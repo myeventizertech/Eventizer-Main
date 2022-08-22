@@ -1,0 +1,84 @@
+/* for react transition group*/
+
+/* enter */
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 150ms linear;
+}
+
+/* exit */
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 150ms linear;
+}
+.fade-exit-done {
+  opacity: 0;
+}
+
+/* slide enter */
+.slide-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+  z-index: 1;
+}
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms linear, transform 300ms ease-out;
+}
+
+/* exit */
+.slide-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-exit.slide-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 300ms linear, transform 300ms ease-out;
+}
+.slide-exit-done {
+  opacity: 0;
+}
+
+/* zoom enter */
+.zoom-enter {
+  opacity: 0;
+  transform: scale(0);
+  z-index: 1;
+}
+.zoom-enter.zoom-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms linear, transform 300ms ease-out;
+}
+
+.progress01 {
+  border-radius: 100px;
+  background:#cac5c5;
+  height: 5px;
+  width: 13rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.progress01 .progress-value {
+	animation: load 5s normal forwards;
+	border-radius: 100px;
+	background: #ef0d5e;
+	height: 5px;
+	width: 100%;
+}
+@keyframes load {
+  0% { transform:translateX(-100%); }
+  100% {transform:translateX(0%);  }
+}

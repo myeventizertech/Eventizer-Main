@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "eventizermanagement",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "autheventizermanagement8cdc22c1",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

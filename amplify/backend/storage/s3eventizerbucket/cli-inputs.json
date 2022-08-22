@@ -1,0 +1,13 @@
+{
+  "resourceName": "s3eventizerbucket",
+  "bucketName": "eventizerbucket",
+  "policyUUID": "9665b637",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

@@ -1,0 +1,479 @@
+type Coupon
+	@model
+	@auth(
+		rules: [
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	code: String!
+	discount: Int!
+	maxDiscount: Int!
+	customCoupon: String!
+	userID: String
+	vendorID: String
+}
+
+type Balance
+	@model
+	@auth(
+		rules: [
+			{ allow: owner, operations: [create, read] }
+			{ allow: groups, groups: ["Admin"], operations: [read] }
+		]
+	) {
+	id: ID!
+	balance: Float!
+	withdrawAmount: Float!
+	Vendor: Vendor @hasOne
+}
+type PaymentRequest
+	@model
+	@auth(
+		rules: [
+			{ allow: owner, operations: [create, read] }
+			{ allow: groups, groups: ["Admin"], operations: [read] }
+		]
+	) {
+	id: ID!
+	balanceAmount: Float!
+	phoneNumber: String
+	method: String
+	bankName: String
+	bankAcNo: String
+	acHolderName: String
+	acBranch: String
+	type: String
+	status: String
+	vendorID: ID! @index(name: "byVendor")
+}
+
+type Error
+	@model
+	@auth(
+		rules: [
+			{ allow: owner, operations: [create] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	errorDetails: String!
+	errorTime: AWSDateTime
+	status: String!
+	vendorID: ID! @index(name: "byVendor")
+}
+
+type Orders
+	@model
+	@auth(
+		rules: [
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+			{ allow: owner, operations: [create, read] }
+			{ allow: groups, groups: ["Vendor"], operations: [read] }
+			{ allow: groups, groups: ["User"], operations: [read] }
+		]
+	) {
+	id: ID!
+	address: String!
+	name: String!
+	phoneNumberUser: String!
+	phoneNumberVendor: String!
+	Link: String
+	package: AWSJSON
+	totalPayment: Float!
+	city: String
+	start: String
+	end: String
+	total: String
+	discount: Float
+	initialPayment: Float!
+	duePayment: Float!
+	status: String!
+	bookedDay: String
+	title: String
+	vendorID: ID! @index(name: "byVendor")
+	userID: ID! @index(name: "byUser")
+	packageName: String
+	reviewID: String
+	notes: String
+}
+
+type Review
+	@model
+	@auth(
+		rules: [
+			{ allow: owner, operations: [create, read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+			{ allow: private, operations: [read] }
+			{ allow: public, operations: [read] }
+		]
+	) {
+	id: ID!
+	description: String!
+	valueForMoney: Float!
+	service: Float!
+	behaviour: Float!
+	average: Float!
+	userPicture: String
+	photographyID: ID @index(name: "byPhotography")
+	cinematographyID: ID @index(name: "byCinematography")
+	userID: ID! @index(name: "byUser")
+	rentalID: ID @index(name: "byRental")
+	brandpromoterID: ID @index(name: "byBrandPromoter")
+	decorationID: ID @index(name: "byDecoration")
+	printingpressID: ID @index(name: "byPrintingPress")
+	giftitemsID: ID @index(name: "byGiftItems")
+	mehediartistID: ID @index(name: "byMehediArtist")
+	makeupartistID: ID @index(name: "byMakeupArtist")
+	djmusicianID: ID @index(name: "byDJMusician")
+}
+
+type Vendor
+	@model
+	@auth(
+		rules: [
+			{ allow: owner, operations: [create, read, update] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	firstName: String!
+	lastName: String!
+	nidFrontSide: String
+	nidBackSide: String
+	nidNumber: String
+	presentLocation: String
+	service: String!
+	phoneNumber: AWSPhone!
+	email: AWSEmail!
+	uploadYourPhoto: String
+	status: String!
+	Orders: [Orders] @hasMany(indexName: "byVendor", fields: ["id"])
+	PaymentRequest: [PaymentRequest]
+		@hasMany(indexName: "byVendor", fields: ["id"])
+	balanceID: ID!
+}
+
+type User
+	@model
+	@auth(
+		rules: [
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+			{ allow: owner, operations: [create, read, update] }
+		]
+	) {
+	id: ID!
+	firstName: String!
+	lastName: String!
+	address: String
+	phoneNumber: AWSPhone
+	email: AWSEmail!
+	nidNumber: String
+	profilePicture: String
+	status: String!
+	Orders: [Orders] @hasMany(indexName: "byUser", fields: ["id"])
+	Reviews: [Review] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Cinematography
+	@model
+	@auth(
+		rules: [
+			{ allow: public, operations: [read] }
+			{ allow: owner, operations: [create, read, update] }
+			{ allow: private, operations: [read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	spealiziedInFIlter: [String]
+	serviceloactionFIlter: [String]
+	specializedIn: [AWSJSON!]
+	title: String
+	deviceName: String
+	yearsOfExperience: String
+	serviceLocation: [AWSJSON!]
+	presentLocation: AWSJSON
+	portfolioLink: [AWSJSON!]
+	email: String
+	portfolioImage: [String!]
+	detailsAboutYou: String
+	uploadYourPhoto: String
+	rating: String
+	isConfirmed: String
+	Reviews: [Review] @hasMany(indexName: "byCinematography", fields: ["id"])
+	phoneNumber: AWSPhone!
+	packages: [AWSJSON!]
+	status: String!
+	eventsCompleted: Int
+}
+
+type Photography
+	@model
+	@auth(
+		rules: [
+			{ allow: public, operations: [read] }
+			{ allow: owner, operations: [create, read, update] }
+			{ allow: private, operations: [read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	specializedIn: [AWSJSON!]
+	spealiziedInFIlter: [String]
+	serviceloactionFIlter: [String]
+	presentLocation: AWSJSON
+	title: String
+	deviceName: String
+	yearsOfExperience: String
+	serviceLocation: [AWSJSON!]
+	portfolioLink: [AWSJSON!]
+	portfolioImage: [String!]
+	uploadYourPhoto: String
+	detailsAboutYou: String
+	rating: String
+	isConfirmed: String
+	Reviews: [Review] @hasMany(indexName: "byPhotography", fields: ["id"])
+	phoneNumber: AWSPhone!
+	packages: [AWSJSON!]
+	status: String!
+	email: String
+	eventsCompleted: Int
+}
+
+type DJMusician
+	@model
+	@auth(
+		rules: [
+			{ allow: public, operations: [read] }
+			{ allow: owner, operations: [create, read, update] }
+			{ allow: private, operations: [read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	specializedIn: [AWSJSON!]
+	title: String
+	spealiziedInFIlter: [String]
+	serviceloactionFIlter: [String]
+	presentLocation: AWSJSON
+	yearsOfExperience: String
+	serviceLocation: [AWSJSON!]
+	portfolioLink: [AWSJSON!]
+	portfolioImage: [String!]
+	uploadYourPhoto: String
+	detailsAboutYou: String
+	rating: String
+	isConfirmed: String
+	phoneNumber: AWSPhone!
+	teamMember: String
+	packages: [AWSJSON!]
+	Reviews: [Review] @hasMany(indexName: "byDJMusician", fields: ["id"])
+	status: String!
+	email: String
+	eventsCompleted: Int
+}
+
+type MakeupArtist
+	@model
+	@auth(
+		rules: [
+			{ allow: public, operations: [read] }
+			{ allow: owner, operations: [create, read, update] }
+			{ allow: private, operations: [read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	title: String
+	yearsOfExperience: String
+	spealiziedInFIlter: [String]
+	serviceloactionFIlter: [String]
+	serviceLocation: [AWSJSON!]
+	portfolioLink: [AWSJSON!]
+	portfolioImage: [String!]
+	presentLocation: AWSJSON
+	uploadYourPhoto: String
+	detailsAboutYou: String
+	rating: String
+	isConfirmed: String
+	phoneNumber: AWSPhone!
+	teamMember: String
+	packages: [AWSJSON!]
+	Reviews: [Review] @hasMany(indexName: "byMakeupArtist", fields: ["id"])
+	status: String!
+	email: String
+	eventsCompleted: Int
+}
+
+type MehediArtist
+	@model
+	@auth(
+		rules: [
+			{ allow: public, operations: [read] }
+			{ allow: owner, operations: [create, read, update] }
+			{ allow: private, operations: [read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	title: String
+	yearsOfExperience: String
+	spealiziedInFIlter: [String]
+	serviceloactionFIlter: [String]
+	serviceLocation: [AWSJSON!]
+	presentLocation: AWSJSON
+	packages: [AWSJSON!]
+	portfolioLink: [AWSJSON!]
+	portfolioImage: [String!]
+	uploadYourPhoto: String
+	detailsAboutYou: String
+	rating: String
+	isConfirmed: String
+	phoneNumber: AWSPhone!
+	teamMember: String
+	Reviews: [Review] @hasMany(indexName: "byMehediArtist", fields: ["id"])
+	status: String!
+	email: String
+	eventsCompleted: Int
+}
+
+# type GiftItems @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner, operations: [create, read, update]}, {allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+#   id: ID!
+#   title: String
+#   specializedIn: [AWSJSON!]
+#   yearsOfExperience: String
+#   serviceLocation: [AWSJSON!]
+#   packages: [AWSJSON!]
+#   portfolioLink: [AWSJSON!]
+#   portfolioImage: [String!]
+#   uploadYourPhoto: String
+#   detailsAboutYou: String
+#   rating: String
+#   isConfirmed: String
+#   phoneNumber:AWSPhone!
+#   Reviews: [Review] @hasMany(indexName: "byGiftItems", fields: ["id"])
+#   status: String!
+# }
+
+# type PrintingPress @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner, operations: [create, read, update]}, {allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+#   id: ID!
+#   title: String
+#   specializedIn: [AWSJSON!]
+#   yearsOfExperience: String
+#   serviceLocation: [AWSJSON!]
+#   packages: [AWSJSON!]
+#   portfolioLink: [AWSJSON!]
+#   portfolioImage: [String!]
+#   uploadYourPhoto: String
+#   detailsAboutYou: String
+#   rating: String
+#   isConfirmed: String
+#   phoneNumber:AWSPhone!
+#   Reviews: [Review] @hasMany(indexName: "byPrintingPress", fields: ["id"])
+#   status: String!
+# }
+
+# type Decoration @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner, operations: [create, read, update]}, {allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+#   id: ID!
+#   title: String
+#   specializedIn: [AWSJSON!]
+#   yearsOfExperience: String
+#   serviceLocation: [AWSJSON!]
+#   packages: [AWSJSON!]
+#   portfolioLink: [AWSJSON!]
+#   portfolioImage: [String!]
+#   uploadYourPhoto: String
+#   detailsAboutYou: String
+#   rating: String
+#   isConfirmed: String
+#   phoneNumber:AWSPhone!
+#   Reviews: [Review] @hasMany(indexName: "byDecoration", fields: ["id"])
+#   status: String!
+# }
+
+# type BrandPromoter @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner, operations: [create, read, update]}, {allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+#   id: ID!
+#   title: String
+#   specializedIn: [AWSJSON!]
+#   yearsOfExperience: String
+#   serviceLocation: [AWSJSON!]
+#   packages: [AWSJSON!]
+#   portfolioLink: [AWSJSON!]
+#   portfolioImage: [String!]
+#   uploadYourPhoto: String!
+#   detailsAboutYou: String!
+#   rating: String
+#   isConfirmed: String
+#   phoneNumber: AWSPhone!
+#   Reviews: [Review] @hasMany(indexName: "byBrandPromoter", fields: ["id"])
+#   status: String!
+# }
+
+# type Rental @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner, operations: [create, read, update]}, {allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+#   id: ID!
+#   title: String
+#   specializedIn: [AWSJSON!]
+#   yearsOfExperience: String
+#   serviceLocation: [AWSJSON!]
+#   portfolioLink: [AWSJSON!]
+#   portfolioImage: [String!]
+#   uploadYourPhoto: String
+#   detailsAboutYou: String
+#   rating: String
+#   isConfirmed: String
+#   phoneNumber: AWSPhone!
+#   vehicleType: String
+#   carModelName: String
+#   maxSeatCapacity: String
+#   drivingLicenseNumber: String
+#   licenseExpiredDate: String
+#   licenseFrontSide: String
+#   licenseBackSide: String
+#   Reviews: [Review] @hasMany(indexName: "byRental", fields: ["id"])
+#   status: String!
+# }
