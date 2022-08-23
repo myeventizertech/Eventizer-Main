@@ -87,7 +87,7 @@ const LayoutSSRfalse = ({ children }) => {
                   <Link href={`/products`}>
                     <a onClick={handleClickNav}>
                       <span className={`dashBoardPageLink`}>
-                        <span>View Products</span>
+                        <span>Product & Services</span>
                       </span>
                     </a>
                   </Link>

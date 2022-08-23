@@ -624,7 +624,10 @@ export const listCinematographies = /* GraphQL */ `
         rating
         isConfirmed
         Reviews {
-          nextToken
+        items {
+          average
+        }
+        nextToken
         }
         phoneNumber
         packages
@@ -717,7 +720,10 @@ export const listPhotographies = /* GraphQL */ `
         rating
         isConfirmed
         Reviews {
-          nextToken
+        items {
+          average
+        }
+        nextToken
         }
         phoneNumber
         packages
@@ -813,7 +819,10 @@ export const listDJMusicians = /* GraphQL */ `
         teamMember
         packages
         Reviews {
-          nextToken
+        items {
+          average
+        }
+        nextToken
         }
         status
         email
@@ -905,7 +914,10 @@ export const listMakeupArtists = /* GraphQL */ `
         teamMember
         packages
         Reviews {
-          nextToken
+        items {
+          average
+        }
+        nextToken
         }
         status
         email
@@ -997,7 +1009,10 @@ export const listMehediArtists = /* GraphQL */ `
         phoneNumber
         teamMember
         Reviews {
-          nextToken
+        items {
+          average
+        }
+        nextToken
         }
         status
         email

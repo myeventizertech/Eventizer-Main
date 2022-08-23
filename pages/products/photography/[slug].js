@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import services from "../../../utils/services";
 function ViewPhotography({posts,rating,sLocation,specializedIn}){
   const data = posts?.serviceLocation == null ?  "": posts;
+  console.log(rating)
     return(
  <>
     <Main data={data} service={services.photography} rating={rating} sLocation={sLocation} specializedIn={specializedIn}/>
@@ -27,7 +28,7 @@ export async function getStaticProps({params}) {
     let k = posts?.Reviews?.items?.length
     let r=0
     const sum = posts?.Reviews?.items?.reduce((accumulator, object) => {
-      return accumulator + object.salary;
+      return accumulator + object.average;
     }, 0);
     r =sum/k ||0
     posts?.serviceLocation?.map((e)=>{

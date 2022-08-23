@@ -82,8 +82,8 @@ const ProfileInfo = ({ slideImg, openImageViewer,data,rating,sLocation,specializ
           />
         </div>
         <div>
-          <span>{rating}</span>
-          <span>({Data?.Reviews?.length||0} ratings)</span>
+          <span>{rating.toFixed(2)}</span>
+          <span>({Data?.Reviews?.items?.length||0} ratings)</span>
         </div>
       </div>
 {specializedIn?       <p className="test-profile-sm">

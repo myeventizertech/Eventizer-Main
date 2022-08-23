@@ -32,11 +32,13 @@ useEffect(() => {
   getImages()
   let r=0
   let k =datas?.Reviews?.items?.length
+  console.log(datas)
   const sum = datas?.Reviews?.items?.reduce((accumulator, object) => {
-    return accumulator + object.salary;
+    return accumulator + object.average;
   }, 0);
   
   r =sum/k ||0
+  console.log(r)
   setrating(r)
 }, [])
 
@@ -81,7 +83,7 @@ useEffect(() => {
         </Link>
 
         <div className="p-2 sm:p-4">
-          <span className="color3 font-normal font-12">{rating}</span>
+          <span className="color3 font-normal font-12">{rating.toFixed(2)}</span>
           <h2 className="color4 font-16 sm:font-18 font-normal truncate">
             <Link href={`/products/${service}/${datas.id}`}>
               <a className="btn-hover">{datas.title||""}</a>

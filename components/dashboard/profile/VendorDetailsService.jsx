@@ -182,14 +182,14 @@ const VendorDetailsService = ({ fieldProps, serviceCheck, attributes }) => {
             <div>
               <Input
                 label={`${
-                  serviceCheck === services.rental ? "Car Name" : "Title"
+                  serviceCheck === services.rental ? "Car Name" : "Company Name"
                 }`}
                 type="text"
                 name="title"
                 placeholder={`${
                   serviceCheck === services.rental
                     ? "Enter car name"
-                    : "Enter your title"
+                    : "Enter your company name"
                 }`}
                 value={fieldProps.values.title}
                 handleChange={fieldProps.handleChange}
