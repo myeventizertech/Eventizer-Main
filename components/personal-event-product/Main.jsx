@@ -16,6 +16,7 @@ import HamburgerDashboard from "../reUseComponents/icons/HamburgerDashboard";
 import Items from "./Items";
 import { useRouter } from "next/router";
 import * as queries from "../../src/graphql/queries";
+import Loader from "../reUseComponents/Loader"
 const Main = ({ service }) => {
   const router = useRouter();
   const [toggle, setToggle] = useState(false);
@@ -24,9 +25,8 @@ const Main = ({ service }) => {
   const [vData, setvData] = useState(null);
   const [datas, setdatas] = useState([]);
   const [serve, setserve] = useState(null);
-
-  const [unchangeData, setunchangeData] = useState([]);
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [loader, setLoader] = useState(false);
+  const [FilterData, setFilterData] = useState([]);
 
   async function check() {
     if (service === "Photography") {
@@ -54,53 +54,46 @@ const Main = ({ service }) => {
       setvData("listMakeupArtists");
       setserve(services.makeupArtist);
     }
-
   }
   const handleClickNav = () => {
     setToggle(!toggle);
     setIsOpen(!isOpen);
   };
-  let filt = {
-    or: [{ status: { eq: "Accepted" } },
-    // { serviceloactionFIlter: { eq: cityFilter } },
-    // { spealiziedInFIlter: { eq: categoryFilter } },
-  
-  ],
-  };
-  async function getdatas(filter) {
-    const res = await API.graphql({
-      query: serviceAPI,
-      authMode: "API_KEY",
-      variables: { filter: filter },
-    });
 
-    const photographer = await res?.data[vData].items;
-    setdatas(photographer);
-    setunchangeData(photographer)
-  }
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", isOpen);
   }, [isOpen]);
   useEffect(() => {
     check();
-  
   }, []);
 
-useEffect(() => {
-  if (serviceAPI !== null) {
-    let filt = {
-      or: [{ status: { eq: "Accepted" } },
-      // { serviceloactionFIlter: { eq: cityFilter } },
-      // { spealiziedInFIlter: { eq: categoryFilter } },
-    
-    ],
+  useEffect(() => {
+    setLoader(true);
+
+    let filter = {
+      or: [{ status: { eq: "Accepted" } }],
     };
-    getdatas(filt);
-  }
-}, [serviceAPI])
+    async function getdatas() {
+      const res = await API.graphql({
+        query: serviceAPI,
+        authMode: "API_KEY",
+        variables: { filter: filter },
+      });
 
+      const photographer = await res?.data[vData].items;
+      setdatas(photographer);
+    }
+    if (serviceAPI !== null) {
+      getdatas();
+    }
 
- 
+  }, [serviceAPI, vData]);
+  useEffect(() => {
+    setFilterData([...datas]);
+    setLoader(false);
+
+  }, [datas]);
+
   return (
     <>
       <div className="container m-all sm:pt-0 pt-12 product overflow-hidden-product  md:pb-0 pb-4">
@@ -120,7 +113,7 @@ useEffect(() => {
           >
             <button
               onClick={handleClickNav}
-              className="absolute -right-10 top-[7px] bgcolor1 p-2 block md:hidden scale-[1.5]"
+              className="absolute -right-8 top-[7px] bgcolor1 p-2 block md:hidden"
             >
               <HamburgerDashboard />
             </button>
@@ -184,20 +177,16 @@ useEffect(() => {
                     placeholder={"Category"}
                     classNamePrefix="react-select"
                     onChange={(value) => {
-                      let k =unchangeData
-                      let array =[]
-                      console.log(k)
-                     for (let i=0; i<k.length;i++){
-                        if(k[i].spealiziedInFIlter.includes(value.label)===true){
-                        array.push(k[i])}
-                        if (i===k.length){
-                          setdatas(array)
-                        }
-                      
+                      if (value.value === "") {
+                        setFilterData(datas);
+                        return;
                       }
-                      setdatas(array)
-                 
-                   
+                      const filteredData = datas.filter((d) =>
+                        d?.specializedIn.some(
+                          (v) => JSON.parse(v).value === value.value
+                        )
+                      );
+                      setFilterData(filteredData);
                     }}
                   />
                 </div>
@@ -215,19 +204,16 @@ useEffect(() => {
                     placeholder={"City"}
                     classNamePrefix="react-select"
                     onChange={(value) => {
-                      let k =unchangeData
-                      let array =[]
-                     for (let i=0; i<k.length;i++){
-                        if(k[i].serviceloactionFIlter.includes(value.label)===true){
-                        array.push(k[i])}
-                        if (i===k.length){
-                          setdatas(array)
-                        }
-                      
+                      if (value.value === "") {
+                        setFilterData(datas);
+                        return;
                       }
-                      setdatas(array)
-                 
-                   
+                      const filteredData = datas.filter((d) =>
+                        d?.serviceLocation.some(
+                          (v) => JSON.parse(v).value === value.value
+                        )
+                      );
+                      setFilterData(filteredData);
                     }}
                   />
                 </div>
@@ -235,11 +221,24 @@ useEffect(() => {
             </div>
 
             {/* ====================== */}
-            <div className="grid  grid-cols-2 lg:grid-cols-3 gap-5 sm:mt-5 min-h-[18rem]">
-              {datas?.map((e, i) => {
-                return <Items data={e} key={i} service={serve} />;
-              })}
-            </div>
+
+            {loader ? (
+            <Loader center={true} colorDefault={false}/>
+            ) : (
+              <>
+              {!loader &&  FilterData.length === 0 && (
+                  <h1 className="text-center color3 mt-5 ">
+                    Sorry! no partner found
+                  </h1>
+                )}
+
+                <div className="grid  grid-cols-2 lg:grid-cols-3 gap-5 sm:mt-5 min-h-[18rem]">
+                  {FilterData?.map((e, i) => {
+                    return <Items data={e} key={i} service={serve} />;
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
