@@ -42,19 +42,19 @@ export async function getStaticProps({ params }) {
     }
   });
   posts?.specializedIn?.map((e) => {
-    let r = JSON.parse(e);
+    let m = JSON.parse(e);
     if (c.length === 0) {
-      c = r?.label;
+      c = m?.label;
     } else {
-      c = c + "," + r?.label;
+      c = c + "," + m?.label;
     }
   });
   return {
     props: {
       posts: posts,
-      rating: r,
+      rating: r.toFixed(2),
       sLocation: s,
-      specializedIn: r,
+      specializedIn: c,
     },
     revalidate: 10, // In seconds
   };

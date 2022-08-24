@@ -39,7 +39,7 @@ useEffect(() => {
   
   r =sum/k ||0
   console.log(r)
-  setrating(r)
+  setrating(r.toFixed(2))
 }, [])
 
   return (
@@ -83,7 +83,7 @@ useEffect(() => {
         </Link>
 
         <div className="p-2 sm:p-4">
-          <span className="color3 font-normal font-12">{rating.toFixed(2)}</span>
+          <span className="color3 font-normal font-12">{rating}</span>
           <h2 className="color4 font-16 sm:font-18 font-normal truncate">
             <Link href={`/products/${service}/${datas.id}`}>
               <a className="btn-hover">{datas.title||""}</a>
