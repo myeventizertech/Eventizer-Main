@@ -4,7 +4,7 @@ import img3 from "../public/img/productsicon.svg";
 
 let navbar = [
   { name: "Home", path: "/", img: img1 },
-  { name: "Products", path: "/products", img: img2 },
+  { name: "Product & Services", path: "/products", img: img2 },
   { name: "Events", path: "/events", img: img3 },
 ];
 export default navbar;

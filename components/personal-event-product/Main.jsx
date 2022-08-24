@@ -16,7 +16,7 @@ import HamburgerDashboard from "../reUseComponents/icons/HamburgerDashboard";
 import Items from "./Items";
 import { useRouter } from "next/router";
 import * as queries from "../../src/graphql/queries";
-import Loader from "../reUseComponents/Loader"
+import Loader from "../reUseComponents/Loader";
 const Main = ({ service }) => {
   const router = useRouter();
   const [city, setCity] = useState("");
@@ -29,7 +29,7 @@ const Main = ({ service }) => {
   const [serve, setserve] = useState(null);
   const [loader, setLoader] = useState(false);
   const [FilterData, setFilterData] = useState([]);
-
+  let [checkPath, setChckPath] = useState("");
   async function check() {
     if (service === "Photography") {
       setserviceAPI(queries.listPhotographies);
@@ -88,26 +88,17 @@ const Main = ({ service }) => {
     if (serviceAPI !== null) {
       getdatas();
     }
-
   }, [serviceAPI, vData]);
   useEffect(() => {
     setFilterData([...datas]);
     setLoader(false);
-
   }, [datas]);
 
-
-
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    let extractPath = router.pathname.split("/");
+    let path = extractPath[extractPath.length - 1];
+    setChckPath(path);
+  }, [router.pathname]);
 
   return (
     <>
@@ -178,45 +169,45 @@ const Main = ({ service }) => {
                 </h1>
               </div>
               <div className="flex gap-4">
-                {<div>
-                  <Select
-                  value={category}
-                    styles={customStyles}
-                    instanceId
-                    isMulti={false}
-                    options={optionsSpecializedInPhoto_Cinemato}
-                    components={{
-                      Option,
-                    }}
+                {checkPath !== services.makeupArtist &&
+                  checkPath !== services.mehediArtist && (
+                    <div>
+                      <Select
+                        value={category}
+                        styles={customStyles}
+                        instanceId
+                        isMulti={false}
+                        options={optionsSpecializedInPhoto_Cinemato}
+                        components={{
+                          Option,
+                        }}
+                        theme={theme}
+                        isSearchable={false}
+                        placeholder={"Category"}
+                        classNamePrefix="react-select"
+                        onChange={(value) => {
+                          setCity("");
+                          setCategory(value);
 
-                    theme={theme}
-                    isSearchable={false}
-                    placeholder={"Category"}
-                    classNamePrefix="react-select"
-                    onChange={(value) => {
-                      
-                      setCity("")
-                      setCategory(value)
-
-                      if (value.value === "") {
-                        setFilterData(datas);
-                        return;
-                      }
-                      const filteredData = datas.filter((d) =>
-                        d?.specializedIn.some(
-                          (v) => JSON.parse(v).value === value.value
-                        )
-                      );
-                      setFilterData(filteredData);
-                    }}
-                  />
-                </div>}
-                
+                          if (value.value === "") {
+                            setFilterData(datas);
+                            return;
+                          }
+                          const filteredData = datas.filter((d) =>
+                            d?.specializedIn.some(
+                              (v) => JSON.parse(v).value === value.value
+                            )
+                          );
+                          setFilterData(filteredData);
+                        }}
+                      />
+                    </div>
+                  )}
 
                 <div>
                   <Select
-                  value={city}
-                  styles={customStyles}
+                    value={city}
+                    styles={customStyles}
                     instanceId
                     isMulti={false}
                     options={optionsServiceLoction}
@@ -228,9 +219,9 @@ const Main = ({ service }) => {
                     placeholder={"City"}
                     classNamePrefix="react-select"
                     onChange={(value) => {
-                      setCity(value)
-                      setCategory("")
-                    
+                      setCity(value);
+                      setCategory("");
+
                       if (value.value === "") {
                         setFilterData(datas);
                         return;
@@ -250,10 +241,10 @@ const Main = ({ service }) => {
             {/* ====================== */}
 
             {loader ? (
-            <Loader center={true} colorDefault={false}/>
+              <Loader center={true} colorDefault={false} />
             ) : (
               <>
-              {!loader &&  FilterData.length === 0 && (
+                {!loader && FilterData.length === 0 && (
                   <h1 className="text-center color3 mt-5 ">
                     Sorry! no partner found
                   </h1>
