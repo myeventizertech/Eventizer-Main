@@ -19,6 +19,8 @@ import * as queries from "../../src/graphql/queries";
 import Loader from "../reUseComponents/Loader"
 const Main = ({ service }) => {
   const router = useRouter();
+  const [city, setCity] = useState("");
+  const [category, setCategory] = useState("");
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [serviceAPI, setserviceAPI] = useState(null);
@@ -94,6 +96,19 @@ const Main = ({ service }) => {
 
   }, [datas]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <div className="container m-all sm:pt-0 pt-12 product overflow-hidden-product  md:pb-0 pb-4">
@@ -163,8 +178,9 @@ const Main = ({ service }) => {
                 </h1>
               </div>
               <div className="flex gap-4">
-                <div>
+                {<div>
                   <Select
+                  value={category}
                     styles={customStyles}
                     instanceId
                     isMulti={false}
@@ -172,11 +188,16 @@ const Main = ({ service }) => {
                     components={{
                       Option,
                     }}
+
                     theme={theme}
                     isSearchable={false}
                     placeholder={"Category"}
                     classNamePrefix="react-select"
                     onChange={(value) => {
+                      
+                      setCity("")
+                      setCategory(value)
+
                       if (value.value === "") {
                         setFilterData(datas);
                         return;
@@ -189,10 +210,13 @@ const Main = ({ service }) => {
                       setFilterData(filteredData);
                     }}
                   />
-                </div>
+                </div>}
+                
+
                 <div>
                   <Select
-                    styles={customStyles}
+                  value={city}
+                  styles={customStyles}
                     instanceId
                     isMulti={false}
                     options={optionsServiceLoction}
@@ -204,6 +228,9 @@ const Main = ({ service }) => {
                     placeholder={"City"}
                     classNamePrefix="react-select"
                     onChange={(value) => {
+                      setCity(value)
+                      setCategory("")
+                    
                       if (value.value === "") {
                         setFilterData(datas);
                         return;

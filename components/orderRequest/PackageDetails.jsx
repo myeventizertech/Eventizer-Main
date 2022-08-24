@@ -1,6 +1,8 @@
 import React from "react";
 import { useUserOrVendor } from "../../authContext/AuthContext";
+import { useRouter } from "next/router";
 const PackageDetails = ({ quality, packageValue, handleClick }) => {
+  let router = useRouter()
   let {verifyUser}= useUserOrVendor()
   let state =verifyUser?.isUser_vendor
   return (
@@ -115,7 +117,14 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
           </>
         )}
         {state==="vendor"? <div></div>:       <button
-          onClick={() => handleClick(quality)}
+          onClick={() =>{
+            if(!verifyUser.isverified){
+              router.push("/sign-in")
+              return
+            }
+            handleClick(quality)
+          
+          }}
           className="text-white bgcolor2 font-18 mt-3 rounded w-full px-2 py-1 font-normal btn-hover"
         >
           Book Now

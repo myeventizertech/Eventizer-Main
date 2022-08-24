@@ -25,14 +25,15 @@ let validationSchema = yup.object({
     .required("Required field"),
 });
 const Main = ({ Data, initialValues }) => {
-  let router = useRouter()
+  let router = useRouter();
   const [promoValue, setPromoValue] = useState({
     promoCode: "",
   });
+  const [disablePromo, setDisablePromo] = useState(false);
   const [getpromoCodeVal, setGetpromoCOdeval] = useState({});
   const [getOffer, setGetOffer] = useState("");
   const [error, setError] = useState(false);
-  console.log(Data)
+  console.log(Data);
   let handleChangePromoCode = (e) => {
     e.persist();
     setPromoValue({
@@ -42,6 +43,7 @@ const Main = ({ Data, initialValues }) => {
   };
 
   let handleSubmit = async () => {
+    
     if (!promoValue.promoCode) {
       return setError(true);
     }
@@ -61,6 +63,7 @@ const Main = ({ Data, initialValues }) => {
         },
       });
       setGetpromoCOdeval(res.data.body);
+      setDisablePromo(true);
       toast.success("successfully");
     } catch (error) {
       toast.error("something went wrong");
@@ -80,14 +83,13 @@ const Main = ({ Data, initialValues }) => {
         data: {
           orderID: Data?.id,
           payment: getOffer / 2,
-          phone: values.phoneNumber
+          phone: values.phoneNumber,
         },
       });
       let url = res?.data?.body?.url;
-      window.open( 
-        url, "_blank");
+      window.open(url, "_blank");
       //ends
-      router.push("/")
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -100,7 +102,7 @@ const Main = ({ Data, initialValues }) => {
       let getMaxDiscount = getpromoCodeVal?.maxDiscount;
       if (getPercentege) {
         let percentege = (getPercentege / 100) * total;
-        if (getMaxDiscount < (percentege.toFixed(2))) {
+        if (getMaxDiscount < percentege.toFixed(2)) {
           return total - getMaxDiscount;
         }
         return total - percentege.toFixed(2);
@@ -114,7 +116,7 @@ const Main = ({ Data, initialValues }) => {
     getpromoCodeVal?.percentege,
   ]);
 
-  useEffect(() => setGetOffer(Data.totalPayment), [Data.totalPayment]);
+  useEffect(() => setGetOffer(Data?.totalPayment), [Data?.totalPayment]);
 
   return (
     <div className="container m-all checkout">
@@ -173,30 +175,35 @@ const Main = ({ Data, initialValues }) => {
                     }
                   />
                 </div>
-
-                <div className="flex gap-x-5 mt-3">
-                  <div className="flex-1">
-                    <Input
-                      name="cupon"
-                      placeholder="Apply promo code"
-                      value={promoValue.promoCode}
-                      handleChange={handleChangePromoCode}
-                      handleBlur={null}
-                      error={error ? "Required" : ""}
-                    />
+                {disablePromo ? (
+                  <h1 className="text-center text-[#32e067] font-26 font-normal min-h-[4rem]">
+                    Cupon created successfully
+                  </h1>
+                ) : (
+                  <div className="flex gap-x-5 mt-3">
+                    <div className="flex-1">
+                      <Input
+                        name="cupon"
+                        placeholder="Apply promo code"
+                        value={promoValue.promoCode}
+                        handleChange={handleChangePromoCode}
+                        handleBlur={null}
+                        error={error ? "Required" : ""}
+                      />
+                    </div>
+                    <div>
+                      <ButtonClick
+                        type="button"
+                        css={"bgcolor2 text-white rounded-md block mt-1"}
+                        width="min-w-[5rem] sm:min-w-[9rem]"
+                        text={"Apply"}
+                        padding="px-6 sm:px-10"
+                        font="font-14 sm:font-16"
+                        handleClick={handleSubmit}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <ButtonClick
-                      type="button"
-                      css={"bgcolor2 text-white rounded-md block mt-1"}
-                      width="min-w-[5rem] sm:min-w-[9rem]"
-                      text={"Apply"}
-                      padding="px-6 sm:px-10"
-                      font="font-14 sm:font-16"
-                      handleClick={handleSubmit}
-                    />
-                  </div>
-                </div>
+                )}
 
                 <>
                   <ButtonClick
