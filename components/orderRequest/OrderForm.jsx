@@ -74,7 +74,7 @@ const OrderForm = ({ passData,vendor }) => {
         let payloadDataSingle = {
           ...valueOfSigleDay,
           totalTime: `${durationTime?.hours} hour and ${durationTime?.min} minutes`,
-          totalMoney: durationDates.totalmoney,
+          totalMoney: durationTime.totalmoney,
         };
         if (user?.phoneNumber === null) {
           toast.error(`Please update your phone number.`);
@@ -122,7 +122,7 @@ const OrderForm = ({ passData,vendor }) => {
               }),
             }
           );
-          router.push("/dashboard/my-booking");
+          // router.push("/dashboard/my-booking");
         }
       }
 
