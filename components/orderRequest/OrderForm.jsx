@@ -122,7 +122,7 @@ const OrderForm = ({ passData,vendor }) => {
               }),
             }
           );
-          // router.push("/dashboard/my-booking");
+          router.push("/dashboard/my-booking");
         }
       }
 
