@@ -2,7 +2,7 @@ import React from "react";
 import fs from "fs";
 
 const Sitemap = () => {};
-
+const dat ={}
 export const getServerSideProps = ({ res }) => {
   const baseUrl ="https://myeventizer.com";
 
