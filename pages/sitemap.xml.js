@@ -7,7 +7,10 @@ export const getServerSideProps = ({ res }) => {
   const baseUrl ="https://myeventizer.com";
 
   const staticPages = fs
-    .readdirSync("pages")
+    .readdirSync({
+        development: 'pages',
+        production: './',
+      }[process.env.NODE_ENV])
     .filter((staticPage) => {
       return ![
         "_app.js",
