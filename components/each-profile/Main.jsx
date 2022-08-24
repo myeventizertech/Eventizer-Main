@@ -84,7 +84,7 @@ const Main = ({data,service,rating,sLocation,specializedIn}) => {
 </div>
 
 <ScrollSpyNav />
-<Overview data={data} />
+<Overview data={data} service={service} />
 
 {isViewerOpen && (
   <ImageViewer

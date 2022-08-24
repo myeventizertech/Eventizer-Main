@@ -20,17 +20,36 @@ let facility = [
   ];
   
 
-const Overview = ({data}) => {
+const Overview = ({data,service}) => {
   let info =data
  let review = info?.Reviews?.items
- console.log(info);
+ let serve =""
+async function check(){
+  if (service === "photography") {
+   serve ="Photographer Overview"
+  }
+  if (service === "cinematography") {
+    serve ="Cinematographer Overview"
+  }
+  if (service === "dj-musician") {
+    serve ="Dj-Musician Overview"
+  }
+  if (service === "mehedi-artist") {
+    serve ="Mehedi Artist Overview"
+  }
+  if (service === "makeup-artist") {
+    serve ="Makeup Artist Overview"
+  }
+}
+check()
+ console.log(service);
   return (
     <div className="container">
       <div className="max-w-[700px] px-2 sm:px-5">
         {/* ====================== */}
         <section className="mt-10 scroll-mt-20 sm:scroll-mt-28" id="details">
           <h1 className="font-22 text-[#202020] font-semibold mb-2">
-            Photographer overview
+            {serve}
           </h1>
           <p className="text-[#595959] font-normal font-18 ">
 {info?.detailsAboutYou}
