@@ -1,13 +1,13 @@
-import Main from "../../components/dashboard/my-booking/Main";
+import Main from "../../components/dashboard/MyPlans/Main";
 import Layout from "../../components/dashboard/Layout";
 import Head from "next/head";
 import { userProtectRoute } from "../../utils/userProtectRoute";
 
-const Wishlist = () => {
+const MyPlans = () => {
   return (
     <>
       <Head>
-        <title>Eventizer | Wishlist</title>
+        <title>Eventizer | My Plans</title>
       </Head>
       <Layout>
         <Main />
@@ -20,4 +20,4 @@ export const getServerSideProps = userProtectRoute((context) => {
     props: {},
   };
 });
-export default Wishlist;
+export default MyPlans;

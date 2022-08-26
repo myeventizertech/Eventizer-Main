@@ -8,6 +8,7 @@ let dashboardlinkUser = [
   // { name: "Wishlist", path: "/dashboard/Wishlist", img: img5 },
   { name: "Profile", path: "/dashboard/profile", img: img1 },
   { name: "My booking", path: "/dashboard/my-booking", img: img3 },
+  { name: "My Plans", path: "/dashboard/my-plans", img: img4 },
 ];
 
 let dashboardlinkVendor = [

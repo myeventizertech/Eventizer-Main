@@ -9,7 +9,7 @@ import {
 import { useUserOrVendor } from "../../authContext/AuthContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import mobileLogo from "../../public/img/mobileLogo.svg";
+import mobileLogo from "../../public/img/mobileLogo.png";
 import ButtonLinkOrClick from "../reUseComponents/ButtonLinkOrClick";
 import HamburgerDashboard from "../reUseComponents/icons/HamburgerDashboard";
 import Loader from "../reUseComponents/Loader";
@@ -54,7 +54,7 @@ const LayoutSSRfalse = ({ children }) => {
             <HamburgerDashboard />
           </button>
 
-          <div className=" py-4 border-[#131313] border-b pl-8 pt-7">
+          <div className=" py-4 border-[#131313] border-b pl-8 pt-7 w-48">
             <Link href="/">
               <a>
                 <Image src={mobileLogo} alt="Eventizer Logo" />

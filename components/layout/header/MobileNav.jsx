@@ -7,7 +7,7 @@ import HamburgerIcon from "../../reUseComponents/icons/HamburgerIcon";
 import Image from "next/image";
 import OutIcon from "../../reUseComponents/icons/OutIcon";
 import ButtonLinkOrClick from "../../reUseComponents/ButtonLinkOrClick";
-import mobileLogo from "../../../public/img/mobileLogo.svg";
+import mobileLogo from "../../../public/img/mobileLogo.png";
 import { useRouter } from "next/router";
 import Loader from "../../reUseComponents/Loader";
 
@@ -87,7 +87,7 @@ const MobileNav = ({
             } `}
           >
             <div className="flex py-3 px-3 justify-between items-center border-[#131313] border-b">
-              <div className="logo">
+              <div className="logo w-40">
                 <Image src={mobileLogo} alt="Eventizer Logo" />
               </div>
               <button className="cross " onClick={handlecutNav}>

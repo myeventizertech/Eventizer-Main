@@ -88,7 +88,7 @@ const DashboardLinks = ({ userTitle, img, alt, isUser_vendor }) => {
               })}
           {isUser_vendor === "vendor" &&
             dashboardlinkVendor
-            .filter((_,i) => i !== dashboardlinkVendor.length - 1)
+            .slice(0, 3)
               .map((item, i) => {
                 return (
                   <li key={i}>

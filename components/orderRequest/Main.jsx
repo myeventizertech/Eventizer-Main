@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from "react";
+import Link from "next/link";
 import OrderForm from "./OrderForm";
 import PackageDetails from "./PackageDetails";
 import Close from "../reUseComponents/icons/Close";
@@ -86,6 +87,20 @@ checkData()
                 </>
               </div>
             </>
+
+
+           {orderData?.packageDemoLink && <div className="mt-8">
+              <Link href={orderData?.packageDemoLink}>
+              <a className=" font-16 btn-hover bgcolor1 text-white rounded-md py-1 px-2 font-normal">
+              See package demo Link
+              </a>
+              </Link>
+            </div>
+}
+
+
+
+
 
             <div className="grid grid-cols-1 md:grid-cols-2 mdx:grid-cols-3 gap-8 mt-7">
               {/* ====================== */}
