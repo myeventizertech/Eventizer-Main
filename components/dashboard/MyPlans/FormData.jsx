@@ -1,12 +1,11 @@
 import React from "react";
 
 const FormData = ({ formData }) => {
-  let { corporetFrom } = formData;
   return (
     <>
-      {corporetFrom.corporateService && (
+      {formData.corporateService && (
         <>
-          {corporetFrom.corporateService.map((item, i) => {
+          {formData.corporateService.map((item, i) => {
             return (
               <div key={i}>
                 <h1 className="MyPackageListItemHeading">
@@ -20,50 +19,50 @@ const FormData = ({ formData }) => {
         </>
       )}
 
-      {corporetFrom.name && (
+      {formData.name && (
         <>
           <h1 className="MyPackageListItemHeading">Name</h1>
-          <p className="MyPackageListItemvalue ">{corporetFrom.name}</p>
+          <p className="MyPackageListItemvalue ">{formData.name}</p>
         </>
       )}
 
-      {corporetFrom.companyName && (
+      {formData.companyName && (
         <>
           <h1 className="MyPackageListItemHeading">Company Name</h1>
-          <p className="MyPackageListItemvalue ">{corporetFrom.companyName}</p>
+          <p className="MyPackageListItemvalue ">{formData.companyName}</p>
         </>
       )}
 
-      {corporetFrom.phoneNumber && (
+      {formData.phoneNumber && (
         <>
           <h1 className="MyPackageListItemHeading">Phone Number</h1>
-          <p className="MyPackageListItemvalue ">{corporetFrom.phoneNumber}</p>
+          <p className="MyPackageListItemvalue ">{formData.phoneNumber}</p>
         </>
       )}
-      {corporetFrom.email && (
+      {formData.email && (
         <>
           <h1 className="MyPackageListItemHeading">Email</h1>
-          <p className="MyPackageListItemvalue ">{corporetFrom.email}</p>
+          <p className="MyPackageListItemvalue ">{formData.email}</p>
         </>
       )}
-      {corporetFrom.eventTitel && (
+      {formData.eventTitel && (
         <>
           <h1 className="MyPackageListItemHeading">Event Titel</h1>
-          <p className="MyPackageListItemvalue ">{corporetFrom.eventTitel}</p>
+          <p className="MyPackageListItemvalue ">{formData.eventTitel}</p>
         </>
       )}
-      {corporetFrom.eventLocation && (
+      {formData.eventLocation && (
         <>
           <h1 className="MyPackageListItemHeading">Event Location</h1>
           <p className="MyPackageListItemvalue ">
-            {corporetFrom.eventLocation}
+            {formData.eventLocation}
           </p>
         </>
       )}
-      {corporetFrom.eventDate && (
+      {formData.eventDate && (
         <>
           <h1 className="MyPackageListItemHeading">Event Date</h1>
-          <p className="MyPackageListItemvalue ">{corporetFrom.eventDate}</p>
+          <p className="MyPackageListItemvalue ">{formData.eventDate}</p>
         </>
       )}
     </>

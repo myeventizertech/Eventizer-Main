@@ -174,7 +174,7 @@ const CorporateForm = () => {
                                 label="Target Budget"
                                 type="number"
                                 name={`corporateService.${index}.targetBudget`}
-                                placeholder="Ex: anything"
+                                placeholder="Ex: 1000000"
                                 value={
                                   fieldProps.values.corporateService[index]
                                     .targetBudget
