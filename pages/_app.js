@@ -3,11 +3,11 @@ import NextNProgress from "nextjs-progressbar";
 import "../styles/globals.css";
 import "../styles/animte.css";
 import "../styles/multiStep.css";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "keen-slider/keen-slider.min.css";
 import "react-datepicker/dist/react-datepicker.css";
-import 'react-awesome-time-picker/assets/index.css';
+import "react-awesome-time-picker/assets/index.css";
 import "../styles/overide.css";
 
 import "../configureAmplify";
@@ -19,6 +19,23 @@ import Script from "next/script";
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      {/* Hotjar Tracking Code for https://myeventizer.com */}
+      <Script
+        id="hotjar"
+        strategy="afterInteractive"
+        // strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `(function(h,o,t,j,a,r){
+  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+  h._hjSettings={hjid:3127042,hjsv:6};
+  a=o.getElementsByTagName('head')[0];
+  r=o.createElement('script');r.async=1;
+  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+  a.appendChild(r);
+})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
+        }}
+      />
+
       <Script
         id="icWebChat"
         strategy="afterInteractive"

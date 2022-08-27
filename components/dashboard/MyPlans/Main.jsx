@@ -4,6 +4,7 @@ import StatusInfo from "./StatusInfo";
 import Loader from "../../reUseComponents/Loader";
 import * as queries from "../../../src/graphql/queries";
 import { API } from "aws-amplify";
+import { useUserOrVendor } from "../../../authContext/AuthContext";
 
 let corporateEvent = [
   {
@@ -20,49 +21,34 @@ const Main = () => {
   const [loader, setLoader] = useState(false);
   let hadleCurrList = (id) => setCurrList(id);
   let [data, setData] = useState([]);
-
-
-
-  
+  const { verifyUser } = useUserOrVendor();
+  let { attributes } = verifyUser?.isUser_vendorAttr || {};
   useEffect(() => {
     setLoader(true);
     async function fetchData() {
       try {
-        let filter = {
-          status: {
-            eq: currList,
-          },
-        };
         let allData = await API.graphql({
-          query: queries.listPlans,
-          variables: { filter: filter },
+          query: queries.getUser,
+          // authMode: "API_KEY",
+          variables: {
+            id: attributes?.sub,
+          },
         });
-        setData(allData.data.listPlans.items);
+        corporateEvent[0].totalBrief =
+          allData?.data?.getUser?.Plan?.items?.length;
+        corporateEvent[1].totalBrief =
+          allData?.data?.getUser?.Plan?.items?.filter(
+            (item) => item.status === "Replied"
+          ).length;
+        setData(allData?.data?.getUser?.Plan?.items);
         setLoader(false);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
-  }, [currList]);
+  }, [attributes?.sub]);
 
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        let allData = await API.graphql({
-          query: queries.listPlans,
-        });
-        corporateEvent[0].totalBrief = allData?.data?.listPlans?.items?.length;
-        corporateEvent[1].totalBrief = allData?.data?.listPlans?.items?.filter(
-          (item) => item.status === "Replied"
-        ).length;
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchData();
-  }, []);
   return (
     <>
       <div className="flex gap-5 sm:gap-10 flex-wrap">
@@ -98,16 +84,18 @@ const Main = () => {
           ) : (
             <>
               <div className=" grid sm:grid-cols-2 gap-8">
-                {data.map((item, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className="bg-white rounded-xl p-4 flex-1 shadow"
-                    >
-                      <StatusInfo item={item} />
-                    </div>
-                  );
-                })}
+                {data
+                  .filter((item) => item.status === currList)
+                  .map((item, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className="bg-white rounded-xl p-4 flex-1 shadow"
+                      >
+                        <StatusInfo item={item} />
+                      </div>
+                    );
+                  })}
               </div>
             </>
           )}
