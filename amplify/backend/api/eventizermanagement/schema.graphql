@@ -70,6 +70,30 @@ type Error
 	status: String!
 	vendorID: ID! @index(name: "byVendor")
 }
+type Plan
+	@model
+	@auth(
+		rules: [
+			{ allow: owner, operations: [create,read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	brief: [AWSJSON]
+	name: String
+	companyName:String
+	phoneNumber:String
+	email:String
+	eventTitle:String
+	eventLocation:String
+	eventDate:String
+	status: String!
+	userID: ID! @index(name: "byUser")
+}
 
 type Orders
 	@model
@@ -196,6 +220,7 @@ type User
 	profilePicture: String
 	status: String!
 	Orders: [Orders] @hasMany(indexName: "byUser", fields: ["id"])
+	Plan: [Plan] @hasMany(indexName: "byUser", fields: ["id"])
 	Reviews: [Review] @hasMany(indexName: "byUser", fields: ["id"])
 }
 

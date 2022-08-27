@@ -295,6 +295,75 @@ export const deleteError = /* GraphQL */ `
     }
   }
 `;
+export const createPlan = /* GraphQL */ `
+  mutation CreatePlan(
+    $input: CreatePlanInput!
+    $condition: ModelPlanConditionInput
+  ) {
+    createPlan(input: $input, condition: $condition) {
+      id
+      brief
+      name
+      companyName
+      phoneNumber
+      email
+      eventTitle
+      eventLocation
+      eventDate
+      status
+      userID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updatePlan = /* GraphQL */ `
+  mutation UpdatePlan(
+    $input: UpdatePlanInput!
+    $condition: ModelPlanConditionInput
+  ) {
+    updatePlan(input: $input, condition: $condition) {
+      id
+      brief
+      name
+      companyName
+      phoneNumber
+      email
+      eventTitle
+      eventLocation
+      eventDate
+      status
+      userID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deletePlan = /* GraphQL */ `
+  mutation DeletePlan(
+    $input: DeletePlanInput!
+    $condition: ModelPlanConditionInput
+  ) {
+    deletePlan(input: $input, condition: $condition) {
+      id
+      brief
+      name
+      companyName
+      phoneNumber
+      email
+      eventTitle
+      eventLocation
+      eventDate
+      status
+      userID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createOrders = /* GraphQL */ `
   mutation CreateOrders(
     $input: CreateOrdersInput!
@@ -761,6 +830,25 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
+      Plan {
+        items {
+          id
+          brief
+          name
+          companyName
+          phoneNumber
+          email
+          eventTitle
+          eventLocation
+          eventDate
+          status
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       Reviews {
         items {
           id
@@ -839,6 +927,25 @@ export const updateUser = /* GraphQL */ `
         }
         nextToken
       }
+      Plan {
+        items {
+          id
+          brief
+          name
+          companyName
+          phoneNumber
+          email
+          eventTitle
+          eventLocation
+          eventDate
+          status
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       Reviews {
         items {
           id
@@ -911,6 +1018,25 @@ export const deleteUser = /* GraphQL */ `
           packageName
           reviewID
           notes
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Plan {
+        items {
+          id
+          brief
+          name
+          companyName
+          phoneNumber
+          email
+          eventTitle
+          eventLocation
+          eventDate
+          status
+          userID
           createdAt
           updatedAt
           owner

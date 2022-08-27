@@ -259,6 +259,66 @@ export const onDeleteError = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePlan = /* GraphQL */ `
+  subscription OnCreatePlan($owner: String) {
+    onCreatePlan(owner: $owner) {
+      id
+      brief
+      name
+      companyName
+      phoneNumber
+      email
+      eventTitle
+      eventLocation
+      eventDate
+      status
+      userID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdatePlan = /* GraphQL */ `
+  subscription OnUpdatePlan($owner: String) {
+    onUpdatePlan(owner: $owner) {
+      id
+      brief
+      name
+      companyName
+      phoneNumber
+      email
+      eventTitle
+      eventLocation
+      eventDate
+      status
+      userID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeletePlan = /* GraphQL */ `
+  subscription OnDeletePlan($owner: String) {
+    onDeletePlan(owner: $owner) {
+      id
+      brief
+      name
+      companyName
+      phoneNumber
+      email
+      eventTitle
+      eventLocation
+      eventDate
+      status
+      userID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreateOrders = /* GraphQL */ `
   subscription OnCreateOrders($owner: String) {
     onCreateOrders(owner: $owner) {
@@ -614,6 +674,25 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
+      Plan {
+        items {
+          id
+          brief
+          name
+          companyName
+          phoneNumber
+          email
+          eventTitle
+          eventLocation
+          eventDate
+          status
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       Reviews {
         items {
           id
@@ -689,6 +768,25 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
+      Plan {
+        items {
+          id
+          brief
+          name
+          companyName
+          phoneNumber
+          email
+          eventTitle
+          eventLocation
+          eventDate
+          status
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       Reviews {
         items {
           id
@@ -758,6 +856,25 @@ export const onDeleteUser = /* GraphQL */ `
           packageName
           reviewID
           notes
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Plan {
+        items {
+          id
+          brief
+          name
+          companyName
+          phoneNumber
+          email
+          eventTitle
+          eventLocation
+          eventDate
+          status
+          userID
           createdAt
           updatedAt
           owner
