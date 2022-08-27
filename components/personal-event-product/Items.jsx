@@ -50,7 +50,7 @@ const Items = ({ data, service }) => {
             <div className="relative min-h-[120px] sm:min-h-[200px]">
               {Images && (
                 <Image
-                  src={Images}
+                  src={img}
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center top"
@@ -63,7 +63,7 @@ const Items = ({ data, service }) => {
                 <div className="sm:h-[70px] sm:w-[70px] h-[45px] w-[45px] overflow-hidden relative rounded-full ">
                   {img && (
                     <Image
-                      src={img}
+                      src={Images}
                       layout="fill"
                       objectFit="cover"
                       objectPosition="center"

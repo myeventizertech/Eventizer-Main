@@ -46,6 +46,117 @@ export const onDeleteCoupon = /* GraphQL */ `
     }
   }
 `;
+export const onCreateHistory = /* GraphQL */ `
+  subscription OnCreateHistory {
+    onCreateHistory {
+      id
+      message
+      Employee
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateHistory = /* GraphQL */ `
+  subscription OnUpdateHistory {
+    onUpdateHistory {
+      id
+      message
+      Employee
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteHistory = /* GraphQL */ `
+  subscription OnDeleteHistory {
+    onDeleteHistory {
+      id
+      message
+      Employee
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateEmployee = /* GraphQL */ `
+  subscription OnCreateEmployee($owner: String) {
+    onCreateEmployee(owner: $owner) {
+      id
+      name
+      designation
+      profilePicture
+      power
+      History {
+        items {
+          id
+          message
+          Employee
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateEmployee = /* GraphQL */ `
+  subscription OnUpdateEmployee($owner: String) {
+    onUpdateEmployee(owner: $owner) {
+      id
+      name
+      designation
+      profilePicture
+      power
+      History {
+        items {
+          id
+          message
+          Employee
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteEmployee = /* GraphQL */ `
+  subscription OnDeleteEmployee($owner: String) {
+    onDeleteEmployee(owner: $owner) {
+      id
+      name
+      designation
+      profilePicture
+      power
+      History {
+        items {
+          id
+          message
+          Employee
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreateBalance = /* GraphQL */ `
   subscription OnCreateBalance($owner: String) {
     onCreateBalance(owner: $owner) {

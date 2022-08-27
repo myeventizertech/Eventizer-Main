@@ -3,10 +3,16 @@ import * as queries from '../../../src/graphql/queries'
 import { API,withSSRContext } from "aws-amplify";
 import { useRouter } from 'next/router'
 import services from "../../../utils/services";
+import Head from "next/head";
 function ViewPhotography({posts,rating,sLocation,specializedIn}){
   const data = posts.serviceLocation == null ?  "": posts;
     return(
  <>
+     <Head>
+    <title>{posts.title}</title>
+    <meta property="og:title" content={posts.title} key="title" />
+    <meta name="description" content={posts.detailsAboutYou}/>
+    </Head>
     <Main data={data} service={services.makeupArtist} rating={rating} sLocation={sLocation} specializedIn={specializedIn}/>
  </>
     )

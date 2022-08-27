@@ -38,6 +38,86 @@ export const listCoupons = /* GraphQL */ `
     }
   }
 `;
+export const getHistory = /* GraphQL */ `
+  query GetHistory($id: ID!) {
+    getHistory(id: $id) {
+      id
+      message
+      Employee
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listHistories = /* GraphQL */ `
+  query ListHistories(
+    $filter: ModelHistoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHistories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        message
+        Employee
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getEmployee = /* GraphQL */ `
+  query GetEmployee($id: ID!) {
+    getEmployee(id: $id) {
+      id
+      name
+      designation
+      profilePicture
+      power
+      History {
+        items {
+          id
+          message
+          Employee
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listEmployees = /* GraphQL */ `
+  query ListEmployees(
+    $filter: ModelEmployeeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEmployees(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        designation
+        profilePicture
+        power
+        History {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getBalance = /* GraphQL */ `
   query GetBalance($id: ID!) {
     getBalance(id: $id) {

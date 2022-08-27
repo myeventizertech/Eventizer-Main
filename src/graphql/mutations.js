@@ -55,6 +55,135 @@ export const deleteCoupon = /* GraphQL */ `
     }
   }
 `;
+export const createHistory = /* GraphQL */ `
+  mutation CreateHistory(
+    $input: CreateHistoryInput!
+    $condition: ModelHistoryConditionInput
+  ) {
+    createHistory(input: $input, condition: $condition) {
+      id
+      message
+      Employee
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateHistory = /* GraphQL */ `
+  mutation UpdateHistory(
+    $input: UpdateHistoryInput!
+    $condition: ModelHistoryConditionInput
+  ) {
+    updateHistory(input: $input, condition: $condition) {
+      id
+      message
+      Employee
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteHistory = /* GraphQL */ `
+  mutation DeleteHistory(
+    $input: DeleteHistoryInput!
+    $condition: ModelHistoryConditionInput
+  ) {
+    deleteHistory(input: $input, condition: $condition) {
+      id
+      message
+      Employee
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createEmployee = /* GraphQL */ `
+  mutation CreateEmployee(
+    $input: CreateEmployeeInput!
+    $condition: ModelEmployeeConditionInput
+  ) {
+    createEmployee(input: $input, condition: $condition) {
+      id
+      name
+      designation
+      profilePicture
+      power
+      History {
+        items {
+          id
+          message
+          Employee
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateEmployee = /* GraphQL */ `
+  mutation UpdateEmployee(
+    $input: UpdateEmployeeInput!
+    $condition: ModelEmployeeConditionInput
+  ) {
+    updateEmployee(input: $input, condition: $condition) {
+      id
+      name
+      designation
+      profilePicture
+      power
+      History {
+        items {
+          id
+          message
+          Employee
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteEmployee = /* GraphQL */ `
+  mutation DeleteEmployee(
+    $input: DeleteEmployeeInput!
+    $condition: ModelEmployeeConditionInput
+  ) {
+    deleteEmployee(input: $input, condition: $condition) {
+      id
+      name
+      designation
+      profilePicture
+      power
+      History {
+        items {
+          id
+          message
+          Employee
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createBalance = /* GraphQL */ `
   mutation CreateBalance(
     $input: CreateBalanceInput!
