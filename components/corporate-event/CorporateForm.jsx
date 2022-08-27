@@ -6,14 +6,13 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import ButtonClick from "../reUseComponents/ButtonClick";
 import ButtonLinkOrClick from "../reUseComponents/ButtonLinkOrClick";
-import debounce from "../../utils/debounceSubmitHandler";
 import Loader from "../reUseComponents/Loader";
 import * as yup from "yup";
-// import { API, Auth } from "aws-amplify";
-// import Loader from "../reUseComponents/Loader";
-// import { v4 as uuid } from "uuid";
-// import { Storage } from "@aws-amplify/storage";
-// import toast from "react-hot-toast";
+import { API } from "aws-amplify";
+import * as mutations from "../../src/graphql/mutations";
+import { useUserOrVendor } from "../../authContext/AuthContext";
+import { v4 as uuid } from "uuid";
+
 let EventDate = ({ fieldProps, error }) => {
   let [rawDate, setRawDatw] = useState("");
   return (
@@ -62,9 +61,9 @@ let validationSchema = yup.object().shape({
           })
           .required("Required"),
         targetBudget: yup
-        .number()
-        .typeError("Must be a number")
-        .positive("Must be greater than zero")
+          .number()
+          .typeError("Must be a number")
+          .positive("Must be greater than zero")
           .when("requiredService", {
             is: (val) => (val || val?.length === 0 ? true : false),
             then: yup.number().required("Required field"),
@@ -92,32 +91,52 @@ let validationSchema = yup.object().shape({
     .string()
     .email("Please enter a valid email address")
     .required("Required field"),
-  eventTitel: cmnSchema,
+  eventTitle: cmnSchema,
   eventLocation: cmnSchema,
   eventDate: yup.mixed().nullable().required("Required field"),
 });
 
 let intVal = {
-  corporateService: [
-    { requiredService: "", targetBudget: "" },
-    // { requiredService: "", targetBudget: "" },
-    // { requiredService: "", targetBudget: "" },
-  ],
+  corporateService: [{ requiredService: "", targetBudget: "" }],
   name: "",
   companyName: "",
   phoneNumber: "",
   email: "",
-  eventTitel: "",
+  eventTitle: "",
   eventLocation: "",
   eventDate: "",
 };
 const CorporateForm = () => {
   let [isDOne, setisDone] = useState(false);
-
+  const { verifyUser } = useUserOrVendor();
+  let { attributes } = verifyUser?.isUser_vendorAttr || {};
   let onSubmit = async (values) => {
-    await debounce(5000);
+    let totalBudget = values.corporateService.reduce(
+      (partialSum, a) => partialSum + a.targetBudget,
+      0
+    );
     try {
-      console.log(values);
+      const createMyplan = {
+        id: uuid(),
+        brief: values.corporateService.map((item) =>
+          JSON.stringify({ ...item })
+        ),
+        name: values.name,
+        companyName: values.companyName,
+        phoneNumber: values.phoneNumber,
+        email: values.email,
+        eventTitle: values.eventTitle,
+        eventLocation: values.eventLocation,
+        eventDate: values.eventDate,
+        status: "Pending",
+        userID: attributes.sub,
+        totalBudget,
+        fileLink: "",
+      };
+      await API.graphql({
+        query: mutations.createPlan,
+        variables: { input: createMyplan },
+      });
       setisDone(true);
     } catch (error) {
       console.log(error);
@@ -194,16 +213,17 @@ const CorporateForm = () => {
                               />
                             </div>
                           </div>
-                          {fieldProps.values.corporateService.length !== 1 &&
-                          <button
-                            type="button"
-                            className="font-14 color3 border border-[#ef0d5e] px-3 py-.5  rounded-[4px] hover:opacity-75 mt-2 block ml-auto"
-                            onClick={() => {
-                              remove(index);
-                            }}
-                          >
-                            Delete
-                          </button>}
+                          {fieldProps.values.corporateService.length !== 1 && (
+                            <button
+                              type="button"
+                              className="font-14 color3 border border-[#ef0d5e] px-3 py-.5  rounded-[4px] hover:opacity-75 mt-2 block ml-auto"
+                              onClick={() => {
+                                remove(index);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          )}
                         </div>
                       ))}
 
@@ -307,15 +327,15 @@ const CorporateForm = () => {
                     <Input
                       label="Event Title"
                       type="text"
-                      name="eventTitel"
+                      name="eventTitle"
                       placeholder="Event Title"
-                      value={fieldProps.values.eventTitel}
+                      value={fieldProps.values.eventTitle}
                       handleChange={fieldProps.handleChange}
                       handleBlur={fieldProps.handleBlur}
                       error={
-                        fieldProps.touched.eventTitel &&
-                        fieldProps.errors.eventTitel
-                          ? fieldProps.errors.eventTitel
+                        fieldProps.touched.eventTitle &&
+                        fieldProps.errors.eventTitle
+                          ? fieldProps.errors.eventTitle
                           : ""
                       }
                     />

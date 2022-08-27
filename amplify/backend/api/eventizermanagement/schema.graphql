@@ -91,6 +91,8 @@ type Plan
 	eventTitle:String
 	eventLocation:String
 	eventDate:String
+	totalBudget:String
+	fileLink:String
 	status: String!
 	userID: ID! @index(name: "byUser")
 }

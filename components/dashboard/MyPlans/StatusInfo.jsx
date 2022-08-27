@@ -14,19 +14,15 @@ function formatCurr(num) {
 const StatusInfo = ({ item }) => {
   const [modalViewForm, setViewForm] = useState(false);
   const [modalViewStatus, setViewStatus] = useState(false);
-
-  let totalBudget = item.corporateService.reduce(
-    (partialSum, a) => partialSum + a.targetBudget,
-    0
-  );
+  let totalBudget = item?.totalBudget || 0;
   return (
     <>
       <div>
         <h3 className="font-18 sm:font-22 color4 font-medium">
-          {item.eventTitel}
+          {item.eventTitle}
         </h3>
         <p className="color1 font-14 font-normal tracking-wider">
-          Submitted on {item.eventDate}
+          Submitted on {item?.eventDate}
         </p>
 
         <div className="mt-5 text-center">
@@ -41,12 +37,10 @@ const StatusInfo = ({ item }) => {
             ></div>
           </div>
           <h3 className="font-16 color4 font-medium">
-            {totalBudget > 1000000
-              ? formatCurr(totalBudget) + "+"
-              : formatCurr(totalBudget)}
+            {totalBudget > 1000000 ? 1000000 + "+" : formatCurr(totalBudget)}
           </h3>
         </div>
-        {item.status !== "Replied" ? (
+        {item?.status !== "Replied" ? (
           <ButtonClick
             type="button"
             css={"bg-[#BA4DAF] text-white rounded-md block mt-4"}
@@ -55,6 +49,7 @@ const StatusInfo = ({ item }) => {
             padding="px-6 sm:px-10"
             font="font-14 sm:font-16"
             handleClick={() => setViewForm(true)}
+            shadow=""
           />
         ) : (
           <ButtonClick
@@ -65,6 +60,7 @@ const StatusInfo = ({ item }) => {
             padding="px-6 sm:px-10"
             font="font-14 sm:font-16"
             handleClick={() => setViewStatus(true)}
+            shadow=""
           />
         )}
       </div>
@@ -104,10 +100,7 @@ const StatusInfo = ({ item }) => {
                 text="Download the Attachement"
                 font="font-14 md:font-20 font-normal"
                 handleBtn={() => {
-                  saveAs(
-                    "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-                    "eventizer-attachment.pdf"
-                  );
+                  saveAs(item?.fileLink, "eventizer-attachment.pdf");
                   setViewStatus(false);
                 }}
                 radius="rounded-[1000px]"

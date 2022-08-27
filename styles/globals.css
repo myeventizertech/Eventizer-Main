@@ -474,7 +474,7 @@
   }
 
   .heroSection {
-    background: url("../public/img/bgimageMobile.png");
+    background: url("https://res.cloudinary.com/eventizer-store/image/upload/v1661620263/Eventizer_New_Site/Frame_1_1_bfgvxu.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: right;
@@ -482,12 +482,12 @@
   }
   @media screen and (max-width: 639px) {
     .heroSection {
-      background-position-y: 4rem;
+      background-position-y: 2rem;
     }
   }
   @media screen and (max-width: 450px) {
     .heroSection {
-      background-position-x: 9rem;
+      background-position-x: 3rem;
     }
   }
 

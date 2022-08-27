@@ -271,6 +271,8 @@ export const onCreatePlan = /* GraphQL */ `
       eventTitle
       eventLocation
       eventDate
+      totalBudget
+      fileLink
       status
       userID
       createdAt
@@ -291,6 +293,8 @@ export const onUpdatePlan = /* GraphQL */ `
       eventTitle
       eventLocation
       eventDate
+      totalBudget
+      fileLink
       status
       userID
       createdAt
@@ -311,6 +315,8 @@ export const onDeletePlan = /* GraphQL */ `
       eventTitle
       eventLocation
       eventDate
+      totalBudget
+      fileLink
       status
       userID
       createdAt
@@ -685,6 +691,8 @@ export const onCreateUser = /* GraphQL */ `
           eventTitle
           eventLocation
           eventDate
+          totalBudget
+          fileLink
           status
           userID
           createdAt
@@ -779,6 +787,8 @@ export const onUpdateUser = /* GraphQL */ `
           eventTitle
           eventLocation
           eventDate
+          totalBudget
+          fileLink
           status
           userID
           createdAt
@@ -873,6 +883,8 @@ export const onDeleteUser = /* GraphQL */ `
           eventTitle
           eventLocation
           eventDate
+          totalBudget
+          fileLink
           status
           userID
           createdAt

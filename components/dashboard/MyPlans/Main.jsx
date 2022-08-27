@@ -2,88 +2,67 @@ import React, { useState, useEffect } from "react";
 import BriefItem from "./BriefItem";
 import StatusInfo from "./StatusInfo";
 import Loader from "../../reUseComponents/Loader";
-let corporetFrom = [
-  {
-    corporateService: [
-      {
-        requiredService: "hjhj",
-        targetBudget: 10000,
-      },
-      {
-        requiredService: "jhj",
-        targetBudget: 6,
-      },
-    ],
-    name: "hjhj",
-    companyName: "hjhj",
-    phoneNumber: "01745645654",
-    email: "hjkjh@dfgdf.fgh",
-    eventTitel: "fghfgh",
-    eventLocation: "fghhhhhhhhhh",
-    eventDate: "03/09/2022",
-  },
-  {
-    corporateService: [
-      {
-        requiredService: "jhj",
-        targetBudget: 700000,
-      },
-      {
-        requiredService: "hjhj",
-        targetBudget: 8,
-      },
-    ],
-    name: "hjjhj",
-    companyName: "hjhj",
-    phoneNumber: "01745645654",
-    email: "hjkjh@dfgdf.fgh",
-    eventTitel: "fghfgh",
-    eventLocation: "fghhhhhhhhhh",
-    eventDate: "03/09/2022",
-  },
-  {
-    corporateService: [
-      {
-        requiredService: "hjhjh",
-        targetBudget: 4,
-      },
-      {
-        requiredService: "hjhjh",
-        targetBudget: 4,
-      },
-    ],
-    name: "dfgggghjhjhgggggg",
-    companyName: "dfggggggghjhjhggggggggg",
-    phoneNumber: "01745645654",
-    email: "hjkjh@dfgdf.fgh",
-    eventTitel: "fghfgh",
-    eventLocation: "fghhhhhhhhhh",
-    eventDate: "03/09/2022",
-  },
-];
+import * as queries from "../../../src/graphql/queries";
+import { API } from "aws-amplify";
+
 let corporateEvent = [
-  { id: 1, totalBrief: 2, title: "Total Brief Submitted", status: "Pending" },
-  { id: 2, totalBrief: 4, title: "Total Brief Replied", status: "Replied" },
+  {
+    id: 1,
+    totalBrief: "...",
+    title: "Total Brief Submitted",
+    status: "Pending",
+  },
+  { id: 2, totalBrief: "...", title: "Total Brief Replied", status: "Replied" },
 ];
+
 const Main = () => {
-  const [currList, setCurrList] = useState(corporateEvent[0].id);
+  const [currList, setCurrList] = useState(corporateEvent[0].status);
   const [loader, setLoader] = useState(false);
   let hadleCurrList = (id) => setCurrList(id);
   let [data, setData] = useState([]);
 
+
+
+  
   useEffect(() => {
     setLoader(true);
     async function fetchData() {
       try {
-        setData(corporetFrom);
+        let filter = {
+          status: {
+            eq: currList,
+          },
+        };
+        let allData = await API.graphql({
+          query: queries.listPlans,
+          variables: { filter: filter },
+        });
+        setData(allData.data.listPlans.items);
         setLoader(false);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
-  }, []);
+  }, [currList]);
 
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let allData = await API.graphql({
+          query: queries.listPlans,
+        });
+        corporateEvent[0].totalBrief = allData?.data?.listPlans?.items?.length;
+        corporateEvent[1].totalBrief = allData?.data?.listPlans?.items?.filter(
+          (item) => item.status === "Replied"
+        ).length;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <div className="flex gap-5 sm:gap-10 flex-wrap">
@@ -93,10 +72,12 @@ const Main = () => {
               role="button"
               className={`bg-white rounded-xl p-4 flex-1 shadow cursor-pointer border btn-hover min-w-[8rem]
               ${
-                item.id !== currList ? "border-[#ded6d6]" : "border-[#141414] "
+                item.status !== currList
+                  ? "border-[#ded6d6]"
+                  : "border-[#141414] "
               }`}
               key={i}
-              onClick={() => hadleCurrList(item.id)}
+              onClick={() => hadleCurrList(item.status)}
             >
               <BriefItem item={item} />
             </div>

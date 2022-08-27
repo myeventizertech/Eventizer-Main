@@ -207,6 +207,8 @@ export const getPlan = /* GraphQL */ `
       eventTitle
       eventLocation
       eventDate
+      totalBudget
+      fileLink
       status
       userID
       createdAt
@@ -232,6 +234,8 @@ export const listPlans = /* GraphQL */ `
         eventTitle
         eventLocation
         eventDate
+        totalBudget
+        fileLink
         status
         userID
         createdAt
@@ -474,6 +478,8 @@ export const getUser = /* GraphQL */ `
           eventTitle
           eventLocation
           eventDate
+          totalBudget
+          fileLink
           status
           userID
           createdAt
@@ -693,6 +699,9 @@ export const listCinematographies = /* GraphQL */ `
         rating
         isConfirmed
         Reviews {
+          items {
+          average
+        }
           nextToken
         }
         phoneNumber
@@ -786,6 +795,9 @@ export const listPhotographies = /* GraphQL */ `
         rating
         isConfirmed
         Reviews {
+          items {
+          average
+        }
           nextToken
         }
         phoneNumber
@@ -882,6 +894,9 @@ export const listDJMusicians = /* GraphQL */ `
         teamMember
         packages
         Reviews {
+          items {
+          average
+        }
           nextToken
         }
         status
@@ -974,6 +989,9 @@ export const listMakeupArtists = /* GraphQL */ `
         teamMember
         packages
         Reviews {
+          items {
+          average
+        }
           nextToken
         }
         status
@@ -1066,6 +1084,9 @@ export const listMehediArtists = /* GraphQL */ `
         phoneNumber
         teamMember
         Reviews {
+          items {
+          average
+        }
           nextToken
         }
         status
