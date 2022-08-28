@@ -61,7 +61,7 @@ const SectionBusiness = () => {
               isLink={true}
               text="Get started"
               font="font-14 sm:font-16 md:font-22 font-normal "
-              goto="/book-now"
+              goto="/corporate-event"
               radius="rounded-[6px]"
               otherCss="block md:inline w-full"
               px="px-[50px]"
