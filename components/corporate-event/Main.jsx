@@ -125,14 +125,13 @@ const Main = () => {
           />
           <div>
             <h3 className="font-18 sm:font-22 color3 font-medium">
-              Dedicated Event Supervisor
+            Budget Forecast
             </h3>
             <p
               className="color1 font-14
              lg:font-16 font-normal tracking-wider"
             >
-              Get a dedicated supervisor for your event and logistics support
-              who will ensure quality as well as your plan.
+              Submit your budget &  plan to get a budget forecast for your upcoming event.
             </p>
           </div>
         </div>
