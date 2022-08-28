@@ -38,7 +38,7 @@ const Main = () => {
             </div>
           ) : (
             <h3 className="font-22 sm:font-32 font-medium tracking-wider capitalize">
-              Need a Event Specialists?
+              Need an Event Specialist?
             </h3>
           )}
           <div className="md:ml-auto">
@@ -73,7 +73,7 @@ const Main = () => {
               <div className="mt-5">
                 <ButtonLinkOrClick
                   isLink={true}
-                  text="Submit Your Plan"
+                  text="Submit Your Brief"
                   font="font-14 md:font-20 font-normal"
                   goto="/corporate-event/corporate-event-from"
                   radius="rounded-[20px]"
