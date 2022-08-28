@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormData from "./FormData";
 import ButtonClick from "../../reUseComponents/ButtonClick";
 import ButtonLinkOrClick from "../../reUseComponents/ButtonLinkOrClick";
 import { saveAs } from "file-saver";
+import { Storage } from "aws-amplify";
+import toast from "react-hot-toast";
+
 const FORMAT_CURR = new Intl.NumberFormat(undefined, {
   currency: "BDT",
   style: "currency",
@@ -11,10 +14,21 @@ function formatCurr(num) {
   return FORMAT_CURR.format(num);
 }
 
-const StatusInfo = ({ item }) => {
+const StatusInfo = ({ item, currList }) => {
   const [modalViewForm, setViewForm] = useState(false);
   const [modalViewStatus, setViewStatus] = useState(false);
+  const [downloadFile, setDownloadFile] = useState(null);
+
   let totalBudget = item?.totalBudget || 0;
+  useEffect(() => {
+    async function fetchme() {
+      try {
+        const key = await Storage.get(item?.fileLink);
+        setDownloadFile(key);
+      } catch (error) {}
+    }
+    fetchme();
+  }, [item.fileLink]);
   return (
     <>
       <div>
@@ -40,7 +54,24 @@ const StatusInfo = ({ item }) => {
             {totalBudget > 1000000 ? 1000000 + "+" : formatCurr(totalBudget)}
           </h3>
         </div>
-        {item?.status !== "Replied" ? (
+        {currList === "Replied" && (
+          <>
+            {item?.status === "Replied" && (
+              <ButtonClick
+                type="button"
+                css={"bgcolor1 text-white rounded-md block mt-4"}
+                width="w-full"
+                text={"View Status"}
+                padding="px-6 sm:px-10"
+                font="font-14 sm:font-16"
+                handleClick={() => setViewStatus(true)}
+                shadow=""
+              />
+            )}
+          </>
+        )}
+
+        {currList === "Pending" && (
           <ButtonClick
             type="button"
             css={"bg-[#BA4DAF] text-white rounded-md block mt-4"}
@@ -49,17 +80,6 @@ const StatusInfo = ({ item }) => {
             padding="px-6 sm:px-10"
             font="font-14 sm:font-16"
             handleClick={() => setViewForm(true)}
-            shadow=""
-          />
-        ) : (
-          <ButtonClick
-            type="button"
-            css={"bgcolor1 text-white rounded-md block mt-4"}
-            width="w-full"
-            text={"View Status"}
-            padding="px-6 sm:px-10"
-            font="font-14 sm:font-16"
-            handleClick={() => setViewStatus(true)}
             shadow=""
           />
         )}
@@ -100,8 +120,12 @@ const StatusInfo = ({ item }) => {
                 text="Download the Attachement"
                 font="font-14 md:font-20 font-normal"
                 handleBtn={() => {
-                  saveAs(item?.fileLink, "eventizer-attachment.pdf");
-                  setViewStatus(false);
+                  if (downloadFile) {
+                    saveAs(downloadFile, "eventizer-attachment.pdf");
+                    setViewStatus(false);
+                    return;
+                  }
+                  toast.error("something went wrong");
                 }}
                 radius="rounded-[1000px]"
                 py="py-[10px]"

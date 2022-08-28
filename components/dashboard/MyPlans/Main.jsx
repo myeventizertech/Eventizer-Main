@@ -77,22 +77,36 @@ const Main = () => {
         <Loader center={true} colorDefault={false} />
       ) : (
         <>
-          {data.length == 0 ? (
+          {data.filter((item) => {
+            if (currList == "Replied") {
+              return item.status === currList;
+            } else {
+              return item;
+            }
+          }).length == 0 ? (
             <h5 className="font-26 md:font-18 font-normal color4 mt-4 text-center">
-              You have no event
+              {currList == "Replied"
+                ? "You have no replied event"
+                : "You have no event"}
             </h5>
           ) : (
             <>
               <div className=" grid sm:grid-cols-2 gap-8">
                 {data
-                  .filter((item) => item.status === currList)
+                  .filter((item) => {
+                    if (currList == "Replied") {
+                      return item.status === currList;
+                    } else {
+                      return item;
+                    }
+                  })
                   .map((item, i) => {
                     return (
                       <div
                         key={i}
                         className="bg-white rounded-xl p-4 flex-1 shadow"
                       >
-                        <StatusInfo item={item} />
+                        <StatusInfo item={item} currList={currList} />
                       </div>
                     );
                   })}
