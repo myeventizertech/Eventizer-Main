@@ -46,7 +46,7 @@ const Main = () => {
       setBookingData(Data);
       return;
     }
-    const filteredData = Data.filter((item) => item.status === orderstatus);
+    const filteredData = Data.filter((item) => item?.status === orderstatus);
     setBookingData(filteredData);
   };
   useEffect(()=>{

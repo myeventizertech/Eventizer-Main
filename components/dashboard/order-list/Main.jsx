@@ -86,7 +86,7 @@ const Main = () => {
       setOrderData(order);
       return;
     }
-    const filteredData = order.filter((item) => item.status === orderstatus);
+    const filteredData = order.filter((item) => item?.status === orderstatus);
     setOrderData(filteredData);
   };
   useEffect(() => {
