@@ -38,7 +38,7 @@ const Main = () => {
             </div>
           ) : (
             <h3 className="font-22 sm:font-32 font-medium tracking-wider capitalize">
-              Need An Event Specialist?
+              Need an Event Specialist?
             </h3>
           )}
           <div className="md:ml-auto">
