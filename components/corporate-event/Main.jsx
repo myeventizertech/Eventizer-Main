@@ -1,26 +1,46 @@
 import React from "react";
 import ButtonLinkOrClick from "../reUseComponents/ButtonLinkOrClick";
+import moment from "moment";
+import { useUserOrVendor } from "../../authContext/AuthContext";
+
 const Main = () => {
+  const { verifyUser, profileImage } = useUserOrVendor();
+  const { isUser_vendor, userTitle } = verifyUser;
   return (
     <>
-      <header className="container m-all">
-        <div className="flex gap-5 items-center flex-col md:flex-row">
-          <div className="flex gap-x-3 sm:gap-x-5 items-center ">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt="Profile Picture"
-              className=" object-cover object-center w-16 h-16 md:w-24 md:h-24 rounded-full "
-            />
-            <div>
-              <h3 className="font-16 sm:font-18 lg:font-26 font-medium tracking-wider capitalize">
-                Hello, Labib Muhannad
-              </h3>
-              <p className="color1 font-12 lg:font-14 font-light tracking-wider">
-                Get Your plan in a Click I Today is 03-02-23
-              </p>
+      <header className="container m-all pt-5">
+        <div className="flex gap-5 items-center flex-col md:flex-row ">
+          {isUser_vendor === "user" ? (
+            <div className="flex gap-x-3 sm:gap-x-5 items-center ">
+              {profileImage ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={profileImage}
+                    alt="Profile Picture"
+                    className=" object-cover object-center w-16 h-16 md:w-24 md:h-24 rounded-full "
+                  />
+                </>
+              ) : (
+                <h1 className="capitalize w-16 h-16 md:w-24 md:h-24 font-20 sm:font-32 font-medium bg-slate-900 text-center text-white rounded-full flex-center justify-center shrink-0">
+                  {userTitle.substring(0, 1)}
+                </h1>
+              )}
+              <div>
+                <h3 className="font-16 sm:font-18 lg:font-26 font-medium tracking-wider capitalize">
+                  Hello, {userTitle}
+                </h3>
+                <p className="color1 font-12 lg:font-14 font-light tracking-wider">
+                  Get Your plan in a Click I Today is{" "}
+                  {moment(new Date()).format("DD-MM-YYYY")}
+                </p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <h3 className="font-22 sm:font-32 font-medium tracking-wider capitalize">
+              Need a Event Specialists?
+            </h3>
+          )}
           <div className="md:ml-auto">
             <ButtonLinkOrClick
               isLink={true}
@@ -48,7 +68,7 @@ const Main = () => {
                 Let us know your plan{" "}
               </h1>
               <h1 className="font-20 sm:font-40 font-medium tracking-wider">
-                Get easy soluaion
+                Get easy solutions
               </h1>
               <div className="mt-5">
                 <ButtonLinkOrClick
@@ -74,7 +94,7 @@ const Main = () => {
 
       <section className="container py-8">
         <h2 className="font-22 sm:font-48 color4 text-center font-medium">
-          How to get easy solutions?
+          How to get easy solution?
         </h2>
         <div className="flex gap-x-6 sm:gap-x-10 items-center mt-8 max-w-[55rem] mx-auto">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -122,27 +142,18 @@ const Main = () => {
         <h2 className="font-22 sm:font-48 color4 text-center font-medium">
           Our Corpoate Clients
         </h2>
-        <div className="mt-8 flex flex-wraps gap-5 justify-center">
-          <div className="w-28">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/parnnerlogos/Asset3.png" alt="Clients logo" />
-          </div>{" "}
-          <div className="w-28">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/parnnerlogos/Asset3.png" alt="Clients logo" />
-          </div>{" "}
-          <div className="w-28">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/parnnerlogos/Asset3.png" alt="Clients logo" />
-          </div>{" "}
-          <div className="w-28">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/parnnerlogos/Asset3.png" alt="Clients logo" />
-          </div>{" "}
-          <div className="w-28">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/parnnerlogos/Asset3.png" alt="Clients logo" />
-          </div>{" "}
+        <div className="mt-8 flex flex-wraps gap-5 justify-center items-center flex-wrap">
+          {[3, 6, 7, 9, 10, 11, 12, 5, 14].map((item, i) => {
+            return (
+              <div className="w-16 sm:w-28" key={i}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/img/parnnerlogos/Asset${item}.png`}
+                  alt="Clients logo"
+                />
+              </div>
+            );
+          })}
         </div>
       </section>
     </>

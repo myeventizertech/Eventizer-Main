@@ -50,7 +50,7 @@ class MyDocument extends Document {
           <meta name="application-name" content="eventizer" />
           <meta name="apple-mobile-web-app-title" content="eventizer" />
 
-          <link rel="icon" href="/img/favicon.ico" />
+          <link rel="icon" href="/img/favicon.png" />
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"

@@ -14,28 +14,18 @@ import "../configureAmplify";
 import AuthContext from "../authContext/AuthContext";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
+import { hotjar } from "react-hotjar";
+import { useEffect } from "react";
+
 // import { Provider } from "react-redux";
 // import store from "../redux/strore";
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    hotjar.initialize(3127892, 1);
+  }, []);
+
   return (
     <>
-      {/* Hotjar Tracking Code for https://myeventizer.com */}
-      <Script
-        id="hotjar"
-        strategy="afterInteractive"
-        // strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `(function(h,o,t,j,a,r){
-  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-  h._hjSettings={hjid:3127042,hjsv:6};
-  a=o.getElementsByTagName('head')[0];
-  r=o.createElement('script');r.async=1;
-  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-  a.appendChild(r);
-})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
-        }}
-      />
-
       <Script
         id="icWebChat"
         strategy="afterInteractive"
