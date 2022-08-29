@@ -106,11 +106,11 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
             {packageValue[quality].customOptionFields.map((item, i) => {
               return (
                 <div key={i}>
-                  <h1 className="MyPackageListItemHeading">Name of service</h1>
+                  <h1 className="MyPackageListItemHeading">Extra service included</h1>
                   <p className="MyPackageListItemvalue ">{item.fieldName}</p>
 
-                  <h1 className="MyPackageListItemHeading">Added value</h1>
-                  <p className="MyPackageListItemvalue ">{item.fieldValue}</p>
+                  {/* <h1 className="MyPackageListItemHeading">Added value</h1>
+                  <p className="MyPackageListItemvalue ">{item.fieldValue}</p> */}
                 </div>
               );
             })}
