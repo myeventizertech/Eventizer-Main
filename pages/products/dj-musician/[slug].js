@@ -9,9 +9,9 @@ function ViewMusician({posts,rating,sLocation,specializedIn}){
     return(
  <>
      <Head>
-    <title>{posts.title}</title>
-    <meta property="og:title" content={posts.title} key="title" />
-    <meta name="description" content={posts.detailsAboutYou}/>
+    <title>{posts?.title}</title>
+    <meta property="og:title" content={posts?.title} key="title" />
+    <meta name="description" content={posts?.detailsAboutYou}/>
     </Head>
     <Main data={data} service={services.djMusician} rating={rating} sLocation={sLocation} specializedIn={specializedIn}/>
  </>

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import Slider from "react-slick";
-import { useEffect ,useState} from "react";
+import { useEffect, useState } from "react";
+import Loader from "../reUseComponents/Loader";
 function SampleNextArrow(props) {
   const { className, onClick } = props;
   return (
@@ -33,8 +34,15 @@ function SamplePrevArrow(props) {
     </div>
   );
 }
-const ProfileInfo = ({ slideImg, openImageViewer,data,rating,sLocation,specializedIn }) => {
-  const Data =data
+const ProfileInfo = ({
+  slideImg,
+  openImageViewer,
+  data,
+  rating,
+  sLocation,
+  specializedIn,
+}) => {
+  const Data = data;
   const settings = {
     dots: false,
     infinite: false,
@@ -57,18 +65,18 @@ const ProfileInfo = ({ slideImg, openImageViewer,data,rating,sLocation,specializ
     ],
   };
 
-  let years =!Data?.yearsOfExperience? 0: JSON.parse(Data?.yearsOfExperience)
+  let years = !Data?.yearsOfExperience
+    ? 0
+    : JSON.parse(Data?.yearsOfExperience);
 
 
-
-  
   return (
     <>
       <h1 className="text-[#141414] mdx:text-white font-18 sm:font-32 font-medium">
-      {Data?.title||""}
+        {Data?.title || ""}
       </h1>
-      <h4 className="test-profile-sm">{years?.value||"0"} experienced</h4>
-      <h4 className="test-profile-sm">Based in {sLocation||""}</h4>
+      <h4 className="test-profile-sm">{years?.value || "0"} experienced</h4>
+      <h4 className="test-profile-sm">Based in {sLocation || ""}</h4>
       <div className="flex items-center test-profile-sm">
         <div>
           <ReactStars
@@ -83,45 +91,48 @@ const ProfileInfo = ({ slideImg, openImageViewer,data,rating,sLocation,specializ
         </div>
         <div>
           <span>{rating}</span>
-          <span>({Data?.Reviews?.items?.length||0} ratings)</span>
+          <span>({Data?.Reviews?.items?.length || 0} ratings)</span>
         </div>
       </div>
-{specializedIn?       <p className="test-profile-sm">
-        Specialized in {specializedIn}
-      </p>: <p></p>
-      
-      }
-      <div className="mdx:max-w-[35rem] flex-1 mt-5">
-        <Slider {...settings}>
-          {slideImg.map((item, i) => {
-            return (
-              <div key={i} onClick={() => openImageViewer(i)}>
-                <div className="mx-1">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item}
-                    // layout="fill"
-                    // objectFit="cover"
-                    // objectPosition="center"
-                    alt={"profile-image"}
-                    // quality={100}
-                    // placeholder="blur"
-                    // blurDataURL={placeholder}
-                    className="mx-auto block"
-                  />
+      {specializedIn ? (
+        <p className="test-profile-sm">Specialized in {specializedIn}</p>
+      ) : (
+        <p></p>
+      )}
+      {slideImg.length !==  0 ? (
+        <div className="mdx:max-w-[35rem] flex-1 mt-5">
+          <Slider {...settings}>
+            {slideImg.map((item, i) => {
+              return (
+                <div key={i} onClick={() => openImageViewer(i)}>
+                  <div className="mx-1">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item}
+                      alt={"profile-image"}
+                      className="mx-auto block"
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </Slider>
+              );
+            })}
+          </Slider>
 
-        <button
-          className="test-profile-sm ml-auto block btn-hover"
-          onClick={() => openImageViewer(0)}
-        >
-          Show All
-        </button>
-      </div>
+          <button
+            className="test-profile-sm ml-auto block btn-hover"
+            onClick={() => openImageViewer(0)}
+          >
+            Show All
+          </button>
+        </div>
+      ):
+      (
+
+        <Loader center={true} colorDefault={false}/>
+      )
+    
+    
+    }
     </>
   );
 };

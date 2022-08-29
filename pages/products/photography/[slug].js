@@ -10,9 +10,9 @@ function ViewPhotography({posts,rating,sLocation,specializedIn}){
     return(
  <>
      <Head>
-    <title>{posts.title}</title>
-    <meta property="og:title" content={posts.title} key="title" />
-    <meta name="description" content={posts.detailsAboutYou}/>
+    <title>{posts?.title}</title>
+    <meta property="og:title" content={posts?.title} key="title" />
+    <meta name="description" content={posts?.detailsAboutYou}/>
     </Head>
     <Main data={data} service={services.photography} rating={rating} sLocation={sLocation} specializedIn={specializedIn}/>
  </>
@@ -20,7 +20,6 @@ function ViewPhotography({posts,rating,sLocation,specializedIn}){
 }
 
 export async function getStaticProps({params}) {
-  console.log(params); 
 
     const res =  await API.graphql({
       query: queries.getPhotography,
