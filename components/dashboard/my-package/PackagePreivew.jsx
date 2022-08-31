@@ -115,7 +115,9 @@ const PackageQuality = ({ quality, packageValue }) => {
             {packageValue[quality].customOptionFields.map((item, i) => {
               return (
                 <div key={i}>
-                  <h1 className="MyPackageListItemHeading">Extra service included</h1>
+                  <h1 className="MyPackageListItemHeading">
+                    Extra service included
+                  </h1>
                   <p className="MyPackageListItemvalue ">{item.fieldName}</p>
 
                   {/* <h1 className="MyPackageListItemHeading">Added value</h1>
@@ -150,6 +152,16 @@ const PackageQuality = ({ quality, packageValue }) => {
 };
 
 const PackagePreivew = ({ packageValue, serviceCheck }) => {
+  let checkIsHave = (quality) => {
+    if (
+      packageValue?.[quality].pricePerHour ||
+      packageValue?.[quality].pricePerDay
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <>
       <div className="mt-5 lgx:flex gap-5">
@@ -255,19 +267,24 @@ const PackagePreivew = ({ packageValue, serviceCheck }) => {
       <div className="mt-5">
         <div className="grid grid-cols-1 mdx:grid-cols-2 xl:grid-cols-3 gap-8 ">
           {/* ====================== */}
-          <div>
-            <PackageQuality quality="basic" packageValue={packageValue} />
-          </div>
-
+          {checkIsHave("basic") && (
+            <div>
+              <PackageQuality quality="basic" packageValue={packageValue} />
+            </div>
+          )}
           {/* ====================== */}
+          {checkIsHave("standard") && (
+            <div>
+              <PackageQuality quality="standard" packageValue={packageValue} />
+            </div>
+          )}
 
-          <div>
-            <PackageQuality quality="standard" packageValue={packageValue} />
-          </div>
           {/* ========================= */}
-          <div>
-            <PackageQuality quality="premium" packageValue={packageValue} />
-          </div>
+          {checkIsHave("premium") && (
+            <div>
+              <PackageQuality quality="premium" packageValue={packageValue} />
+            </div>
+          )}
         </div>
       </div>
 

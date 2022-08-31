@@ -193,6 +193,7 @@ const PackageFrom = ({
                 quality="basic"
                 fieldProps={props}
                 serviceCheck={serviceCheck}
+                isOptional={false}
               />
             </div>
             <div>
@@ -200,6 +201,7 @@ const PackageFrom = ({
                 quality="standard"
                 fieldProps={props}
                 serviceCheck={serviceCheck}
+                isOptional={true}
               />
             </div>
             <div>
@@ -207,6 +209,7 @@ const PackageFrom = ({
                 quality="premium"
                 fieldProps={props}
                 serviceCheck={serviceCheck}
+                isOptional={false}
               />
             </div>
           </div>

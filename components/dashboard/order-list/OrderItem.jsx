@@ -27,7 +27,16 @@ const OrderItem = ({ data, getData }) => {
             {": "}
             <span>{data?.city + "," + data.address}</span>
           </li>
-
+          <li>
+            <span className="order-items-name">Event time</span>
+            {": "}
+            <span>
+              {" "}
+              {data?.bookedDay === null
+                ? data?.start + "-" + data?.end
+                : data?.bookedDay + "," + data?.start + "-" + data?.end}
+            </span>
+          </li>
           <li>
             <span className="order-items-name">Total Price</span>
             {": "}

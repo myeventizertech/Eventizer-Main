@@ -46,7 +46,15 @@ function checkData(){
   useEffect(() => {
 checkData()
   }, [])
-  
+  let checkIsHave = (quality) => {
+    if (
+      orderData?.[quality].pricePerHour ||
+      orderData?.[quality].pricePerDay
+    ) {
+      return true;
+    }
+    return false;
+  };
   return (
     <>
       <div className="container m-all">
@@ -104,6 +112,8 @@ checkData()
 
             <div className="grid grid-cols-1 md:grid-cols-2 mdx:grid-cols-3 gap-8 mt-7">
               {/* ====================== */}
+              {checkIsHave("basic") && (
+
               <div>
                 <PackageDetails
                   quality="basic"
@@ -111,8 +121,10 @@ checkData()
                   handleClick={handleSHowOrderFrom}
                 />
               </div>
-
+              )}
               {/* ====================== */}
+              {checkIsHave("standard") && (
+
               <div>
                 <PackageDetails
                   quality="standard"
@@ -120,8 +132,10 @@ checkData()
                   handleClick={handleSHowOrderFrom}
                 />
               </div>
-
+              )}
               {/* ========================= */}
+              {checkIsHave("premium") && (
+
               <div>
                 <PackageDetails
                   quality="premium"
@@ -129,6 +143,7 @@ checkData()
                   handleClick={handleSHowOrderFrom}
                 />
               </div>
+              )}
             </div>
           </>
         )}

@@ -14,6 +14,7 @@ const PackageQuality = ({
   labelDesign = "font-16",
   fieldProps,
   serviceCheck,
+  isOptional
 }) => {
   return (
     <>
@@ -37,7 +38,7 @@ const PackageQuality = ({
               label="Price Per hour"
               type="text"
               name={`${quality}.pricePerHour`}
-              isMust={true}
+              isMust={isOptional}
               placeholder="৳300"
               inputdesign={inputdesign}
               labelDesign={labelDesign}
@@ -82,7 +83,7 @@ const PackageQuality = ({
               label="Team Member"
               type="text"
               name={`${quality}.minPerson`}
-              isMust={true}
+              isMust={isOptional}
               placeholder="5"
               inputdesign={inputdesign}
               labelDesign={labelDesign}
@@ -112,7 +113,7 @@ const PackageQuality = ({
             label="Delivery time"
             placeholder="Select day"
             name={`${quality}.deliveryTime`}
-            isMust={true}
+            isMust={isOptional}
             handleBlur={fieldProps.setFieldTouched}
             error={
               fieldProps.touched[quality]?.deliveryTime &&
@@ -129,7 +130,7 @@ const PackageQuality = ({
               label="Edited Photo"
               type="text"
               name={`${quality}.editedPhoto`}
-              isMust={true}
+              isMust={isOptional}
               placeholder="60"
               inputdesign={inputdesign}
               labelDesign={labelDesign}
@@ -148,7 +149,7 @@ const PackageQuality = ({
               label="Printed Copy"
               type="text"
               name={`${quality}.printedCopy`}
-              isMust={true}
+              isMust={isOptional}
               placeholder="60"
               inputdesign={inputdesign}
               labelDesign={labelDesign}
@@ -173,7 +174,7 @@ const PackageQuality = ({
             label="Trailer Duration"
             placeholder="Trailer Duration"
             name={`${quality}.trailerDuration`}
-            isMust={true}
+            isMust={isOptional}
             handleBlur={fieldProps.setFieldTouched}
             error={
               fieldProps.touched[quality]?.trailerDuration &&
@@ -191,7 +192,7 @@ const PackageQuality = ({
               label="Decoration Price"
               type="text"
               name={`${quality}.decorationPrice`}
-              isMust={true}
+              isMust={isOptional}
               placeholder="৳400"
               inputdesign={inputdesign}
               labelDesign={labelDesign}
@@ -214,7 +215,7 @@ const PackageQuality = ({
               value={fieldProps.values[quality].decorationImage}
               handleChange={fieldProps.setFieldValue}
               handleBlur={fieldProps.handleBlur}
-              isMust={true}
+              isMust={isOptional}
               error={
                 fieldProps.touched[quality]?.decorationImage &&
                 fieldProps.errors[quality]?.decorationImage
@@ -244,7 +245,7 @@ const PackageQuality = ({
               label="Price Per Piece"
               type="text"
               name={`${quality}.pricePerPiece`}
-              isMust={true}
+              isMust={isOptional}
               placeholder="৳200"
               inputdesign={inputdesign}
               labelDesign={labelDesign}
@@ -263,7 +264,7 @@ const PackageQuality = ({
               label="Quality"
               type="text"
               name={`${quality}.quality`}
-              isMust={true}
+              isMust={isOptional}
               placeholder="Quality"
               inputdesign={inputdesign}
               labelDesign={labelDesign}
