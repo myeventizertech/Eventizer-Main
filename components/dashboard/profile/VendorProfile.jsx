@@ -282,7 +282,7 @@ const VendorProfile = ({ attributes, service }) => {
 					files={files}
 					setFiles={setFiles}
 					fileError={fileError}
-					fileLimit={5}
+					fileLimit={10}
 					minFileLimit={3}
 					loads={loadImg}
 				/>
