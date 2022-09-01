@@ -15,9 +15,9 @@ export default async function handler(req, res) {
       email: 'tanvirish123@gmail.com',
       amount: '500',
       metadata: {order_id: '10', product_id: '5'},
-      redirect_url: 'https://zf4ur41ks6.execute-api.ap-southeast-1.amazonaws.com/Final',
-      cancel_url: 'https://zf4ur41ks6.execute-api.ap-southeast-1.amazonaws.com/Final',
-      webhook_url: 'https://zf4ur41ks6.execute-api.ap-southeast-1.amazonaws.com/Final'
+      redirect_url: 'https://myeventizer.com/',
+      cancel_url: 'https://myeventizer.com/',
+      webhook_url: 'https://myeventizer.com/'
     }
   };
   
