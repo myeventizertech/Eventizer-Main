@@ -14,7 +14,7 @@ const OrderItem = ({ data, getData }) => {
             <h4>{data?.packageName}</h4>
           </div>
           <div>
-            <p className="font-14 font-normal bg-rose-600 text-white py-1 px-2 rounded-sm">
+            <p className="font-14 font-normal bg-rose-600 text-white py-1 px-2 rounded-sm capitalize">
               {" "}
               {data.status}
             </p>

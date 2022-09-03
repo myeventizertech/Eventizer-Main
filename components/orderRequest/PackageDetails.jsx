@@ -2,9 +2,11 @@ import React from "react";
 import { useUserOrVendor } from "../../authContext/AuthContext";
 import { useRouter } from "next/router";
 const PackageDetails = ({ quality, packageValue, handleClick }) => {
-  let router = useRouter()
-  let {verifyUser}= useUserOrVendor()
-  let state =verifyUser?.isUser_vendor
+  let router = useRouter();
+  let { verifyUser } = useUserOrVendor();
+  let state = verifyUser?.isUser_vendor;
+  const storage = JSON.parse(localStorage.getItem("AmpUserInfo"));
+  const user = storage?.user;
   return (
     <>
       <div className="bg-white p-5 lgx:p-[40px] xl:p-[55px] rounded-[4px] ">
@@ -106,7 +108,9 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
             {packageValue[quality].customOptionFields.map((item, i) => {
               return (
                 <div key={i}>
-                  <h1 className="MyPackageListItemHeading">Extra service included</h1>
+                  <h1 className="MyPackageListItemHeading">
+                    Extra service included
+                  </h1>
                   <p className="MyPackageListItemvalue ">{item.fieldName}</p>
 
                   {/* <h1 className="MyPackageListItemHeading">Added value</h1>
@@ -116,20 +120,36 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
             })}
           </>
         )}
-        {state==="vendor"? <div></div>:       <button
-          onClick={() =>{
-            if(!verifyUser.isverified){
-              router.push("/sign-in")
-              return
-            }
-            handleClick(quality)
-          
-          }}
-          className="text-white bgcolor2 font-18 mt-3 rounded w-full px-2 py-1 font-normal btn-hover"
-        >
-          Book Now
-        </button> }
+        {state === "vendor" ? (
+          <div></div>
+        ) : (
+          <button
+            onClick={() => {
+              if (!verifyUser.isverified) {
+                router.push("/sign-in");
+                return;
+              }
 
+              if (!user?.phoneNumber) {
+                router.push({
+                  pathname: "/dashboard/profile",
+                  query: {
+                    redirect: "true",
+                    path: router.asPath,
+                  },
+                });
+                return;
+              }
+
+              if (user?.phoneNumber) {
+                handleClick(quality);
+              }
+            }}
+            className="text-white bgcolor2 font-18 mt-3 rounded w-full px-2 py-1 font-normal btn-hover"
+          >
+            Book Now
+          </button>
+        )}
       </div>
     </>
   );

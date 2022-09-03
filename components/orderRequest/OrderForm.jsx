@@ -12,6 +12,7 @@ import { Formik, Form } from "formik";
 import * as mutations from "../../src/graphql/mutations";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
+import conditionalRendar from "../../utils/conditionalRendar";
 import {
   DatePickersStart,
   DatePickersEnd,
@@ -34,7 +35,7 @@ let currOrderTime = [
   { id: 1, value: " I want to book for multiple day" },
 ];
 
-const OrderForm = ({ passData,vendor }) => {
+const OrderForm = ({ passData, vendor }) => {
   let [currOrder, setCurrOrder] = useState(currOrderTime[0].id);
   const storage = JSON.parse(localStorage.getItem("AmpUserInfo"));
   const user = storage?.user;
@@ -100,7 +101,7 @@ const OrderForm = ({ passData,vendor }) => {
             status: "Pending",
             title: passData?.title,
             packageName: passData?.packName + " " + passData?.packageStandard,
-            notes:values.detailsAboutBooking
+            notes: values.detailsAboutBooking,
           };
           await API.graphql({
             query: mutations.createOrders,
@@ -156,7 +157,7 @@ const OrderForm = ({ passData,vendor }) => {
             status: "Pending",
             title: passData?.title,
             packageName: passData?.packName + " " + passData?.packageStandard,
-            notes:values.detailsAboutBooking
+            notes: values.detailsAboutBooking,
           };
           await API.graphql({
             query: mutations.createOrders,
@@ -199,14 +200,14 @@ const OrderForm = ({ passData,vendor }) => {
   }, [currOrder, passData]);
 
   useEffect(() => {
-    let array =[]
-    vendor?.serviceLocation?.map((e)=>{
-      let k =JSON.parse(e)
-      array.push(k)
-    })
-    setlocation(array)
-  }, [])
-  
+    let array = [];
+    vendor?.serviceLocation?.map((e) => {
+      let k = JSON.parse(e);
+      array.push(k);
+    });
+    setlocation(array);
+  }, []);
+
   return (
     <Formik
       initialValues={initialValues}
@@ -217,7 +218,7 @@ const OrderForm = ({ passData,vendor }) => {
           .min(5, "Minimum 5 letter required")
           .max(500, "Maximum 500 letter required")
           .required("Required field")
-          .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed"),
+          .matches(/^([^0-9@]*)$/, "Only alphabets are allowed"),
 
         yourAddress: yup
           .string()
@@ -277,10 +278,8 @@ const OrderForm = ({ passData,vendor }) => {
                     <button
                       type="button"
                       onClick={() => handleOrderTime(item.id)}
-                      className={`font-14 color4 px-2 py-3 w-full border  rounded-[8px] mb-6 btn-hover ${
-                        item.id !== currOrder
-                          ? "border-[#d6d9de]"
-                          : "border-[#141414]"
+                      className={`font-14 text-white bgcolor1 px-2 py-3 w-full border  rounded-[8px] mb-6 ${
+                        item.id !== currOrder ? "" : "opacity-80"
                       }`}
                     >
                       {item.value}
@@ -401,23 +400,27 @@ const OrderForm = ({ passData,vendor }) => {
               />
             </div>
           </div>
-
-          <>
-            <ButtonClick
-              type="submit"
-              css={"bgcolor2 text-white rounded-full ml-auto block"}
-              width="null"
-              text={
-                props.isSubmitting ? (
-                  <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
-                ) : (
-                  "Request for booking"
-                )
-              }
-              padding="px-6 sm:px-10"
-              disable={props.isSubmitting || !props.dirty}
-            />
-          </>
+          {conditionalRendar(
+            (currOrder === 0 && durationTime.totalmoney > 0) ||
+              (currOrder === 1 && durationDates.totalmoney > 0)
+          ) && (
+            <>
+              <ButtonClick
+                type="submit"
+                css={"bgcolor2 text-white rounded-full ml-auto block"}
+                width="null"
+                text={
+                  props.isSubmitting ? (
+                    <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
+                  ) : (
+                    "Request for booking"
+                  )
+                }
+                padding="px-6 sm:px-10"
+                disable={props.isSubmitting || !props.dirty}
+              />
+            </>
+          )}
         </Form>
       )}
     </Formik>

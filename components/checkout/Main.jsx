@@ -125,7 +125,7 @@ const Main = ({ Data, initialValues }) => {
         <div className="bg-white p-5 shadow rounded-md order-1 md:order-[0] flex-1">
           <h1 className="header mb-1">Contact address</h1>
           <p className="text-[#8C8C8C] font-14 font-normal ">
-            We will contact with you via this mumber
+            We will contact with you via this number
           </p>
           <Formik
             initialValues={initialValues}
@@ -228,7 +228,7 @@ const Main = ({ Data, initialValues }) => {
         </div>
         <div>
           <div className="p-5 box-right boxDetails  ">
-            <h1>Paackage</h1>
+            <h1>Package</h1>
             <h3>{Data?.packageName}</h3>
             <p>{Data?.totalPayment} BDT</p>
           </div>

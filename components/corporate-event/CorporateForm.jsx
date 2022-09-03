@@ -94,6 +94,11 @@ let validationSchema = yup.object().shape({
   eventTitle: cmnSchema,
   eventLocation: cmnSchema,
   eventDate: yup.mixed().nullable().required("Required field"),
+  description: yup
+    .string()
+    .min(5, "Minimum 5 letter required")
+    .max(500, "Maximum 500 letter required")
+    .required("Required field"),
 });
 
 let intVal = {
@@ -105,6 +110,7 @@ let intVal = {
   eventTitle: "",
   eventLocation: "",
   eventDate: "",
+  description: "",
 };
 const CorporateForm = () => {
   let [isDOne, setisDone] = useState(false);
@@ -130,6 +136,7 @@ const CorporateForm = () => {
         eventDate: values.eventDate,
         status: "Pending",
         userID: attributes.sub,
+        description:description,
         totalBudget,
         fileLink: "",
       };
@@ -358,22 +365,39 @@ const CorporateForm = () => {
                       }
                     />
                   </div>
+                </div>
 
-                  <div>
-                    <label className="inputLabel font-14 sm:font-16 md:font-18  color4">
-                      Event Date
-                    </label>
+                <div className="mb-5">
+                  <label className="inputLabel font-14 sm:font-16 md:font-18  color4">
+                    Event Date
+                  </label>
 
-                    <EventDate
-                      fieldProps={fieldProps}
-                      error={
-                        fieldProps.touched.eventDate &&
-                        fieldProps.errors.eventDate
-                          ? fieldProps.errors.eventDate
-                          : ""
-                      }
-                    />
-                  </div>
+                  <EventDate
+                    fieldProps={fieldProps}
+                    error={
+                      fieldProps.touched.eventDate &&
+                      fieldProps.errors.eventDate
+                        ? fieldProps.errors.eventDate
+                        : ""
+                    }
+                  />
+                </div>
+                <div>
+                  <Input
+                    label="Description"
+                    istextArea={true}
+                    name="description"
+                    placeholder="Write something"
+                    value={fieldProps.values.description}
+                    handleChange={fieldProps.handleChange}
+                    handleBlur={fieldProps.handleBlur}
+                    error={
+                      fieldProps.touched.description &&
+                      fieldProps.errors.description
+                        ? fieldProps.errors.description
+                        : ""
+                    }
+                  />
                 </div>
 
                 <ButtonClick
