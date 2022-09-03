@@ -101,7 +101,7 @@ setpackages(newArray)
 
   return (
     <div
-      className=" h-[26rem] overflow-x-auto hide w-full rounded-md p-4 sm:p-7"
+      className="mdx:h-[26rem]  overflow-x-auto hide w-full rounded-md p-4 sm:p-7"
       style={{
         background:
           "linear-gradient(160.95deg, #EF0D5E 28.19%, #DA1674 60.41%)",

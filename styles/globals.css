@@ -479,6 +479,7 @@
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: 2rem;
+    background-color:#fff;
   }
   @media screen and (max-width: 639px) {
     .heroSection {

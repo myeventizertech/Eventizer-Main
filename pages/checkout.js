@@ -23,7 +23,7 @@ const Checkout = () => {
         setData(s)
         let initialValues = {
           userName: s?.name,
-          phoneNumber: s?.phoneNumberUser,
+          phoneNumber: s?.phoneNumberUser?.substring(3),
         }
         setnewData(initialValues)
         setboolean(true)

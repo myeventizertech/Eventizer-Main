@@ -1,7 +1,10 @@
 const axios = require('axios').default;
 
 export default async function handler(req, res) {
-
+console.log(req.body)
+//  let orderID= req?.body?.orderID
+//  let payment= req?.body?.payment
+//  let phone= req?.body?.phone
   const options = {
     method: 'POST',
     url: 'https://uddokta.myeventizer.com/api/checkout',

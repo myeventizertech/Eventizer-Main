@@ -57,7 +57,7 @@ export async function getStaticProps({params}) {
   return {
     props: {
       posts:posts,
-      rating:r.toFixed(2),
+      rating:parseFloat(r.toFixed(2)),
       sLocation:s,
       specializedIn:c
     },

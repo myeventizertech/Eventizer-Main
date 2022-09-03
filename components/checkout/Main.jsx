@@ -78,7 +78,7 @@ const Main = ({ Data, initialValues }) => {
       };
       const res = await axios({
         method: "put",
-        url: "https://98np0kzlxb.execute-api.ap-southeast-1.amazonaws.com/Final",
+        url: "/api/pay",
         header,
         data: {
           orderID: Data?.id,
@@ -86,10 +86,11 @@ const Main = ({ Data, initialValues }) => {
           phone: values.phoneNumber,
         },
       });
-      let url = res?.data?.body?.url;
-      window.open(url, "_blank");
-      //ends
-      router.push("/");
+      let url = res?.data?.body?.url?.payment_url;
+
+      // window.open(url, "_blank");
+      // //ends
+      // router.push("/");
     } catch (error) {
       console.log(error);
     }
