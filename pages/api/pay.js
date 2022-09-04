@@ -1,33 +1,32 @@
 const axios = require('axios').default;
 
 export default async function handler(req, res) {
-console.log(req.body)
-//  let orderID= req?.body?.orderID
-//  let payment= req?.body?.payment
-//  let phone= req?.body?.phone
+
+ let orderID= req?.body?.orderID
+ let payment= req?.body?.payment
+ let phone= req?.body?.phone
+ let name= req?.body?.name
   const options = {
     method: 'POST',
-    url: 'https://uddokta.myeventizer.com/api/checkout',
+    url: 'https://uddokta.myeventizer.com/api/checkout-v2',
     headers: {
       Accept: 'application/json',
       'RT-UDDOKTAPAY-API-KEY': '0391e407f08a5d80376ef38009828b42b0c6c43e',
       'Content-Type': 'application/json'
     },
     data: {
-      full_name: 'Tanvir Ishtiaq',
-      email: 'tanvirish123@gmail.com',
-      amount: '500',
-      metadata: {order_id: '10', product_id: '5'},
-      redirect_url: 'https://myeventizer.com/',
-      cancel_url: 'https://myeventizer.com/',
-      webhook_url: 'https://myeventizer.com/'
+      full_name: name,
+      email: phone,
+      amount: payment,
+      metadata: {order_id: orderID, phone:phone,name:name},
+      redirect_url: 'https://myeventizer.com/api/redirect',
+      cancel_url: 'https://myeventizer.com/checkoutfailed',
     }
   };
   
 let dsl = await  axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
       return response.data
     })
     .catch(function (error) {

@@ -33,7 +33,6 @@ const Main = ({ Data, initialValues }) => {
   const [getpromoCodeVal, setGetpromoCOdeval] = useState({});
   const [getOffer, setGetOffer] = useState("");
   const [error, setError] = useState(false);
-  console.log(Data);
   let handleChangePromoCode = (e) => {
     e.persist();
     setPromoValue({
@@ -84,11 +83,12 @@ const Main = ({ Data, initialValues }) => {
           orderID: Data?.id,
           payment: getOffer / 2,
           phone: values.phoneNumber,
+          name : Data?.name
         },
       });
       let url = res?.data?.body?.url?.payment_url;
 
-      // window.open(url, "_blank");
+      window.open(url, "_blank");
       // //ends
       // router.push("/");
     } catch (error) {
