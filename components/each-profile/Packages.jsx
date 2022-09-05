@@ -31,7 +31,7 @@ useEffect(() => {
     <>
       <div className="p-3 bg-white rounded flex justify-between items-center gap-2 sm:gap-3">
         <div className="flex gap-3 items-center">
-          <div className="relative w-12 h-12 overflow-hidden rounded">
+          <div className="relative w-12 h-12 overflow-hidden rounded shrink-0">
             <Image
               src={
                 slideImg[0]||
@@ -63,7 +63,7 @@ useEffect(() => {
             bool(true)
             setorder(vendorData)
           }}
-            className="text-white bgcolor2 font-12 sm:font-14 px-2 py-1 font-normal btn-hover"
+            className="text-white bgcolor2 font-12 sm:font-14 px-2 py-1 font-normal btn-hover whitespace-nowrap"
           >
             Book now
           </button>

@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     data: {
       full_name: name,
       email: phone,
-      amount: "1",
+      amount: "5",
       metadata: {order_id: orderID, phone:phone,name:name},
       redirect_url: 'https://myeventizer.com/api/redirect',
       cancel_url: 'https://myeventizer.com/checkoutfailed',

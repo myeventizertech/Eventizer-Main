@@ -76,7 +76,7 @@ const ProfileInfo = ({
         {Data?.title || ""}
       </h1>
       <h4 className="test-profile-sm">{years?.value || "0"} experienced</h4>
-      <h4 className="test-profile-sm">Based in {sLocation || ""}</h4>
+      <h4 className="test-profile-sm">Based in {sLocation.split(",").join(", ") || ""}</h4>
       <div className="flex items-center test-profile-sm">
         <div>
           <ReactStars
@@ -95,7 +95,7 @@ const ProfileInfo = ({
         </div>
       </div>
       {specializedIn ? (
-        <p className="test-profile-sm">Specialized in {specializedIn}</p>
+        <p className="test-profile-sm">Specialized in {specializedIn.split(",").join(", ")}</p>
       ) : (
         <p></p>
       )}
