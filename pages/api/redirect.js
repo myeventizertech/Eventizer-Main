@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 let id =req.body.invoice_id
 const options = {
     method: 'POST',
-    url: 'https://uddokta.myeventizer.com/api/checkout-v2',
+    url: 'https://uddokta.myeventizer.com/api/verify-payment',
     headers: {Accept: 'application/json',
     'RT-UDDOKTAPAY-API-KEY': '0391e407f08a5d80376ef38009828b42b0c6c43e', 'Content-Type': 'application/json'},
     data: {invoice_id:id}
