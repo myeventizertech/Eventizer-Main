@@ -44,7 +44,7 @@ export async function getStaticProps({ params }) {
     if (s.length === 0) {
       s = d?.label;
     } else {
-      s = s + "," + d?.label;
+      s = s + ", " + d?.label;
     }
   });
   posts?.specializedIn?.map((e) => {
@@ -52,7 +52,7 @@ export async function getStaticProps({ params }) {
     if (c.length === 0) {
       c = m?.label;
     } else {
-      c = c + "," + m?.label;
+      c = c + ", " + m?.label;
     }
   });
   return {
