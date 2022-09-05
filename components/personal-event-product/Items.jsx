@@ -48,7 +48,7 @@ const Items = ({ data, service }) => {
         <Link href={`/products/${service}/${datas.id}`}>
           <a>
             <div className="relative min-h-[120px] sm:min-h-[200px]">
-              {Images && (
+              {img && (
                 <Image
                   src={img}
                   layout="fill"
@@ -61,7 +61,7 @@ const Items = ({ data, service }) => {
               )}
               <div className=" bg-slate-300 bg-opacity-10  p-1 rounded-full absolute -bottom-7 sm:-bottom-8 right-7 sm:right-10  border border-gray-500">
                 <div className="sm:h-[70px] sm:w-[70px] h-[45px] w-[45px] overflow-hidden relative rounded-full ">
-                  {img && (
+                  {Images && (
                     <Image
                       src={Images}
                       layout="fill"

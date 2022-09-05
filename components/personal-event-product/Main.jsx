@@ -186,19 +186,30 @@ const Main = ({ service }) => {
                         placeholder={"Category"}
                         classNamePrefix="react-select"
                         onChange={(value) => {
-                          setCity("");
+                          
                           setCategory(value);
 
                           if (value.value === "") {
                             setFilterData(datas);
                             return;
                           }
-                          const filteredData = datas.filter((d) =>
+                          let filteredData = datas.filter((d) =>
                             d?.specializedIn.some(
                               (v) => JSON.parse(v).value === value.value
                             )
                           );
-                          setFilterData(filteredData);
+                              if(city===""){
+                                setFilterData(filteredData);
+                              }
+                  
+                              if(city!==""){
+                                let filteredD = filteredData.filter((d) =>
+                            d?.serviceLocation.some(
+                              (v) => JSON.parse(v).value === city.value
+                            )
+                          );
+                                setFilterData(filteredD);
+                              }
                         }}
                       />
                     </div>
@@ -220,7 +231,6 @@ const Main = ({ service }) => {
                     classNamePrefix="react-select"
                     onChange={(value) => {
                       setCity(value);
-                      setCategory("");
 
                       if (value.value === "") {
                         setFilterData(datas);
@@ -231,7 +241,18 @@ const Main = ({ service }) => {
                           (v) => JSON.parse(v).value === value.value
                         )
                       );
-                      setFilterData(filteredData);
+                      if(category===""){
+                                setFilterData(filteredData);
+                              }
+                  
+                              if(category!==""){
+                                let filteredD = filteredData.filter((d) =>
+                            d?.specializedIn.some(
+                              (v) => JSON.parse(v).value === category.value
+                            )
+                          );
+                                setFilterData(filteredD);
+                              }
                     }}
                   />
                 </div>
@@ -252,7 +273,7 @@ const Main = ({ service }) => {
 
                 <div className="grid  grid-cols-2 lg:grid-cols-3 gap-5 sm:mt-5 min-h-[18rem]">
                   {FilterData?.map((e, i) => {
-                    return <Items data={e} key={i} service={serve} />;
+                    return <Items data={e} key={e.id} service={serve} />;
                   })}
                 </div>
               </>
