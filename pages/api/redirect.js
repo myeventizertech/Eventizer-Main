@@ -19,6 +19,24 @@ const options = {
     .catch(function (error) {
       console.error(error);
     });
-res.status(200).json(dsl)
+    const orderid = dsl.metadata.order_id
+    const amount = dsl.amount
+
+    const lamb =           await fetch(
+      "https://bcftqwss7dwpdrc2mvfgyj2ucy0jrghf.lambda-url.ap-southeast-1.on.aws/",
+      {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderID: orderid,
+          amount:amount
+        }),
+      }
+    );
+res.status(200).json(lamb)
 }
 
