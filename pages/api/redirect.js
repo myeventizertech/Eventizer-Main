@@ -37,6 +37,7 @@ const options = {
         }),
       }
     );
-res.status(200).json(lamb)
+    console.log(lamb)
+res(lamb)
 }
 
