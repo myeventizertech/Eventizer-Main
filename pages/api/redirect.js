@@ -38,6 +38,6 @@ const options = {
       }
     );
     console.log(lamb)
-res.status(301).url("https://myeventizer.com/checkoutsuccess")
+res.redirect("https://myeventizer.com/checkoutsuccess")
 }
 
