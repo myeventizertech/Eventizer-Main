@@ -64,9 +64,7 @@ const Items = ({ data, service }) => {
                     <img
                       src={Images}
                       className="absolute object-cover w-full h-full"
-
                       alt={"profile-image"}
-                     
                     />
                   )}
                 </div>
