@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import placeholder from "../../utils/imageBlurLoader";
-import Image from "next/image";
 import ImageViewer from "react-simple-image-viewer";
 import { Storage } from "aws-amplify";
 import useMediaQuery from "../../utils/useMediaQuery";
@@ -60,22 +59,18 @@ const Main = ({ data, service, rating, sLocation, specializedIn }) => {
       ) : (
         <>
           <div
-            className={`wrap min-h-[70vh] bg-no-repeat bg-cover z-[10] relative mt-[5.5rem] py-10 pt-5 mdx:pt-10 flex flex-col justify-center profile-vendor-wrapper`}
+            className={`wrap min-h-[70vh] bg-no-repeat bg-cover z-[10] relative mt-[5.5rem] py-10 pt-5 mdx:pt-10 flex flex-col justify-center profile-vendor-wrapper overflow-hidden`}
           >
             {isMobile && (
-              <Image
-                src={
-                  slideImg?.[0] ||
-                  "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
-                }
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-                alt={"cover image"}
-                quality={100}
-                placeholder="blur"
-                blurDataURL={placeholder}
-              />
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+              src={
+                slideImg?.[0] ||
+                "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
+              }
+              className="absolute object-cover w-full"
+              alt={"cover image"}
+            />
             )}
 
             <div className="container  profile-vendor z-[1] ">

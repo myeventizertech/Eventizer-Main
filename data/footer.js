@@ -1,6 +1,4 @@
-import facebook from "../public/img/Facebook.svg";
-import linkedIn from "../public/img/linkedin.svg";
-import instragram from "../public/img/instagram.svg";
+
 
 let FotterInfor = [
   // item 1
@@ -105,16 +103,16 @@ let FotterInfor = [
 
       social: [
         {
-          img: facebook,
+          img: "/img/Facebook.svg",
           path: "https://www.facebook.com/eventizer.bd/",
         },
         {
-          img: linkedIn,
+          img: "/img/linkedin.svg",
           path: "https://www.linkedin.com/company/eventizer-bd",
         },
 
         {
-          img: instragram,
+          img: "/img/instagram.svg",
           path: "https://instagram.com/eventizer.bd",
         },
       ],

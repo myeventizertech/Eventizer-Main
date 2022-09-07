@@ -4,35 +4,30 @@ import { Formik, Form } from "formik";
 import Loader from "../../reUseComponents/Loader";
 import * as yup from "yup";
 import InputError from "../../reUseComponents/InputError";
-import Image from "next/image";
-import bkashImg from "../../../public/img/gateway/bkash.png";
-import amImg from "../../../public/img/gateway/am.png";
-import upayImg from "../../../public/img/gateway/upay.png";
-import rocketImg from "../../../public/img/gateway/rocket.png";
-import nogodImg from "../../../public/img/gateway/nogod.png";
+
 import * as mutations from "../../../src/graphql/mutations";
 import { API } from "aws-amplify";
 import toast from "react-hot-toast";
 let mbBanking = [
   {
     value: "Bkash",
-    img: bkashImg,
+    img: "/img/gateway/bkash.png",
   },
   {
     value: "amcash",
-    img: amImg,
+    img: "/img/gateway/am.png",
   },
   {
     value: "upay",
-    img: upayImg,
+    img: "/img/gateway/upay.png",
   },
   {
     value: "rocket",
-    img: rocketImg,
+    img: "/img/gateway/rocket.png",
   },
   {
     value: "nogod",
-    img: nogodImg,
+    img: "/img/gateway/nogod.png",
   },
 ];
 const BDNUM = /^01[23456789][0-9]{8}\b/g;
@@ -112,7 +107,8 @@ const MobileBanking = ({ setMBisOpen ,getData}) => {
                       key={i}
                     >
                       <span>
-                        <Image
+                         {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                           src={item.img}
                           alt="mobile banking"
                           quality={100}

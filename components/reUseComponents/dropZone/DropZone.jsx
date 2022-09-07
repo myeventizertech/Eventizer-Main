@@ -1,7 +1,5 @@
 import React, { useMemo, useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import Image from "next/image";
-import dropImage from "../../../public/img/drag-icon.png";
 import InputError from "../../reUseComponents/InputError";
 import Loader from "../Loader";
 import imageCompression from "browser-image-compression";
@@ -155,7 +153,8 @@ function DropZone({
           {!isDragAccept && (
             <>
               <div className={`${dropZoneImgWidth} m-auto`}>
-                <Image src={dropImage} alt="Drag-image-icon" />
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={"/img/drag-icon.png"} alt="Drag-image-icon" />
               </div>
               <h1 className={`${dropZoneMidText}  font-medium  color4`}>
                 Drag your image here, or <span className="color3"> browse</span>

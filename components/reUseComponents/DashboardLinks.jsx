@@ -3,7 +3,6 @@ import {
   dashboardlinkUser,
   dashboardlinkVendor,
 } from "../../data/dashbordLinks";
-import Image from "next/image";
 import Link from "next/link";
 import { Auth } from "aws-amplify";
 import toast from "react-hot-toast";
@@ -27,16 +26,11 @@ const DashboardLinks = ({ userTitle, img, alt, isUser_vendor }) => {
       <div className="py-3 gap-2 flex-center px-5 border-b border-[#C4C4C4]">
         <div className="img h-[32px] w-[32px] auth-smallimg relative">
           {img ? (
-            <Image
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={img}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center top"
-              priority
               alt={alt}
-              quality={100}
-              placeholder="blur"
-              blurDataURL={placeholder}
+              className="absolute object-cover w-full h-full rounded-full"
             />
           ) : (
             <h1
@@ -66,49 +60,47 @@ const DashboardLinks = ({ userTitle, img, alt, isUser_vendor }) => {
       <div>
         <ul>
           {isUser_vendor === "user" &&
-            dashboardlinkUser
-              .map((item, i) => {
-                return (
-                  <li key={i}>
-                    <Link href={item.path}>
-                      <a>
-                        <div className="flex-center gap-2 hover:bg-[#F3F3F3] color1 font-18 px-5 py-2 font-16 font-normal">
-                          <Image
-                            src={item.img}
-                            width={18}
-                            height={18}
-                            alt="icon"
-                          />
-                          <span>{item.name}</span>
-                        </div>
-                      </a>
-                    </Link>
-                  </li>
-                );
-              })}
+            dashboardlinkUser.map((item, i) => {
+              return (
+                <li key={i}>
+                  <Link href={item.path}>
+                    <a>
+                      <div className="flex-center gap-2 hover:bg-[#F3F3F3] color1 font-18 px-5 py-2 font-16 font-normal">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={item.img}
+                          width={18}
+                          height={18}
+                          alt="icon"
+                        />
+                        <span>{item.name}</span>
+                      </div>
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
           {isUser_vendor === "vendor" &&
-            dashboardlinkVendor
-            .slice(0, 3)
-              .map((item, i) => {
-                return (
-                  <li key={i}>
-                    <Link href={item.path}>
-                      <a>
-                        <div className="flex-center gap-2 hover:bg-[#F3F3F3] color1 font-18 px-5 py-2 font-16 font-normal">
-                          <Image
-                            src={item.img}
-                            width={18}
-                            height={18}
-                            alt="icon"
-                          />
-                          <span>{item.name}</span>
-                        </div>
-                      </a>
-                    </Link>
-                  </li>
-                );
-              })
-            }
+            dashboardlinkVendor.slice(0, 3).map((item, i) => {
+              return (
+                <li key={i}>
+                  <Link href={item.path}>
+                    <a>
+                      <div className="flex-center gap-2 hover:bg-[#F3F3F3] color1 font-18 px-5 py-2 font-16 font-normal">
+                   {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={item.img}
+                          width={18}
+                          height={18}
+                          alt="icon"
+                        />
+                        <span>{item.name}</span>
+                      </div>
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </div>
 

@@ -1,7 +1,6 @@
 import React from "react";
 import Logo from "../../reUseComponents/Logo";
 import Link from "next/link";
-import Image from "next/image";
 import FotterInfor from "../../../data/footer";
 import useMediaQuery from "../../../utils/useMediaQuery";
 
@@ -88,10 +87,11 @@ const Footer = () => {
                                             target="_blank"
                                             className="text-12 font-normal hover:opacity-75 "
                                           >
-                                            <Image
+                                             {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img
                                               src={itemss?.img}
                                               alt="icon"
-                                              width={22}
+                                              width={20}
                                               height={20}
                                             />
                                           </a>

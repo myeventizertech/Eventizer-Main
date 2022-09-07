@@ -54,7 +54,7 @@ const SectionSubscribe = () => {
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      className="inputdesign w-full py-[10px] px-[12px]"
+                      className="inputdesign w-full py-[10px] px-[12px] rounded-md"
                     />
                     {formik.errors.email && (
                       <p className="color1 font-14">

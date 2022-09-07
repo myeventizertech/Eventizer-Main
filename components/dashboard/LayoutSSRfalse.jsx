@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Auth } from "aws-amplify";
-import Image from "next/image";
 import {
   dashboardlinkUser,
   dashboardlinkVendor,
@@ -9,7 +8,6 @@ import {
 import { useUserOrVendor } from "../../authContext/AuthContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import mobileLogo from "../../public/img/mobileLogo.png";
 import ButtonLinkOrClick from "../reUseComponents/ButtonLinkOrClick";
 import HamburgerDashboard from "../reUseComponents/icons/HamburgerDashboard";
 import Loader from "../reUseComponents/Loader";
@@ -57,7 +55,8 @@ const LayoutSSRfalse = ({ children }) => {
           <div className=" py-4 border-[#131313] border-b pl-8 pt-7 w-48">
             <Link href="/">
               <a>
-                <Image src={mobileLogo} alt="Eventizer Logo" />
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={"/img/mobileLogo.png"} alt="Eventizer Logo" />
               </a>
             </Link>
           </div>

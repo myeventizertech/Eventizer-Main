@@ -1,7 +1,6 @@
 import React from "react";
 import bottomNav from "../../data/bottomMobileNav";
 import Link from "next/link";
-import Image from "next/image";
 
 const BottomNavMbl = () => {
   return (
@@ -18,7 +17,7 @@ const BottomNavMbl = () => {
                   <Link href={item.path}>
                     <a className="btn-hover">
                       <span className=" w-[20px] h-[20px] mx-auto flex flex-col justify-center">
-                        <Image src={item.img} alt="icon" />
+                        {/* <img  src={item.img} alt="icon" /> */}
                       </span>
                       <span className="block mt-1">{item.name}</span>
                     </a>

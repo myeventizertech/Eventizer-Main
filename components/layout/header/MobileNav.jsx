@@ -4,7 +4,6 @@ import Link from "next/link";
 import SignInIcon from "../../reUseComponents/icons/SignInIcon";
 import Avatar from "../../reUseComponents/Avatar";
 import HamburgerIcon from "../../reUseComponents/icons/HamburgerIcon";
-import Image from "next/image";
 import OutIcon from "../../reUseComponents/icons/OutIcon";
 import ButtonLinkOrClick from "../../reUseComponents/ButtonLinkOrClick";
 import mobileLogo from "../../../public/img/mobileLogo.png";
@@ -21,7 +20,7 @@ const MobileNav = ({
   handleRegisterBtn,
   profileImage,
   authLoader,
-  service
+  service,
 }) => {
   const router = useRouter();
 
@@ -88,7 +87,8 @@ const MobileNav = ({
           >
             <div className="flex py-3 px-3 justify-between items-center border-[#131313] border-b">
               <div className="logo w-40">
-                <Image src={mobileLogo} alt="Eventizer Logo" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={"/img/mobileLogo.png"} alt="Eventizer Logo" />
               </div>
               <button className="cross " onClick={handlecutNav}>
                 <OutIcon />
@@ -108,7 +108,10 @@ const MobileNav = ({
                 {isUser_vendor === "vendor" && isverified && (
                   <>
                     {service !== "rental" && (
-                      <ButtonLinkOrClick goto="/dashboard/add-packages" text="Add package" />
+                      <ButtonLinkOrClick
+                        goto="/dashboard/add-packages"
+                        text="Add package"
+                      />
                     )}
                   </>
                 )}
@@ -129,7 +132,8 @@ const MobileNav = ({
                             className="flex-center gap-2"
                             onClick={handlecutNav}
                           >
-                            <Image
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
                               src={item.img}
                               width={17}
                               height={17}

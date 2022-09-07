@@ -1,5 +1,4 @@
 import React,{useEffect,useState} from "react";
-import Image from "next/image";
 import placeholder from "../../utils/imageBlurLoader";
 import { Storage } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -32,17 +31,15 @@ useEffect(() => {
       <div className="p-3 bg-white rounded flex justify-between items-center gap-2 sm:gap-3">
         <div className="flex gap-3 items-center">
           <div className="relative w-12 h-12 overflow-hidden rounded shrink-0">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={
-                slideImg[0]||
+                slideImg?.[0] ||
                 "https://images.unsplash.com/photo-1657299156725-dc862fea3e11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
               }
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center"
               alt={"package image"}
-              placeholder="blur"
-              blurDataURL={placeholder}
+              className="absolute object-cover w-full h-full"
+
             />
           </div>
           <div>

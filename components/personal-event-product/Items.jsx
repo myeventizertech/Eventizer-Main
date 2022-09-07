@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import placeholder from "../../utils/imageBlurLoader";
 import Link from "next/link";
-import Image from "next/image";
 import { Storage } from "aws-amplify";
 const Items = ({ data, service }) => {
   let datas = data;
@@ -45,31 +44,29 @@ const Items = ({ data, service }) => {
   return (
     <>
       <div className="shadow-md rounded-md overflow-hidden mt-2">
+        
         <Link href={`/products/${service}/${datas.id}`}>
           <a>
             <div className="relative min-h-[120px] sm:min-h-[200px]">
               {img && (
-                <Image
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src={img}
-                  layout="fill"
-                  objectFit="cover"
-                  objectPosition="center top"
-                  alt={"profile-image"}
-                  placeholder="blur"
-                  blurDataURL={placeholder}
+                  className="absolute object-cover w-full h-full"
+                  alt={"portfolio-image"}
+                 
                 />
               )}
               <div className=" bg-slate-300 bg-opacity-10  p-1 rounded-full absolute -bottom-7 sm:-bottom-8 right-7 sm:right-10  border border-gray-500">
                 <div className="sm:h-[70px] sm:w-[70px] h-[45px] w-[45px] overflow-hidden relative rounded-full ">
                   {Images && (
-                    <Image
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
                       src={Images}
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="center"
+                      className="absolute object-cover w-full h-full"
+
                       alt={"profile-image"}
-                      placeholder="blur"
-                      blurDataURL={placeholder}
+                     
                     />
                   )}
                 </div>

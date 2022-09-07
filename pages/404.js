@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import ButtonLinkOrClick from "../components/reUseComponents/ButtonLinkOrClick";
 import placeholder from "../utils/imageBlurLoader";
-import Image from "next/image";
 // import * as queries from '../src/graphql/queries'
 // import { API } from "aws-amplify";
 const Error = () => {
@@ -36,19 +35,9 @@ const Error = () => {
     //   </div>
     // </div>
     <div className="container m-all min-h-screen  text-center">
-      <div className=" max-w-[500px] mx-auto my-3">
-        <Image
-          src={
-            "https://res.cloudinary.com/eventizer-store/image/upload/v1656948431/Eventizer_New_Site/404_image_xz7ypc.png"
-          }
-          layout="responsive"
-          width={516}
-          height={277}
-          alt="construction image"
-          placeholder="blur"
-          blurDataURL={placeholder}
-        />
-      </div>
+      {/* <div className=" max-w-[500px] mx-auto my-3">
+   
+      </div> */}
 
       <h1 className="font-22 sm:font-30 md:font-48 color3">
         This site is under construction

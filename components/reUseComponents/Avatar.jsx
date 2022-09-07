@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import DashboardLinks from "../reUseComponents/DashboardLinks";
 import UseOutsideClick from "../../utils/useOutsideClick";
 import placeholder from "../../utils/imageBlurLoader";
@@ -16,16 +15,12 @@ const Avatar = ({ userTitle, img, alt, isUser_vendor }) => {
         title={img ? alt : ""}
       >
         {img ? (
-          <Image
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={img}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center top"
-            priority
             alt={alt}
-            quality={100}
-            placeholder="blur"
-            blurDataURL={placeholder}
+            className="absolute object-cover w-full h-full rounded-full"
+
 
           />
         ) : (
