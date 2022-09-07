@@ -1,7 +1,5 @@
 import React from "react";
-import Image from "next/image";
 import ButtonLinkOrClick from "../reUseComponents/ButtonLinkOrClick";
-import placeholder from "../../utils/imageBlurLoader";
 import Script from "next/script";
 
 const SectionBookNow = () => {
@@ -16,17 +14,14 @@ const SectionBookNow = () => {
         <div className="container py-all relative z-[1]">
           <div className="flex gap-4 sm:gap-10 justify-between min-h-[240px] sm:min-h-[330px] lg:min-h-[360px]">
             <div className="w-[80%] relative rounded-[8px] overflow-hidden">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={
                   "https://res.cloudinary.com/eventizer-store/image/upload/v1654711252/consultancy_image_wnzkms.png"
                 }
-                layout="fill"
-                objectFit="cover"
+               
                 alt="Book now image"
-                sizes="50vw"
-                quality={100}
-                placeholder="blur"
-                blurDataURL={placeholder}
+             className="absolute w-full h-full object-cover object-center"
               />
             </div>
             <div className=" flex flex-col justify-center gap-2 min-w-[15rem] sm:min-w-0">

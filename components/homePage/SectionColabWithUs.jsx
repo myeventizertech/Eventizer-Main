@@ -1,8 +1,6 @@
 import React from "react";
 import DrawlineSvg from "../reUseComponents/DrawlineSvg";
 import partner_logo from "../../data/partnerLogo";
-import Image from "next/image";
-import placeholder from "../../utils/imageBlurLoader";
 import { useKeenSlider } from "keen-slider/react";
 
 const SectionColabWithUs = () => {
@@ -62,12 +60,8 @@ const SectionColabWithUs = () => {
                 >
                   <div className="min-h-[10rem] flex items-center">
                     <div className="w-[80px] md:w-[130px] mx-auto">
-                      <Image
-                        src={item.image}
-                        alt={item?.name}
-                        placeholder="blur"
-                        blurDataURL={placeholder}
-                      />
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={item.image} alt={item?.name} />
                     </div>
                   </div>
                 </div>

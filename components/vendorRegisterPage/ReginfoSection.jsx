@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Image from "next/image";
 import Logo from "../reUseComponents/Logo";
 import registerInfo from "../../data/registerPageInfo";
 import { CSSTransition } from "react-transition-group";
@@ -27,7 +26,8 @@ const ReginfoSection = ({ showRegPop, handleRegPopOut }) => {
               <div key={i} className="flex-center gap-2 lg:gap-5 mt-8">
                 <div className="bg-white bg-opacity-20 p-4 md:p-6 lg:p-8 rounded-[4px]">
                   <div className="w-[40px] h-[40px]  lg:w-[45px] lg:h-[45px]  flex justify-center">
-                    <Image src={item.img} alt="icon" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={item.img} alt="icon" />
                   </div>
                 </div>
                 <div className="text-white">

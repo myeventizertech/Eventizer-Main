@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import feedBack from "../../data/feedBack";
 import placeholder from "../../utils/imageBlurLoader";
@@ -98,15 +97,12 @@ const SectionFeedBack = () => {
                         <div className="flex justify-between gap-4">
                           <div className="relative w-full">
                             <div className="absolute w-[8rem]  lg:w-[10rem] -left-3 lg:-left-6 -top-[7rem] lg:-top-[10rem]">
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                 src={item.img}
                                 alt="feed back"
-                                layout="responsive"
                                 width={item.imgWidth}
                                 height={item.imgHeight}
-                                quality={100}
-                                placeholder="blur"
-                                blurDataURL={placeholder}
                               />
                             </div>
                           </div>

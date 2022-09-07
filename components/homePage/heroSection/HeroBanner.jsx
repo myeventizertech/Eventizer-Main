@@ -1,8 +1,6 @@
 import React from "react";
 import Slideshow from "./Slider";
-import Image from "next/image";
 import placeholder from "../../../utils/imageBlurLoader";
-import finger_icon from "../../../public/img/finger_icon.svg";
 
 const HeroBanner = () => {
   return (
@@ -24,7 +22,13 @@ const HeroBanner = () => {
 
         <div className="bg-[#FE71B5]  bottom-28 xl:bottom-36 right-[4%] lgx:right-4 xl:right-0  tool-flex toolTop py-2">
           <div className="flex-center ">
-            <Image src={finger_icon} width={17} height={17} alt="icon" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={"/img/finger_icon.svg"}
+              width={17}
+              height={17}
+              alt="icon"
+            />
           </div>
           <div>
             <h3>We are now in</h3>
@@ -42,7 +46,13 @@ const HeroBanner = () => {
 
         <div className="bg-[#FFDCB4]  bottom-8 -left-40 tool-flex py-2 toolTop ">
           <div className="flex-center w-[17px]">
-            <Image src={finger_icon} width={17} height={17} alt="icon" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={"/img/finger_icon.svg"}
+              width={17}
+              height={17}
+              alt="icon"
+            />{" "}
           </div>
           <div>
             <h3>Partner</h3>
@@ -51,18 +61,14 @@ const HeroBanner = () => {
             </p>
           </div>
         </div>
-        <Image
+         {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={
             "https://res.cloudinary.com/eventizer-store/image/upload/v1657650088/Eventizer_New_Site/Only_png_njdl_ox9g58.png"
           }
-          priority
           alt="eventizer-brand"
           width={680}
           height={821}
-          layout="responsive"
-          placeholder="blur"
-          blurDataURL={placeholder}
-          quality={100}
         />
       </div>
     </>

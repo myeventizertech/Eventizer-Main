@@ -3,8 +3,6 @@ import DrawlineSvg from "../reUseComponents/DrawlineSvg";
 import useSWR from "swr";
 import Link from "next/link";
 import LinkIcon from "../reUseComponents/icons/LinkIcon";
-import Image from "next/image";
-import placeholder from "../../utils/imageBlurLoader";
 import Loader from "../reUseComponents/Loader";
 const SectionReadarticles = () => {
   const url = `https://diary.myeventizer.com/wp-json/api/v1/posts`;
@@ -37,17 +35,14 @@ const SectionReadarticles = () => {
                   <div className="flex " key={i}>
                     <div className="bg-white flex flex-col overflow-hidden rounded-[4px] shadow-[0px_0px_10px_0px_#90909040] w-full">
                       <div className="w-full h-[10rem] md:h-[15rem] relative ">
-                        <Image
+                         {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                           src={
                             item?.featured_image?.large ||
                             "https://res.cloudinary.com/eventizer-store/image/upload/v1656771738/Eventizer_New_Site/placeholder-image_bjm2n7.png"
-                          }
-                          layout="fill"
-                          objectFit="cover"
-                          objectPosition="center"
+                          }                      
                           alt={item?.title}
-                          placeholder="blur"
-                          blurDataURL={placeholder}
+                          className="absolute w-full h-full object-cover object-center"
                         />
                       </div>
 

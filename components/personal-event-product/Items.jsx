@@ -41,6 +41,18 @@ const Items = ({ data, service }) => {
     setrating(r.toFixed(2));
   }, []);
 
+
+
+
+
+
+
+
+
+
+
+
+  
   return (
     <>
       <div className="shadow-md rounded-md overflow-hidden mt-2">
@@ -51,7 +63,8 @@ const Items = ({ data, service }) => {
               {img && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={img}
+                  src={img ||
+                    "https://res.cloudinary.com/eventizer-store/image/upload/v1656771738/Eventizer_New_Site/placeholder-image_bjm2n7.png"}
                   className="absolute object-cover w-full h-full"
                   alt={"portfolio-image"}
                  
@@ -62,7 +75,8 @@ const Items = ({ data, service }) => {
                   {Images && (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={Images}
+                      src={Images ||
+                            "https://res.cloudinary.com/eventizer-store/image/upload/v1656771738/Eventizer_New_Site/placeholder-image_bjm2n7.png"}
                       className="absolute object-cover w-full h-full"
                       alt={"profile-image"}
                     />

@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import eventType from "../../data/eventType";
 import Circle2 from "../reUseComponents/icons/Circle2";
 const SectionEventType = () => {
@@ -22,7 +21,8 @@ const SectionEventType = () => {
                     <a className="sectionTwo-box">
                       <span className=" w-[140px] sm:w-[155px] lg:w-[165px] flex flex-col gap-1">
                         <span className=" w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] flex justify-center  mx-auto">
-                          <Image src={item.img} alt="icon" />
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={item.img} alt="icon" />
                         </span>
                         <span className="block ">{item.name}</span>
                       </span>

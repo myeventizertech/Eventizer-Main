@@ -1,7 +1,5 @@
 import React from "react";
 import whyEvntizer from "../../data/sectionFourInfo";
-import Image from "next/image";
-import quality_icon from "../../public/img/quality_icon.svg";
 import Circle1 from "../reUseComponents/icons/Circle1";
 
 const SectionWhyEventizer = () => {
@@ -24,7 +22,8 @@ const SectionWhyEventizer = () => {
                     className="flex-center gap-3 lg:gap-5 mt-2 sm:mt-4"
                   >
                     <div className=" w-[40px] sm:w-[85px]">
-                      <Image src={item.img} alt="icon" />
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={item.img} alt="icon" />
                     </div>
                     <div className="color4">
                       <h1 className="font-16 sm:font-18 lg:font-26 font-medium tracking-wider capitalize">
@@ -42,7 +41,8 @@ const SectionWhyEventizer = () => {
           <div className="flex-1 rounded-[8px] bg-[#DB1B60] px-8">
             <div className="text-white min-h-[250px] sm:min-h-[360px] flex flex-col justify-center gap-3 sm:text-left text-center">
               <div className="w-[80px] sm:w-[106px] mx-auto sm:mx-0 drop-shadow-2xl">
-                <Image src={quality_icon} alt="icon" />
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={"/img/quality_icon.svg"} alt="icon" />
               </div>
               <div>
                 <h2 className="font-18 sm:font-20 md:font-26 lg:font-40 font-medium">

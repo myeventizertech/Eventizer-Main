@@ -1,7 +1,4 @@
 import React, { useState, useRef } from "react";
-import subscribe_msg_icon from "../../public/img/subscribe_msg_icon.svg";
-import subscribe_congrats_avatar from "../../public/img/subscribe_congrats_avatar.svg";
-import Image from "next/image";
 import ButtonClick from "../reUseComponents/ButtonClick";
 import { useFormik } from "formik";
 import { CSSTransition } from "react-transition-group";
@@ -36,8 +33,9 @@ const SectionSubscribe = () => {
           {!congrats && (
             <>
               <div className="block w-[35px] sm:w-[40px] lg:w-[55px] mx-auto">
-                <Image
-                  src={subscribe_msg_icon}
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={"/img/subscribe_msg_icon.svg"}
                   alt="icon"
                 />
               </div>
@@ -89,7 +87,8 @@ const SectionSubscribe = () => {
             >
               <div ref={nodeRef}>
                 <div className="block max-w-[80px] sm:max-w-[105px] mx-auto">
-                  <Image src={subscribe_congrats_avatar} priority alt="icon" />
+                   {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={"/img/subscribe_congrats_avatar.svg"} priority alt="icon" />
                 </div>
                 <h1>Thanks for subscribe to us</h1>
               </div>

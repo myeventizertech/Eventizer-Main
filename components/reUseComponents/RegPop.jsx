@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import OutIcon from "./icons/OutIcon";
 import placeholder from "../../utils/imageBlurLoader";
@@ -21,16 +20,14 @@ const RegPop = ({ handlecloseReg }) => {
           <Link href="/user-register">
             <a onClick={handlecloseReg}>
               <span className="h-[9.6875rem] inline-block w-full relative">
-                <Image
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={
                     "https://res.cloudinary.com/eventizer-store/image/upload/v1655131467/Eventizer_New_Site/user_reg_img.png"
                   }
-                  layout="fill"
-                  priority
                   alt="user register image"
-                  placeholder="blur"
-                  blurDataURL={placeholder}
-                  objectFit="cover"
+                  className="absolute w-full h-full object-cover object-center"
+
                 />
               </span>
 
@@ -44,16 +41,13 @@ const RegPop = ({ handlecloseReg }) => {
           <Link href="/vendor-register">
             <a onClick={handlecloseReg}>
               <span className="h-[9.6875rem] inline-block w-full relative">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={
                     "https://res.cloudinary.com/eventizer-store/image/upload/v1661620766/Eventizer_New_Site/vendorimage_s84wdj.png"
                   }
-                  layout="fill"
-                  priority
                   alt="vendor register image"
-                  placeholder="blur"
-                  blurDataURL={placeholder}
-                  objectFit="cover"
+                className="absolute w-full h-full object-cover object-center"
                 />
               </span>
 

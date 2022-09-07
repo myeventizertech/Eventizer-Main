@@ -3,8 +3,6 @@ import servicesList from "../../data/servicesList";
 import Link from "next/link";
 import services from "../../utils/services";
 import { API, withSSRContext } from "aws-amplify";
-import Image from "next/image";
-import finger_icon from "../../public/img/finger_icon.svg";
 import { customStyles, theme } from "../../data/reactSelectStyle";
 import Option from "../reUseComponents/ReactSelectCheckBox";
 import Select from "react-select";
@@ -138,8 +136,9 @@ const Main = ({ service }) => {
                     `}
                       >
                         <span>
-                          <Image
-                            src={finger_icon}
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={"/img/finger_icon.svg"}
                             alt="icon"
                             width={13}
                             height={13}

@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import howItsWorkType from "../../data/HowItsWorkType";
 import DrawlineSvg from "../reUseComponents/DrawlineSvg";
 const SectionHowItsWork = () => {
@@ -19,7 +18,8 @@ const SectionHowItsWork = () => {
               <li key={i} className="snap-center ">
                 <span className="flex flex-col gap-2 sectionSixMW">
                   <span className="flex justify-center w-[60px] sm:w-[75px] lg:w-[106px] h-[48px] sm:h-[63px]  lg:h-[88px] mx-auto">
-                    <Image src={item.img} alt="icon" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={item.img} alt="icon" />
                   </span>
                   <span className="block colo4 font-14 sm:font-18 lg:font-20">
                     {item.name}

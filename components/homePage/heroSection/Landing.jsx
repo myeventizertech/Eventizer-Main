@@ -1,9 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import placeholder from "../../../utils/imageBlurLoader";
 import eventType from "../../../data/eventType";
-import EventBg from "../../../public/img/events_bg_shape.svg";
 import UseOutsideClick from "../../../utils/useOutsideClick";
 import useMediaQuery from "../../../utils/useMediaQuery";
 import HeroBanner from "./HeroBanner";
@@ -21,12 +19,11 @@ const Landing = () => {
             Organize Your {" "}
               <span className="span1">
                 <span className="span2">
-                  <Image
-                    layout="fill"
-                    src={EventBg}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={"/img/events_bg_shape.svg"}
                     alt="shape"
-                    placeholder="blur"
-                    blurDataURL={placeholder}
+                    className="absolute w-full h-full "
                   />
                 </span>
                 Events
@@ -63,7 +60,8 @@ const Landing = () => {
                                 }}
                               >
                                 <span className="w-[18px] h-[18px]">
-                                  <Image src={item.img} alt="icon" />
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                                  <img src={item.img} alt="icon" />
                                 </span>
                                 <span className="font-12 sm:font-16 font-normal">
                                   {item.name}

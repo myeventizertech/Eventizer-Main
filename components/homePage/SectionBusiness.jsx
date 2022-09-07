@@ -1,42 +1,31 @@
 import React from "react";
-import Image from "next/image";
 import ButtonLinkOrClick from "../reUseComponents/ButtonLinkOrClick";
-import placeholder from "../../utils/imageBlurLoader";
 const SectionBusiness = () => {
   return (
     <div className="container py-all relative">
       <div className="max-w-[768px] md:max-w-[600px] lg:max-w-[650px] flex flex-col gap-4 md:gap-8 relative md:z-10 md:mr-[28rem] lg:mr-[30rem]">
         <div className="mr-20">
           <div className="flex-1 relative rounded-[8px] max-w-[500px] md:max-w-[400px] lg:max-w-[470px] ">
-            <Image
+             {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={
                 "https://res.cloudinary.com/eventizer-store/image/upload/v1654711252/business_image_kj49ym.png"
               }
-              layout="responsive"
-              width={463}
-              height={322}
               alt="Book now image"
-              quality={100}
-              sizes="50vw"
-              placeholder="blur"
-              blurDataURL={placeholder}
+             
             />
           </div>
         </div>
         <div className="ml-20">
           <div className="flex-1 relative rounded-[8px] ml-auto max-w-[500px] md:max-w-[400px] lg:max-w-[470px] ">
-            <Image
+             {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={
                 "https://res.cloudinary.com/eventizer-store/image/upload/v1654711252/business_image2_wgdmip.png"
               }
-              layout="responsive"
-              width={477}
-              height={318}
+         
               alt="Book now image"
-              quality={100}
-              sizes="50vw"
-              placeholder="blur"
-              blurDataURL={placeholder}
+         
             />
           </div>
         </div>
