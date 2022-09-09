@@ -13,26 +13,27 @@ const BookingItem = ({ data, getData }) => {
   const [rev, setrev] = useState(false);
   const [pay, setpay] = useState(false);
   const [number, setnumber] = useState(true);
-  function check1() {
-    if (data?.reviewID !== null) {
-      setrev(true);
-    }
-  }
-  function check2() {
-    if (data?.status !== "Completed") {
-      setrev(true);
-    }
-  }
-  function check3() {
-    if (data?.status !== "pendingPayment") {
-      setpay(true);
-    }
-  }
+
   useEffect(() => {
+    function check1() {
+      if (data?.reviewID !== null) {
+        setrev(true);
+      }
+    }
+    function check2() {
+      if (data?.status !== "Completed") {
+        setrev(true);
+      }
+    }
+    function check3() {
+      if (data?.status !== "pendingPayment") {
+        setpay(true);
+      }
+    }
     check1();
     check2();
     check3();
-  }, []);
+  }, [data?.reviewID, data?.status]);
 
   return (
     <>
@@ -113,7 +114,7 @@ const BookingItem = ({ data, getData }) => {
             <span className="text-[#FF8310]">{data?.duePayment} BDT</span>
           </li>
         </ul>
-        {data?.notes !== null ? (
+        {data?.notes ? (
           <div>
             <h3 className="order-items-name">Notes</h3>
             <p className="break-all">{data?.notes}</p>

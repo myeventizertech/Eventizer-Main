@@ -62,7 +62,7 @@ const OrderItem = ({ data, getData }) => {
             <span className="text-[#FF8310]">{data?.duePayment} BDT</span>
           </li>
         </ul>
-        {data?.notes !== null ? (
+        {data?.notes ? (
           <div>
             <h3 className="order-items-name ">Notes</h3>
             <p className="break-all">{data?.notes}</p>
