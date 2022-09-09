@@ -62,6 +62,7 @@ const OrderItem = ({ data, getData }) => {
             <span className="text-[#FF8310]">{data?.duePayment} BDT</span>
           </li>
         </ul>
+        
         {data?.notes ? (
           <div>
             <h3 className="order-items-name ">Notes</h3>
