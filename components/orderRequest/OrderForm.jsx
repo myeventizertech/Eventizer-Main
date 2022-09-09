@@ -101,7 +101,7 @@ const OrderForm = ({ passData, vendor }) => {
             status: "Pending",
             title: passData?.title,
             packageName: passData?.packName + " " + passData?.packageStandard,
-            notes: values.detailsAboutBooking,
+            notes: values?.detailsAboutBooking || "",
           };
           await API.graphql({
             query: mutations.createOrders,
@@ -157,7 +157,7 @@ const OrderForm = ({ passData, vendor }) => {
             status: "Pending",
             title: passData?.title,
             packageName: passData?.packName + " " + passData?.packageStandard,
-            notes: values.detailsAboutBooking,
+            notes: values?.detailsAboutBooking || "",
           };
           await API.graphql({
             query: mutations.createOrders,
@@ -217,7 +217,7 @@ const OrderForm = ({ passData, vendor }) => {
           .string()
           .min(5, "Minimum 5 letter required")
           .max(500, "Maximum 500 letter required")
-          .required("Required field")
+          .notRequired("Not required")
           .matches(/^([^0-9@]*)$/, "Only alphabets are allowed"),
 
         yourAddress: yup
@@ -278,8 +278,9 @@ const OrderForm = ({ passData, vendor }) => {
                     <button
                       type="button"
                       onClick={() => handleOrderTime(item.id)}
-                      className={`font-14 text-white bgcolor1 px-2 py-3 w-full border  rounded-[8px] mb-6 ${
-                        item.id !== currOrder ? "" : "opacity-80"
+                      className={`font-14 color4  px-2 py-3 w-full border-[1.5px]  rounded-[8px] mb-6 ${
+                        item.id !== currOrder ? "border-[#787878]"
+                        : "border-[#ef0d5e] "
                       }`}
                     >
                       {item.value}

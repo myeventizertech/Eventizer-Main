@@ -10,6 +10,7 @@ const Items = ({ data, service }) => {
   const [img, setimg] = useState("");
   useEffect(() => {
     async function getImages() {
+     try {
       const signedURL = await Storage.get(datas?.uploadYourPhoto);
       const response = await fetch(signedURL);
       const signedURL1 = datas?.portfolioImage
@@ -27,6 +28,9 @@ const Items = ({ data, service }) => {
       } else if (response.status === 404) {
         return;
       }
+     } catch (error) {
+      console.log(error);
+     }
     }
     getImages();
     let r = 0;
@@ -60,11 +64,11 @@ const Items = ({ data, service }) => {
         <Link href={`/products/${service}/${datas.id}`}>
           <a>
             <div className="relative min-h-[120px] sm:min-h-[200px]">
-              {img && (
+              { (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={img ||
-                    "https://res.cloudinary.com/eventizer-store/image/upload/v1656771738/Eventizer_New_Site/placeholder-image_bjm2n7.png"}
+                  src={img ? img :
+                    "/img/placeholder-image.png"}
                   className="absolute object-cover w-full h-full"
                   alt={"portfolio-image"}
                  
@@ -72,11 +76,11 @@ const Items = ({ data, service }) => {
               )}
               <div className=" bg-slate-300 bg-opacity-10  p-1 rounded-full absolute -bottom-7 sm:-bottom-8 right-7 sm:right-10  border border-gray-500">
                 <div className="sm:h-[70px] sm:w-[70px] h-[45px] w-[45px] overflow-hidden relative rounded-full ">
-                  {Images && (
+                  {  (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={Images ||
-                            "https://res.cloudinary.com/eventizer-store/image/upload/v1656771738/Eventizer_New_Site/placeholder-image_bjm2n7.png"}
+                      src={Images ? Images :
+                            "/img/placeholder-image.png"}
                       className="absolute object-cover w-full h-full"
                       alt={"profile-image"}
                     />

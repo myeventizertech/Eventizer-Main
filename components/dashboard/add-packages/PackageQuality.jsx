@@ -325,7 +325,7 @@ const PackageQuality = ({
                   <div className=" border p-5 mt-4">
                     <Input
                     istextArea={true}
-                      label="Extra service included"
+                      label="Service included"
                       type="text"
                       name={`${quality}.customOptionFields.${index}.fieldName`}
                       placeholder="Ex: anything"

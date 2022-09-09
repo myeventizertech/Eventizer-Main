@@ -4,7 +4,6 @@ const OrderItem = ({ data, getData }) => {
   const [modalRejectIsOpen, setRejectIsOpen] = React.useState(false);
   let obj = JSON.parse(data.package);
   const [load, setload] = useState(false);
-  console.log(data);
   return (
     <>
       <div className="orderItems ">
@@ -14,9 +13,17 @@ const OrderItem = ({ data, getData }) => {
             <h4>{data?.packageName}</h4>
           </div>
           <div>
-            <p className="font-14 font-normal bg-rose-600 text-white py-1 px-2 rounded-sm capitalize">
+            <p
+              className={`font-14 font-normal bg-rose-600 text-white py-1 px-2 rounded-sm capitalize           
+            ${data?.status === "Accepted" && "bg-[#33ae10]"}
+            ${data?.status === "Completed" && "bg-[#A4DD74]"}
+            ${data?.status === "Pending" && "bg-[#ff8400]"}
+            ${data?.status === "pendingPayment" && "bg-[#5454E8]"}
+            ${data?.status === "Rejected" && "bg-[#eb311b]"}
+            `}
+            >
               {" "}
-              {data.status}
+              {data?.status}
             </p>
           </div>
         </div>

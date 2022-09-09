@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import * as queries from "../../../src/graphql/queries";
 const BookingItem = ({ data, getData }) => {
   const router = useRouter();
-  console.log(data);
   const [modalReviewIsOpen, setReviewIsOpen] = React.useState(false);
   let obj = JSON.parse(data.package);
   let service = obj.service;
@@ -44,7 +43,18 @@ const BookingItem = ({ data, getData }) => {
             <h4>{data?.packageName}</h4>
           </div>
           <div>
-            <p className="font-14 font-normal bg-rose-600 text-white py-1 px-2 rounded-sm capitalize"> {data.status}</p>
+            <p
+              className={`font-14 font-normal bg-rose-600 text-white py-1 px-2 rounded-sm capitalize           
+            ${data?.status === "Accepted" && "bg-[#33ae10]"}
+            ${data?.status === "Completed" && "bg-[#A4DD74]"}
+            ${data?.status === "Pending" && "bg-[#ff8400]"}
+            ${data?.status === "pendingPayment" && "bg-[#5454E8]"}
+            ${data?.status === "Rejected" && "bg-[#eb311b]"}
+            `}
+            >
+              {" "}
+              {data?.status}
+            </p>
           </div>
         </div>
         <ul className="order-items-list">
@@ -112,7 +122,6 @@ const BookingItem = ({ data, getData }) => {
           <div></div>
         )}
 
-        {console.log(data?.status)}
         <div className="flex mt-4">
           <div className="ml-auto flex flex-wrap gap-4">
             {rev ? (

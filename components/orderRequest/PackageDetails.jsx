@@ -109,7 +109,7 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
               return (
                 <div key={i}>
                   <h1 className="MyPackageListItemHeading">
-                    Extra service included
+                    Service included
                   </h1>
                   <p className="MyPackageListItemvalue ">{item.fieldName}</p>
 

@@ -59,8 +59,8 @@ const Main = () => {
               className={`bg-white rounded-xl p-4 flex-1 shadow cursor-pointer border btn-hover min-w-[8rem]
               ${
                 item.status !== currList
-                  ? "border-[#ded6d6]"
-                  : "border-[#141414] "
+                  ? "border-[#a5a2a2]"
+                  : "border-[#ef0d5e] "
               }`}
               key={i}
               onClick={() => hadleCurrList(item.status)}

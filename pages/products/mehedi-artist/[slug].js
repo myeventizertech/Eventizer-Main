@@ -19,7 +19,6 @@ function ViewPhotography({posts,rating,sLocation,specializedIn}){
 }
 
 export async function getStaticProps({params}) {
-  console.log(params); 
     const res =  await API.graphql({
       query: queries.getMehediArtist,
       variables: { id: params.slug },
@@ -40,17 +39,16 @@ export async function getStaticProps({params}) {
         s=d?.label
       }
       else{
-        s=s+","+d?.label
+        s=s+", "+d?.label
       }
     })
-    console.log(s)
     posts?.specializedIn?.map((e)=>{
       let m =JSON.parse(e)
       if(c.length===0){
         c=m?.label
       }
       else{
-        c=c+","+m?.label
+        c=c+", "+m?.label
       }
 
     })
@@ -77,7 +75,6 @@ export async function getStaticPaths() {
   });
 
     const photographer = await res?.data?.listMehediArtists?.items
-    console.log(photographer)
     const paths = photographer.map((e) => ({
       params: { slug: e.id },
     }))

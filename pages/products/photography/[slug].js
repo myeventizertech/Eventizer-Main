@@ -6,7 +6,6 @@ import services from "../../../utils/services";
 import Head from "next/head";
 function ViewPhotography({posts,rating,sLocation,specializedIn}){
   const data = posts?.serviceLocation == null ?  "": posts;
-  console.log(rating)
     return(
  <>
      <Head>
@@ -42,7 +41,7 @@ export async function getStaticProps({params}) {
         s=d?.label
       }
       else{
-        s=s+","+d?.label
+        s=s+", "+d?.label
       }
     })
     posts?.specializedIn?.map((e)=>{
@@ -51,7 +50,7 @@ export async function getStaticProps({params}) {
         c=m?.label
       }
       else{
-        c=c+","+m?.label
+        c=c+", "+m?.label
       }
 
     })
@@ -78,7 +77,6 @@ export async function getStaticPaths() {
   });
 
     const photographer = await res?.data?.listPhotographies?.items
-    console.log(photographer)
     const paths = photographer.map((e) => ({
       params: { slug: e.id },
     }))

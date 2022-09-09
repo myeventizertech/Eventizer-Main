@@ -21,7 +21,7 @@ import { useEffect } from "react";
 // import store from "../redux/strore";
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    hotjar.initialize(3127892, 1);
+    hotjar.initialize(3127042, 1);
   }, []);
 
   return (

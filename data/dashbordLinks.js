@@ -2,9 +2,9 @@
 
 let dashboardlinkUser = [
   // { name: "Wishlist", path: "/dashboard/Wishlist", img: "/img/wishlist_icon.svg" },
-  { name: "Profile", path: "/dashboard/profile", img: "/img/profile_icon.svg" },
   { name: "My booking", path: "/dashboard/my-booking", img: "/img/booking_icon.svg" },
   { name: "My Plans", path: "/dashboard/my-plans", img: "/img/package_icon.svg" },
+  { name: "Profile", path: "/dashboard/profile", img: "/img/profile_icon.svg" },
 ];
 
 let dashboardlinkVendor = [

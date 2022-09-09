@@ -19,7 +19,6 @@ const Reviews = ({ name, rate, review, userImg }) => {
     }
     fetchme();
   }, [userImg]);
-  console.log(updateImage);
   return (
     <div className="mt-3 flex gap-3">
       <div className="min-w-9 pt-1">
