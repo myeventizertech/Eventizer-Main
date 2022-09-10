@@ -6,6 +6,24 @@ import services from "../../../utils/services";
 import Head from "next/head";
 function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
   const data = posts?.serviceLocation == null ? "" : posts;
+
+  let [updateImage, setUpdateImage] = useState("");
+  useEffect(() => {
+    async function fetchme() {
+      try {
+        const imageKey = await Storage.get(data?.uploadYourPhoto);
+
+        const response = await fetch(imageKey);
+        if (response.status == 200) {
+          setUpdateImage(imageKey);
+        } else if (response.status === 404) {
+          setUpdateImage("");
+        }
+      } catch (error) {}
+    }
+    fetchme();
+  }, [data.uploadYourPhoto]);
+
   return (
     <>
       <Head>
@@ -20,6 +38,17 @@ function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
         <meta name="description" content={posts?.detailsAboutYou} />
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
+        {updateImage ? (
+          <>
+            <meta property="og:image" content={`${updateImage}`} />
+            <meta name="twitter:image" content={`${updateImage}`} />
+          </>
+        ) : (
+          <>
+            <meta property="og:image" content="/img/og.png" />
+            <meta name="twitter:image" content="/img/og.png" />
+          </>
+        )}
       </Head>
 
       <Main
