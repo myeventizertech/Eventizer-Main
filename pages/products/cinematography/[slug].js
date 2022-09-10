@@ -5,15 +5,29 @@ import { useRouter } from "next/router";
 import services from "../../../utils/services";
 import Head from "next/head";
 function ViewCinematography({ posts, rating, sLocation, specializedIn }) {
-  const data = posts.serviceLocation == null ?  "": posts;
+  const data = posts.serviceLocation == null ? "" : posts;
   return (
     <>
-    <Head>
-    <title>{posts?.title}</title>
-    <meta property="og:title" content={posts?.title} key="title" />
-    <meta property="og:url" content={"https://myeventizer.com/products/cinematography/"+posts?.id} />
-    <meta name="description" content={posts?.detailsAboutYou}/>
-    </Head>
+      <Head>
+        <title>{posts?.title}</title>
+        <meta name="title" content={posts?.title} />
+        <meta property="og:title" content={posts?.title} key="ogtitle" />
+        <meta name="twitter:title" content={posts?.title} />
+        <meta
+          property="og:url"
+          content={
+            "https://myeventizer.com/products/cinematography/" + posts?.id
+          }
+        />
+
+        <meta name="description" content={posts?.detailsAboutYou} />
+        <meta property="og:description" content={posts?.detailsAboutYou} />
+        <meta name="twitter:description" content={posts?.detailsAboutYou} />
+
+        <meta property="og:image" content="/img/og.png" />
+        <meta name="twitter:image" content="/img/og.png" />
+      </Head>
+
       <Main
         data={data}
         service={services.cinematography}
