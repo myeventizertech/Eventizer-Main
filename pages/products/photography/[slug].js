@@ -6,21 +6,7 @@ import services from "../../../utils/services";
 import Head from "next/head";
 function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
   const data = posts?.serviceLocation == null ? "" : posts;
-
-    async function fetchme() {
-      try {
-        const imageKey = await Storage.get(data.uploadYourPhoto);
-
-        const response = await fetch(imageKey);
-        if (response.status == 200) {
-         return imageKey;
-        } else if (response.status === 404) {
-          return ""
-        }
-      } catch (error) {}
-    }
-    fetchme();
-
+  
   return (
     <>
       <Head>
@@ -35,17 +21,8 @@ function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
         <meta name="description" content={posts?.detailsAboutYou} />
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
-        {fetchme() ? (
-          <>
-            <meta property="og:image" content={`${fetchme()}`} />
-            <meta name="twitter:image" content={`${fetchme()}`} />
-          </>
-        ) : (
-          <>
-            <meta property="og:image" content="/img/og.png" />
-            <meta name="twitter:image" content="/img/og.png" />
-          </>
-        )}
+        <meta property="og:image" content="/img/og.png" />
+        <meta name="twitter:image" content="/img/og.png" />
       </Head>
 
       <Main
