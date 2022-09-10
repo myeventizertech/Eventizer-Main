@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect  } from "react";
 import Main from "../../../components/each-profile/Main";
 import * as queries from "../../../src/graphql/queries";
 import { API, withSSRContext } from "aws-amplify";
