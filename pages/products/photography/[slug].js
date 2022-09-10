@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Main from "../../../components/each-profile/Main";
 import * as queries from "../../../src/graphql/queries";
 import { API, withSSRContext } from "aws-amplify";
@@ -8,16 +7,15 @@ import Head from "next/head";
 function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
   const data = posts?.serviceLocation == null ? "" : posts;
 
-  let [updateImage, setUpdateImage] = useState("");
     async function fetchme() {
       try {
         const imageKey = await Storage.get(data.uploadYourPhoto);
 
         const response = await fetch(imageKey);
         if (response.status == 200) {
-          setUpdateImage(imageKey);
+         return imageKey;
         } else if (response.status === 404) {
-          setUpdateImage("");
+          return ""
         }
       } catch (error) {}
     }
@@ -37,10 +35,10 @@ function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
         <meta name="description" content={posts?.detailsAboutYou} />
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
-        {updateImage ? (
+        {fetchme() ? (
           <>
-            <meta property="og:image" content={`${updateImage}`} />
-            <meta name="twitter:image" content={`${updateImage}`} />
+            <meta property="og:image" content={`${fetchme()}`} />
+            <meta name="twitter:image" content={`${fetchme()}`} />
           </>
         ) : (
           <>
