@@ -10,12 +10,14 @@ function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
     <>
       <Head>
         <title>{posts?.title}</title>
+        <meta name="title" content={posts?.title} />
         <meta property="og:title" content={posts?.title} key="ogtitle" />
         <meta name="twitter:title" content={posts?.title} />
         <meta
           property="og:url"
           content={"https://myeventizer.com/products/photography/" + posts?.id}
         />
+        <meta name="description" content={posts?.detailsAboutYou} />
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
       </Head>

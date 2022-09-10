@@ -7,7 +7,7 @@ class MyDocument extends Document {
         <Head>
           <meta name="theme-color" content="#ef0d5e" />
           <meta name="author" content="Eventizer" />
-          <meta
+          {/* <meta
             name="title"
             content="Eventizer | Plan Your Event Hassle Free"
           />
@@ -32,7 +32,7 @@ class MyDocument extends Document {
           />
           <meta property="og:image" content="/img/og.png" />
           <meta property="og:url" content="https://myeventizer.com" />
-          <meta property="og:site_name" content="Eventizer" />
+          <meta property="og:site_name" content="Eventizer" /> */}
 
           <meta name="twitter:domain" content="https://myeventizer.com" />
           <meta
