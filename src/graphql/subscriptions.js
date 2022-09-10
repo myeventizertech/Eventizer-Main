@@ -385,6 +385,7 @@ export const onCreatePlan = /* GraphQL */ `
       totalBudget
       fileLink
       status
+      description
       userID
       createdAt
       updatedAt
@@ -407,6 +408,7 @@ export const onUpdatePlan = /* GraphQL */ `
       totalBudget
       fileLink
       status
+      description
       userID
       createdAt
       updatedAt
@@ -429,6 +431,7 @@ export const onDeletePlan = /* GraphQL */ `
       totalBudget
       fileLink
       status
+      description
       userID
       createdAt
       updatedAt
@@ -805,6 +808,7 @@ export const onCreateUser = /* GraphQL */ `
           totalBudget
           fileLink
           status
+          description
           userID
           createdAt
           updatedAt
@@ -821,6 +825,7 @@ export const onCreateUser = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -901,6 +906,7 @@ export const onUpdateUser = /* GraphQL */ `
           totalBudget
           fileLink
           status
+          description
           userID
           createdAt
           updatedAt
@@ -917,6 +923,7 @@ export const onUpdateUser = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -997,6 +1004,7 @@ export const onDeleteUser = /* GraphQL */ `
           totalBudget
           fileLink
           status
+          description
           userID
           createdAt
           updatedAt
@@ -1013,6 +1021,7 @@ export const onDeleteUser = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1046,6 +1055,7 @@ export const onCreateReview = /* GraphQL */ `
       behaviour
       average
       userPicture
+      userName
       photographyID
       cinematographyID
       userID
@@ -1073,6 +1083,7 @@ export const onUpdateReview = /* GraphQL */ `
       behaviour
       average
       userPicture
+      userName
       photographyID
       cinematographyID
       userID
@@ -1100,6 +1111,7 @@ export const onDeleteReview = /* GraphQL */ `
       behaviour
       average
       userPicture
+      userName
       photographyID
       cinematographyID
       userID
@@ -1145,6 +1157,7 @@ export const onCreateCinematography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1200,6 +1213,7 @@ export const onUpdateCinematography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1255,6 +1269,7 @@ export const onDeleteCinematography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1309,6 +1324,7 @@ export const onCreatePhotography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1364,6 +1380,7 @@ export const onUpdatePhotography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1419,6 +1436,7 @@ export const onDeletePhotography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1476,6 +1494,7 @@ export const onCreateDJMusician = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1531,6 +1550,7 @@ export const onUpdateDJMusician = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1586,6 +1606,7 @@ export const onDeleteDJMusician = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1640,6 +1661,7 @@ export const onCreateMakeupArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1694,6 +1716,7 @@ export const onUpdateMakeupArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1748,6 +1771,7 @@ export const onDeleteMakeupArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1802,6 +1826,7 @@ export const onCreateMehediArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1856,6 +1881,7 @@ export const onUpdateMehediArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1910,6 +1936,7 @@ export const onDeleteMehediArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID

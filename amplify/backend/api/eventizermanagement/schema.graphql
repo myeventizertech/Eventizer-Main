@@ -120,6 +120,7 @@ type Plan
 	totalBudget:String
 	fileLink:String
 	status: String!
+    description:String,
 	userID: ID! @index(name: "byUser")
 }
 
@@ -183,6 +184,7 @@ type Review
 	behaviour: Float!
 	average: Float!
 	userPicture: String
+	userName:String
 	photographyID: ID @index(name: "byPhotography")
 	cinematographyID: ID @index(name: "byCinematography")
 	userID: ID! @index(name: "byUser")

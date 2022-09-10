@@ -95,7 +95,7 @@ check()
               return (
                 <div key={i}>
                   <Reviews
-                    name={item.description}
+                    name={item.userName}
                     review={item.description}
                     rate={item.average}
                     userImg={item.userPicture}

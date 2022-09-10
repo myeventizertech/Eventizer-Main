@@ -69,6 +69,7 @@ const GiveReview = ({ service, id, oid, setReviewIsOpen, getData }) => {
         average: average,
         userPicture: storage?.profilePicture,
         userID: storage?.user?.id,
+        userName:storage?.user?.firstName +" "+storage?.user?.lastName
       };
       var person = { [serviceAPI]: id };
       const reviewQuery = await API.graphql({

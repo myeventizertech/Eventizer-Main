@@ -290,6 +290,7 @@ export const getPlan = /* GraphQL */ `
       totalBudget
       fileLink
       status
+      description
       userID
       createdAt
       updatedAt
@@ -317,6 +318,7 @@ export const listPlans = /* GraphQL */ `
         totalBudget
         fileLink
         status
+        description
         userID
         createdAt
         updatedAt
@@ -561,6 +563,7 @@ export const getUser = /* GraphQL */ `
           totalBudget
           fileLink
           status
+          description
           userID
           createdAt
           updatedAt
@@ -577,6 +580,7 @@ export const getUser = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -644,6 +648,7 @@ export const getReview = /* GraphQL */ `
       behaviour
       average
       userPicture
+      userName
       photographyID
       cinematographyID
       userID
@@ -676,6 +681,7 @@ export const listReviews = /* GraphQL */ `
         behaviour
         average
         userPicture
+        userName
         photographyID
         cinematographyID
         userID
@@ -723,6 +729,7 @@ export const getCinematography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -779,9 +786,6 @@ export const listCinematographies = /* GraphQL */ `
         rating
         isConfirmed
         Reviews {
-          items {
-          average
-        }
           nextToken
         }
         phoneNumber
@@ -823,6 +827,7 @@ export const getPhotography = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -875,9 +880,6 @@ export const listPhotographies = /* GraphQL */ `
         rating
         isConfirmed
         Reviews {
-          items {
-          average
-        }
           nextToken
         }
         phoneNumber
@@ -922,6 +924,7 @@ export const getDJMusician = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -974,9 +977,6 @@ export const listDJMusicians = /* GraphQL */ `
         teamMember
         packages
         Reviews {
-          items {
-          average
-        }
           nextToken
         }
         status
@@ -1018,6 +1018,7 @@ export const getMakeupArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1069,9 +1070,6 @@ export const listMakeupArtists = /* GraphQL */ `
         teamMember
         packages
         Reviews {
-          items {
-          average
-        }
           nextToken
         }
         status
@@ -1113,6 +1111,7 @@ export const getMehediArtist = /* GraphQL */ `
           behaviour
           average
           userPicture
+          userName
           photographyID
           cinematographyID
           userID
@@ -1164,9 +1163,6 @@ export const listMehediArtists = /* GraphQL */ `
         phoneNumber
         teamMember
         Reviews {
-          items {
-          average
-        }
           nextToken
         }
         status
