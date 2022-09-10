@@ -12,6 +12,7 @@ function ViewMusician({posts,rating,sLocation,specializedIn}){
     <title>{posts?.title}</title>
     <meta property="og:title" content={posts?.title} key="title" />
     <meta name="description" content={posts?.detailsAboutYou}/>
+    <meta property="og:url" content={"https://myeventizer.com/products/dj-musician/"+posts?.id} />
     </Head>
     <Main data={data} service={services.djMusician} rating={rating} sLocation={sLocation} specializedIn={specializedIn}/>
  </>

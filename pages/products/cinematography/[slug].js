@@ -11,6 +11,7 @@ function ViewCinematography({ posts, rating, sLocation, specializedIn }) {
     <Head>
     <title>{posts?.title}</title>
     <meta property="og:title" content={posts?.title} key="title" />
+    <meta property="og:url" content={"https://myeventizer.com/products/cinematography/"+posts?.id} />
     <meta name="description" content={posts?.detailsAboutYou}/>
     </Head>
       <Main
