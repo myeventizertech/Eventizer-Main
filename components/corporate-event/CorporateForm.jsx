@@ -49,29 +49,23 @@ let cmnSchema = yup
   .required("Company Name is required");
 let validationSchema = yup.object().shape({
   corporateService: yup.array().of(
-    yup.object().shape(
-      {
-        requiredService: yup
-          .string()
-          .min(2, "Minimum 2 letter required")
-          .max(1000, "Maximum 1000 letter required")
-          .when("targetBudget", {
-            is: (val) => (val || val?.length === 0 ? true : false),
-            then: yup.string().required("Required field"),
-          })
-          .required("Required"),
-        targetBudget: yup
-          .number()
-          .typeError("Must be a number")
-          .positive("Must be greater than zero")
-          .when("requiredService", {
-            is: (val) => (val || val?.length === 0 ? true : false),
-            then: yup.number().required("Required field"),
-          })
-          .required("Required"),
-      },
-      ["requiredService", "targetBudget"]
-    )
+    yup.object().shape({
+      requiredService: yup
+        .string()
+        .min(2, "Minimum 2 letter required")
+        .max(1000, "Maximum 1000 letter required")
+        .required("Required"),
+      targetBudget: yup
+        .number()
+        .typeError("Must be a number")
+        .positive("Must be greater than zero")
+        .notRequired("Not required"),
+        qdhValue: yup
+        .number()
+        .typeError("Must be a number")
+        .positive("Must be greater than zero")
+        .notRequired("Not required"),
+    })
   ),
 
   name: yup
@@ -102,7 +96,9 @@ let validationSchema = yup.object().shape({
 });
 
 let intVal = {
-  corporateService: [{ requiredService: "", targetBudget: "" }],
+  corporateService: [
+    { requiredService: "", targetBudget: "", qdh: "days", qdhValue: "" },
+  ],
   name: "",
   companyName: "",
   phoneNumber: "",
@@ -118,7 +114,7 @@ const CorporateForm = () => {
   let { attributes } = verifyUser?.isUser_vendorAttr || {};
   let onSubmit = async (values) => {
     let totalBudget = values.corporateService.reduce(
-      (partialSum, a) => partialSum + a.targetBudget,
+      (partialSum, a) => partialSum + Number(a.targetBudget),
       0
     );
     try {
@@ -136,7 +132,7 @@ const CorporateForm = () => {
         eventDate: values.eventDate,
         status: "Pending",
         userID: attributes.sub,
-        description:description,
+        description: values.description,
         totalBudget,
         fileLink: "",
       };
@@ -144,6 +140,7 @@ const CorporateForm = () => {
         query: mutations.createPlan,
         variables: { input: createMyplan },
       });
+      console.log(createMyplan);
       setisDone(true);
     } catch (error) {
       console.log(error);
@@ -219,6 +216,48 @@ const CorporateForm = () => {
                                 }
                               />
                             </div>
+                            <div className="relative">
+                              <Input
+                                otherCSS="pr-[7.25rem]"
+                                label="Quantity/Days/Hours"
+                                type="number"
+                                name={`corporateService.${index}.qdhValue`}
+                                placeholder="Number"
+                                value={
+                                  fieldProps.values.corporateService[index]
+                                    .qdhValue
+                                }
+                                handleChange={fieldProps.handleChange}
+                                handleBlur={fieldProps.handleBlur}
+                                error={
+                                  fieldProps.errors.corporateService &&
+                                  fieldProps.errors.corporateService[index] &&
+                                  fieldProps.touched.corporateService &&
+                                  fieldProps.errors.corporateService[index]
+                                    .qdhValue
+                                    ? fieldProps.errors.corporateService[index]
+                                        .qdhValue
+                                    : ""
+                                }
+                              />
+
+                              <select
+                                name={`corporateService.${index}.qdh`}
+                                value={
+                                  fieldProps.values.corporateService[index].qdh
+                                }
+                                onChange={fieldProps.handleChange}
+                                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 -right-10 pl-1  block color1 font-normal capitalize outline-[#ef0d5e]  border-l border-gray-400 h-[35px] mt-[2px] sm:mt-1 md:mt-1.5"
+                              >
+                                {["quantity", "days", "hour"].map((item, i) => {
+                                  return (
+                                    <option value={item} label={item} key={i}>
+                                      {item}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                            </div>
                           </div>
                           {fieldProps.values.corporateService.length !== 1 && (
                             <button
@@ -239,7 +278,7 @@ const CorporateForm = () => {
                           type="button"
                           className="font-14 font-normal text-white bgcolor2 rounded-[4px] flex justify-center items-center hover:opacity-75 px-2 py-1 ml-auto mt-5"
                           onClick={() =>
-                            push({ requiredService: "", targetBudget: "" })
+                            push( { requiredService: "", targetBudget: "", qdh: "days", qdhValue: "" })
                           }
                         >
                           Add More +

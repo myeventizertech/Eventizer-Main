@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import * as mutations from "../../../src/graphql/mutations";
 import { useRouter } from "next/router";
 import * as queries from "../../../src/graphql/queries";
+import conditionalRendar from "../../../utils/conditionalRendar"
 const BookingItem = ({ data, getData }) => {
   const router = useRouter();
   const [modalReviewIsOpen, setReviewIsOpen] = React.useState(false);
@@ -34,6 +35,8 @@ const BookingItem = ({ data, getData }) => {
     check2();
     check3();
   }, [data?.reviewID, data?.status]);
+
+  // data.status = "Accepted";
 
   return (
     <>
@@ -99,20 +102,36 @@ const BookingItem = ({ data, getData }) => {
           <li>
             <span className="order-items-name">Total Price</span>
             {": "}
-            <span>{data?.totalPayment}</span>
+            <span>{data?.totalPayment} BDT</span>
           </li>
+          {data?.status !== "Completed" && 
 
           <li>
             <span className="order-items-name">Advance Payment</span>
             {": "}
             <span className="text-[#EF0D0D]">{data?.initialPayment} BDT</span>
           </li>
+}
 
+{data?.status !== "Completed" && 
           <li>
             <span className="order-items-name">Due Payment</span>
             {": "}
-            <span className="text-[#FF8310]">{data?.duePayment} BDT</span>
+            <span className="text-[#FF8310]">
+              {conditionalRendar(data?.status === "Pending" || data?.status === "pendingPayment" || data?.status === "Accepted")
+                ? data?.totalPayment
+                : data?.totalPayment / 2}{" "}
+              BDT
+            </span>
           </li>
+}
+          {conditionalRendar(data?.status !== "Completed" && data?.status !== "Accepted") && (
+            <li>
+              <span className="order-items-name">Payment Now</span>
+              {": "}
+              <span>{data?.totalPayment / 2}</span>
+            </li>
+          )}
         </ul>
         {data?.notes ? (
           <div>

@@ -47,7 +47,7 @@ const OrderItem = ({ data, getData }) => {
           <li>
             <span className="order-items-name">Total Price</span>
             {": "}
-            <span>{data?.totalPayment}</span>
+            <span>{data?.totalPayment} BDT</span>
           </li>
 
           <li>

@@ -32,6 +32,7 @@ const Main = ({ Data, initialValues }) => {
   const [disablePromo, setDisablePromo] = useState(false);
   const [getpromoCodeVal, setGetpromoCOdeval] = useState({});
   const [getOffer, setGetOffer] = useState("");
+  const [discountVAl, setDiscountVAl] = useState("");
   const [error, setError] = useState(false);
   let handleChangePromoCode = (e) => {
     e.persist();
@@ -103,10 +104,14 @@ const Main = ({ Data, initialValues }) => {
       let getMaxDiscount = getpromoCodeVal?.maxDiscount;
       if (getPercentege) {
         let percentege = (getPercentege / 100) * total;
-        if (getMaxDiscount < percentege.toFixed(2)) {
+
+        if (getMaxDiscount  < percentege) {
+          setDiscountVAl(getMaxDiscount)
           return total - getMaxDiscount;
         }
-        return total - percentege.toFixed(2);
+        setDiscountVAl(percentege)
+
+        return total - percentege;
       }
     }
     let totalOffer = calc();
@@ -118,7 +123,7 @@ const Main = ({ Data, initialValues }) => {
   ]);
 
   useEffect(() => setGetOffer(Data?.totalPayment), [Data?.totalPayment]);
-
+console.log(getOffer);
   return (
     <div className="container m-all checkout">
       <div className="flex gap-5 flex-col md:flex-row">
@@ -268,7 +273,27 @@ const Main = ({ Data, initialValues }) => {
 
               <div className="box-inner">
                 <div>
-                  <h5>Total Payment</h5>
+                  <h5>Subtotal</h5>
+                </div>
+                <div>
+                  <p>৳ {Data?.totalPayment} </p>
+                </div>
+              </div>
+            </div>
+            <div className="px-5">
+              <div className="box-inner">
+                <div>
+                  <h5>offer</h5>
+                </div>
+                <div>
+                  <p>৳ {discountVAl ? discountVAl : 0}</p>
+                </div>
+              </div>
+            </div>
+            <div className="px-5">
+              <div className="box-inner">
+                <div>
+                  <h5>Payble Total</h5>
                 </div>
                 <div>
                   <p>৳ {getOffer}</p>
@@ -283,22 +308,13 @@ const Main = ({ Data, initialValues }) => {
               }}
             >
               <div>
-                <h5>Payble total</h5>
+                <h5>Pay Now</h5>
               </div>
               <div>
                 <p>৳ {getOffer / 2}</p>
               </div>
             </div>
-            {/* <div className="px-5">
-              <div className="box-inner">
-                <div>
-                  <h5>Subtotal</h5>
-                </div>
-                <div>
-                  <p>৳ 4000</p>
-                </div>
-              </div>
-            </div> */}
+           
           </div>
         </div>
       </div>

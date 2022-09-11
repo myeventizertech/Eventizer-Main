@@ -12,7 +12,6 @@ import { Storage } from "@aws-amplify/storage";
 import imageCompression from "browser-image-compression";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-
 const BDNUM = /^01[23456789][0-9]{8}\b/g;
 
 let userSchema = yup.object().shape({
@@ -46,10 +45,12 @@ let userSchema = yup.object().shape({
     .required("Required field"),
 });
 import { useUserOrVendor } from "../../../authContext/AuthContext";
+import ChangePassword from "./ChangePassword";
 
 const UserProfile = ({ attributes }) => {
+
   let router = useRouter();
-  let { redirect,path } = router.query;
+  let { redirect, path } = router.query;
   const storage = JSON.parse(localStorage.getItem("AmpUserInfo"));
   const [images, setImages] = useState(null);
   let number = storage.user?.phoneNumber;
@@ -106,9 +107,9 @@ const UserProfile = ({ attributes }) => {
         },
       });
       toast.success("Upadate success");
-	  if(redirect === "true"){
-		router.push(path);
-	  }
+      if (redirect === "true") {
+        router.push(path);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -276,6 +277,8 @@ const UserProfile = ({ attributes }) => {
           </Form>
         )}
       </Formik>
+
+      <ChangePassword/>
     </>
   );
 };
