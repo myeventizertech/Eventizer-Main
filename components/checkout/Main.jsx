@@ -183,7 +183,7 @@ console.log(getOffer);
                 </div>
                 {disablePromo ? (
                   <h1 className="text-center text-[#32e067] font-26 font-normal min-h-[4rem]">
-                    Cupon created successfully
+                    Cupon applied successfully
                   </h1>
                 ) : (
                   <div className="flex gap-x-5 mt-3">
@@ -286,7 +286,7 @@ console.log(getOffer);
                   <h5>offer</h5>
                 </div>
                 <div>
-                  <p>৳ {discountVAl ? discountVAl : 0}</p>
+                  <p>৳ -{discountVAl ? discountVAl : 0}</p>
                 </div>
               </div>
             </div>
