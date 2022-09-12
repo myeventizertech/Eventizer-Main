@@ -1,10 +1,10 @@
 import Main from "../../../components/each-profile/Main";
 import * as queries from "../../../src/graphql/queries";
-import { API, withSSRContext } from "aws-amplify";
+import { API, withSSRContext,Storage } from "aws-amplify";
 import { useRouter } from "next/router";
 import services from "../../../utils/services";
 import Head from "next/head";
-function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
+function ViewPhotography({ posts, rating, sLocation, specializedIn ,url}) {
   const data = posts?.serviceLocation == null ? "" : posts;
   
   return (
@@ -21,8 +21,8 @@ function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
         <meta name="description" content={posts?.detailsAboutYou} />
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
-        <meta property="og:image" content="/img/og.png" />
-        <meta name="twitter:image" content="/img/og.png" />
+        <meta property="og:image" content={url} />
+        <meta name="twitter:image" content={url} />
       </Head>
 
       <Main
@@ -51,6 +51,12 @@ export async function getStaticProps({ params }) {
     return accumulator + object.average;
   }, 0);
   r = sum / k || 0;
+  const signedURL = await Storage.get(posts?.uploadYourPhoto);
+  const response = await fetch(signedURL);
+  let imgurl = null
+  if (response.status == 200) {
+    imgurl = signedURL
+  }
   posts?.serviceLocation?.map((e) => {
     let d = JSON.parse(e);
     if (s.length === 0) {
@@ -73,6 +79,7 @@ export async function getStaticProps({ params }) {
       rating: parseFloat(r.toFixed(2)),
       sLocation: s,
       specializedIn: c,
+      url :imgurl
     },
     revalidate: 10, // In seconds
   };

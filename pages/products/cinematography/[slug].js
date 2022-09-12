@@ -1,6 +1,6 @@
 import Main from "../../../components/each-profile/Main";
 import * as queries from "../../../src/graphql/queries";
-import { API, withSSRContext } from "aws-amplify";
+import { API, withSSRContext,Storage } from "aws-amplify";
 import { useRouter } from "next/router";
 import services from "../../../utils/services";
 import Head from "next/head";
@@ -46,6 +46,12 @@ export async function getStaticProps({ params }) {
     authMode: "API_KEY",
   });
   const posts = await res?.data?.getCinematography;
+  const signedURL = await Storage.get(posts?.uploadYourPhoto);
+  const response = await fetch(signedURL);
+  if (response.status == 200) {
+    console.log(signedURL)
+  }
+
   let s = "";
   let c = "";
   let k = posts?.Reviews?.items?.length;
