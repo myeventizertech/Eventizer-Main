@@ -30,7 +30,7 @@ export const getServerSideProps = async ({ res }) => {
   let filter = {
     status: { eq: "Accepted" },
   };
-  const res = await SSR.API.graphql({
+  const ress = await SSR.API.graphql({
     query: queries.listCinematographies,
     authMode: "API_KEY",
     variables: { filter: filter },
@@ -55,7 +55,7 @@ export const getServerSideProps = async ({ res }) => {
     authMode: "API_KEY",
     variables: { filter: filter },
   });
-  const Cinematographies = await res?.data?.listCinematographies?.items;
+  const Cinematographies = await ress?.data?.listCinematographies?.items;
   Cinematographies.map((e) => (documents.push(`${baseUrl}products/cinematography/${e.id}`)));
 
   const photo = await res1?.data?.listPhotographies?.items;
