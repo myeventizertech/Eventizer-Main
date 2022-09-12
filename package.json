@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build" : "next build && next-sitemap",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -20,6 +20,7 @@
     "keen-slider": "^6.7.0",
     "moment": "^2.29.4",
     "next": "12.1.5",
+    "next-sitemap": "^3.1.22",
     "nextjs-progressbar": "^0.0.14",
     "react": "18.1.0",
     "react-awesome-time-picker": "^1.0.1",
