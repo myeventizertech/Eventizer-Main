@@ -4,7 +4,7 @@ import { API, withSSRContext,Storage } from "aws-amplify";
 import { useRouter } from "next/router";
 import services from "../../../utils/services";
 import Head from "next/head";
-function ViewPhotography({ posts, rating, sLocation, specializedIn ,url}) {
+function ViewPhotography({ posts, rating, sLocation, specializedIn }) {
   const data = posts?.serviceLocation == null ? "" : posts;
   
   return (
@@ -21,8 +21,8 @@ function ViewPhotography({ posts, rating, sLocation, specializedIn ,url}) {
         <meta name="description" content={posts?.detailsAboutYou} />
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
-        <meta property="og:image" content={url} />
-        <meta name="twitter:image" content={url} />
+        <meta property="og:image" content={"https://eventizerbucket155524-dev/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
+        <meta name="twitter:image" content={"https://eventizerbucket155524-dev/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
       </Head>
 
       <Main
@@ -51,12 +51,7 @@ export async function getStaticProps({ params }) {
     return accumulator + object.average;
   }, 0);
   r = sum / k || 0;
-  const signedURL = await Storage.get(posts?.uploadYourPhoto);
-  const response = await fetch(signedURL);
-  let imgurl = null
-  if (response.status == 200) {
-    imgurl = signedURL
-  }
+
   posts?.serviceLocation?.map((e) => {
     let d = JSON.parse(e);
     if (s.length === 0) {

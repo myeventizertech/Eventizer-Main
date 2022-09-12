@@ -258,7 +258,9 @@ const VendorProfile = ({ attributes, service }) => {
                   //code here
                   const result = await Storage.put(
                     "ProfilePicture/Vendor" + attributes.sub + ".png",
-                    file
+                    file,{
+  level: "public",
+}
                   );
                   uuid();
                   dispatch({

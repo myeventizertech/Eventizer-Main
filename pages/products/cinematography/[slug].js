@@ -24,8 +24,8 @@ function ViewCinematography({ posts, rating, sLocation, specializedIn }) {
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
 
-        <meta property="og:image" content="/img/og.png" />
-        <meta name="twitter:image" content="/img/og.png" />
+        <meta property="og:image" content={"https://eventizerbucket155524-dev/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
+        <meta name="twitter:image" content={"https://eventizerbucket155524-dev/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
       </Head>
 
       <Main
@@ -46,11 +46,6 @@ export async function getStaticProps({ params }) {
     authMode: "API_KEY",
   });
   const posts = await res?.data?.getCinematography;
-  const signedURL = await Storage.get(posts?.uploadYourPhoto);
-  const response = await fetch(signedURL);
-  if (response.status == 200) {
-    console.log(signedURL)
-  }
 
   let s = "";
   let c = "";
