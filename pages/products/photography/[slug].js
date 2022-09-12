@@ -74,7 +74,6 @@ export async function getStaticProps({ params }) {
       rating: parseFloat(r.toFixed(2)),
       sLocation: s,
       specializedIn: c,
-      url :imgurl
     },
     revalidate: 10, // In seconds
   };
