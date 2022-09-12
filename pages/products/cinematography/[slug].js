@@ -24,8 +24,8 @@ function ViewCinematography({ posts, rating, sLocation, specializedIn }) {
         <meta property="og:description" content={posts?.detailsAboutYou} />
         <meta name="twitter:description" content={posts?.detailsAboutYou} />
 
-        <meta property="og:image" content={"https://eventizerbucket155524-devt.s3.amazonaws.com/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
-        <meta name="twitter:image" content={"https://eventizerbucket155524-devt.s3.amazonaws.com/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
+        <meta property="og:image" content={"https://eventizerbucket155524-dev.s3.amazonaws.com/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
+        <meta name="twitter:image" content={"https://eventizerbucket155524-dev.s3.amazonaws.com/public/ProfilePicture/" + "Vendor" + posts?.id + ".png"} />
       </Head>
 
       <Main
