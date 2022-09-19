@@ -78,12 +78,13 @@ checkData()
                       {Files?.map((item, i) => {
                         return (
                           <div key={i}>
-                            <div className="w-[300px] inline-block">
-                              <div className="w-full h-full">
+                            <div className="w-[300px] inline-block ">
+                              <div className="w-full h-[10rem] bg-[#e7e6ea]">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                   src={item}
                                   alt="package-images"
+                                  className="mx-auto block h-full"
                                 />
                               </div>
                             </div>

@@ -50,7 +50,7 @@ const ChangePassword = () => {
             toast.success("Password upadate successful");
             actions.resetForm();
           } catch (error) {
-            toast.error("Something went wrong");
+            toast.error("Old password is not valid");
 
             console.log(error);
           }

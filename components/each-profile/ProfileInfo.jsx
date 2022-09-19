@@ -105,12 +105,12 @@ const ProfileInfo = ({
             {slideImg.map((item, i) => {
               return (
                 <div key={i} onClick={() => openImageViewer(i)}>
-                  <div className="mx-1">
+                  <div className="mx-1 h-[15rem] sm:h-[8rem] bg-[#e7e6ea]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item}
                       alt={"profile-image"}
-                      className="mx-auto block"
+                      className="mx-auto block h-full"
                     />
                   </div>
                 </div>

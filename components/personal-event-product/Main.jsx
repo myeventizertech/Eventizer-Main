@@ -100,7 +100,7 @@ const Main = ({ service }) => {
 
   return (
     <>
-      <div className="container m-all sm:pt-0 pt-12 product overflow-hidden-product  md:pb-0 pb-4">
+      <div className="container m-all product overflow-hidden-product  md:pb-0 pb-4">
         <h1 className="color4 font-18 sm:font-26">Personal event</h1>
         <p className="text-[#6F6F6F] font-14 ">
           Home {">"} Personal event {">"}{" "}

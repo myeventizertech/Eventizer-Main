@@ -107,9 +107,9 @@ const Items = ({ data, service }) => {
             </div>
             <div className="pl-2">
               <span className="color3 font-normal font-12">
-                {years.value || "0"}
+                {years.value.replace('years','') || "0"}
               </span>
-              <p className="text-[#8C8C8C] font-12">Years experienced</p>
+              <p className="text-[#8C8C8C] font-12"> Years experienced</p>
             </div>
           </div>
         </div>
