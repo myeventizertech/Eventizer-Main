@@ -64,7 +64,7 @@ const HeroBanner = () => {
          {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={
-            "https://res.cloudinary.com/eventizer-store/image/upload/v1657650088/Eventizer_New_Site/Only_png_njdl_ox9g58.png"
+            "img/banner.png"
           }
           alt="eventizer-brand"
           width={680}

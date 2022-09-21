@@ -17,7 +17,7 @@ const SectionBookNow = () => {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={
-                  "https://res.cloudinary.com/eventizer-store/image/upload/v1654711252/consultancy_image_wnzkms.png"
+                  "img/consultancy.png"
                 }
                
                 alt="Book now image"

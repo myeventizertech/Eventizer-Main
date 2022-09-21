@@ -28,7 +28,8 @@ const Main = () => {
           <SectionWhyEventizer />
         </section>
         <section>
-          <SectionBusiness />
+          {/* <SectionBusiness /> */}
+          <SectionBusiness/>
         </section>
         <section>
           <SectionHowItsWork />
