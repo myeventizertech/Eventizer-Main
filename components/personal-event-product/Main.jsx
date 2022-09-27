@@ -100,7 +100,7 @@ const Main = ({ service }) => {
 
   return (
     <>
-      <div className="container m-all product overflow-hidden-product  md:pb-0 pb-4">
+      <div className="container pt-24 product overflow-hidden-product  md:pb-0 pb-4">
         <h1 className="color4 font-18 sm:font-26">Personal event</h1>
         <p className="text-[#6F6F6F] font-14 ">
           Home {">"} Personal event {">"}{" "}
@@ -111,9 +111,8 @@ const Main = ({ service }) => {
 
         <div className="flex h-min-screen relative">
           <div
-            className={` w-[18%] min-w-[180px] absolute md:sticky left-0 md:left-[unset] bottom-0 md:bottom-[unset] top-0 md:bg-transparent  md:top-[12%] h-screen md:h-[30%] transition-transform duration-300 z-10 ${
-              toggle ? "translate-x-0" : "translate-x-[-110%] md:translate-x-0"
-            }`}
+            className={` w-[18%] min-w-[180px] absolute md:sticky left-0 md:left-[unset] bottom-0 md:bottom-[unset] top-0 md:bg-transparent  md:top-[12%] h-screen md:h-[30%] transition-transform duration-300 z-10 ${toggle ? "translate-x-0" : "translate-x-[-110%] md:translate-x-0"
+              }`}
           >
             <button
               onClick={handleClickNav}
@@ -128,15 +127,14 @@ const Main = ({ service }) => {
                     <Link href={item.path}>
                       <a
                         className={`text-[#434343] font-14 font-normal hover:opacity-75 flex items-center gap-2 px-2 py-1 
-                    ${
-                      router.pathname == item.path &&
-                      "bg-[#ef0d5e] bg-opacity-10 border-[#ef0d5e] border-b-2"
-                    }
+                    ${router.pathname == item.path &&
+                          "bg-[#ef0d5e] bg-opacity-10 border-[#ef0d5e] border-b-2"
+                          }
                     
                     `}
                       >
                         <span>
-                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={"/img/finger_icon.svg"}
                             alt="icon"
@@ -154,9 +152,8 @@ const Main = ({ service }) => {
           </div>
 
           <div
-            className={`w-full md:w-[80%] pl-0 md:pl-5 lg:pl-8  border-l-0 md:border-l border-slate-300 transition-transform duration-300 ${
-              toggle ? "translate-x-[14rem]" : "translate-x-0"
-            }`}
+            className={`w-full md:w-[80%] pl-0 md:pl-5 lg:pl-8  border-l-0 md:border-l border-slate-300 transition-transform duration-300 ${toggle ? "translate-x-[14rem]" : "translate-x-0"
+              }`}
           >
             <div className="flex justify-between flex-col gap-5 sm:gap-0 sm:flex-row items-center mb-5 sm:mb-0">
               <div>
@@ -185,7 +182,7 @@ const Main = ({ service }) => {
                         placeholder={"Category"}
                         classNamePrefix="react-select"
                         onChange={(value) => {
-                          
+
                           setCategory(value);
 
                           if (value.value === "") {
@@ -197,18 +194,18 @@ const Main = ({ service }) => {
                               (v) => JSON.parse(v).value === value.value
                             )
                           );
-                              if(city===""){
-                                setFilterData(filteredData);
-                              }
-                  
-                              if(city!==""){
-                                let filteredD = filteredData.filter((d) =>
-                            d?.serviceLocation.some(
-                              (v) => JSON.parse(v).value === city.value
-                            )
-                          );
-                                setFilterData(filteredD);
-                              }
+                          if (city === "") {
+                            setFilterData(filteredData);
+                          }
+
+                          if (city !== "") {
+                            let filteredD = filteredData.filter((d) =>
+                              d?.serviceLocation.some(
+                                (v) => JSON.parse(v).value === city.value
+                              )
+                            );
+                            setFilterData(filteredD);
+                          }
                         }}
                       />
                     </div>
@@ -240,18 +237,18 @@ const Main = ({ service }) => {
                           (v) => JSON.parse(v).value === value.value
                         )
                       );
-                      if(category===""){
-                                setFilterData(filteredData);
-                              }
-                  
-                              if(category!==""){
-                                let filteredD = filteredData.filter((d) =>
-                            d?.specializedIn.some(
-                              (v) => JSON.parse(v).value === category.value
-                            )
-                          );
-                                setFilterData(filteredD);
-                              }
+                      if (category === "") {
+                        setFilterData(filteredData);
+                      }
+
+                      if (category !== "") {
+                        let filteredD = filteredData.filter((d) =>
+                          d?.specializedIn.some(
+                            (v) => JSON.parse(v).value === category.value
+                          )
+                        );
+                        setFilterData(filteredD);
+                      }
                     }}
                   />
                 </div>
