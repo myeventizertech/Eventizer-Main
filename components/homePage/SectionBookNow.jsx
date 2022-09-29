@@ -13,7 +13,7 @@ const SectionBusiness = () => {
 
       <div className="hero container py-8 bg-FAFAFA">
         <div className="hero-content flex-col lg:flex-row">
-          <img src="/img/corporate.png" className=" rounded-lg " alt='img' />
+          <img src="/img/corporate.png" className="w-2/5 rounded-lg " alt='img' />
           <div>
             <h1 className="text-5xl font-bold">Book a free event consultant </h1>
             <p className="py-6">For your forthcoming events, it is better to talk with an event professional. Hire an event planner to help you arrange a successful event.</p>

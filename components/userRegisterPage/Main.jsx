@@ -20,7 +20,7 @@ const Main = () => {
   let { isShow, handleShowClick } = useShowPass();
 
   const router = useRouter();
-  let { setAuthLoader,dispatch } = useUserOrVendor();
+  let { setAuthLoader, dispatch } = useUserOrVendor();
   const [userData, setuserData] = useState({});
   const [uiLoading, setUiLoading] = useState(false);
   const [formState, setFormState] = useState({
@@ -55,13 +55,13 @@ const Main = () => {
             "custom:userOrvendor": "user",
           },
         }).then(
-					setuserData({
-						email: email,
-						status: "Confirmed",
-						firstName: values.firstName,
-						lastName:values.lastName
-					})
-				);
+          setuserData({
+            email: email,
+            status: "Confirmed",
+            firstName: values.firstName,
+            lastName: values.lastName
+          })
+        );
 
         setFormState((prev) => ({
           ...prev,
@@ -97,31 +97,31 @@ const Main = () => {
       await debounce(500);
 
       await Auth.confirmSignUp(formState.email, OTP);
-      const query =    await Auth.signIn(formState.email, formState.password).then(
-				() => Auth.currentUserInfo()
-			);
+      const query = await Auth.signIn(formState.email, formState.password).then(
+        () => Auth.currentUserInfo()
+      );
       toast.success("Account Create successful", {
         duration: 3000,
       });
       const user = await API.graphql({
-				query: mutations.createUser,
-				variables: {
-					input: {
+        query: mutations.createUser,
+        variables: {
+          input: {
             id: query.attributes.sub,
-						...userData
-					},
-				},
-			});
+            ...userData
+          },
+        },
+      });
       dispatch({
-				type: "UPDATE_SUCCESS",
-				payload: {
-						user:user?.data?.createUser,
-						data:"Found",
-						profilePicture: "ProfilePicture/User" + query.attributes.sub + ".png"
-					
-				},
-			});
-      
+        type: "UPDATE_SUCCESS",
+        payload: {
+          user: user?.data?.createUser,
+          data: "Found",
+          profilePicture: "ProfilePicture/User" + query.attributes.sub + ".png"
+
+        },
+      });
+
       router.push("/");
       setUiLoading(false);
     } catch (err) {
@@ -136,7 +136,7 @@ const Main = () => {
   }
 
   return (
-    <div className="container m-all">
+    <div className="container pt-24 md:pt-28">
       {formState.uistate === "signIn" && (
         <>
           <div className="sign-box">
@@ -235,9 +235,8 @@ const Main = () => {
 
               <ButtonClick
                 type={"submit"}
-                css={`bgcolor2 text-white sm:mt-3 rounded-[8px] ${
-                  uiLoading && "opacity-75"
-                }`}
+                css={`bgcolor2 text-white sm:mt-3 rounded-[8px] ${uiLoading && "opacity-75"
+                  }`}
                 text={
                   uiLoading ? (
                     <Loader loaderWidht="w-[27px] h-[27px]" center={true} />

@@ -30,7 +30,7 @@ const ButtonLinkOrClick = ({
         id={id}
         onClick={handleBtn}
         className={`${bgcolor} ${py} ${px} ${radius}  btn-hover text-white  ${font}
-         whitespace-nowrap ${otherCss}`}
+         whitespace-nowrap w-full ${otherCss}`}
       >
         {text}
       </button>

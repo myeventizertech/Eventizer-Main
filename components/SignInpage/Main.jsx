@@ -45,7 +45,7 @@ const Main = () => {
 			setAuthLoader(true);
 			try {
 				await debounce(500);
-		
+
 
 				await Auth.signIn({
 					username: values.email,
@@ -53,70 +53,70 @@ const Main = () => {
 				});
 				const user = await Auth.currentAuthenticatedUser();
 				let data = user.attributes["custom:userOrvendor"];
-        let id =user.attributes.sub
-        let service=user.attributes["custom:service"]
-     if(data==="vendor"){
-      let serviceAPI = null;
-      let vData =null
+				let id = user.attributes.sub
+				let service = user.attributes["custom:service"]
+				if (data === "vendor") {
+					let serviceAPI = null;
+					let vData = null
 
-      if ((service === "photography")) {
-        serviceAPI = queries.getPhotography;
-        vData="getPhotography"
-      }
-      if ((service === "cinematography")) {
-        serviceAPI = queries.getCinematography;
-        vData="getCinematography"
-      }
-      if ((service === "dj-musician")) {
-        serviceAPI = queries.getDJMusician;
-        vData="getDJMusician"
-      }
-      if ((service === "mehedi-artist")) {
-        serviceAPI = queries.getMehediArtist;
-        vData="getMehediArtist"
-      }
-      if ((service === "makeup-artist")) {
-        serviceAPI = queries.getMakeupArtist;
-        vData="getMakeupArtist"
-      }
-	  const vendor = await API.graphql({
-        query: queries.getVendor,
-        variables: { id: id }
-      });
-      const vendorDetails = await API.graphql({
-        query: serviceAPI,
-        variables: { id: id }
-      });
-      const balance = await API.graphql({
-        query: queries.getBalance,
-        variables: { id: id }
-      });
-				dispatch({
-				  type: "LOGIN_SUCCESS",
-				  payload:{
-						vendorDetails: vendor?.data?.getVendor,
-						vendor: vendorDetails?.data[vData],
-						balance: balance?.data?.getBalance,
-						data:"Found",
-						profilePicture:vendorDetails?.data[vData]?.uploadYourPhoto
-				},
-				})
-     }
-if(data==="user"){
-	const user = await API.graphql({
-        query: queries.getUser,
-        variables: { id: id }
-      });
-	  dispatch({
-		type: "UPDATE_SUCCESS",
-		payload: {
-				user:user?.data?.getUser,
-				data:"Found",
-				profilePicture: "ProfilePicture/User" + id + ".png"
-			
-		},
-	});
-}
+					if ((service === "photography")) {
+						serviceAPI = queries.getPhotography;
+						vData = "getPhotography"
+					}
+					if ((service === "cinematography")) {
+						serviceAPI = queries.getCinematography;
+						vData = "getCinematography"
+					}
+					if ((service === "dj-musician")) {
+						serviceAPI = queries.getDJMusician;
+						vData = "getDJMusician"
+					}
+					if ((service === "mehedi-artist")) {
+						serviceAPI = queries.getMehediArtist;
+						vData = "getMehediArtist"
+					}
+					if ((service === "makeup-artist")) {
+						serviceAPI = queries.getMakeupArtist;
+						vData = "getMakeupArtist"
+					}
+					const vendor = await API.graphql({
+						query: queries.getVendor,
+						variables: { id: id }
+					});
+					const vendorDetails = await API.graphql({
+						query: serviceAPI,
+						variables: { id: id }
+					});
+					const balance = await API.graphql({
+						query: queries.getBalance,
+						variables: { id: id }
+					});
+					dispatch({
+						type: "LOGIN_SUCCESS",
+						payload: {
+							vendorDetails: vendor?.data?.getVendor,
+							vendor: vendorDetails?.data[vData],
+							balance: balance?.data?.getBalance,
+							data: "Found",
+							profilePicture: vendorDetails?.data[vData]?.uploadYourPhoto
+						},
+					})
+				}
+				if (data === "user") {
+					const user = await API.graphql({
+						query: queries.getUser,
+						variables: { id: id }
+					});
+					dispatch({
+						type: "UPDATE_SUCCESS",
+						payload: {
+							user: user?.data?.getUser,
+							data: "Found",
+							profilePicture: "ProfilePicture/User" + id + ".png"
+
+						},
+					});
+				}
 
 				router.push("/");
 				setFormState((prev) => ({
@@ -227,7 +227,7 @@ if(data==="user"){
 	});
 
 	return (
-		<div className="container m-all ">
+		<div className="container pt-24 md:pt-28 ">
 			{formState.uistate === "signIn" && (
 				<>
 					<div className="sign-box">
@@ -291,9 +291,8 @@ if(data==="user"){
 
 							<ButtonClick
 								type={"submit"}
-								css={`bgcolor2 text-white sm:mt-3 rounded-[8px] ${
-									uiLoading && "opacity-75"
-								}`}
+								css={`bgcolor2 text-white sm:mt-3 rounded-[8px] ${uiLoading && "opacity-75"
+									}`}
 								text={
 									uiLoading ? (
 										<Loader loaderWidht="w-[27px] h-[27px]" center={true} />
@@ -345,7 +344,7 @@ if(data==="user"){
 								handleBlur={formikPassWordReset.handleBlur}
 								error={
 									formikPassWordReset.touched.otp &&
-									formikPassWordReset.errors.otp
+										formikPassWordReset.errors.otp
 										? formikPassWordReset.errors.otp
 										: ""
 								}
@@ -363,7 +362,7 @@ if(data==="user"){
 									handleBlur={formikPassWordReset.handleBlur}
 									error={
 										formikPassWordReset.touched.password &&
-										formikPassWordReset.errors.password
+											formikPassWordReset.errors.password
 											? formikPassWordReset.errors.password
 											: ""
 									}
@@ -373,9 +372,8 @@ if(data==="user"){
 
 						<ButtonClick
 							type={"submit"}
-							css={`bgcolor2 text-white sm:mt-3 rounded-[8px] ${
-								uiLoading && "opacity-75"
-							}`}
+							css={`bgcolor2 text-white sm:mt-3 rounded-[8px] ${uiLoading && "opacity-75"
+								}`}
 							text={
 								uiLoading ? (
 									<Loader loaderWidht="w-[27px] h-[27px]" center={true} />
