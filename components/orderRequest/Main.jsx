@@ -57,7 +57,7 @@ checkData()
   };
   return (
     <>
-      <div className="container m-all">
+      <div className="container pt-24">
         {!showForm && (
           <>
             <button onClick={() => bool(false)} className="py-5">

@@ -15,7 +15,6 @@
     "aws-sdk": "^2.1209.0",
     "axios": "^0.27.2",
     "browser-image-compression": "^2.0.0",
-    "daisyui": "^2.31.0",
     "file-saver": "^2.0.5",
     "formik": "^2.2.9",
     "keen-slider": "^6.7.0",
