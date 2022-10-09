@@ -38,7 +38,7 @@ const SectionBusiness = () => {
       >
         <div className="md:max-w-[600px] lg:max-w-[545px] md:ml-auto md:pr-[30px] md:pl-[7rem] lg:pl-0">
           <h1 className="color4 font-18 sm:font-20 md:font-26 lg:font-40 mb-2 leading-none">
-            Eventizer for business
+            Eventizer for Corporates
           </h1>
           <p className="font-12 sm:font-16 lg:font-18 color1 md:mb-4 font-light">
             Book your personal virtual event planner for your business events.
