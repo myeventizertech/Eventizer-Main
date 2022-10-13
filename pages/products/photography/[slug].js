@@ -1,4 +1,4 @@
-import Main from "../../../components/each-profile/Main";
+import Main from "../../../components/each-profile/photography/Main";
 import * as queries from "../../../src/graphql/queries";
 import { API, withSSRContext,Storage } from "aws-amplify";
 import { useRouter } from "next/router";

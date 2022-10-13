@@ -1,6 +1,6 @@
-import Main from "../../../components/each-profile/Main";
+import Main from "../../../components/each-profile/cinematography/Main";
 import * as queries from "../../../src/graphql/queries";
-import { API, withSSRContext,Storage } from "aws-amplify";
+import { API, withSSRContext, Storage } from "aws-amplify";
 import { useRouter } from "next/router";
 import services from "../../../utils/services";
 import Head from "next/head";
