@@ -7,7 +7,7 @@ import Packages from "./Packages";
 import Overview from "./Overview";
 import ScrollSpyNav from "./ScrollSpyNav";
 import ProfileInfo from "./ProfileInfo";
-import MainOrder from "../../components/orderRequest/Main";
+import MainOrder from "./orderRequest/Main";
 
 const Main = ({ data, service, rating, sLocation, specializedIn }) => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -64,13 +64,13 @@ const Main = ({ data, service, rating, sLocation, specializedIn }) => {
             {isMobile && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-              src={
-                slideImg?.[0] ||
-                "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
-              }
-              className="absolute object-cover w-full"
-              alt={"cover image"}
-            />
+                src={
+                  slideImg?.[0] ||
+                  "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
+                }
+                className="absolute object-cover w-full"
+                alt={"cover image"}
+              />
             )}
 
             <div className="container  profile-vendor z-[1] ">

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
-import ButtonClick from "../reUseComponents/ButtonClick";
-import Input from "../reUseComponents/Input";
-import SelectInput from "../reUseComponents/SelectInput";
-import { optionsServiceLoction } from "../../utils/options";
-import Loader from "../reUseComponents/Loader";
+import ButtonClick from "../../../reUseComponents/ButtonLinkOrClick";
+import Input from "../../../reUseComponents/Input";
+import SelectInput from "../../../reUseComponents/SelectInput";
+import { optionsServiceLoction } from "../../../../utils/options";
+import Loader from "../../../reUseComponents/Loader";
 import moment from "moment";
 import toast from "react-hot-toast";
-import debounce from "../../utils/debounceSubmitHandler";
+import debounce from "../../../../utils/debounceSubmitHandler";
 import { Formik, Form } from "formik";
-import * as mutations from "../../src/graphql/mutations";
+import * as mutations from "../../../../src/graphql/mutations";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
-import conditionalRendar from "../../utils/conditionalRendar";
+import conditionalRendar from "../../../../utils/conditionalRendar";
 import {
   DatePickersStart,
   DatePickersEnd,
@@ -179,8 +179,8 @@ const OrderForm = ({ passData, vendor }) => {
       totalmoney:
         parseInt(dur.asHours()) > 0
           ? (parseInt(dur.asHours()) +
-              (parseInt(dur.asMinutes()) % 60 > 0 ? 0.5 : 0)) *
-            amount
+            (parseInt(dur.asMinutes()) % 60 > 0 ? 0.5 : 0)) *
+          amount
           : amount,
     });
   }, [amount, endTime, startTime]);
@@ -248,8 +248,8 @@ const OrderForm = ({ passData, vendor }) => {
                   handleBlur={props.setFieldTouched}
                   error={
                     props.touched.city &&
-                    props.errors.city &&
-                    !props.values.city
+                      props.errors.city &&
+                      !props.values.city
                       ? props.errors.city
                       : ""
                   }
@@ -278,10 +278,9 @@ const OrderForm = ({ passData, vendor }) => {
                     <button
                       type="button"
                       onClick={() => handleOrderTime(item.id)}
-                      className={`font-14 color4  px-2 py-3 w-full border-[1.5px]  rounded-[8px] mb-6 ${
-                        item.id !== currOrder ? "border-[#787878]"
+                      className={`font-14 color4  px-2 py-3 w-full border-[1.5px]  rounded-[8px] mb-6 ${item.id !== currOrder ? "border-[#787878]"
                         : "border-[#ef0d5e] "
-                      }`}
+                        }`}
                     >
                       {item.value}
                     </button>
@@ -394,7 +393,7 @@ const OrderForm = ({ passData, vendor }) => {
                 handleBlur={props.handleBlur}
                 error={
                   props.touched.detailsAboutBooking &&
-                  props.errors.detailsAboutBooking
+                    props.errors.detailsAboutBooking
                     ? props.errors.detailsAboutBooking
                     : ""
                 }
@@ -403,25 +402,25 @@ const OrderForm = ({ passData, vendor }) => {
           </div>
           {conditionalRendar(
             (currOrder === 0 && durationTime.totalmoney > 0) ||
-              (currOrder === 1 && durationDates.totalmoney > 0)
+            (currOrder === 1 && durationDates.totalmoney > 0)
           ) && (
-            <>
-              <ButtonClick
-                type="submit"
-                css={"bgcolor2 text-white rounded-full ml-auto block"}
-                width="null"
-                text={
-                  props.isSubmitting ? (
-                    <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
-                  ) : (
-                    "Request for booking"
-                  )
-                }
-                padding="px-6 sm:px-10"
-                disable={props.isSubmitting || !props.dirty}
-              />
-            </>
-          )}
+              <>
+                <ButtonClick
+                  type="submit"
+                  css={"bgcolor2 text-white rounded-full ml-auto block"}
+                  width="null"
+                  text={
+                    props.isSubmitting ? (
+                      <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
+                    ) : (
+                      "Request for booking"
+                    )
+                  }
+                  padding="px-6 sm:px-10"
+                  disable={props.isSubmitting || !props.dirty}
+                />
+              </>
+            )}
         </Form>
       )}
     </Formik>

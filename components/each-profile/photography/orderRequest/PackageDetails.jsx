@@ -1,5 +1,5 @@
 import React from "react";
-import { useUserOrVendor } from "../../authContext/AuthContext";
+import { useUserOrVendor } from "../../../../authContext/AuthContext";
 import { useRouter } from "next/router";
 const PackageDetails = ({ quality, packageValue, handleClick }) => {
   let router = useRouter();
