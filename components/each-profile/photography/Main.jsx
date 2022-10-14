@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import placeholder from '../../../utils/imageBlurLoader'
+import placeholder from "../../../utils/imageBlurLoader";
 import ImageViewer from "react-simple-image-viewer";
 import { Storage } from "aws-amplify";
 import useMediaQuery from "../../../utils/useMediaQuery";

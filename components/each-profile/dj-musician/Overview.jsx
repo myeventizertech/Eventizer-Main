@@ -2,46 +2,46 @@ import React from "react";
 import FAQ from "./FAQ";
 import Reviews from "./Reviews";
 let facility = [
-    { value: "Free product delivery" },
-    { value: "Design without cost" },
-    { value: "No hidden charge" },
-    { value: "Design" },
-    { value: "Design" },
-  ];
-  let faq = [
-    {
-      title: "Free product",
-      desc: "Fast Refresh will perform ",
-    },
-    {
-      title: "Free  delivery",
-      desc: "Fast Refresh will perform a full reload when you edit a file that is imported by modules outside of the React rendering tree. It is also possible the parent component of the Fast Refresh will perform a full reload when you edit a file that is imported by modules outside of the React rendering tree. It is also possible the parent component of the Fast Refresh will perform a full reload when you edit a file that is imported by modules outside of the React rendering tree. It is also possible the parent component of the ",
-    },
-  ];
-  
+  { value: "Free product delivery" },
+  { value: "Design without cost" },
+  { value: "No hidden charge" },
+  { value: "Design" },
+  { value: "Design" },
+];
+let faq = [
+  {
+    title: "Free product",
+    desc: "Fast Refresh will perform ",
+  },
+  {
+    title: "Free  delivery",
+    desc: "Fast Refresh will perform a full reload when you edit a file that is imported by modules outside of the React rendering tree. It is also possible the parent component of the Fast Refresh will perform a full reload when you edit a file that is imported by modules outside of the React rendering tree. It is also possible the parent component of the Fast Refresh will perform a full reload when you edit a file that is imported by modules outside of the React rendering tree. It is also possible the parent component of the ",
+  },
+];
 
-const Overview = ({data,service}) => {
-  let info =data
- let review = info?.Reviews?.items
- let serve =""
-async function check(){
-  if (service === "photography") {
-   serve ="Photographer Overview"
+
+const Overview = ({ data, service }) => {
+  let info = data
+  let review = info?.Reviews?.items
+  let serve = ""
+  async function check() {
+    if (service === "photography") {
+      serve = "Photographer Overview"
+    }
+    if (service === "cinematography") {
+      serve = "Cinematographer Overview"
+    }
+    if (service === "dj-musician") {
+      serve = "Dj-Musician Overview"
+    }
+    if (service === "mehedi-artist") {
+      serve = "Mehedi Artist Overview"
+    }
+    if (service === "makeup-artist") {
+      serve = "Makeup Artist Overview"
+    }
   }
-  if (service === "cinematography") {
-    serve ="Cinematographer Overview"
-  }
-  if (service === "dj-musician") {
-    serve ="Dj-Musician Overview"
-  }
-  if (service === "mehedi-artist") {
-    serve ="Mehedi Artist Overview"
-  }
-  if (service === "makeup-artist") {
-    serve ="Makeup Artist Overview"
-  }
-}
-check()
+  check()
   return (
     <div className="container">
       <div className="max-w-[700px] px-2 sm:px-5">
@@ -51,7 +51,7 @@ check()
             {serve}
           </h1>
           <p className="text-[#595959] font-normal font-18 ">
-{info?.detailsAboutYou}
+            {info?.detailsAboutYou}
           </p>
         </section>
         {/* ==================================== */}
@@ -86,7 +86,7 @@ check()
           </div>
         </section> */}
         {/* ================================ */}
-{review?.length !==0  ?         <section className="mt-10 scroll-mt-20 sm:scroll-mt-28" id="reviews">
+        {review?.length !== 0 ? <section className="mt-10 scroll-mt-20 sm:scroll-mt-28" id="reviews">
           <h1 className="font-22 text-[#202020] font-semibold mb-2">
             Review of {info?.title}
           </h1>
@@ -104,8 +104,8 @@ check()
               );
             })}
           </div>
-        </section>: <div></div>
-        
+        </section> : <div></div>
+
         }
       </div>
     </div>

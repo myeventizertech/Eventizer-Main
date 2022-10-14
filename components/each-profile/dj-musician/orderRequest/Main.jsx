@@ -1,50 +1,51 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import OrderForm from "./OrderForm";
 import PackageDetails from "./PackageDetails";
-import Close from "../reUseComponents/icons/Close";
-import GoBack from "../reUseComponents/icons/GoBack";
+import Close from "../../../reUseComponents/icons/Close";
+import GoBack from "../../../reUseComponents/icons/GoBack";
 import { useRouter } from "next/router";
-import {Storage} from "aws-amplify"
-const Main = ({vendor,bool,boolval,setorder,orderData,service}) => {
+import { Storage } from "aws-amplify"
+const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   const [passData, setPassData] = useState({});
   const [Files, setFiles] = useState([])
   let handleSHowOrderFrom = (quality) => {
-    
-    let obj ={...orderData[quality],
-    packageStandard:quality,
-    vendorID : vendor?.id,
-    vendorNumber: vendor?.phoneNumber,
-    title: vendor?.title,
-    vendorEmail:vendor?.email,
-    packName:orderData?.packageName,
-    service:service
+
+    let obj = {
+      ...orderData[quality],
+      packageStandard: quality,
+      vendorID: vendor?.id,
+      vendorNumber: vendor?.phoneNumber,
+      title: vendor?.title,
+      vendorEmail: vendor?.email,
+      packName: orderData?.packageName,
+      service: service
     }
     setPassData(obj);
     setShowForm(true);
   };
-function checkData(){
-  if(orderData?.packageImage?.length!==0){
-    orderData?.packageImage?.map(async (e) => {
-          let signedURL = await Storage.get(e);
-          let url = signedURL;
-          const data = await fetch(url);
-          if (data.ok) {
+  function checkData() {
+    if (orderData?.packageImage?.length !== 0) {
+      orderData?.packageImage?.map(async (e) => {
+        let signedURL = await Storage.get(e);
+        let url = signedURL;
+        const data = await fetch(url);
+        if (data.ok) {
 
-        setFiles(prev => {
-      return	[...prev, url] 
+          setFiles(prev => {
+            return [...prev, url]
+          });
+
+        } else {
+          return
+        }
       });
-  
-          } else {
-            return
-          }
-        });    
+    }
   }
-}
   useEffect(() => {
-checkData()
+    checkData()
   }, [])
   let checkIsHave = (quality) => {
     if (
@@ -66,7 +67,7 @@ checkData()
             <div>
               <h3 className="font-22 font-normal color3">{orderData?.packageName}</h3>
               <p className="color1 font-14">
-              {orderData?.packageDetails}
+                {orderData?.packageDetails}
               </p>
             </div>
 
@@ -98,14 +99,14 @@ checkData()
             </>
 
 
-           {orderData?.packageDemoLink && <div className="mt-8">
+            {orderData?.packageDemoLink && <div className="mt-8">
               <Link href={orderData?.packageDemoLink}>
-              <a className=" font-16 btn-hover bgcolor1 text-white rounded-md py-1 px-2 font-normal">
-              See package demo Link
-              </a>
+                <a className=" font-16 btn-hover bgcolor1 text-white rounded-md py-1 px-2 font-normal">
+                  See package demo Link
+                </a>
               </Link>
             </div>
-}
+            }
 
 
 
@@ -115,35 +116,35 @@ checkData()
               {/* ====================== */}
               {checkIsHave("basic") && (
 
-              <div>
-                <PackageDetails
-                  quality="basic"
-                  packageValue={orderData}
-                  handleClick={handleSHowOrderFrom}
-                />
-              </div>
+                <div>
+                  <PackageDetails
+                    quality="basic"
+                    packageValue={orderData}
+                    handleClick={handleSHowOrderFrom}
+                  />
+                </div>
               )}
               {/* ====================== */}
               {checkIsHave("standard") && (
 
-              <div>
-                <PackageDetails
-                  quality="standard"
-                  packageValue={orderData}
-                  handleClick={handleSHowOrderFrom}
-                />
-              </div>
+                <div>
+                  <PackageDetails
+                    quality="standard"
+                    packageValue={orderData}
+                    handleClick={handleSHowOrderFrom}
+                  />
+                </div>
               )}
               {/* ========================= */}
               {checkIsHave("premium") && (
 
-              <div>
-                <PackageDetails
-                  quality="premium"
-                  packageValue={orderData}
-                  handleClick={handleSHowOrderFrom}
-                />
-              </div>
+                <div>
+                  <PackageDetails
+                    quality="premium"
+                    packageValue={orderData}
+                    handleClick={handleSHowOrderFrom}
+                  />
+                </div>
               )}
             </div>
           </>

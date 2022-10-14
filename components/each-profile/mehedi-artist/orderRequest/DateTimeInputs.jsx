@@ -1,5 +1,5 @@
 import React from "react";
-import InputError from "../../../reUseComponents/Input";
+import InputError from "../../../reUseComponents/InputError";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-awesome-time-picker";
 import moment from "moment";

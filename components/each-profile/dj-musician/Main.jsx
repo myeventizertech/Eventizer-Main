@@ -7,7 +7,7 @@ import Packages from "./Packages";
 import Overview from "./Overview";
 import ScrollSpyNav from "./ScrollSpyNav";
 import ProfileInfo from "./ProfileInfo";
-import MainOrder from "../../../components/orderRequest/Main";
+import MainOrder from "./orderRequest/Main";
 
 const Main = ({ data, service, rating, sLocation, specializedIn }) => {
   const [currentImage, setCurrentImage] = useState(0);
