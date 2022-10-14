@@ -2,7 +2,7 @@ import React from "react";
 import ReactStars from "react-rating-stars-component";
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
-import Loader from "../reUseComponents/Loader";
+import Loader from "../../reUseComponents/Loader";
 function SampleNextArrow(props) {
   const { className, onClick } = props;
   return (
@@ -99,7 +99,7 @@ const ProfileInfo = ({
       ) : (
         <p></p>
       )}
-      {slideImg.length !==  0 ? (
+      {slideImg.length !== 0 ? (
         <div className="mdx:max-w-[35rem] flex-1 mt-5">
           <Slider {...settings}>
             {slideImg.map((item, i) => {
@@ -125,14 +125,14 @@ const ProfileInfo = ({
             Show All
           </button>
         </div>
-      ):
-      (
+      ) :
+        (
 
-        <Loader center={true} colorDefault={false}/>
-      )
-    
-    
-    }
+          <Loader center={true} colorDefault={false} />
+        )
+
+
+      }
     </>
   );
 };

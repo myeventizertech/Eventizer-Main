@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import placeholder from "../../utils/imageBlurLoader";
+import placeholder from "../../../utils/imageBlurLoader";
 import { Storage } from "aws-amplify";
 import { useRouter } from "next/router";
 let PackageItem = ({ data, vendorData, bool, boolval, setorder }) => {
