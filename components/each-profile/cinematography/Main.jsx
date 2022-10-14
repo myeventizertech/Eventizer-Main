@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import placeholder from "../../utils/imageBlurLoader";
+import placeholder from "../../../utils/imageBlurLoader";
 import ImageViewer from "react-simple-image-viewer";
 import { Storage } from "aws-amplify";
 import useMediaQuery from "../../../utils/useMediaQuery";
@@ -7,7 +7,7 @@ import Packages from "./Packages";
 import Overview from "./Overview";
 import ScrollSpyNav from "./ScrollSpyNav";
 import ProfileInfo from "./ProfileInfo";
-import MainOrder from "../../components/orderRequest/Main";
+import MainOrder from "./orderRequest/Main";
 
 const Main = ({ data, service, rating, sLocation, specializedIn }) => {
   const [currentImage, setCurrentImage] = useState(0);

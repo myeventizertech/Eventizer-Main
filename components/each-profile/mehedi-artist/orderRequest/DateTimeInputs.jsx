@@ -1,5 +1,5 @@
 import React from "react";
-import InputError from "../reUseComponents/InputError";
+import InputError from "../../../reUseComponents/Input";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-awesome-time-picker";
 import moment from "moment";
@@ -72,7 +72,7 @@ const DatePickersEnd = ({
         placeholderText="End date"
         minDate={startDate}
         onFocus={(e) => e.target.readOnly = true}
-        
+
         dateFormat="dd/MM/yyyy"
       />
       {error && <InputError text={error} />}
@@ -108,13 +108,12 @@ const TimePickers = ({
               : moment(value).format("hh:mm a")
           );
         }}
-        className={`inputdesign rounded-[8px] ${
-          error ? " border-[#f30303]" : "inpBorderColor"
-        }`}
+        className={`inputdesign rounded-[8px] ${error ? " border-[#f30303]" : "inpBorderColor"
+          }`}
         format={"h:mm a"}
         use12Hours
         inputReadOnly
-        inputClassName={` w-full font-14 sm:font-16 md:font-18  px-2 sm:px-[20px] h-[38px] sm:h-[45px] `}  
+        inputClassName={` w-full font-14 sm:font-16 md:font-18  px-2 sm:px-[20px] h-[38px] sm:h-[45px] `}
       />
       {error && <InputError text={error} />}
     </>
