@@ -6,6 +6,7 @@ import Close from "../../../reUseComponents/icons/Close";
 import GoBack from "../../../reUseComponents/icons/GoBack";
 import { useRouter } from "next/router";
 import { Storage } from "aws-amplify"
+import InformationModal from "../../../reUseComponents/InformationModal";
 const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);
@@ -164,6 +165,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
           </>
         )}
       </div>
+      <InformationModal />
     </>
   );
 };

@@ -60,7 +60,7 @@ let validationSchema = yup.object().shape({
         .typeError("Must be a number")
         .positive("Must be greater than zero")
         .notRequired("Not required"),
-        qdhValue: yup
+      qdhValue: yup
         .number()
         .typeError("Must be a number")
         .positive("Must be greater than zero")
@@ -182,12 +182,12 @@ const CorporateForm = () => {
                                 handleBlur={fieldProps.handleBlur}
                                 error={
                                   fieldProps.errors.corporateService &&
-                                  fieldProps.errors.corporateService[index] &&
-                                  fieldProps.touched.corporateService &&
-                                  fieldProps.errors.corporateService[index]
-                                    .requiredService
+                                    fieldProps.errors.corporateService[index] &&
+                                    fieldProps.touched.corporateService &&
+                                    fieldProps.errors.corporateService[index]
+                                      .requiredService
                                     ? fieldProps.errors.corporateService[index]
-                                        .requiredService
+                                      .requiredService
                                     : ""
                                 }
                               />
@@ -206,12 +206,12 @@ const CorporateForm = () => {
                                 handleBlur={fieldProps.handleBlur}
                                 error={
                                   fieldProps.errors.corporateService &&
-                                  fieldProps.errors.corporateService[index] &&
-                                  fieldProps.touched.corporateService &&
-                                  fieldProps.errors.corporateService[index]
-                                    .targetBudget
+                                    fieldProps.errors.corporateService[index] &&
+                                    fieldProps.touched.corporateService &&
+                                    fieldProps.errors.corporateService[index]
+                                      .targetBudget
                                     ? fieldProps.errors.corporateService[index]
-                                        .targetBudget
+                                      .targetBudget
                                     : ""
                                 }
                               />
@@ -231,12 +231,12 @@ const CorporateForm = () => {
                                 handleBlur={fieldProps.handleBlur}
                                 error={
                                   fieldProps.errors.corporateService &&
-                                  fieldProps.errors.corporateService[index] &&
-                                  fieldProps.touched.corporateService &&
-                                  fieldProps.errors.corporateService[index]
-                                    .qdhValue
+                                    fieldProps.errors.corporateService[index] &&
+                                    fieldProps.touched.corporateService &&
+                                    fieldProps.errors.corporateService[index]
+                                      .qdhValue
                                     ? fieldProps.errors.corporateService[index]
-                                        .qdhValue
+                                      .qdhValue
                                     : ""
                                 }
                               />
@@ -278,7 +278,7 @@ const CorporateForm = () => {
                           type="button"
                           className="font-14 font-normal text-white bgcolor2 rounded-[4px] flex justify-center items-center hover:opacity-75 px-2 py-1 ml-auto mt-5"
                           onClick={() =>
-                            push( { requiredService: "", targetBudget: "", qdh: "days", qdhValue: "" })
+                            push({ requiredService: "", targetBudget: "", qdh: "days", qdhValue: "" })
                           }
                         >
                           Add More +
@@ -321,7 +321,7 @@ const CorporateForm = () => {
                       handleBlur={fieldProps.handleBlur}
                       error={
                         fieldProps.touched.companyName &&
-                        fieldProps.errors.companyName
+                          fieldProps.errors.companyName
                           ? fieldProps.errors.companyName
                           : ""
                       }
@@ -341,7 +341,7 @@ const CorporateForm = () => {
                       handleBlur={fieldProps.handleBlur}
                       error={
                         fieldProps.touched.phoneNumber &&
-                        fieldProps.errors.phoneNumber
+                          fieldProps.errors.phoneNumber
                           ? fieldProps.errors.phoneNumber
                           : ""
                       }
@@ -380,7 +380,7 @@ const CorporateForm = () => {
                       handleBlur={fieldProps.handleBlur}
                       error={
                         fieldProps.touched.eventTitle &&
-                        fieldProps.errors.eventTitle
+                          fieldProps.errors.eventTitle
                           ? fieldProps.errors.eventTitle
                           : ""
                       }
@@ -398,7 +398,7 @@ const CorporateForm = () => {
                       handleBlur={fieldProps.handleBlur}
                       error={
                         fieldProps.touched.eventLocation &&
-                        fieldProps.errors.eventLocation
+                          fieldProps.errors.eventLocation
                           ? fieldProps.errors.eventLocation
                           : ""
                       }
@@ -415,7 +415,7 @@ const CorporateForm = () => {
                     fieldProps={fieldProps}
                     error={
                       fieldProps.touched.eventDate &&
-                      fieldProps.errors.eventDate
+                        fieldProps.errors.eventDate
                         ? fieldProps.errors.eventDate
                         : ""
                     }
@@ -432,7 +432,7 @@ const CorporateForm = () => {
                     handleBlur={fieldProps.handleBlur}
                     error={
                       fieldProps.touched.description &&
-                      fieldProps.errors.description
+                        fieldProps.errors.description
                         ? fieldProps.errors.description
                         : ""
                     }
