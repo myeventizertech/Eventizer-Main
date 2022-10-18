@@ -85,26 +85,40 @@ const InformationModal = () => {
                 </>}
                 {
                     secondPage && <>
-                        <div>
+                        <div className='mb-6'>
                             <h2 className='text-xl font-medium text-center mt-12 mb-11'>What type of event?</h2>
-                            <form className='flex justify-center flex-col items-center'>
-                                <div>
-                                    <input className='w-9 border-gray-800' type="radio" id="ex1" name="radio-option" value="ex1" />
-                                    <label className='ml-4 text-xl font-normal' htmlFor="ex1">Ex1</label>
+                            <form className='flex flex-col items-center '>
+                                <div className='flex flex-col'>
+                                    <div role={'button'} className='my-2'>
+                                        <input role={'button'} className=' border-gray-800' type="radio" id="ex1" name="radio-option" value="Wedding" />
+                                        <label role={'button'} className='ml-4  text-xl font-normal' htmlFor="ex1">Wedding</label>
+                                    </div>
+                                    <div role={'button'} className='my-2'>
+                                        <input role={'button'} className='' type="radio" id="ex2" name="radio-option" value="Formal" />
+                                        <label role={'button'} className='ml-4 text-xl font-normal' htmlFor="ex2">Formal</label>
+                                    </div>
+                                    <div role={'button'} className='my-2'>
+                                        <input role={'button'} className='' type="radio" id="ex3" name="radio-option" value="Birthday Party" />
+                                        <label role={'button'} className='ml-4 text-xl font-normal' htmlFor="ex3">Birthday Party</label>
+                                    </div>
+                                    <div role={'button'} className='my-2'>
+                                        <input className='' role={'button'} type="radio" id="ex4" name="radio-option" value="Photo Shoot" />
+                                        <label role={'button'} className='ml-4 text-xl font-normal' htmlFor="ex4">Photo Shoot</label>
+                                    </div>
+                                    <div role={'button'} className='my-2'>
+                                        <input role={'button'} className='' type="radio" id="ex5" name="radio-option" value="Fashion Show" />
+                                        <label role={'button'} className='ml-4 text-xl font-normal' htmlFor="ex5">Fashion Show</label>
+                                    </div>
                                 </div>
-                                <div className='test'>
-                                    <input className='' type="radio" id="ex2" name="radio-option" value="ex2" />
-                                    <label className='ml-4 text-xl font-normal' htmlFor="ex2">Ex2</label>
-                                </div>
-                                <div>
-                                    <input className='' type="radio" id="ex3" name="radio-option" value="ex3" />
-                                    <label className='ml-4 text-xl font-normal' htmlFor="ex3">Ex3</label>
-                                </div>
-
+                                <button className='bgcolor2 w-1/2 text-white rounded-xl  text-xl font-medium mb-5 my-8 py-2'>Next
+                                </button>
                             </form>
                         </div>
                     </>
                 }
+
+
+
             </div>
         </div>
     );
