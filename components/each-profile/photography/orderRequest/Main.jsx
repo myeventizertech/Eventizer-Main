@@ -62,8 +62,9 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   };
   return (
     <>
-      <div className={`${modal && 'bg-[#E5E5E5]'} container pt-24`}>
-     {modal&&   <InformationModal setModal={setModal} setShowForm={setShowForm} firstPage={firstPage} setFirstPage={setFirstPage}/>}
+      <div className={` container pt-24`}>
+     {modal&&   <InformationModal setModal={setModal} setShowForm={setShowForm} firstPage={firstPage} setFirstPage={setFirstPage} modal={modal} />}
+
      {!modal&& <div>
       
      {!showForm && (

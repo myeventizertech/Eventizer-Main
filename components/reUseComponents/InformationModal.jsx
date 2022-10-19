@@ -9,7 +9,7 @@ import GoBack from './icons/GoBack';
 import Input from './Input';
 import SelectInput from './SelectInput';
 
-const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage}) => {
+const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal}) => {
     const [secondPage, setSecondPage] = useState(false)
     const [thirdPage, setThirdPage] = useState(false)
     const [fourthPage, setFourthPage] = useState(false)
@@ -20,12 +20,29 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage}) => {
         console.log(city)
     }
 
+    const handleBackButton =()=>{
+        firstPage && setModal(false);
+        if(secondPage){
+            setFirstPage(true)
+            setSecondPage(false)
+        }
+         else if(thirdPage){
+            setSecondPage(true)
+            setThirdPage(false)
+         }
+         else if(fourthPage){
+            setThirdPage(true)
+            setFourthPage(false)
+         }
+        
+    }
+
     return (
-        <div className='my-24 container  md:w-[900px] w-[100%] bg-white rounded-md'>
+        <div className={`${modal && 'shadow-lg'} my-24 container  md:w-[900px] w-[100%] bg-white rounded-md`}>
             <header className='h-[73px] w-[100%] shadow-sm'>
                 <div className='flex justify-between '>
                     <div className='flex items-center pt-5'>
-                      <button onClick={handleBack}>
+                      <button onClick={handleBackButton}>
                       <GoBack></GoBack>
                       </button>
                         <h1 className='text-2xl font-normal ml-5'>Makeup Artist</h1>
