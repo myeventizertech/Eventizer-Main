@@ -10,6 +10,8 @@ import Slider from "react-slick";
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
+  
+
   return (
     <div className={className} onClick={onClick}>
       <svg
@@ -27,20 +29,22 @@ function SampleNextArrow(props) {
 function SamplePrevArrow(props) {
   const { className, onClick } = props;
   return (
-    <div className='flex' onClick={onClick}>
-      <svg
-        className="w-4 mr-[-200px] justify-end"
+    <div className={`${className} `} onClick={onClick}>
+     <div className="">
+     <svg
+        className="w-4 left-arrow "
         viewBox="0 0 8 12"
         fill="#787878"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M7.41003 1.41L2.83003 6L7.41003 10.59L6.00003 12L3.38077e-05 6L6.00003 1.23266e-07L7.41003 1.41Z" />
       </svg>
+     </div>
     </div>
   );
 }
 
-const PackageDetails = ({ quality, packageValue, handleClick }) => {
+const PackageDetails = ({ quality,setFirstPage, packageValue, handleClick ,setModal}) => {
   let router = useRouter();
   let { verifyUser } = useUserOrVendor();
   let state = verifyUser?.isUser_vendor;
@@ -48,6 +52,11 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
   const user = storage?.user;
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
+
+    const hanldleModal = ()=>{
+      setModal(true)
+      setFirstPage(true)
+    }
 
   const images = [
     'https://images.unsplash.com/photo-1604357209793-fca5dca89f97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Z3BzJTIwbWFwfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
@@ -95,8 +104,8 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
 
 
   return (
-    <div className="border-2 rounded-md">
-      <div>
+    <div className="border-2 mx-auto rounded-md">
+      <div className="m-0 p-0 w-full">
         {/* {images.map((src, index) => (
           <img
             src={src}
@@ -176,27 +185,29 @@ const PackageDetails = ({ quality, packageValue, handleClick }) => {
           <div></div>
         ) : (
           <button
-            onClick={() => {
-              if (!verifyUser.isverified) {
-                router.push("/sign-in");
-                return;
-              }
+            // onClick={() => {
+            //   if (!verifyUser.isverified) {
+            //     router.push("/sign-in");
+            //     return;
+            //   }
 
-              if (!user?.phoneNumber) {
-                router.push({
-                  pathname: "/dashboard/profile",
-                  query: {
-                    redirect: "true",
-                    path: router.asPath,
-                  },
-                });
-                return;
-              }
+            //   if (!user?.phoneNumber) {
+            //     router.push({
+            //       pathname: "/dashboard/profile",
+            //       query: {
+            //         redirect: "true",
+            //         path: router.asPath,
+            //       },
+            //     });
+            //     return;
+            //   }
 
-              if (user?.phoneNumber) {
-                handleClick(quality);
-              }
-            }}
+            //   if (user?.phoneNumber) {
+            //     handleClick(quality);
+            //   }
+            //   ()=>setModal(true)
+            // }}
+            onClick={hanldleModal}
             className="text-white bgcolor2 font-18 mt-3 rounded w-full px-2 py-1 font-normal btn-hover"
           >
             Book Now

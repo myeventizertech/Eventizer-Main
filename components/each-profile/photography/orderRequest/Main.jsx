@@ -9,9 +9,12 @@ import { Storage } from "aws-amplify"
 import InformationModal from "../../../reUseComponents/InformationModal";
 const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   const router = useRouter();
+  const [modal,setModal]= useState(false)
   const [showForm, setShowForm] = useState(false);
   const [passData, setPassData] = useState({});
   const [Files, setFiles] = useState([])
+  const [firstPage, setFirstPage] = useState(false)
+
   let handleSHowOrderFrom = (quality) => {
 
     let obj = {
@@ -59,8 +62,11 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   };
   return (
     <>
-      <div className="container pt-24">
-        {!showForm && (
+      <div className={`${modal && 'bg-[#E5E5E5]'} container pt-24`}>
+     {modal&&   <InformationModal setModal={setModal} setShowForm={setShowForm} firstPage={firstPage} setFirstPage={setFirstPage}/>}
+     {!modal&& <div>
+      
+     {!showForm && (
           <>
             <button onClick={() => bool(false)} className="py-5">
               <GoBack />
@@ -122,6 +128,9 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                     quality="basic"
                     packageValue={orderData}
                     handleClick={handleSHowOrderFrom}
+                    setModal={setModal}
+                    setFirstPage={setFirstPage}
+                    firstPage={firstPage}
                   />
                 </div>
               )}
@@ -164,8 +173,10 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
             </div>
           </>
         )}
+        
+     </div>}
       </div>
-      <InformationModal />
+      
     </>
   );
 };
