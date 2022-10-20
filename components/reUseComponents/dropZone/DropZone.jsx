@@ -102,8 +102,8 @@ function DropZone({
         "image/webp": [],
       },
       maxSize: 3145728,
-      disabled: files.length >= fileLimit,
-      noClick: files.length >= fileLimit,
+      disabled: files?.length >= fileLimit,
+      noClick: files?.length >= fileLimit,
     });
 
   const style = useMemo(
@@ -144,7 +144,7 @@ function DropZone({
       <div
         {...getRootProps({ style })}
         className={`${
-          files.length >= fileLimit && "opacity-30 pointer-events-none"
+          files?.length >= fileLimit && "opacity-30 pointer-events-none"
         } ${dropZoneHeight} rounded-[5px] sm:rounded-[10px] relative`}
       >
         <input {...getInputProps()} />
@@ -185,13 +185,13 @@ function DropZone({
           {errorMany && (
             <InputError text={`You can upload only ${fileLimit} images`} />
           )}
-          {files.length >= fileLimit && (
+          {files?.length >= fileLimit && (
             <p className="font-10 sm:font-14 text-green-500">
               you upload {fileLimit} images
             </p>
           )}
           <>
-            {files.length >= minFileLimit ||
+            {files?.length >= minFileLimit ||
               (fileError && (
                 <InputError text={`Minimun ${minFileLimit} photo required`} />
               ))}
@@ -201,7 +201,7 @@ function DropZone({
           <p className="text-right font-10 sm:font-14 text-[#888c]">
             Max {fileLimit} image supported
           </p>
-          {files.length > 0 && (
+          {files?.length > 0 && (
             <div>
               <p className="text-right font-10 sm:font-14 color4">
                 {files.slice(0, fileLimit).length} Image Uploaded
@@ -211,7 +211,7 @@ function DropZone({
         </div>
       </div>
       <div className="mt-2 flex items-center gap-2">
-        {files.length > 1 && (
+        {files?.length > 1 && (
           <>
             <button
               type="button"
@@ -229,7 +229,7 @@ function DropZone({
           </div>
         )}
       </div>
-      {files.length > 0  && (
+      {files?.length > 0  && (
         <div className="overflow-x-auto p-5 flex gap-3 bar-thin">
           {files.slice(0, fileLimit).map((fileItem, i) => (
             <div key={i}>

@@ -7,8 +7,14 @@ import Input from "../../reUseComponents/Input";
 import FileInput from "../../reUseComponents/FileInput";
 import conditionalRendar from "../../../utils/conditionalRendar";
 import services from "../../../utils/services";
+import DropZone from "../../reUseComponents/dropZone/DropZone";
 
 const PackageQuality = ({
+  props,
+  files,
+  setFiles,
+  fileError,
+  addPackAgeInitalValue,
   quality,
   inputdesign = "font-16 rounded-[4px] px-[10px] h-[35px] ",
   labelDesign = "font-16",
@@ -22,6 +28,29 @@ const PackageQuality = ({
         className="bg-white p-5 lgx:p-[40px] xl:p-[55px] rounded-[4px] "
         id="packageQuality"
       >
+{conditionalRendar(serviceCheck === services.photography) && (
+       <div className="flex-1 overflow-hidden">
+           <DropZone
+              // label={
+              //   serviceCheck === services.giftItems
+              //     ? "Item Image"
+              //     : "Package Image" && serviceCheck === services.brandPromoter
+              //     ? "Promoter Image"
+              //     : "Package Image"
+              // }
+              files={files}
+              setFiles={setFiles}
+              fileError={fileError}
+              fileLimit={10}
+              minFileLimit={3}
+              dropZoneHeight="h-[140px]"
+              dropZoneImgWidth="w-[20px] sm:w-[35px]"
+              dropZoneMidText="font-14 md:font-18 mt-[5px]"
+              dropZoneEndText="font-12 sm:font-14 mt-[6px]"
+            />
+</div>
+)}
+
         <h1 className="text-center font-20 font-normal color3 mb-5 capitalize">
           {quality}
         </h1>

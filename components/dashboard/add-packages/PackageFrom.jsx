@@ -118,7 +118,7 @@ const PackageFrom = ({
                   }
                 />
                 <Input
-                  label="Price Per day"
+                  label="Price Per Day"
                   type="text"
                   name={`pricePerDay`}
                   placeholder="৳5000"
