@@ -44,7 +44,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-const PackageDetails = ({ quality,setFirstPage, packageValue, handleClick ,setModal}) => {
+const PackageDetails = ({ quality,setFirstPage,setFourthPage, packageValue, handleClick ,setModal}) => {
   let router = useRouter();
   let { verifyUser } = useUserOrVendor();
   let state = verifyUser?.isUser_vendor;
@@ -53,9 +53,16 @@ const PackageDetails = ({ quality,setFirstPage, packageValue, handleClick ,setMo
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
+  useEffect(() => {
+    // 👇️ scroll to top on page load
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+
     const hanldleModal = ()=>{
       setModal(true)
       setFirstPage(true)
+      setFourthPage(false)
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }
 
   const images = [

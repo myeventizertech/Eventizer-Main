@@ -14,6 +14,12 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   const [passData, setPassData] = useState({});
   const [Files, setFiles] = useState([])
   const [firstPage, setFirstPage] = useState(false)
+  const [fourthPage, setFourthPage] = useState(false)
+
+  const handleBack = ()=>{
+   setShowForm(false) ,setModal(true)
+
+  }
 
   let handleSHowOrderFrom = (quality) => {
 
@@ -60,16 +66,19 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
     }
     return false;
   };
+
+
+
   return (
     <>
       <div className={` container pt-24`}>
-     {modal&&   <InformationModal setModal={setModal} setShowForm={setShowForm} firstPage={firstPage} setFirstPage={setFirstPage} modal={modal} />}
+     {modal&&   <InformationModal setModal={setModal} setShowForm={setShowForm} fourthPage={fourthPage} setFourthPage={setFourthPage} firstPage={firstPage} setFirstPage={setFirstPage} modal={modal} />}
 
-     {!modal&& <div>
+     {!modal && <div>
       
      {!showForm && (
           <>
-            <button onClick={() => bool(false)} className="py-5">
+            <button  className="py-5">
               <GoBack />
             </button>
             <div>
@@ -117,9 +126,6 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
             }
 
 
-
-
-
             <div className="grid grid-cols-1 md:grid-cols-2 mdx:grid-cols-3 gap-8 mt-7">
               {/* ====================== */}
               {checkIsHave("basic") && (
@@ -131,6 +137,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                     handleClick={handleSHowOrderFrom}
                     setModal={setModal}
                     setFirstPage={setFirstPage}
+                    setFourthPage={setFourthPage}
                     firstPage={firstPage}
                   />
                 </div>
@@ -163,13 +170,30 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
 
         {showForm && (
           <>
-            <div className="max-w-[40rem] mx-auto bg-white rounded p-6 shadow-lg">
-              <button
+            <div className="max-w-[40rem] mx-auto my-5 bg-white rounded p-6 shadow-lg">
+              
+            <header className='h-[73px] max-w-[40rem] w-[100%] mb-5  pl-[-24px] pr-[-24px] drop-shadow'>
+              
+            <div className='flex justify-between '>
+                    <div className='flex items-center pt-5'>
+                      <button onClick={handleBack}>
+                      <GoBack></GoBack>
+                      </button>
+                        <h1 className='text-2xl font-normal ml-5'>Makeup Artist</h1>
+                    </div>
+                    <div className='pt-5'>
+                       <button onClick={()=>setShowForm(false)}>
+                       {/* <CLoso></CLoso> */}
+                <Close />
+                       </button>
+                    </div>
+                </div>
+                </header>
+              {/* <button
                 onClick={() => setShowForm(false)}
                 className="ml-auto block mb-5"
               >
-                <Close />
-              </button>
+              </button> */}
               <OrderForm passData={passData} vendor={vendor} setShowForm={setShowForm} />
             </div>
           </>

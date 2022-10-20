@@ -1,11 +1,34 @@
 import services from "../../../utils/services";
 import conditionalRendar from "../../../utils/conditionalRendar";
 import S3ImagesConverter from "../../reUseComponents/S3ImagesConverter";
+import DropZone from "../../reUseComponents/dropZone/DropZone";
 
 const PackageQuality = ({ quality, packageValue }) => {
   return (
     <>
       <div className="bg-white p-5 lgx:p-[40px] xl:p-[55px] rounded-[4px] ">
+
+     <div className="w-12 border">
+     <DropZone
+              // label={
+              //   serviceCheck === services.giftItems
+              //     ? "Item Image"
+              //     : "Package Image" && serviceCheck === services.brandPromoter
+              //     ? "Promoter Image"
+              //     : "Package Image"
+              // }
+              // files={files}
+              // setFiles={setFiles}
+              // fileError={fileError}
+              // fileLimit={10}
+              // minFileLimit={3}
+              // dropZoneHeight="h-[140px]"
+              // dropZoneImgWidth="w-[20px] sm:w-[35px]"
+              // dropZoneMidText="font-14 md:font-18 mt-[5px]"
+              // dropZoneEndText="font-12 sm:font-14 mt-[6px]"
+            />
+     </div>
+
         <h1 className="text-center font-20 font-normal color3 mb-5 capitalize">
           {quality}
         </h1>
