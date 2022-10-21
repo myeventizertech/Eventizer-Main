@@ -1,13 +1,13 @@
 import React from "react";
 import { FieldArray } from "formik";
-import SelectInput from "../../reUseComponents/SelectInput";
-import { optionsTeamMember } from "../../../utils/options";
-import InputError from "../../reUseComponents/InputError";
-import Input from "../../reUseComponents/Input";
-import FileInput from "../../reUseComponents/FileInput";
-import conditionalRendar from "../../../utils/conditionalRendar";
-import services from "../../../utils/services";
-import DropZone from "../../reUseComponents/dropZone/DropZone";
+import SelectInput from "../../../../reUseComponents/SelectInput";
+import { optionsTeamMember } from "../../../../../utils/options";
+import InputError from "../../../../reUseComponents/InputError";
+import Input from "../../../../reUseComponents/Input";
+import FileInput from "../../../../reUseComponents/FileInput";
+import conditionalRendar from "../../../../../utils/conditionalRendar";
+import services from "../../../../../utils/services";
+import DropZone from "../../../../reUseComponents/dropZone/DropZone";
 
 const PackageQuality = ({
   props,
@@ -31,17 +31,17 @@ const PackageQuality = ({
 {conditionalRendar(serviceCheck === services.photography) && (
        <div className="flex-1 overflow-hidden">
            <DropZone
-              // label={
-              //   serviceCheck === services.giftItems
-              //     ? "Item Image"
-              //     : "Package Image" && serviceCheck === services.brandPromoter
-              //     ? "Promoter Image"
-              //     : "Package Image"
-              // }
+              label={
+                serviceCheck === services.giftItems
+                  ? "Item Image"
+                  : "Package Image" && serviceCheck === services.brandPromoter
+                  ? "Promoter Image"
+                  : "Package Image"
+              }
               files={files}
               setFiles={setFiles}
               fileError={fileError}
-              fileLimit={10}
+              fileLimit={5}
               minFileLimit={3}
               dropZoneHeight="h-[140px]"
               dropZoneImgWidth="w-[20px] sm:w-[35px]"

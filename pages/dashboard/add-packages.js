@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Main from "../../components/dashboard/add-packages/Main";
+// import Main from "../../components/dashboard/add-packages/Main";
 import Layout from "../../components/dashboard/Layout";
 import Head from "next/head";
 import { vendorProtectRoute } from "../../utils/vendorProtectRoute";
@@ -7,6 +7,7 @@ import { vendorProtectRoute } from "../../utils/vendorProtectRoute";
 import { useUserOrVendor } from "../../authContext/AuthContext";
 import { useRouter } from "next/router";
 import Loader from "../../components/reUseComponents/Loader";
+import Main from "../../components/dashboard/Packages/cinematography/add-packages/Main";
 
 const AddPackages = () => {
   let router = useRouter();

@@ -1,10 +1,11 @@
 import React from "react";
-import Input from "../../reUseComponents/Input";
-import DropZone from "../../reUseComponents/dropZone/DropZone";
-import conditionalRendar from "../../../utils/conditionalRendar";
-import services from "../../../utils/services";
+import Input from "../../../../reUseComponents/Input";
+import DropZone from "../../../../reUseComponents/dropZone/DropZone";
+import conditionalRendar from "../../../../../utils/conditionalRendar";
+import services from "../../../../../utils/services";
 import PackageQuality from "./PackageQuality";
-import S3ImagesConverter from "../../reUseComponents/S3ImagesConverter";
+import S3ImagesConverter from "../../../../reUseComponents/S3ImagesConverter";
+
 const PackageFrom = ({
   props,
   files,

@@ -1,21 +1,22 @@
 import React, { useState,useEffect } from "react";
 import Link from "next/link";
-import LinkIconPink from "../../reUseComponents/icons/LinkIconPink";
-import initalValue from "../../../utils/add-packages/initalValue";
+import LinkIconPink from '../../../../reUseComponents/icons/LinkIconPink'
+import initalValue from "../../../../../utils/add-packages/initalValue";
 import { Formik, Form } from "formik";
 import toast from "react-hot-toast";
-import ButtonClick from "../../reUseComponents/ButtonClick";
-import schema from "../../../utils/add-packages/schema";
-import { useUserOrVendor } from "../../../authContext/AuthContext";
+import ButtonClick from "../../../../reUseComponents/ButtonClick";
+import schema from "../../../../../utils/add-packages/schema";
+import { useUserOrVendor } from "../../../../../authContext/AuthContext";
 import PackageFrom from "./PackageFrom";
-import debounce from "../../../utils/debounceSubmitHandler";
-import Loader from "../../reUseComponents/Loader";
+import debounce from "../../../../../utils/debounceSubmitHandler";
+import Loader from "../../../../reUseComponents/Loader";
 import { v4 as uuid } from "uuid";
-import services from "../../../utils/services";
+import services from "../../../../../utils/services";
 import { Storage } from "@aws-amplify/storage";
 import { API } from "aws-amplify";
-import * as mutations from "../../../src/graphql/mutations";
+import * as mutations from "../../../../../src/graphql/mutations";
 import {useRouter} from 'next/router'
+
 const Main = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
   const router =useRouter()
   const { verifyUser } = useUserOrVendor();
