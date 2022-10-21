@@ -99,18 +99,12 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
   
     const handleOrderDataForPageFour = (e)=>{
         e.preventDefault()                   
-        // setModal(false);
-        // setShowForm(true)
-        // customerData.peopleNumber=(peopleNumber)
+        setModal(false);
+        setShowForm(true)
         console.log(customerData)
     }
 
    
-
-
-
-
-
     const handleBackButton =()=>{
         firstPage && setModal(false);
         if(secondPage){

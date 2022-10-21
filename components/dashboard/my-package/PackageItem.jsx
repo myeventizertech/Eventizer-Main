@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import ThreeDotIcon from "../../reUseComponents/icons/ThreeDotIcon";
 import UseOutsideClick from "../../../utils/useOutsideClick";
 import PackagePreivew from "./PackagePreivew";
-import Main from "../add-packages/Main";
+import CinematographyMain from "../Packages/cinematography/add-packages/Main";
+import DjMain from "../Packages/dj-musician/add-packages/Main";
+import MakeupMain from "../Packages/makeup-artist/add-packages/Main";
+import MehediMain from "../Packages/mehedi-artist/add-packages/Main";
+import PhotographyMain from "../Packages/photography/add-packages/Main";
 import { API, Storage } from "aws-amplify";
 import * as mutations from "../../../src/graphql/mutations";
 import { useUserOrVendor } from "../../../authContext/AuthContext";
@@ -138,7 +142,11 @@ const PackageItem = ({ packageValue, allValue,index }) => {
 			{modalEditIsOpen && (
 				<div className="modal-cover">
 					<div className="modal">
-						<Main addPackAgeInitalValue={packageValue} iseEDit={true} index={index} setEditIsOpen={setEditIsOpen}/>
+					{service === "photography" && <PhotographyMain addPackAgeInitalValue={packageValue} iseEDit={true} index={index} setEditIsOpen={setEditIsOpen}/>}
+					{service === "cinematography" && <CinematographyMain addPackAgeInitalValue={packageValue} iseEDit={true} index={index} setEditIsOpen={setEditIsOpen}/>}
+					{service === "dj-musician" && <DjMain addPackAgeInitalValue={packageValue} iseEDit={true} index={index} setEditIsOpen={setEditIsOpen}/>}
+					{service === "mehedi-artist" && <MehediMain addPackAgeInitalValue={packageValue} iseEDit={true} index={index} setEditIsOpen={setEditIsOpen}/>}
+					{service === "makeup-artist" && <MakeupMain addPackAgeInitalValue={packageValue} iseEDit={true} index={index} setEditIsOpen={setEditIsOpen}/>}
 						<button
 							onClick={() => setEditIsOpen(false)}
 							className="text-white bgcolor1 btn-hover px-4 py-1 font-20 rounded-[4px] font-light mx-auto mt-5 block mb-10 w-full"
