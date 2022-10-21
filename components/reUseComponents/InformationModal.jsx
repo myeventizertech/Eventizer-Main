@@ -50,22 +50,22 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
     }
 
     const checkUnder13=(e)=>{
-        setCustomerAge(e.target.value)
+        (customerAge.push(e.target.value))
     }
     const check1317=(e)=>{
-        setCustomerAge(e.target.value)
+        (customerAge.push(e.target.value))
     }
     const check1828=(e)=>{
-        setCustomerAge(e.target.value)
+        (customerAge.push(e.target.value))
     }
     const check2944=(e)=>{
-        setCustomerAge(e.target.value)
+        (customerAge.push(e.target.value))
     }
     const chec4565=(e)=>{
-        setCustomerAge(e.target.value)
+        (customerAge.push(e.target.value))
     }
     const check65older=(e)=>{
-        setCustomerAge(e.target.value)
+        (customerAge.push(e.target.value))
     }
 
     const handleOrderDataForPageThree = (e)=>{
