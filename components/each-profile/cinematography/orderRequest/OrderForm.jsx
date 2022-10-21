@@ -169,6 +169,7 @@ const OrderForm = ({ passData, vendor }) => {
     } catch (error) {
       console.log(error);
     }
+    console.log(data)
   };
 
   useEffect(() => {

@@ -12,12 +12,104 @@ import SelectInput from './SelectInput';
 const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fourthPage, setFourthPage}) => {
     const [secondPage, setSecondPage] = useState(false)
     const [thirdPage, setThirdPage] = useState(false)
-    
-    const handleOrderData = (e)=>{
+       
+    const [description,setDescription]=useState('')
+    const [eventType,setEventType]=useState('')
+    const [customerAge,setCustomerAge]=useState([])
+    const [peopleNumber,setPeopleNumber]=useState('')
+  
+
+    const handleOrderDataForPageOne = (e)=>{
         e.preventDefault()
-        const city = e.target.city.value
-        console.log(city)
+        
+        setFirstPage(false)
+    
+        setSecondPage(true)
+        setDescription(e.target.description.value)
     }
+    
+    const changeWedding = (e)=>{
+        setEventType(e.target.value)        
+    }
+    const changeFormal = (e)=>{
+        setEventType(e.target.value)    }
+    const changeBirthday = (e)=>{
+        setEventType(e.target.value)
+    }
+    const changePhotoshoot = (e)=>{
+        setEventType(e.target.value)
+    }
+    const changeFashion = (e)=>{
+        setEventType(e.target.value)
+    }
+    
+    const handleOrderDataForPageTwo = (e)=>{
+        e.preventDefault()              
+        setSecondPage(false)
+        setThirdPage(true)               
+    }
+
+    const checkUnder13=(e)=>{
+        setCustomerAge(e.target.value)
+    }
+    const check1317=(e)=>{
+        setCustomerAge(e.target.value)
+    }
+    const check1828=(e)=>{
+        setCustomerAge(e.target.value)
+    }
+    const check2944=(e)=>{
+        setCustomerAge(e.target.value)
+    }
+    const chec4565=(e)=>{
+        setCustomerAge(e.target.value)
+    }
+    const check65older=(e)=>{
+        setCustomerAge(e.target.value)
+    }
+
+    const handleOrderDataForPageThree = (e)=>{
+        e.preventDefault()                   
+        setThirdPage(false)
+        setFourthPage(true)        
+    }
+
+    const change1 =(e)=>{
+        setPeopleNumber(e.target.value)
+    }
+    const change2 =(e)=>{
+        setPeopleNumber(e.target.value)
+    }
+    const change3 =(e)=>{
+        setPeopleNumber(e.target.value)
+    }
+    const change4 =(e)=>{
+        setPeopleNumber(e.target.value)
+    }
+    const change5 =(e)=>{
+        setPeopleNumber(e.target.value)
+    }
+  
+    let customerData ={
+        description:description,
+        eventType:eventType,
+        customerAge:customerAge,
+        peopleNumber:peopleNumber
+    }
+  
+    const handleOrderDataForPageFour = (e)=>{
+        e.preventDefault()                   
+        // setModal(false);
+        // setShowForm(true)
+        // customerData.peopleNumber=(peopleNumber)
+        console.log(customerData)
+    }
+
+   
+
+
+
+
 
     const handleBackButton =()=>{
         firstPage && setModal(false);
@@ -60,17 +152,15 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
   
                   {firstPage && <>
                       <h2 className='text-xl font-medium text-center mt-12 mb-11'>Fillup some information to book</h2>
-                      <form onSubmit={handleOrderData} className='flex flex-col justify-center items-center w-320px  md:w-[454px] mx-auto'>
+                      <form onSubmit={handleOrderDataForPageOne} className='flex flex-col justify-center items-center w-320px  md:w-[454px] mx-auto'>
                           <div className='flex justify-center '>
   
                               <div className='mr-1 md:w-1/2 w-[150px]'>
-                                  <SelectInput
-                                      
+                                  <SelectInput                                      
                                       options={optionsServiceLoction}                                
                                       placeholder="Select City"
                                       name="city"
-                                  >
-                                  </SelectInput>
+                                 / >
                               </div>
                               <div className='ml-1 md:w-1/2 w-[150px]'>
                                   <Input
@@ -104,14 +194,13 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
   
                                   istextArea={true}
                                   name="description"
-                                  placeholder="Write something about your booking"
-  
+                                  placeholder="Write something about your booking"  
                               />
                           </div>
-  
-                          <button onClick={()=>(setFirstPage(false) , setSecondPage(true))} className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'>Next
-                          </button>
-  
+                              <input
+                            role={'button'}
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            type="submit" value="Next" />                                              
                       </form>
                   </>}
   
@@ -121,32 +210,34 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                       secondPage && <>
                           <div className='mb-6'>
                               <h2 className='text-xl font-medium text-center mt-12 mb-11'>What type of event?</h2>
-                              <form className='flex flex-col items-center '>
+                              <form onSubmit={handleOrderDataForPageTwo} className='flex flex-col items-center '>
                                   <div className='flex flex-col'>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal ' htmlFor="ex1">Wedding
-                                          <input role={'button'} className=' border-gray-800'  type="radio" id="ex1" name="radio-option" value="Wedding" />
+                                          <input onChange={changeWedding} role={'button'} className=' border-gray-800'  type="radio" id="ex1" name="radio-option" value="Wedding" />
                                           <span className="checkmark ml-[-8px]"></span>        
                                       </label>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal ' htmlFor="ex2">Formal
-                                          <input role={'button'} className=' border-gray-800'  type="radio" id="ex2" name="radio-option" value="Formal" />
+                                          <input onChange={changeFormal} role={'button'} className=' border-gray-800'  type="radio" id="ex2" name="radio-option" value="Formal" />
                                           <span className="checkmark ml-[-8px]"></span>        
                                       </label>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal ' htmlFor="ex3">Birthday Party
-                                          <input role={'button'} className=' border-gray-800'  type="radio" id="ex3" name="radio-option" value="Birthday Party" />
+                                          <input onChange={changeBirthday} role={'button'} className=' border-gray-800'  type="radio" id="ex3" name="radio-option" value="Birthday Party" />
                                           <span className="checkmark ml-[-8px]"></span>        
                                       </label>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal ' htmlFor="ex4">Photoshoot
-                                          <input role={'button'} className=' border-gray-800'  type="radio" id="ex4" name="radio-option" value="Photoshoot" />
+                                          <input onChange={changePhotoshoot} role={'button'} className=' border-gray-800'  type="radio" id="ex4" name="radio-option" value="Photoshoot" />
                                           <span className="checkmark ml-[-8px]"></span>        
                                       </label>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal ' htmlFor="ex5">Fashion Show
-                                          <input role={'button'} className='  border-gray-800'  type="radio" id="ex5" name="radio-option" value="Fashion Show" />
+                                          <input onChange={changeFashion} role={'button'} className='  border-gray-800'  type="radio" id="ex5" name="radio-option" value="Fashion Show" />
                                           <span className="checkmark ml-[-8px]"></span>        
                                       </label>
                                       
                                   </div>
-                                  <button onClick={()=>(setSecondPage(false),setThirdPage(true))} className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 my-8 py-2'>Next
-                                  </button>                         
+                                  <input
+                            role={'button'}
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            type="submit" value="Next" />                          
                               </form>
                           </div>
                       </>
@@ -158,39 +249,38 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                       thirdPage && <>
                           <div>
                               <h2 className='text-xl font-medium text-center mt-12 mb-11'>How old are member?</h2>
-                              <form className='flex flex-col items-center '>
+                              <form onSubmit={handleOrderDataForPageThree} className='flex flex-col items-center '>
                                   <div className='flex flex-col'>
                                       <label role={'button'} className='my-2 text-xl font-normal check flex' htmlFor="ex1">Under 13
-                                          <input role={'button'} className=' border-gray-800' type="checkbox" id="ex1" name="radio-option"  value="Under 13" />
+                                          <input onChange={checkUnder13} role={'button'} className=' border-gray-800' type="checkbox" id="ex1" name="radio-option"  value="Under 13" />
                                           <span className="checkmark-box ml-[-8px]"></span>                                        
                                       </label>
                                       <label role={'button'} className='my-2  text-xl font-normal check flex' htmlFor="ex2">13-17 years old                                    
-                                          <input role={'button'} className=' border-gray-800' type="checkbox" id="ex2" name="radio-option"  value="13-17 years old" />                                        
+                                          <input onChange={check1317} role={'button'} className=' border-gray-800' type="checkbox" id="ex2" name="radio-option"  value="13-17 years old" />                                        
                                           <span className="checkmark-box ml-[-8px]"></span>
                                       </label>
                                       <label role={'button'} className='my-2 text-xl font-normal check flex' htmlFor="ex3">18-28 years old
-                                          <input role={'button'} className=' border-gray-800' type="checkbox" id="ex3" name="radio-option"  value="18-28 years old" />
+                                          <input onChange={check1828} role={'button'} className=' border-gray-800' type="checkbox" id="ex3" name="radio-option"  value="18-28 years old" />
                                           <span className="checkmark-box ml-[-8px]"></span>                                        
                                       </label>
                                       <label role={'button'} className='my-2 text-xl font-normal check flex' htmlFor="ex4">29-44 years old
-                                          <input role={'button'} className=' border-gray-800' type="checkbox" id="ex4" name="radio-option"  value="29-44 years old" />
+                                          <input onChange={check2944} role={'button'} className=' border-gray-800' type="checkbox" id="ex4" name="radio-option"  value="29-44 years old" />
                                           <span className="checkmark-box ml-[-8px]"></span>                                        
                                       </label>
                                       <label role={'button'} className='my-2 text-xl font-normal check flex' htmlFor="ex5">45-65 years old
-                                          <input role={'button'} className=' border-gray-800' type="checkbox" id="ex5" name="radio-option"  value="45-65 years old" />
+                                          <input onChange={chec4565} role={'button'} className=' border-gray-800' type="checkbox" id="ex5" name="radio-option"  value="45-65 years old" />
                                           <span className="checkmark-box ml-[-8px]"></span>                                        
                                       </label>
                                       <label role={'button'} className='my-2 text-xl font-normal check flex' htmlFor="ex6">65 years or older
-                                          <input role={'button'} className=' border-gray-800' type="checkbox" id="ex6" name="radio-option"  value="65 years or older" />
+                                          <input onChange={check65older} role={'button'} className=' border-gray-800' type="checkbox" id="ex6" name="radio-option"  value="65 years or older" />
                                           <span className="checkmark-box ml-[-8px]"></span>                                        
                                       </label>
                                       
                                   </div>
-                                  <button onClick={()=>(setThirdPage(false), setFourthPage(true))} className='bgcolor2 w-1/2 text-white   text-xl font-medium mb-5 my-8 py-2 rounded btn-hover'>Next
-                                  </button>
-  
-                                  {/* text-white bgcolor2 font-18 mt-3 rounded w-full px-2 py-1 font-normal btn-hover */}
-  
+                                  <input
+                            role={'button'}
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            type="submit" value="Next" />       
                               </form>
                           </div>
                       </>
@@ -201,37 +291,31 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                       fourthPage && <>
                           <div className='mb-6'>
                               <h2 className='text-xl font-medium text-center mt-12 mb-11'>How many people want to take makeup service?</h2>
-                              <form className='flex flex-col items-center '>
+                              <form onSubmit={handleOrderDataForPageFour} className='flex flex-col items-center '>
                                   <div className='flex flex-col'>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex1">1
-                                          <input role={'button'} className=' border-gray-800' type="radio" id="ex1" name="radio-option" value="1" />
-                                          <span className="checkmark ml-[-8px]"></span>
-                                          
-                                      </label>
-                                    
-                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex2">2                                        <input role={'button'} className=' border-gray-800' type="radio" id="ex2" name="radio-option" value="2" />
-                                          <span className="checkmark ml-[-8px]"></span>
-                                          
-                                      </label>
-                                    
-                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex3">3                                        <input role={'button'} className=' border-gray-800' type="radio" id="ex3" name="radio-option" value="3" />
-                                          <span className="checkmark ml-[-8px]"></span>
-                                          
-                                      </label>
-                                    
-                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex4">4                                        <input role={'button'} className=' border-gray-800' type="radio" id="ex4" name="radio-option" value="4" />
-                                          <span className="checkmark ml-[-8px]"></span>
-                                          
-                                      </label>
-                                    
-                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex5">5                                        <input role={'button'} className=' border-gray-800' type="radio" id="ex5" name="radio-option" value="5" />
-                                          <span className="checkmark ml-[-8px]"></span>
-                                          
+                                          <input onChange={change1} role={'button'} className=' border-gray-800' type="radio" id="ex1" name="radio-option" value="1" />
+                                          <span className="checkmark ml-[-8px]"></span>                                          
+                                      </label>                                    
+                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex2">2                                        <input onChange={change2} role={'button'} className=' border-gray-800' type="radio" id="ex2" name="radio-option" value="2" />
+                                          <span className="checkmark ml-[-8px]"></span>                                          
+                                      </label>                                    
+                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex3">3                                        <input onChange={change3} role={'button'} className=' border-gray-800' type="radio" id="ex3" name="radio-option" value="3" />
+                                          <span className="checkmark ml-[-8px]"></span>                                          
+                                      </label>                                    
+                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex4">4                                        <input onChange={change4} role={'button'} className=' border-gray-800' type="radio" id="ex4" name="radio-option" value="4" />
+                                          <span className="checkmark ml-[-8px]"></span>                                          
+                                      </label>                                    
+                                      <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex5">5                                        <input onChange={change5} role={'button'} className=' border-gray-800' type="radio" id="ex5" name="radio-option" value="5" />
+                                          <span className="checkmark ml-[-8px]"></span>                                          
                                       </label>
                                     
                                   </div>
-                                  <button onClick={()=>(setModal(false),setShowForm(true))} className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 my-8 py-2'>Next
-                                  </button>
+                                 <input                                
+                            role={'button'}
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            type="submit"
+                             value="Next" />    
                               </form>
                           </div>
                       </>
