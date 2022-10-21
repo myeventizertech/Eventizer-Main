@@ -28,7 +28,7 @@ const PackageQuality = ({
         className="bg-white p-5 lgx:p-[40px] xl:p-[55px] rounded-[4px] "
         id="packageQuality"
       >
-{conditionalRendar(serviceCheck === services.photography) && (
+{conditionalRendar(serviceCheck === services.cinematography) && (
        <div className="flex-1 overflow-hidden">
            <DropZone
               label={
