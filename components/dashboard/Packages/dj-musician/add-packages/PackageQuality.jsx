@@ -27,7 +27,7 @@ const PackageQuality = ({
         className="bg-white p-5 lgx:p-[40px] xl:p-[55px] rounded-[4px] "
         id="packageQuality"
       >
-{conditionalRendar(serviceCheck === services.djMusician) && (
+{/* {conditionalRendar(serviceCheck === services.djMusician) && ( */}
        <div className="flex-1 overflow-hidden">
            <DropZone
               label={
@@ -48,7 +48,7 @@ const PackageQuality = ({
               dropZoneEndText="font-12 sm:font-14 mt-[6px]"
             />
 </div>
-)}
+{/* )} */}
 
         <h1 className="text-center font-20 font-normal color3 mb-5 capitalize">
           {quality}

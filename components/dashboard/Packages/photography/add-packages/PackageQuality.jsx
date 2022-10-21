@@ -27,13 +27,13 @@ const PackageQuality = ({
         className="bg-white p-5 lgx:p-[40px] xl:p-[55px] rounded-[4px] "
         id="packageQuality"
       >
-{conditionalRendar(serviceCheck === services.photography) && (
+{/* {conditionalRendar(serviceCheck === services.photography) && ( */}
        <div className="flex-1 overflow-hidden">
            <DropZone
               label={
                 serviceCheck === services.giftItems
                   ? "Item Image"
-                  : "Package Image" && serviceCheck === services.brandPromoter
+                  : "Package Image" && serviceCheck === services.photography
                   ? "Promoter Image"
                   : "Package Image"
               }
@@ -48,7 +48,7 @@ const PackageQuality = ({
               dropZoneEndText="font-12 sm:font-14 mt-[6px]"
             />
 </div>
-)}
+{/* //  )}  */}
 
         <h1 className="text-center font-20 font-normal color3 mb-5 capitalize">
           {quality}
