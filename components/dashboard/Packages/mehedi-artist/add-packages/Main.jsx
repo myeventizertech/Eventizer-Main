@@ -17,7 +17,7 @@ import { API } from "aws-amplify";
 import * as mutations from "../../../../../src/graphql/mutations";
 import {useRouter} from 'next/router'
 
-const Main = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
+const MehediMain  = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
   const router =useRouter()
   const { verifyUser } = useUserOrVendor();
   let { attributes } = verifyUser?.isUser_vendorAttr || {};
@@ -242,4 +242,4 @@ check()
   );
 };
 
-export default Main;
+export default MehediMain ;

@@ -21,13 +21,7 @@ const PackageFrom = ({
         <div className="lgx:flex gap-5">
           <div className="flex-1">
             <Input
-              label={
-                serviceCheck === services.giftItems
-                  ? "Item Name"
-                  : "Package Name" && serviceCheck === services.brandPromoter
-                  ? "Promoter Name"
-                  : "Package Name"
-              }
+              label={"Package Namesss"}
               type="text"
               name="packageName"
               placeholder={"Enter Name"}
@@ -44,13 +38,7 @@ const PackageFrom = ({
             <Input
               istextArea={true}
               textareaHeight={"10"}
-              label={
-                serviceCheck === services.giftItems
-                  ? "Item Details"
-                  : "Package Details" && serviceCheck === services.brandPromoter
-                  ? "Promoter Experience"
-                  : "Package Details"
-              }
+              label={"Package Details"}
               name="packageDetails"
               placeholder={"Enter Details"}
               value={props.values.packageDetails}
@@ -63,7 +51,7 @@ const PackageFrom = ({
               }
             />
 
-            {conditionalRendar(
+            {/* {conditionalRendar(
               serviceCheck === services.cinematography ||
                 serviceCheck === services.djMusician ||
                 serviceCheck === services.decoration
@@ -82,9 +70,9 @@ const PackageFrom = ({
                     : ""
                 }
               />
-            )}
+            )} */}
 
-            {conditionalRendar(serviceCheck === services.giftItems) && (
+            {/* {conditionalRendar(serviceCheck === services.giftItems) && (
               <Input
                 label="Item pricing"
                 type="text"
@@ -99,9 +87,9 @@ const PackageFrom = ({
                     : ""
                 }
               />
-            )}
+            )} */}
 
-            {conditionalRendar(serviceCheck === services.brandPromoter) && (
+            {/* {conditionalRendar(serviceCheck === services.brandPromoter) && (
               <>
                 <Input
                   label="Price Per hour"
@@ -133,7 +121,7 @@ const PackageFrom = ({
                   }
                 />
               </>
-            )}
+            )} */}
           </div>
           <div className="flex-1 overflow-hidden">
             <DropZone

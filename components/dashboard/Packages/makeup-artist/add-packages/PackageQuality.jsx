@@ -53,7 +53,7 @@ const PackageQuality = ({
         <h1 className="text-center font-20 font-normal color3 mb-5 capitalize">
           {quality}
         </h1>
-
+{/* 
         {conditionalRendar(
           serviceCheck === services.photography ||
             serviceCheck === services.cinematography ||
@@ -98,8 +98,8 @@ const PackageQuality = ({
               }
             />
           </>
-        )}
-       {conditionalRendar(
+        )} */}
+       {/* {conditionalRendar(
           serviceCheck === services.photography ||
             serviceCheck === services.cinematography ||
             serviceCheck === services.djMusician ||
@@ -151,8 +151,8 @@ const PackageQuality = ({
                 : ""
             }
           />
-        )}
-        {conditionalRendar(serviceCheck === services.photography) && (
+        )} */}
+        {/* {conditionalRendar(serviceCheck === services.photography) && (
           <>
             <Input
               label="Edited Photo"
@@ -192,9 +192,9 @@ const PackageQuality = ({
               }
             />
           </>
-        )}
+        )} */}
 
-        {conditionalRendar(serviceCheck === services.cinematography) && (
+        {/* {conditionalRendar(serviceCheck === services.cinematography) && (
           <SelectInput
             handleChange={fieldProps.setFieldValue}
             value={fieldProps.values[quality].trailerDuration}
@@ -212,7 +212,7 @@ const PackageQuality = ({
                 : ""
             }
           />
-        )}
+        )} */}
 
         {conditionalRendar(serviceCheck === services.decoration) && (
           <>
@@ -266,8 +266,9 @@ const PackageQuality = ({
             )}
           </>
         )}
+        
 
-        {conditionalRendar(serviceCheck === services.printingPress) && (
+        {/* {conditionalRendar(serviceCheck === services.printingPress) && (
           <>
             <Input
               label="Price Per Piece"
@@ -307,9 +308,9 @@ const PackageQuality = ({
               }
             />
           </>
-        )}
-        {/* ================================================================== */}
-        <Input
+        )} */}
+
+        {/* <Input
           label="Overtime Price Per hour"
           type="text"
           name={`${quality}.overTimePricePerHour`}
@@ -342,7 +343,7 @@ const PackageQuality = ({
               ? fieldProps.errors[quality]?.overTimePricePerDay
               : ""
           }
-        />
+        /> */}
         {/* ================================================ */}
         <FieldArray
           name={`${quality}.customOptionFields`}
