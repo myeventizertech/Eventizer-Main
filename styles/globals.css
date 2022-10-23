@@ -7,17 +7,8 @@
   .flex-center {
     @apply flex items-center;
   }
-.left-arrow{
-  margin-left: 20px;
-  opacity: 1;
-  /* padding-right: -25px; */
-  display: block;
-  position: static;
 
-}
-
-
-
+  
 /* Radio button style start */
 .label {
   display: block;

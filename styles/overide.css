@@ -427,7 +427,21 @@ input::placeholder {
 .rc-time-picker-panel {
   z-index: 10;
 }
-
+.slick-list{
+  z-index: 1 !important;
+}
+.slick-prev{
+  z-index: 8 !important;
+}
+.slick-next{
+  z-index: 8 !important;
+}
+.slick-prev:before {
+  display: none;
+}
+.slick-next:before {
+  display: none;
+}
 @media screen and (max-width: 899px) {
   .profile-vendor-wrapper::before {
     background-color: #fff;

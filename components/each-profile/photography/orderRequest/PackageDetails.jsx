@@ -15,7 +15,7 @@ function SampleNextArrow(props) {
   return (
     <div className={className} onClick={onClick}>
       <svg
-        className="w-4 ml-[-30px]"
+        className="w-4 ml-[-32px]"
         viewBox="0 0 8 12 "
         fill="#787878"
         xmlns="http://www.w3.org/2000/svg"
@@ -30,16 +30,15 @@ function SamplePrevArrow(props) {
   const { className, onClick } = props;
   return (
     <div className={`${className} `} onClick={onClick}>
-     <div className="">
+    
      <svg
-        className="w-4 left-arrow "
+        className="w-4 ml-8 "
         viewBox="0 0 8 12"
         fill="#787878"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M7.41003 1.41L2.83003 6L7.41003 10.59L6.00003 12L3.38077e-05 6L6.00003 1.23266e-07L7.41003 1.41Z" />
       </svg>
-     </div>
     </div>
   );
 }

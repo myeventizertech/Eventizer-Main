@@ -88,32 +88,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
               </p>
             </div>
 
-            <>
-              <div className=" overflow-hidden">
-                <>
-                  <div>
-                    <div className="overflow-x-auto p-5 flex gap-3 bar-thin">
-                      {Files?.map((item, i) => {
-                        return (
-                          <div key={i}>
-                            <div className="w-[300px] inline-block ">
-                              <div className="w-full h-[10rem] bg-[#e7e6ea]">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                  src={item}
-                                  alt="package-images"
-                                  className="mx-auto block h-full"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </>
-              </div>
-            </>
+        
 
 
             {orderData?.packageDemoLink && <div className="mt-8">
