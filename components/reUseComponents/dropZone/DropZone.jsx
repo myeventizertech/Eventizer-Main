@@ -266,7 +266,7 @@ function DropZone({
         </div>
       ):files?.length > 0  && (
         //Smaller images here ,Design for packages
-        <div className="overflow-x-auto p-5 flex gap-3 bar-thin">
+        <div className="overflow-x-auto p-5 flex gap-[6px] bar-thin">
           {files.slice(0, fileLimit).map((fileItem, i) => (
             <div key={i}>
               <>
