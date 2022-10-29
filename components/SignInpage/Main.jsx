@@ -170,7 +170,7 @@ const Main = () => {
 			setFormState((prev) => ({ ...prev, uistate: "signIn" }));
 			setUiLoading(false);
 		} catch (err) {
-			console.log({ err });
+	
 			setUiLoading(false);
 			toast.error(err.message, {
 				duration: 2000,
@@ -191,7 +191,7 @@ const Main = () => {
 			setUiLoading(false);
 			router.push("/sign-in");
 		} catch (err) {
-			console.log({ err });
+		
 
 			setUiLoading(false);
 			toast.error(err.message, {

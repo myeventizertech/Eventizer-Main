@@ -40,6 +40,7 @@ const rejectStyle = {
 function DropZone({
   fileLimit = 10,
   minFileLimit = 5,
+  showImage,
   dropZoneHeight = "h-[125px] sm:h-[275px]",
   dropZoneImgWidth = "w-[22px] sm:w-[55px]",
   dropZoneMidText = "font-14 sm:font-22 mt-[5px] sm:mt-[12px]",
@@ -101,7 +102,7 @@ function DropZone({
         "image/jpg": [],
         "image/webp": [],
       },
-      maxSize: 3145728,
+      maxSize: 1224000,
       disabled: files?.length >= fileLimit,
       noClick: files?.length >= fileLimit,
     });
@@ -176,7 +177,7 @@ function DropZone({
         <div>
           {errorLarge && (
             <InputError
-              text={"Some files are removed & each size limit is 3mb"}
+              text={"Some files are removed & each size limit is 1.2 mb"}
             />
           )}
           {errorType && (
@@ -229,7 +230,42 @@ function DropZone({
           </div>
         )}
       </div>
-      {files?.length > 0  && (
+{showImage===true? files?.length > 0  && (
+        <div className="overflow-x-auto p-5 flex gap-3 bar-thin">
+          {files.slice(0, fileLimit).map((fileItem, i) => (
+            <div key={i}>
+              <>
+                <div
+                  className=" relative bg-[#bababf] px-3 py-2 rounded-[8px] inline-block text-center w-[130px]"
+                >
+                  <div className="absolute top-0 right-0 bg-black bg-opacity-75 p-3 w-[20px] h-[20px] text-white flex justify-center items-center rounded-tr-[8px]">
+                    <h4>{i + 1}</h4>
+                  </div>
+                  <div className="w-full h-full m-auto">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={URL.createObjectURL(fileItem.file)}
+                      alt="Uploaded-image"
+                      width={"100%"}
+                      height={"100%"}
+                    />
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className="color4 font-normal font-14 mt-1 hover:opacity-75"
+                      onClick={() => onDelete(fileItem.file)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </>
+            </div>
+          ))}
+        </div>
+      ):files?.length > 0  && (
+        //Smaller images here ,Design for packages
         <div className="overflow-x-auto p-5 flex gap-3 bar-thin">
           {files.slice(0, fileLimit).map((fileItem, i) => (
             <div key={i}>

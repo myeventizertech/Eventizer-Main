@@ -140,7 +140,7 @@ const CorporateForm = () => {
         query: mutations.createPlan,
         variables: { input: createMyplan },
       });
-      console.log(createMyplan);
+
       setisDone(true);
     } catch (error) {
       console.log(error);

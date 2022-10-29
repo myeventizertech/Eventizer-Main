@@ -78,7 +78,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
       
      {!showForm && (
           <>
-            <button  className="py-5">
+            <button  className="py-5"  onClick={() => bool(false)} >
               <GoBack />
             </button>
             <div>

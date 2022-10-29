@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import Slider from "react-slick";
+import { Storage } from "aws-amplify";
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
@@ -51,7 +52,7 @@ const PackageDetails = ({ quality,setFirstPage,setFourthPage, packageValue, hand
   const user = storage?.user;
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
-
+  const [images, setimages] = useState([])
   useEffect(() => {
     // 👇️ scroll to top on page load
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -64,14 +65,21 @@ const PackageDetails = ({ quality,setFirstPage,setFourthPage, packageValue, hand
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }
 
-  const images = [
-    'https://images.unsplash.com/photo-1604357209793-fca5dca89f97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Z3BzJTIwbWFwfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-    'https://media.istockphoto.com/photos/new-york-city-skyline-with-manhattan-financial-district-world-trade-picture-id1364031269?b=1&k=20&m=1364031269&s=170667a&w=0&h=XJr9gkdpJwvCQtqZ__cE4YH1pzsuwzdQKFrJfTzJJAM=',
-
-    'https://images.unsplash.com/photo-1604357209793-fca5dca89f97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Z3BzJTIwbWFwfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-    'https://media.istockphoto.com/photos/new-york-city-skyline-with-manhattan-financial-district-world-trade-picture-id1364031269?b=1&k=20&m=1364031269&s=170667a&w=0&h=XJr9gkdpJwvCQtqZ__cE4YH1pzsuwzdQKFrJfTzJJAM=',
-
-  ];
+    useEffect(() => {
+      if (images.length === 0) {
+        packageValue[quality].packageImage?.map(async (e) => {
+          let signedURL = await Storage.get(e);
+  
+          const data = await fetch(signedURL);
+          if (data.ok) {
+            setimages((prev) => [...prev, signedURL]);
+            console.log(images)
+          } else {
+            return;
+          }
+        });
+      }
+    }, []);
   const settings = {
     dots: false,
     infinite: false,
@@ -139,7 +147,7 @@ const PackageDetails = ({ quality,setFirstPage,setFourthPage, packageValue, hand
           {images.map((item, i) => {
             return (
               <div key={i} onClick={() => openImageViewer(i)}>
-                <div className="mx-1 h-[15rem] sm:h-[8rem] bg-[#e7e6ea]">
+                <div className="h-[15rem] sm:h-[8rem] bg-[#e7e6ea]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item}

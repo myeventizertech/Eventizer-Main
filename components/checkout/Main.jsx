@@ -123,7 +123,6 @@ const Main = ({ Data, initialValues }) => {
   ]);
 
   useEffect(() => setGetOffer(Data?.totalPayment), [Data?.totalPayment]);
-console.log(getOffer);
   return (
     <div className="container m-all checkout">
       <div className="flex gap-5 flex-col md:flex-row">

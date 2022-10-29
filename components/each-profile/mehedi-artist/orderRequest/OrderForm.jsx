@@ -19,6 +19,7 @@ import {
   TimePickers,
 } from "./DateTimeInputs";
 
+
 let commonFieldSchema = yup.mixed().nullable().required("Required field");
 let initialValues = {
   city: "",
@@ -167,7 +168,7 @@ const OrderForm = ({ passData, vendor }) => {
         }
       }
     } catch (error) {
-      console.log(error);
+     
     }
   };
 
@@ -279,7 +280,7 @@ const OrderForm = ({ passData, vendor }) => {
                       type="button"
                       onClick={() => handleOrderTime(item.id)}
                       className={`font-14 color4  px-2 py-3 w-full border-[1.5px]  rounded-[8px] mb-6 ${item.id !== currOrder ? "border-[#787878]"
-                          : "border-[#ef0d5e] "
+                        : "border-[#ef0d5e] "
                         }`}
                     >
                       {item.value}

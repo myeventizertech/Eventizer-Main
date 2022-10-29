@@ -17,7 +17,7 @@ import { API } from "aws-amplify";
 import * as mutations from "../../../../../src/graphql/mutations";
 import {useRouter} from 'next/router'
 
-const MehediMain  = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
+const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
   const router =useRouter()
   const { verifyUser } = useUserOrVendor();
   let { attributes } = verifyUser?.isUser_vendorAttr || {};
@@ -25,6 +25,9 @@ const MehediMain  = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEdi
 	const [serviceAPI, setserviceAPI] = useState(null);
 	const [vData, setvData] = useState(null);
   const [files, setFiles] = useState([]);
+  const [filesB, setFilesB] = useState([]);
+  const [filesS, setFilesS] = useState([]);
+  const [filesP, setFilesP] = useState([]);
   const [fileError, setFileError] = useState(false);
   const storage = JSON.parse(localStorage.getItem("AmpUserInfo"));
 	let { dispatch } = useUserOrVendor();
@@ -65,6 +68,63 @@ check()
 					const result = await data.blob();
 					//   var blob = new Blob([result], { type: "image/png" });
 					setFiles((prev) => {
+						return [...prev, { file: result }];
+					});
+				} else {
+					setloadImg(false);
+				}
+			});
+			setloadImg(true);
+		}
+	}, []);
+  useEffect(() => {
+		if (addPackAgeInitalValue?.basic?.packageImage?.length !== 0) {
+			addPackAgeInitalValue?.basic?.packageImage?.map(async (e) => {
+				let signedURL = await Storage.get(e);
+				let url = signedURL;
+				const data = await fetch(url);
+				if (data.ok) {
+					const result = await data.blob();
+					//   var blob = new Blob([result], { type: "image/png" });
+					setFilesB((prev) => {
+						return [...prev, { file: result }];
+					});
+				} else {
+					setloadImg(false);
+				}
+			});
+			setloadImg(true);
+		}
+	}, []);
+  useEffect(() => {
+		if (addPackAgeInitalValue?.standard?.packageImage?.length !== 0) {
+			addPackAgeInitalValue?.standard?.packageImage?.map(async (e) => {
+				let signedURL = await Storage.get(e);
+				let url = signedURL;
+				const data = await fetch(url);
+				if (data.ok) {
+					const result = await data.blob();
+					//   var blob = new Blob([result], { type: "image/png" });
+					setFilesS((prev) => {
+						return [...prev, { file: result }];
+					});
+				} else {
+					setloadImg(false);
+				}
+			});
+			setloadImg(true);
+		}
+	}, []);
+  useEffect(() => {
+		if (addPackAgeInitalValue?.premium?.packageImage?.length !== 0) {
+			addPackAgeInitalValue?.premium?.packageImage?.map(async (e) => {
+				let signedURL = await Storage.get(e);
+				let url = signedURL;
+				const data = await fetch(url);
+				if (data.ok) {
+					const result = await data.blob();
+					//   var blob = new Blob([result], { type: "image/png" });
+					setFilesP((prev) => {
 						return [...prev, { file: result }];
 					});
 				} else {
@@ -125,6 +185,9 @@ check()
           values.packageImage = [...addPackAgeInitalValue.packageImage];
         } else {
           let allPackageImage = [];
+          let allPackageImageB = [];
+          let allPackageImageS = [];
+          let allPackageImageP = [];
           if (files) {
             let i=0
             await files.map(async (e) => {
@@ -137,7 +200,46 @@ check()
               
             });
           }
+          if (filesB) {
+            let i=0
+            await filesB.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/Basic/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImageB.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          }
+          if (filesS) {
+            let i=0
+            await filesS.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/Standard/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImageS.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          }
+          if (filesP) {
+            let i=0
+            await filesP.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/Premium/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImageP.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          }
           values.packageImage = [...allPackageImage];
+          values.standard.packageImage = [...allPackageImageS];
+          values.basic.packageImage = [...allPackageImageB];
+          values.premium.packageImage = [...allPackageImageP];
         }
         let details =storage.vendorDetails
         let balance =storage.balance
@@ -212,6 +314,12 @@ check()
               props={props}
               files={files}
               setFiles={setFiles}
+              filesB={filesB}
+              setFilesB={setFilesB}
+              filesP={filesP}
+              setFilesP={setFilesP}
+              filesS={filesS}
+              setFilesS={setFilesS}
               fileError={fileError}
               serviceCheck={serviceCheck}
               addPackAgeInitalValue={addPackAgeInitalValue}
@@ -242,4 +350,4 @@ check()
   );
 };
 
-export default MehediMain ;
+export default PhotographyMain;

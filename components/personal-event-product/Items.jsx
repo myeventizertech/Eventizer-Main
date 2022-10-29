@@ -29,19 +29,19 @@ const Items = ({ data, service }) => {
         return;
       }
      } catch (error) {
-      console.log(error);
+   
      }
     }
     getImages();
     let r = 0;
     let k = datas?.Reviews?.items?.length;
-    console.log(datas);
+
     const sum = datas?.Reviews?.items?.reduce((accumulator, object) => {
       return accumulator + object.average;
     }, 0);
 
     r = sum / k || 0;
-    console.log(r);
+
     setrating(r.toFixed(2));
   }, []);
 

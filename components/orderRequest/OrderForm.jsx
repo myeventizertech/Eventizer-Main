@@ -167,7 +167,7 @@ const OrderForm = ({ passData, vendor }) => {
         }
       }
     } catch (error) {
-      console.log(error);
+
     }
   };
 

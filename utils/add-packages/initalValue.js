@@ -1,4 +1,7 @@
 let commonIntvalue = {
+//Image for all,
+packageImage:[],
+
   overTimePricePerDay:"",
   overTimePricePerHour:"",
   // ph,ch,dj,mk,md only for this
@@ -46,12 +49,15 @@ let initalValue = {
 
   basic: {
     ...commonIntvalue,
+    package:"basic"
   },
   standard: {
     ...commonIntvalue,
+    package:"standard"
   },
   premium: {
     ...commonIntvalue,
+    package:"premium"
   },
 
   // ph,ch,dj,mk,md ,br,br nly for this

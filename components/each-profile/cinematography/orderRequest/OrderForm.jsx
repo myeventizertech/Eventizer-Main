@@ -19,6 +19,7 @@ import {
   TimePickers,
 } from "./DateTimeInputs";
 
+
 let commonFieldSchema = yup.mixed().nullable().required("Required field");
 let initialValues = {
   city: "",
@@ -167,9 +168,8 @@ const OrderForm = ({ passData, vendor }) => {
         }
       }
     } catch (error) {
-      console.log(error);
+     
     }
-    console.log(data)
   };
 
   useEffect(() => {

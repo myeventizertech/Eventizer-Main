@@ -135,7 +135,7 @@ let finaSubmitToBackEnd = async (
 			},
 		});
 	} catch (error) {
-		console.log(error);
+		
 	}
 };
 

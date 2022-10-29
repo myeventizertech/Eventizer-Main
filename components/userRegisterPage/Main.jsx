@@ -72,7 +72,7 @@ const Main = () => {
         setUiLoading(false);
         router.push("/user-register");
       } catch (err) {
-        console.log({ err });
+  
         setUiLoading(false);
         toast.error(err.message, {
           duration: 2000,
@@ -125,7 +125,7 @@ const Main = () => {
       router.push("/");
       setUiLoading(false);
     } catch (err) {
-      console.log({ err });
+     
       setUiLoading(false);
       setAuthLoader(false);
 
