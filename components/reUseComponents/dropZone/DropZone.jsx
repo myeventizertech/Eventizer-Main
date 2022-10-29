@@ -271,12 +271,12 @@ function DropZone({
             <div key={i}>
               <>
                 <div
-                  className=" relative bg-[#bababf] px-3 py-2 rounded-[8px] inline-block text-center w-[130px]"
+                  className=" relative bg-[#bababf] px-1 pt-1 rounded-[8px] inline-block text-center w-[50px]"
                 >
                   <div className="absolute top-0 right-0 bg-black bg-opacity-75 p-3 w-[20px] h-[20px] text-white flex justify-center items-center rounded-tr-[8px]">
                     <h4>{i + 1}</h4>
                   </div>
-                  <div className="w-full h-full m-auto">
+                  <div className="w-full h-full m-auto ">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={URL.createObjectURL(fileItem.file)}
