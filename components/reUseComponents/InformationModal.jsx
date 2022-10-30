@@ -1,5 +1,7 @@
+import { Form, Formik } from 'formik';
+import * as yup from "yup";
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { optionsServiceLoction } from '../../utils/options';
 import { DatePickersStart } from '../each-profile/cinematography/orderRequest/DateTimeInputs';
@@ -8,8 +10,10 @@ import CLoso from './icons/Close';
 import GoBack from './icons/GoBack';
 import Input from './Input';
 import SelectInput from './SelectInput';
+import moment from "moment";
 
-const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fourthPage, setFourthPage}) => {
+
+const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fourthPage, vendor,setFourthPage}) => {
     const [secondPage, setSecondPage] = useState(false)
     const [thirdPage, setThirdPage] = useState(false)
        
@@ -18,7 +22,11 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
     const [customerAge,setCustomerAge]=useState([])
     const [peopleNumber,setPeopleNumber]=useState('')
   
+    
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
+  const [location, setlocation] = useState([])
     const handleOrderDataForPageOne = (e)=>{
         e.preventDefault()
         
@@ -121,6 +129,147 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
          }
         
     }
+    let currOrderTime = [
+      { id: 0, value: "I want to book for one day" },
+      { id: 1, value: " I want to book for multiple day" },
+    ];
+
+    let [currOrder, setCurrOrder] = useState(currOrderTime[0].id);
+    let commonFieldSchema = yup.mixed().nullable().required("Required field");
+    let initialValues = {
+        city: "",
+        detailsAboutBooking: "",
+        yourAddress: "",
+        startTime: "",
+        endTime: "",
+        startDate: "",
+        endDate: "",
+      };
+      
+
+      let onSubmit = async (values, actions) => {
+        await debounce(1000);
+        try {
+          if (currOrder === 0 && durationTime?.hours < 1) {
+            toast.error(`Time must be more than 1 hour`);
+            return actions.setSubmitting(false);
+          }
+    
+          if (currOrder === 1 && durationDates.days < 2) {
+            toast.error(`Date must be more than 2 Day`);
+            return actions.setSubmitting(false);
+          }
+          if (currOrder === 0) {
+            let { endDate, ...valueOfSigleDay } = values;
+            let payloadDataSingle = {
+              ...valueOfSigleDay,
+              totalTime: `${durationTime?.hours} hour and ${durationTime?.min} minutes`,
+              totalMoney: durationTime.totalmoney,
+            };
+            if (user?.phoneNumber === null) {
+              toast.error(`Please update your phone number.`);
+              router.push("/dashboard/profile");
+            }
+            if (user?.phoneNumber !== null) {
+              let data = {
+                address: payloadDataSingle?.yourAddress,
+                name: user?.firstName + " " + user?.lastName,
+                phoneNumberUser: user?.phoneNumber,
+                phoneNumberVendor: passData?.vendorNumber,
+                package: JSON.stringify(passData),
+                bookedDay: payloadDataSingle?.startDate,
+                totalPayment: payloadDataSingle?.totalMoney,
+                vendorID: passData?.vendorID,
+                userID: user?.id,
+                city: payloadDataSingle?.city?.label,
+                start: payloadDataSingle?.startTime,
+                end: payloadDataSingle?.endTime,
+                total: payloadDataSingle?.totalTime,
+                initialPayment: 0,
+                duePayment: payloadDataSingle?.totalMoney,
+                status: "Pending",
+                title: passData?.title,
+                packageName: passData?.packName + " " + passData?.packageStandard,
+                notes: values?.detailsAboutBooking || "",
+              };
+              await API.graphql({
+                query: mutations.createOrders,
+                variables: { input: data },
+              });
+              await fetch(
+                "https://ouorw5sokfjhv44dyacow5acju0ucjeg.lambda-url.ap-southeast-1.on.aws/",
+                {
+                  method: "POST",
+                  mode: "no-cors",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    email: passData?.vendorEmail,
+                    subject: "New order request on eventizer",
+                    body: "You have a new order request on eventizer. Please approve or reject the order request.",
+                  }),
+                }
+              );
+              router.push("/dashboard/my-booking");
+            }
+          }
+    
+          if (currOrder === 1) {
+            let { startTime, endTime, ...valueOfMultipleDay } = values;
+            let payloadDataMulti = {
+              ...valueOfMultipleDay,
+              totalDays: durationDates.days,
+              totalMoney: durationDates.totalmoney,
+            };
+            if (user?.phoneNumber === null) {
+              toast.error(`Please update your phone number.`);
+              router.push("/dashboard/profile");
+            }
+            if (user?.phoneNumber !== null) {
+              let data = {
+                address: payloadDataMulti?.yourAddress,
+                name: user?.firstName + " " + user?.lastName,
+                phoneNumberUser: user?.phoneNumber,
+                phoneNumberVendor: passData?.vendorNumber,
+                package: JSON.stringify(passData),
+                totalPayment: payloadDataMulti?.totalMoney,
+                vendorID: passData?.vendorID,
+                userID: user?.id,
+                city: payloadDataMulti?.city?.label,
+                start: payloadDataMulti?.startDate,
+                end: payloadDataMulti?.endDate,
+                total: payloadDataMulti?.totalDays,
+                initialPayment: 0,
+                duePayment: payloadDataMulti?.totalMoney,
+                status: "Pending",
+                title: passData?.title,
+                packageName: passData?.packName + " " + passData?.packageStandard,
+                notes: values?.detailsAboutBooking || "",
+              };
+              await API.graphql({
+                query: mutations.createOrders,
+                variables: { input: data },
+              });
+              router.push("/dashboard/my-booking");
+            }
+          }
+        } catch (error) {
+         
+        }
+      };
+      
+     
+useEffect(() => {
+    let array = [];
+    vendor?.serviceLocation?.map((e) => {
+      let k = JSON.parse(e);
+      array.push(k);
+    });
+    setlocation(array);
+  }, []);
+
 
     return (
       <div>
@@ -146,15 +295,54 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
   
                   {firstPage && <>
                       <h2 className='text-xl font-medium text-center mt-12 mb-11'>Fillup some information to book</h2>
-                      <form onSubmit={handleOrderDataForPageOne} className='flex flex-col justify-center items-center w-320px  md:w-[454px] mx-auto'>
+                      <Formik
+                          initialValues={initialValues}
+                          validationSchema={yup.object().shape({
+                         city: commonFieldSchema,
+                           detailsAboutBooking: yup
+                           .string()
+                           .min(5, "Minimum 5 letter required")
+                            .max(500, "Maximum 500 letter required")
+                        .notRequired("Not required")
+                       .matches(/^([^0-9@]*)$/, "Only alphabets are allowed"),
+
+                          yourAddress: yup
+                      .string()
+                       .min(5, "Minimum 5 letter required")
+                   .required("Required field"),
+
+                     startTime: currOrder === 0 ? commonFieldSchema : "",
+                     endTime: currOrder === 0 ? commonFieldSchema : "",
+
+                     startDate: commonFieldSchema,
+                      endDate: currOrder === 1 ? commonFieldSchema : "",
+                     })}
+                     validateOnBlur={true}
+                 onSubmit={onSubmit}
+                     >
+
+
+                    {(props) => (
+                      <Form onSubmit={handleOrderDataForPageOne} className='flex flex-col justify-center items-center w-320px  md:w-[454px] mx-auto'>
                           <div className='flex justify-center '>
   
                               <div className='mr-1 md:w-1/2 w-[150px]'>
-                                  <SelectInput                                      
-                                      options={optionsServiceLoction}                                
-                                      placeholder="Select City"
-                                      name="city"
-                                 / >
+                              <SelectInput
+                           
+                              options={location}
+                              placeholder="Select City"
+                              name="city"
+                              handleBlur={props.setFieldTouched}
+                            value={props.values.city}
+                            handleChange={props.setFieldValue}
+                              error={
+                                    props.touched.city &&
+                                      props.errors.city &&
+                                   !props.values.city
+                                   ? props.errors.city
+                                       : ""
+                              }
+                            />
                               </div>
                               <div className='ml-1 md:w-1/2 w-[150px]'>
                                   <Input
@@ -164,16 +352,20 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                                   />
                               </div>
                           </div>
-                          <div>
-                              <DatePicker
-                                  name={"eventDate"}
-                                  showPopperArrow={false}
-                                  className={`inputdesign md:w-[454px]  w-[310px] font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] mb-5`}
-                                  placeholderText="Select date"
-                                  // minDate={moment().toDate()}
-                                  onFocus={(e) => (e.target.readOnly = true)}
-                                  dateFormat="dd/MM/yyyy"
-                              />
+                          <div className={` md:w-[492px]  w-[310px] font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] mb-5`}>
+                          <DatePickersStart
+                  name="startDate"
+                  startDate={startDate}
+                  endDate={endDate}
+                  fieldProps={props}
+                  
+                  error={
+                    props.touched.startDate && props.errors.startDate
+                      ? props.errors.startDate
+                      : ""
+                  }
+                  handleChange={(value) => setStartDate(value)}
+                />
                           </div>
                           <div className='flex'>
                               <div className='mr-1 md:w-1/2 w-[150px]'>
@@ -193,9 +385,11 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                           </div>
                               <input
                             role={'button'}
-                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit" value="Next" />                                              
-                      </form>
+                      </Form>
+                      )}
+                      </Formik>
                   </>}
   
                   {/* Second page starts from here */}
@@ -230,7 +424,7 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                                   </div>
                                   <input
                             role={'button'}
-                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit" value="Next" />                          
                               </form>
                           </div>
@@ -273,7 +467,7 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                                   </div>
                                   <input
                             role={'button'}
-                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit" value="Next" />       
                               </form>
                           </div>
@@ -307,7 +501,7 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
                                   </div>
                                  <input                                
                             role={'button'}
-                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2'
+                            className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit"
                              value="Next" />    
                               </form>

@@ -72,7 +72,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   return (
     <>
       <div className={` container pt-24`}>
-     {modal&&   <InformationModal setModal={setModal} setShowForm={setShowForm} fourthPage={fourthPage} setFourthPage={setFourthPage} firstPage={firstPage} setFirstPage={setFirstPage} modal={modal} />}
+     {modal&&   <InformationModal vendor={vendor} setModal={setModal} setShowForm={setShowForm} fourthPage={fourthPage} setFourthPage={setFourthPage} firstPage={firstPage} setFirstPage={setFirstPage} modal={modal} />}
 
      {!modal && <div>
       
