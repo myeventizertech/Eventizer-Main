@@ -35,16 +35,17 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
   const [errorText,setErrorText]=useState('')
 
 
-  const handleOrderDataForPageOne = (e)=>{      
-        e.preventDefault()
-      
-      
-        setFirstPage(false)
-        setSecondPage(true)
+  const handleOrderDataForPageOne = async(e)=>{      
+        e.preventDefault()            
+       
+
         setlocation(location)        
         setAddress(e.target.yourAddress.value)
         setStartTime(startTime?._i)
         setDescription(e.target.detailsAboutBooking.value)     
+       
+          setFirstPage(false)
+          setSecondPage(true)
     }
     
     const changeWedding = (e)=>{
@@ -138,6 +139,11 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
     }
   
     let customerData ={
+     vendor:vendor,
+      location:location,
+      address:address,
+      startTime:startTime,
+      startDate:startDate,    
         description:description,
         eventType:eventType,
         customerAge:customerAge,
@@ -359,7 +365,6 @@ useEffect(() => {
                             .string()
                             .min(5, "Minimum 5 letter required")
                             .required("Required field"),
-                            // endTime: currOrder === 0 ? commonFieldSchema : "",
                     
                             startDate:   yup
                             .string()
@@ -400,7 +405,7 @@ useEffect(() => {
                                       type="text"
                                       name="yourAddress"
                                       placeholder="Write Your Address"
-                                     
+                                     onChange={()=>setAddress(value)}
                                       value={props.values.yourAddress}
                                       handleChange={props.handleChange}
                                       handleBlur={props.handleBlur}
@@ -453,6 +458,7 @@ useEffect(() => {
                                   placeholder="Write something about your booking"
                                   handleChange={props.handleChange}
                                   handleBlur={props.handleBlur}
+                                  onBlur={()=>setDescription(value)}
                                   error={
                                     props.touched.detailsAboutBooking &&
                                       props.errors.detailsAboutBooking
@@ -462,6 +468,7 @@ useEffect(() => {
                               />
                           </div>
                               <input
+                              
                             role={'button'}
                             className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit" value="Next" />                                              
