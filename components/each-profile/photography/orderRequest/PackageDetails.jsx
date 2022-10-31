@@ -45,6 +45,7 @@ function SamplePrevArrow(props) {
 }
 
 const PackageDetails = ({ quality,setFirstPage,setFourthPage, packageValue, handleClick ,setModal}) => {
+  // console.log(packageValue[quality])
   let router = useRouter();
   let { verifyUser } = useUserOrVendor();
   let state = verifyUser?.isUser_vendor;
@@ -58,7 +59,8 @@ const PackageDetails = ({ quality,setFirstPage,setFourthPage, packageValue, hand
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, []);
 
-    const hanldleModal = ()=>{
+    const hanldleModal = (quality)=>{
+      handleClick(quality)
       setModal(true)
       setFirstPage(true)
       setFourthPage(false)
@@ -217,11 +219,11 @@ const PackageDetails = ({ quality,setFirstPage,setFourthPage, packageValue, hand
             //   }
 
             //   if (user?.phoneNumber) {
-            //     handleClick(quality);
+                // handleClick(quality);
             //   }
             //   ()=>setModal(true)
             // }}
-            onClick={hanldleModal}
+            onClick={()=>hanldleModal(quality)}
             className="text-white bgcolor2 font-18 mt-3 rounded w-full px-2 py-1 font-normal btn-hover"
           >
             Book Now

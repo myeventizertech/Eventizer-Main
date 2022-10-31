@@ -20,21 +20,39 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
    setShowForm(false) 
   }
 
+  const [packageStandard,setPackageStandard]= useState('')
+  const [vendorId,setVendorId]= useState('')
+  const [vendorNumber,setVendorNumber]=useState('')
+  const [title,setTitle]=useState('')
+  const [vendorEmail,setVendorEmail]= useState('')
+  const [packageName,setPackageName]= useState('')
+  const [packageService,setPackageService]= useState('')
+
   let handleSHowOrderFrom = (quality) => {
+    setPassData(obj);
+    // setShowForm(true);
 
     let obj = {
       ...orderData[quality],
-      packageStandard: quality,
-      vendorID: vendor?.id,
-      vendorNumber: vendor?.phoneNumber,
-      title: vendor?.title,
-      vendorEmail: vendor?.email,
-      packName: orderData?.packageName,
-      service: service
-    }
-    setPassData(obj);
-    setShowForm(true);
+      packageStandard: setPackageStandard(quality),
+      vendorId:  setVendorId(vendor?.id),
+      vendorNumber:setVendorNumber(vendor?.phoneNumber),
+      title:setTitle(vendor?.title),
+      vendorEmail:setVendorEmail(vendor?.email),
+      packName: setPackageName(orderData?.packageName),
+      service:setPackageService(service)
+    }   
   };
+  const packageObj = {
+    packageStandard:packageStandard,
+    vendorId:vendorId,
+    vendorNumber:vendorNumber,
+    title:title,
+    vendorEmail:vendorEmail,
+    packageName:packageName,
+    packageService:packageService
+  }
+
   function checkData() {
     if (orderData?.packageImage?.length !== 0) {
       orderData?.packageImage?.map(async (e) => {
@@ -71,7 +89,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   return (
     <>
       <div className={` container pt-24`}>
-     {modal&&   <InformationModal vendor={vendor} setModal={setModal} setShowForm={setShowForm} fourthPage={fourthPage} setFourthPage={setFourthPage} firstPage={firstPage} setFirstPage={setFirstPage} modal={modal} />}
+     {modal&&   <InformationModal vendor={vendor} setModal={setModal} setShowForm={setShowForm} fourthPage={fourthPage} setFourthPage={setFourthPage} firstPage={firstPage} setFirstPage={setFirstPage} packageValue={orderData}  modal={modal} packageObj={packageObj}/>}
 
      {!modal && <div>
       
@@ -121,9 +139,13 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
 
                 <div>
                   <PackageDetails
-                    quality="standard"
+                    quality={"standard"}
                     packageValue={orderData}
                     handleClick={handleSHowOrderFrom}
+                    setModal={setModal}
+                    setFirstPage={setFirstPage}
+                    setFourthPage={setFourthPage}
+                    firstPage={firstPage}
                   />
                 </div>
               )}
@@ -135,6 +157,10 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                     quality="premium"
                     packageValue={orderData}
                     handleClick={handleSHowOrderFrom}
+                    setModal={setModal}
+                    setFirstPage={setFirstPage}
+                    setFourthPage={setFourthPage}
+                    firstPage={firstPage}
                   />
                 </div>
               )}

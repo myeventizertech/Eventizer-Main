@@ -14,7 +14,7 @@ import moment from "moment";
 import toast from 'react-hot-toast';
 
 
-const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fourthPage, vendor,setFourthPage}) => {
+const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fourthPage, vendor,setFourthPage,packageValue,packageObj}) => {
     const [secondPage, setSecondPage] = useState(false)
     const [thirdPage, setThirdPage] = useState(false)
        
@@ -38,7 +38,6 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
   const handleOrderDataForPageOne = async(e)=>{      
         e.preventDefault()            
        
-
         setlocation(location)        
         setAddress(e.target.yourAddress.value)
         setStartTime(startTime?._i)
@@ -114,7 +113,6 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
             setThirdPage(false)
             setFourthPage(true)        
           }
-          console.log(customerAge)  
     }
 
     const change1 =(e)=>{
@@ -139,6 +137,7 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
     }
   
     let customerData ={
+      packageObj:packageObj,
      vendor:vendor,
       location:location,
       address:address,
@@ -156,10 +155,12 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
           setErrorText(true)
         } else {          
           setModal(false);
+          // setShowForm(true)
           toast.success('Data passed')
           console.log(customerData)
         }               
     }
+// Alumni Association
 
    
     const handleBackButton =()=>{
