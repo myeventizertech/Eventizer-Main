@@ -50,6 +50,7 @@ const Main = ({ data, service, rating, sLocation, specializedIn }) => {
       {boolOrder ? (
         <MainOrder
           vendor={vendorData}
+          bendor={service}
           orderData={order}
           bool={setboolOrder}
           boolval={boolOrder}

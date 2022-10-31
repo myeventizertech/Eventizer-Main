@@ -6,53 +6,26 @@ import Close from "../../../reUseComponents/icons/Close";
 import GoBack from "../../../reUseComponents/icons/GoBack";
 import { useRouter } from "next/router";
 import { Storage } from "aws-amplify"
-import InformationModal from "../../../reUseComponents/InformationModal";
 const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   const router = useRouter();
-  const [modal,setModal]= useState(false)
   const [showForm, setShowForm] = useState(false);
   const [passData, setPassData] = useState({});
   const [Files, setFiles] = useState([])
-  const [firstPage, setFirstPage] = useState(false)
-  const [fourthPage, setFourthPage] = useState(false)
-
-  const handleBack = ()=>{
-   setShowForm(false) 
-  }
-
-  const [packageStandard,setPackageStandard]= useState('')
-  const [vendorId,setVendorId]= useState('')
-  const [vendorNumber,setVendorNumber]=useState('')
-  const [title,setTitle]=useState('')
-  const [vendorEmail,setVendorEmail]= useState('')
-  const [packageName,setPackageName]= useState('')
-  const [packageService,setPackageService]= useState('')
-
   let handleSHowOrderFrom = (quality) => {
-    setPassData(obj);
-    // setShowForm(true);
 
     let obj = {
       ...orderData[quality],
-      packageStandard: setPackageStandard(quality),
-      vendorId:  setVendorId(vendor?.id),
-      vendorNumber:setVendorNumber(vendor?.phoneNumber),
-      title:setTitle(vendor?.title),
-      vendorEmail:setVendorEmail(vendor?.email),
-      packName: setPackageName(orderData?.packageName),
-      service:setPackageService(service)
-    }   
+      packageStandard: quality,
+      vendorID: vendor?.id,
+      vendorNumber: vendor?.phoneNumber,
+      title: vendor?.title,
+      vendorEmail: vendor?.email,
+      packName: orderData?.packageName,
+      service: service
+    }
+    setPassData(obj);
+    setShowForm(true);
   };
-  const packageObj = {
-    packageStandard:packageStandard,
-    vendorId:vendorId,
-    vendorNumber:vendorNumber,
-    title:title,
-    vendorEmail:vendorEmail,
-    packageName:packageName,
-    packageService:packageService
-  }
-
   function checkData() {
     if (orderData?.packageImage?.length !== 0) {
       orderData?.packageImage?.map(async (e) => {
@@ -83,19 +56,12 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
     }
     return false;
   };
-
-
-
   return (
     <>
-      <div className={` container pt-24`}>
-     {modal&&   <InformationModal vendor={vendor} setModal={setModal} setShowForm={setShowForm} fourthPage={fourthPage} setFourthPage={setFourthPage} firstPage={firstPage} setFirstPage={setFirstPage} packageValue={orderData}  modal={modal} packageObj={packageObj}/>}
-
-     {!modal && <div>
-      
-     {!showForm && (
+      <div className="container pt-24">
+        {!showForm && (
           <>
-            <button  className="py-5"  onClick={() => bool(false)} >
+            <button onClick={() => bool(false)} className="py-5">
               <GoBack />
             </button>
             <div>
@@ -105,7 +71,32 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
               </p>
             </div>
 
-        
+            <>
+              <div className=" overflow-hidden">
+                <>
+                  <div>
+                    <div className="overflow-x-auto p-5 flex gap-3 bar-thin">
+                      {Files?.map((item, i) => {
+                        return (
+                          <div key={i}>
+                            <div className="w-[300px] inline-block ">
+                              <div className="w-full h-[10rem] bg-[#e7e6ea]">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={item}
+                                  alt="package-images"
+                                  className="mx-auto block h-full"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              </div>
+            </>
 
 
             {orderData?.packageDemoLink && <div className="mt-8">
@@ -118,6 +109,9 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
             }
 
 
+
+
+
             <div className="grid grid-cols-1 md:grid-cols-2 mdx:grid-cols-3 gap-8 mt-7">
               {/* ====================== */}
               {checkIsHave("basic") && (
@@ -127,10 +121,6 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                     quality="basic"
                     packageValue={orderData}
                     handleClick={handleSHowOrderFrom}
-                    setModal={setModal}
-                    setFirstPage={setFirstPage}
-                    setFourthPage={setFourthPage}
-                    firstPage={firstPage}
                   />
                 </div>
               )}
@@ -139,13 +129,9 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
 
                 <div>
                   <PackageDetails
-                    quality={"standard"}
+                    quality="standard"
                     packageValue={orderData}
                     handleClick={handleSHowOrderFrom}
-                    setModal={setModal}
-                    setFirstPage={setFirstPage}
-                    setFourthPage={setFourthPage}
-                    firstPage={firstPage}
                   />
                 </div>
               )}
@@ -157,10 +143,6 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                     quality="premium"
                     packageValue={orderData}
                     handleClick={handleSHowOrderFrom}
-                    setModal={setModal}
-                    setFirstPage={setFirstPage}
-                    setFourthPage={setFourthPage}
-                    firstPage={firstPage}
                   />
                 </div>
               )}
@@ -170,37 +152,18 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
 
         {showForm && (
           <>
-            <div className="max-w-[40rem] mx-auto my-5 bg-white rounded p-6 shadow-lg">
-              
-            <header className='h-[73px] max-w-[40rem] w-[100%] mb-5  pl-[-24px] pr-[-24px] drop-shadow'>
-              
-            <div className='flex justify-between '>
-                    <div className='flex items-center pt-5'>
-                      <button onClick={handleBack}>
-                      <GoBack></GoBack>
-                      </button>
-                        <h1 className='text-2xl font-normal ml-5'>Makeup Artist</h1>
-                    </div>
-                    <div className='pt-5'>
-                       <button onClick={()=>setShowForm(false)}>
-                <Close />
-                       </button>
-                    </div>
-                </div>
-                </header>
-              {/* <button
+            <div className="max-w-[40rem] mx-auto bg-white rounded p-6 shadow-lg">
+              <button
                 onClick={() => setShowForm(false)}
                 className="ml-auto block mb-5"
               >
-              </button> */}
+                <Close />
+              </button>
               <OrderForm passData={passData} vendor={vendor} setShowForm={setShowForm} />
             </div>
           </>
         )}
-        
-     </div>}
       </div>
-      
     </>
   );
 };
