@@ -17,8 +17,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
   const [fourthPage, setFourthPage] = useState(false)
 
   const handleBack = ()=>{
-   setShowForm(false) ,setModal(true)
-
+   setShowForm(false) 
   }
 
   let handleSHowOrderFrom = (quality) => {
@@ -158,7 +157,6 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                     </div>
                     <div className='pt-5'>
                        <button onClick={()=>setShowForm(false)}>
-                       {/* <CLoso></CLoso> */}
                 <Close />
                        </button>
                     </div>

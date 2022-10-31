@@ -11,6 +11,7 @@ import GoBack from './icons/GoBack';
 import Input from './Input';
 import SelectInput from './SelectInput';
 import moment from "moment";
+import toast from 'react-hot-toast';
 
 
 const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fourthPage, vendor,setFourthPage}) => {
@@ -31,13 +32,15 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
   const [address,setAddress]=useState('')
 
   const [location, setlocation] = useState([])
+  const [errorText,setErrorText]=useState('')
+
 
   const handleOrderDataForPageOne = (e)=>{      
         e.preventDefault()
       
       
-        // setFirstPage(false)
-        // setSecondPage(true)
+        setFirstPage(false)
+        setSecondPage(true)
         setlocation(location)        
         setAddress(e.target.yourAddress.value)
         setStartTime(startTime?._i)
@@ -45,65 +48,93 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
     }
     
     const changeWedding = (e)=>{
-        setEventType(e.target.value)        
+        setEventType(e.target.value)      
+        setErrorText(false)                 
     }
     const changeFormal = (e)=>{
-        setEventType(e.target.value)    }
+        setEventType(e.target.value)    
+        setErrorText(false)               
+      }
     const changeBirthday = (e)=>{
         setEventType(e.target.value)
+        setErrorText(false)               
     }
     const changePhotoshoot = (e)=>{
         setEventType(e.target.value)
+        setErrorText(false)               
     }
     const changeFashion = (e)=>{
         setEventType(e.target.value)
+        setErrorText(false)               
     }
     
     const handleOrderDataForPageTwo = (e)=>{
-        e.preventDefault()              
+      e.preventDefault()              
+      if (!eventType) {
+        setErrorText(true)
+      } else if(eventType){
         setSecondPage(false)
-        setThirdPage(true)               
+        setThirdPage(true)        
+        setErrorText(false)               
+      }
     }
 
     const checkUnder13=(e)=>{
-        (customerAge.push(e.target.value))
+      setCustomerAge([...customerAge],e.target.value)
+      setErrorText(false)
     }
     const check1317=(e)=>{
-        (customerAge.push(e.target.value))
+      setCustomerAge([...customerAge,e.target.value])
+      setErrorText(false)
     }
     const check1828=(e)=>{
-        (customerAge.push(e.target.value))
+      setCustomerAge([...customerAge,e.target.value])
+      setErrorText(false)
     }
     const check2944=(e)=>{
-        (customerAge.push(e.target.value))
+      setCustomerAge([...customerAge,e.target.value])
+      setErrorText(false)
     }
     const chec4565=(e)=>{
-        (customerAge.push(e.target.value))
+      setCustomerAge([...customerAge,e.target.value])        
+      setErrorText(false)
     }
     const check65older=(e)=>{
-        (customerAge.push(e.target.value))
-    }
-
-    const handleOrderDataForPageThree = (e)=>{
-        e.preventDefault()                   
-        setThirdPage(false)
-        setFourthPage(true)        
+      setCustomerAge([...customerAge,e.target.value])     
+      setErrorText(false)   
+      }
+       
+        const handleOrderDataForPageThree = (e)=>{
+          e.preventDefault()     
+          if(customerAge.length===0){
+            setErrorText(true)
+          }              
+          else{
+            setThirdPage(false)
+            setFourthPage(true)        
+          }
+          console.log(customerAge)  
     }
 
     const change1 =(e)=>{
         setPeopleNumber(e.target.value)
-    }
+        setErrorText(false)
+      }
     const change2 =(e)=>{
         setPeopleNumber(e.target.value)
-    }
+        setErrorText(false)
+      }
     const change3 =(e)=>{
         setPeopleNumber(e.target.value)
-    }
+        setErrorText(false)
+      }
     const change4 =(e)=>{
         setPeopleNumber(e.target.value)
-    }
+        setErrorText(false)
+      }
     const change5 =(e)=>{
         setPeopleNumber(e.target.value)
+        setErrorText(false)
     }
   
     let customerData ={
@@ -114,10 +145,14 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
     }
   
     const handleOrderDataForPageFour = (e)=>{
-        e.preventDefault()                   
-        setModal(false);
-        setShowForm(true)
-        console.log(customerData)
+        e.preventDefault()    
+        if (!peopleNumber) {
+          setErrorText(true)
+        } else {          
+          setModal(false);
+          toast.success('Data passed')
+          console.log(customerData)
+        }               
     }
 
    
@@ -465,7 +500,11 @@ useEffect(() => {
                                       </label>
                                       
                                   </div>
+                                  <div>
+                                   {errorText&& <small className='text-sm text-red-500 text-center'>*Please select one</small>}
+                                  </div>
                                   <input
+                                  // disabled={!eventType}
                             role={'button'}
                             className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit" value="Next" />                          
@@ -508,7 +547,11 @@ useEffect(() => {
                                       </label>
                                       
                                   </div>
+                                  <div>
+                                   {errorText&& <small className='text-sm text-red-500 text-center'>*Please select one</small>}
+                                  </div>
                                   <input
+                                  // disabled={customerAge.length===0}
                             role={'button'}
                             className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit" value="Next" />       
@@ -542,7 +585,11 @@ useEffect(() => {
                                       </label>
                                     
                                   </div>
-                                 <input                                
+                                  <div>
+                                   {errorText&& <small className='text-sm text-red-500 text-center'>*Please select one</small>}
+                                  </div>
+                                 <input 
+                                                   
                             role={'button'}
                             className='bgcolor2 w-1/2 text-white rounded btn-hover  text-xl font-medium mb-5 py-2 my-6'
                             type="submit"
