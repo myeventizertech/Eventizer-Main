@@ -4,7 +4,7 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { optionsServiceLoction } from '../../utils/options';
-import { DatePickersStart } from '../each-profile/cinematography/orderRequest/DateTimeInputs';
+import { DatePickersStart, TimePickers } from '../each-profile/cinematography/orderRequest/DateTimeInputs';
 import { DatePickersEnd } from '../each-profile/photography/orderRequest/DateTimeInputs';
 import CLoso from './icons/Close';
 import GoBack from './icons/GoBack';
@@ -23,17 +23,25 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
     const [peopleNumber,setPeopleNumber]=useState('')
   
     
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+
+  const [startTime, setStartTime] = useState('');
+  const [address,setAddress]=useState('')
 
   const [location, setlocation] = useState([])
-    const handleOrderDataForPageOne = (e)=>{
+
+  const handleOrderDataForPageOne = (e)=>{      
         e.preventDefault()
-        
-        setFirstPage(false)
-    
-        setSecondPage(true)
-        setDescription(e.target.description.value)
+      
+      
+        // setFirstPage(false)
+        // setSecondPage(true)
+        setlocation(location)        
+        setAddress(e.target.yourAddress.value)
+        setStartTime(startTime?._i)
+        setDescription(e.target.detailsAboutBooking.value)     
     }
     
     const changeWedding = (e)=>{
@@ -146,10 +154,11 @@ const InformationModal = ({setModal,setShowForm,firstPage,setFirstPage,modal,fou
         endDate: "",
       };
       
-
       let onSubmit = async (values, actions) => {
         await debounce(1000);
         try {
+
+            
           if (currOrder === 0 && durationTime?.hours < 1) {
             toast.error(`Time must be more than 1 hour`);
             return actions.setSubmitting(false);
@@ -294,35 +303,42 @@ useEffect(() => {
                   {/* First page starts from here */}
   
                   {firstPage && <>
-                      <h2 className='text-xl font-medium text-center mt-12 mb-11'>Fillup some information to book</h2>
+                      <h2 className='text-xl font-medium text-center mt-12 mb-8'>Fillup some information to book</h2>
                       <Formik
                           initialValues={initialValues}
                           validationSchema={yup.object().shape({
-                         city: commonFieldSchema,
-                           detailsAboutBooking: yup
-                           .string()
-                           .min(5, "Minimum 5 letter required")
-                            .max(500, "Maximum 500 letter required")
-                        .notRequired("Not required")
-                       .matches(/^([^0-9@]*)$/, "Only alphabets are allowed"),
-
-                          yourAddress: yup
-                      .string()
-                       .min(5, "Minimum 5 letter required")
-                   .required("Required field"),
-
-                     startTime: currOrder === 0 ? commonFieldSchema : "",
-                     endTime: currOrder === 0 ? commonFieldSchema : "",
-
-                     startDate: commonFieldSchema,
-                      endDate: currOrder === 1 ? commonFieldSchema : "",
-                     })}
-                     validateOnBlur={true}
+                            city: commonFieldSchema,
+                            detailsAboutBooking: yup
+                              .string()
+                              .min(5, "Minimum 5 letter required")
+                              .max(500, "Maximum 500 letter required")
+                              .required("Required field")
+                              .matches(/^([^0-9@]*)$/, "Only alphabets are allowed"),
+                    
+                            yourAddress: yup
+                              .string()
+                              .min(5, "Minimum 5 letter required")
+                              .required("Required field"),
+                    
+                            startTime: yup
+                            .string()
+                            .min(5, "Minimum 5 letter required")
+                            .required("Required field"),
+                            // endTime: currOrder === 0 ? commonFieldSchema : "",
+                    
+                            startDate:   yup
+                            .string()
+                            .min(5, "Minimum 5 letter required")
+                            .required("Required field"),
+                            endDate: commonFieldSchema,
+                          })}
+                          validateOnBlur={true}
                  onSubmit={onSubmit}
                      >
 
 
                     {(props) => (
+                        
                       <Form onSubmit={handleOrderDataForPageOne} className='flex flex-col justify-center items-center w-320px  md:w-[454px] mx-auto'>
                           <div className='flex justify-center '>
   
@@ -333,8 +349,8 @@ useEffect(() => {
                               placeholder="Select City"
                               name="city"
                               handleBlur={props.setFieldTouched}
-                            value={props.values.city}
-                            handleChange={props.setFieldValue}
+                              value={props.values.city}
+                              handleChange={props.setFieldValue}
                               error={
                                     props.touched.city &&
                                       props.errors.city &&
@@ -349,6 +365,15 @@ useEffect(() => {
                                       type="text"
                                       name="yourAddress"
                                       placeholder="Write Your Address"
+                                     
+                                      value={props.values.yourAddress}
+                                      handleChange={props.handleChange}
+                                      handleBlur={props.handleBlur}
+                                      error={
+                                        props.touched.yourAddress && props.errors.yourAddress
+                                          ? props.errors.yourAddress
+                                          : ""
+                                      }
                                   />
                               </div>
                           </div>
@@ -367,20 +392,38 @@ useEffect(() => {
                   handleChange={(value) => setStartDate(value)}
                 />
                           </div>
-                          <div className='flex'>
-                              <div className='mr-1 md:w-1/2 w-[150px]'>
-                                  <DatePickersStart />
+                          <div className=''>
+                              <div className=' md:w-[492px]  w-[310px] font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] '>
+                              <TimePickers
+                      value={startTime}
+                      name="startTime"
+                      fieldProps={props}
+                      handleChange={(value) => {
+                        setStartTime(value);
+                      }}
+                      error={
+                        props.touched.startTime && props.errors.startTime
+                          ? props.errors.startTime
+                          : ""
+                      }
+                      placeholderText="Time"
+                    />
                               </div>
-                              <div className='ml-1 md:w-1/2 w-[150px]'>
-                                  <DatePickersEnd />
-                              </div>
+                             
                           </div>
                           <div className='mt-4 w-[310px] md:w-auto'>
                               <Input
-  
                                   istextArea={true}
-                                  name="description"
-                                  placeholder="Write something about your booking"  
+                                  name="detailsAboutBooking"
+                                  placeholder="Write something about your booking"
+                                  handleChange={props.handleChange}
+                                  handleBlur={props.handleBlur}
+                                  error={
+                                    props.touched.detailsAboutBooking &&
+                                      props.errors.detailsAboutBooking
+                                      ? props.errors.detailsAboutBooking
+                                      : ""
+                                  }  
                               />
                           </div>
                               <input
@@ -397,7 +440,7 @@ useEffect(() => {
                   {
                       secondPage && <>
                           <div className='mb-6'>
-                              <h2 className='text-xl font-medium text-center mt-12 mb-11'>What type of event?</h2>
+                              <h2 className='text-xl font-medium text-center mt-12 mb-8'>What type of event?</h2>
                               <form onSubmit={handleOrderDataForPageTwo} className='flex flex-col items-center '>
                                   <div className='flex flex-col'>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal ' htmlFor="ex1">Wedding
@@ -436,7 +479,7 @@ useEffect(() => {
                   {
                       thirdPage && <>
                           <div>
-                              <h2 className='text-xl font-medium text-center mt-12 mb-11'>How old are member?</h2>
+                              <h2 className='text-xl font-medium text-center mt-12 mb-8'>How old are member?</h2>
                               <form onSubmit={handleOrderDataForPageThree} className='flex flex-col items-center '>
                                   <div className='flex flex-col'>
                                       <label role={'button'} className='my-2 text-xl font-normal check flex' htmlFor="ex1">Under 13
@@ -478,7 +521,7 @@ useEffect(() => {
                   {
                       fourthPage && <>
                           <div className='mb-6'>
-                              <h2 className='text-xl font-medium text-center mt-12 mb-11'>How many people want to take makeup service?</h2>
+                              <h2 className='text-xl font-medium text-center mt-12 mb-8'>How many people want to take makeup service?</h2>
                               <form onSubmit={handleOrderDataForPageFour} className='flex flex-col items-center '>
                                   <div className='flex flex-col'>
                                       <label role={'button'} className='my-2 label flex text-xl font-normal' htmlFor="ex1">1
