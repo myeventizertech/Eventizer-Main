@@ -70,7 +70,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                 {orderData?.packageDetails}
               </p>
             </div>
-
+{/* 
             <>
               <div className=" overflow-hidden">
                 <>
@@ -81,7 +81,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                           <div key={i}>
                             <div className="w-[300px] inline-block ">
                               <div className="w-full h-[10rem] bg-[#e7e6ea]">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                    
                                 <img
                                   src={item}
                                   alt="package-images"
@@ -96,7 +96,7 @@ const Main = ({ vendor, bool, boolval, setorder, orderData, service }) => {
                   </div>
                 </>
               </div>
-            </>
+            </> */}
 
 
             {orderData?.packageDemoLink && <div className="mt-8">
