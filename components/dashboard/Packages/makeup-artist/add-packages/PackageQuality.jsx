@@ -113,18 +113,7 @@ const PackageQuality = ({
             />
           </>
         )}
-       
-       
-        
-
-       
-
-       
-
-        
-       
-       
-        
+               
         {/* ================================================ */}
         <FieldArray
           name={`${quality}.customOptionFields`}
