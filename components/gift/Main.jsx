@@ -29,17 +29,16 @@ const Main = ({service}) => {
               <li>Catagory</li>
             </ul>
           </div>
-          <div className='w-[1px] h-[100vh] mr-16 bg-[#D4D4D4]'>
+          <div className='w-[1px] h-[655px]  bg-[#D4D4D4]'>
 
           </div>
-            <div className='grid grid-cols-12 gap-8'>
+           <section className='pl-14'>
+            <h1 className='text-[32px] mb-[10px] font-normal'>Gift Items</h1>
+           <div className='grid grid-cols-12 gap-8 '>
                 {giftData.map(data=><GiftCard key={data.id} data={data}/>)}
             </div>
-
-
+           </section>
      </div>
-
-
     </div>
   );
 };

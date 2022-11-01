@@ -78,7 +78,7 @@ const ProfileInfo = ({
       <h4 className="test-profile-sm">{years?.value || "0"} experienced</h4>
       <h4 className="test-profile-sm">Based in {sLocation || ""}</h4>
       <div className="flex items-center test-profile-sm">
-        <div>
+        <div>          
           <ReactStars
             classNames="mr-2"
             size={24}
