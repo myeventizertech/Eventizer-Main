@@ -1,16 +1,15 @@
 import React from "react";
 import { useUserOrVendor } from "../../../../authContext/AuthContext";
 import { useRouter } from "next/router";
-// import ImageViewer from "react-simple-image-viewer/dist/types";
 import ImageViewer from "react-simple-image-viewer";
 import { useState } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import Slider from "react-slick";
 import { Storage } from "aws-amplify";
+
 function SampleNextArrow(props) {
   const { className, onClick } = props;
-  
 
   return (
     <div className={className} onClick={onClick}>
