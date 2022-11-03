@@ -49,6 +49,7 @@ function SampleNextArrow(props) {
 const GiftDetail = () => {
     const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [showMore,setShowMore]= useState(false)
 //   const [images, setimages] = useState([])
     const data = giftData.slice(0,1)
     const obj = data[0]
@@ -68,8 +69,8 @@ const GiftDetail = () => {
               dots: false,
               infinite: false,
               speed: 500,
-              slidesToShow: 3,
-              slidesToScroll: 3,
+              slidesToShow: 2,
+              slidesToScroll: 2,
             },
           },
         ],
@@ -98,14 +99,62 @@ const GiftDetail = () => {
     return (
         <section className='container  mt-[155px]'>
       
-           <div className='flex min-h-[300px] h-auto'>
-           <div className=' w-[435px]'>            
+           <div className='flex md:flex-row flex-col  min-h-[300px] h-auto'>
+           <div className='w-full md:w-[435px]'>            
                 <img src='https://i.ibb.co/gZZVZgt/Rectangle-4499.png' alt="gift" />
+           
+           <div className='mt-2'>
+
+           
+                <div className=" p-0 w-full">
+        {/* {images.map((src, index) => (
+          <img
+            src={src}
+            onClick={() => openImageViewer(index)}
+            width="300"
+            key={index}
+            style={{ margin: '2px' }}
+            alt=""
+          />
+        ))} */}
+
+        {isViewerOpen && (
+          <ImageViewer
+            src={images}
+            currentIndex={currentImage}
+            disableScroll={false}
+            closeOnClickOutside={true}
+            onClose={closeImageViewer}
+          />
+        )}
+      </div>
+
+<div className="w-auto md:w-[95%] mx-auto">
+        <Slider {...settings}>
+          {images.map((item, i) => {
+            return (
+              <div key={i} onClick={() => openImageViewer(i)}>
+                <div className=" sm:h-[8rem] mx bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item}
+                    alt={"profile-image"}
+                    className="mx-auto h-full w-[130px]"
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </Slider>
+      </div>
+      </div>
+
+
             </div>
 
-            <div className='ml-5 '>
-                <h1 className='text-2xl font-normal mb-[13px]'>Gift name of this vendor</h1>
-                <div className='text-lg font-normal flex'>
+            <div className='md:ml-5 '>
+                <h1 className='text-lg mt-5 md:mt-0 md:text-2xl font-normal md:mb-[13px] mb-[11px]'>Gift name of this vendor</h1>
+                <div className='text-lg  font-normal flex'>
                 <ReactStars
                   classNames="mr-2"
                   size={24}
@@ -115,33 +164,52 @@ const GiftDetail = () => {
                   isHalf={true}
                   value={obj.rating}
                 />
-                    <p>{obj.rating}</p>
-                    <p className='text-[#8C8C8C] mx-2'>(13 ratings)</p>
+                    <p className='md:text-lg text-[15px]'>{obj.rating}</p>
+                    <p className='md:text-lg text-[15px] text-[#8C8C8C] mx-2'>(13 ratings)</p>
                     </div>
 
-                    <div className='max-w-[375px]'>
-                    <p className='text-base font-normal my-[15px] text-[#6F6F6F] shrink'>{obj.giftDescription}</p>
+                    <div className='w-auto md:max-w-[375px]'>
+                    <p className='md:text-base text-[13.5px] font-normal my-[12px] md:my-[15px] text-[#6F6F6F] '>{!showMore ? obj.giftDescription.slice(0,150):obj.giftDescription}
+                    <button onClick={()=>setShowMore(!showMore)} className='text-xs text-[#EF0D5E] hover:text-[#ef0d60d4]'>{!showMore?'Show more':'Show less'}</button>
+                    </p>
                     </div>
 
-                    <p className='text-sm text-[#8C8C8C]'>৳{obj.price}</p>
-                    <hr className='mt-[-11.5px] w-[40px] mb-3'/>
+                   <div className='mb-[14px]'>
+                   <p className='text-sm  text-[#8C8C8C]'>৳{obj.price}</p>
+                    <div className='h-[1.2px]  bg-black mt-[-11.5px] w-[40px] mb-3'></div>
+                   </div>
+
                     <h2 className='text-3xl font-normal text-[#EF0D5E]'>৳{obj.price}</h2>
-                    <div className='flex mt-7'>
+                    <div className='flex md:ml-0 ml-[-5px] mt-6 md:mt-7'>
                        <button> 
                         <div className='bg-[#EDEEF5] w-9 h-9 rounded-[50%] flex justify-center align-middle'>
                             <p className='text-lg font-bold mt-1'>-</p>
                         </div>
                         </button>
-                        <p className='text-2xl font-medium mx-2 mt-1'>2</p>
+                        <p className='text-2xl font-medium mx-[10px] mt-1'>2</p>
                         <button>
                         <div className='bg-[#EDEEF5] w-9 h-9 rounded-[50%] flex justify-center align-middle'>
                             <p className='text-lg font-bold mt-1'>+</p>
                         </div>
                         </button>
-                        <button className='ml-2 bg-[#EF0D5E] w-28 text-white text-base font-normal rounded-[18px]'>Buy Now</button>
+                        <button className='ml-3 bg-[#EF0D5E] w-28 text-white text-base font-normal rounded-[18px]'>Buy Now</button>
                     </div>
+
+                    <div className='text-base ml-7 font-normal'>
+            <div className='flex'>
+            <h3>In box:</h3>
+            <h3 className='ml-3'>1. First Item</h3>
             </div>
-            <div className='ml-7 w-[280px]'>            
+            <div className='ml-16'>
+            <h3>2. Second Item</h3>
+            <h3>2. Third Item</h3>
+            </div>
+
+            
+           </div>
+
+            </div>
+            <div className='md:ml-7 md:w-[280px] w-full'>            
                 <div className=' bg-[#D9D9D9]'>
                     <h1 className='ml-[18px] py-2 text-lg font-normal '>Customize</h1>
                 </div>
@@ -169,64 +237,9 @@ const GiftDetail = () => {
 
 
           <div className='flex mt-6'>
-           <div className='ml-5  max-w-[400px]'>
+          
+
            
-        <div className="m-0 p-0 w-full">
-        {/* {images.map((src, index) => (
-          <img
-            src={src}
-            onClick={() => openImageViewer(index)}
-            width="300"
-            key={index}
-            style={{ margin: '2px' }}
-            alt=""
-          />
-        ))} */}
-
-        {isViewerOpen && (
-          <ImageViewer
-            src={images}
-            currentIndex={currentImage}
-            disableScroll={false}
-            closeOnClickOutside={true}
-            onClose={closeImageViewer}
-          />
-        )}
-      </div>
-
-<div className=" ">
-        <Slider {...settings}>
-          {images.map((item, i) => {
-            return (
-              <div key={i} onClick={() => openImageViewer(i)}>
-                <div className=" sm:h-[8rem] bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item}
-                    alt={"profile-image"}
-                    className=" h-full w-[130px]"
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </Slider>
-      </div>
-      
-           </div>
-
-           <div className='text-base ml-7 font-normal'>
-            <div className='flex'>
-            <h3>In box:</h3>
-            <h3 className='ml-3'>1. First Item</h3>
-            </div>
-            <div className='ml-16'>
-            <h3>2. Second Item</h3>
-            <h3>2. Third Item</h3>
-            </div>
-
-            
-           </div>
 
            </div>
 
