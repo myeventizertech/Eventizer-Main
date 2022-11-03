@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import styles from "../../styles/gift.module.css"
 import RatingsSection from '../../components/gift/RatingsSection';
+import ReactStars from 'react-rating-stars-component';
 
 
 function SampleNextArrow(props) {
@@ -105,6 +106,15 @@ const GiftDetail = () => {
             <div className='ml-5 '>
                 <h1 className='text-2xl font-normal mb-[13px]'>Gift name of this vendor</h1>
                 <div className='text-lg font-normal flex'>
+                <ReactStars
+                  classNames="mr-2"
+                  size={24}
+                  edit={false}
+                  color={"#adb5bd"}
+                  activeColor={"#ef0d5e"}
+                  isHalf={true}
+                  value={obj.rating}
+                />
                     <p>{obj.rating}</p>
                     <p className='text-[#8C8C8C] mx-2'>(13 ratings)</p>
                     </div>
@@ -227,7 +237,9 @@ const GiftDetail = () => {
             </div>
             <div className='mt-4'>
               <p className='text-lg font-normal ml-11 mr-16'>What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets contai</p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley
+            of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was 
+            popularised in the 1960s with the release of Letraset sheets contai</p>
             </div>
             <RatingsSection/>
            </div>

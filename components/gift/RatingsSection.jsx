@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactStars from 'react-rating-stars-component';
+import { reviews } from './giftData';
 
 const RatingsSection = () => {
     return (
@@ -14,22 +16,81 @@ const RatingsSection = () => {
                     <div className='flex justify-between'>
                         <div>
                             <p className='text-base font-normal'>Service</p>
-                            <p className='text-base font-normal'>star</p>
+                            <ReactStars
+        classNames="mr-2"
+        size={20}
+        edit={true}
+        color={"#adb5bd"}
+        activeColor={"#ef0d5e"}
+        isHalf={true}
+        value={5}
+        // onChange={(value) => {
+        //   fieldProps.setFieldValue(name, value);
+        // }}
+      />
                         </div>
                         <div>
                             <p className='text-base font-normal'>Behaviour</p>
-                            <p className='text-base font-normal'>star</p>
+                            <ReactStars
+        classNames="mr-2"
+        size={20}
+        edit={true}
+        color={"#adb5bd"}
+        activeColor={"#ef0d5e"}
+        isHalf={true}
+        value={5}
+        // onChange={(value) => {
+        //   fieldProps.setFieldValue(name, value);
+        // }}
+      />
                         </div>
                         <div>
                             <p className='text-base font-normal'>Value of money</p>
-                            <p className='text-base font-normal'>star</p>
+                            <ReactStars
+        classNames="mr-2"
+        size={20}
+        edit={true}
+        color={"#adb5bd"}
+        activeColor={"#ef0d5e"}
+        isHalf={true}
+        value={5}
+        // onChange={(value) => {
+        //   fieldProps.setFieldValue(name, value);
+        // }}
+      />
                         </div>
                     </div>
                     <div className=' flex flex-col items-end justify-end'>
                        <input type="text" className='pl-3 w-full rounded-[6px] border-[0.5px] border-[#C4C4C4] mt-2 h-[58px] text-[#8C8C8C] hover:border-black' placeholder='Write a review'/>
                        <button className='text-base w-24 text-white rounded bg-[#EF0D5E] py-[6px] mt-[10px] right-0 '>Submit</button>
                     </div>
-                </div>
+                    </div>
+                    <div>
+                       {reviews.map(review=>
+                       <div className='flex my-4' key={review.id}>
+                        <div className='mr-6'>
+                        <img className='' src={review.img} alt="user" />
+                        </div>
+                        <div className=''>
+                            <p className='text-base  text-[#595959] font-normal'>{review.name}</p>
+                            <ReactStars
+        classNames="mr-2"
+        size={20}
+        edit={true}
+        color={"#adb5bd"}
+        activeColor={"#ef0d5e"}
+        isHalf={true}
+        value={review.rating}
+        // onChange={(value) => {
+        //   fieldProps.setFieldValue(name, value);
+        // }}
+      />
+                            <div className='max-w-[590px]'>
+                            <p className='text-base text-[#595959] font-normal'>{review.review}</p>
+                            </div>
+                        </div>
+                       </div>) }
+                    </div>
               </div>
         </div>
     );

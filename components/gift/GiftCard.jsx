@@ -4,17 +4,28 @@ import p1 from '../../public/img/Rectangle 42.png'
 
 const GiftCard = ({data}) => {
     return (
-        <section className='w-[280px] rounded-lg col-span-4 border '>
-            <div>
+        <section className='rounded  bg-base-100 col-span-6 min-w-full   lg:min-w-full  md:col-span-6 mdx:col-span-4 shadow-md w-[100%] '>
+            <div className='md:w-[280px] w-[100%]'>
             <img src={data.giftPhoto} alt="gift" />
 
-           <div className='mt-[-30px] border-[#252836] border w-[63px] h-[63px] ml-[195px] rounded-[50%] z-10'>
-           <div className='mb-[-3px]'>
-           <img src={data.sellerPhoto} alt="seller" />
-           </div>
-           </div>
+             <div>
+                                                               
+            <div className="mt-[-17.5px] md:mt-[-32.5px] ml-[95px] md:ml-[197px] absolute bg-slate-300 bg-opacity-10 rounded-[50%] w-[35px] md:w-[63px]    border border-gray-500">
+                <div className=" overflow-hidden relative rounded-full ">
+                  {  (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={data.sellerPhoto?data.sellerPhoto :
+                            "/img/placeholder-image.png"}
+                      className=" object-cover  mx-auto mt-[4px] md:mt-[6px] w-[30px] md:w-[55px] "
+                      alt={"profile-image"}
+                    />
+                  )}
+                </div>
+              </div>
+             </div> 
             </div>
-            <div className='px-7 py-[10px]'>
+            <div className='md:px-7 px-3 md:py-[10px] py-[8px]'>
             <div>
                 <p className='text-xs font-normal text-[#EF0D5E]'>{data.rating}</p>
                 <h1 className='text-lg font-normal'>{data.name}</h1>
@@ -25,7 +36,7 @@ const GiftCard = ({data}) => {
             </div>
             <div className='flex justify-between mt-3 '>
                 <h3 className='text-sm text-[#EF0D5E] font-normal'>৳{data.price}</h3>
-              <button className='rounded text-white bg-[#EF0D5E] p-1 text-xs w-[82px] font-normal'>Buy Now</button>
+              <button className='rounded text-white bg-[#EF0D5E] md:p-1 text-[8px] md:text-xs w-[45px] md:w-[82px] h-[15px] md:h-[28px] font-normal'>Buy Now</button>
             </div>
             </div>
         </section>
