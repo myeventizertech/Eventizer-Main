@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import Main from "../../components/dashboard/add-packages/Main";
 import Layout from "../../components/dashboard/Layout";
 import Head from "next/head";
 import { vendorProtectRoute } from "../../utils/vendorProtectRoute";
@@ -12,6 +11,7 @@ import CinematographyMain from "../../components/dashboard/Packages/cinematograp
 import DjMain from "../../components/dashboard/Packages/dj-musician/add-packages/Main"
 import MehediMain from "../../components/dashboard/Packages/mehedi-artist/add-packages/Main"
 import MakeupMain from "../../components/dashboard/Packages/makeup-artist/add-packages/Main"
+import GiftMain from "../../components/dashboard/Packages/giftItem/Main";
 const AddPackages = () => {
   let router = useRouter();
   const { verifyUser } = useUserOrVendor();
@@ -46,12 +46,12 @@ const AddPackages = () => {
         <title>Eventizer | Add Packages</title>
       </Head>
       <Layout>
-
-       {serviceCheck === "photography" && <PhotographyMain/>}
+      <GiftMain/>
+       {/* {serviceCheck === "photography" && <PhotographyMain/>}
 					{serviceCheck === "cinematography" && <CinematographyMain />}
 					{serviceCheck === "dj-musician" && <DjMain />}
 					{serviceCheck === "mehedi-artist" && <MehediMain />}
-					{serviceCheck === "makeup-artist" && <MakeupMain />}
+					{serviceCheck === "makeup-artist" && <MakeupMain />} */}
       </Layout>
     </>
   );

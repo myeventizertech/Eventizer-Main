@@ -179,23 +179,23 @@ const GiftDetail = () => {
                     <div className='h-[1.2px]  bg-black mt-[-11.5px] w-[40px] mb-3'></div>
                    </div>
 
-                    <h2 className='text-3xl font-normal text-[#EF0D5E]'>৳{obj.price}</h2>
+                    <h2 className='text-[28px] font-normal text-[#EF0D5E]'>৳ {obj.price}</h2>
                     <div className='flex md:ml-0 ml-[-5px] mt-6 md:mt-7'>
                        <button> 
-                        <div className='bg-[#EDEEF5] w-9 h-9 rounded-[50%] flex justify-center align-middle'>
+                        <div className='bg-[#EDEEF5] md:w-9 w-[30px] h-[30px] md:h-9 rounded-[50%] flex justify-center align-middle'>
                             <p className='text-lg font-bold mt-1'>-</p>
                         </div>
                         </button>
-                        <p className='text-2xl font-medium mx-[10px] mt-1'>2</p>
+                        <p className='md:text-2xl text-[20px] font-medium mx-[10px] mt-1'>2</p>
                         <button>
-                        <div className='bg-[#EDEEF5] w-9 h-9 rounded-[50%] flex justify-center align-middle'>
+                        <div className='bg-[#EDEEF5] md:w-9 w-[30px] h-[30px] md:h-9 rounded-[50%] flex justify-center align-middle'>
                             <p className='text-lg font-bold mt-1'>+</p>
                         </div>
                         </button>
-                        <button className='ml-3 bg-[#EF0D5E] w-28 text-white text-base font-normal rounded-[18px]'>Buy Now</button>
+                        <button className='ml-3 bg-[#EF0D5E] w-[93px] md:w-28 text-white text-base font-normal md:rounded-[18px] rounded-[15px]'>Buy Now</button>
                     </div>
 
-                    <div className='text-base ml-7 font-normal'>
+                    <div className='text-base mt-[30px] mb-[28px] font-normal'>
             <div className='flex'>
             <h3>In box:</h3>
             <h3 className='ml-3'>1. First Item</h3>
@@ -246,10 +246,10 @@ const GiftDetail = () => {
            {/* More Information section */}
            <div className='mt-5'>
             <div className='bg-[#D9D9D9]'>
-              <h2 className='text-lg py-2 font-normal ml-11'>More information about gift</h2>
+              <h2 className='text-lg py-2 font-normal ml-3 md:ml-11'>More information about gift</h2>
             </div>
             <div className='mt-4'>
-              <p className='text-lg font-normal ml-11 mr-16'>What is Lorem Ipsum?
+              <p className='md:text-lg text-base font-normal md:ml-11 md:mr-16'>What is Lorem Ipsum?
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley
             of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was 
             popularised in the 1960s with the release of Letraset sheets contai</p>

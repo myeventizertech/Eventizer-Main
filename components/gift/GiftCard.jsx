@@ -5,7 +5,7 @@ import p1 from '../../public/img/Rectangle 42.png'
 const GiftCard = ({data}) => {
     return (
         <section className='rounded  bg-base-100 col-span-6 min-w-full   lg:min-w-full  md:col-span-6 mdx:col-span-4 shadow-md w-[100%] '>
-            <div className='md:w-[280px] w-[100%]'>
+            <div className=' w-[100%]'>
             <img src={data.giftPhoto} alt="gift" />
 
              <div>

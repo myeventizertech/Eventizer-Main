@@ -1,0 +1,408 @@
+import React, { useState,useEffect } from "react";
+import Link from "next/link";
+import LinkIconPink from '../../../reUseComponents/icons/LinkIconPink'
+import initalValue from "../../../../utils/add-packages/initalValue";
+import { Formik, Form } from "formik";
+import toast from "react-hot-toast";
+import ButtonClick from "../../../reUseComponents/ButtonClick";
+import schema from "../../../../utils/add-packages/schema";
+import { useUserOrVendor } from "../../../../authContext/AuthContext";
+import PackageFrom from "./PackageForm";
+import debounce from "../../../../utils/debounceSubmitHandler";
+import Loader from "../../../reUseComponents/Loader";
+import { v4 as uuid } from "uuid";
+import services from "../../../../utils/services";
+import { Storage } from "@aws-amplify/storage";
+import { API } from "aws-amplify";
+import * as mutations from "../../../../src/graphql/mutations";
+import {useRouter} from 'next/router'
+import DropZone from "../../../reUseComponents/dropZone/DropZone";
+
+const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
+  const router =useRouter()
+  const { verifyUser } = useUserOrVendor();
+  let { attributes } = verifyUser?.isUser_vendorAttr || {};
+  let serviceCheck = attributes?.["custom:service"];
+	const [serviceAPI, setserviceAPI] = useState(null);
+	const [vData, setvData] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [filesB, setFilesB] = useState([]);
+  const [filesS, setFilesS] = useState([]);
+  const [filesP, setFilesP] = useState([]);
+  const [fileError, setFileError] = useState(false);
+  const storage = JSON.parse(localStorage.getItem("AmpUserInfo"));
+	let { dispatch } = useUserOrVendor();
+  const [loadImg, setloadImg] = useState(false);
+  let prevPackage= storage.vendor?.packages
+  
+  const [isSingle,setIsSingle]=useState(false)
+  const [isMultiple,setIsMultiple]=useState(false)
+
+  let a = {name:"Test"}
+  const inA = [a,a,a]
+  console.log(inA.map(b=>b));
+
+	async function check() {
+		if (serviceCheck === "photography") {
+			setserviceAPI(mutations.updatePhotography);
+			setvData("updatePhotography");
+		}
+		if (serviceCheck === "cinematography") {
+			setserviceAPI(mutations.updateCinematography);
+			setvData("updateCinematography");
+		}
+		if (serviceCheck === "dj-musician") {
+			setserviceAPI(mutations.updateDJMusician);
+			setvData("updateDJMusician");
+		}
+		if (serviceCheck === "mehedi-artist") {
+			setserviceAPI(mutations.updateMehediArtist);
+			setvData("updateMehediArtist");
+		}
+		if (serviceCheck === "makeup-artist") {
+			setserviceAPI(mutations.updateMakeupArtist);
+			setvData("updateMakeupArtist");
+		}
+	}
+  useEffect(() => {
+check()
+  }, [])
+  useEffect(() => {
+		if (addPackAgeInitalValue?.packageImage?.length !== 0) {
+			addPackAgeInitalValue?.packageImage?.map(async (e) => {
+				let signedURL = await Storage.get(e);
+				let url = signedURL;
+				const data = await fetch(url);
+				if (data.ok) {
+					const result = await data.blob();
+					//   var blob = new Blob([result], { type: "image/png" });
+					setFiles((prev) => {
+						return [...prev, { file: result }];
+					});
+				} else {
+					setloadImg(false);
+				}
+			});
+			setloadImg(true);
+		}
+	}, []);
+  useEffect(() => {
+		if (addPackAgeInitalValue?.basic?.packageImage?.length !== 0) {
+			addPackAgeInitalValue?.basic?.packageImage?.map(async (e) => {
+				let signedURL = await Storage.get(e);
+				let url = signedURL;
+				const data = await fetch(url);
+				if (data.ok) {
+					const result = await data.blob();
+					//   var blob = new Blob([result], { type: "image/png" });
+					setFilesB((prev) => {
+						return [...prev, { file: result }];
+					});
+				} else {
+					setloadImg(false);
+				}
+			});
+			setloadImg(true);
+		}
+	}, []);
+  useEffect(() => {
+		if (addPackAgeInitalValue?.standard?.packageImage?.length !== 0) {
+			addPackAgeInitalValue?.standard?.packageImage?.map(async (e) => {
+				let signedURL = await Storage.get(e);
+				let url = signedURL;
+				const data = await fetch(url);
+				if (data.ok) {
+					const result = await data.blob();
+					//   var blob = new Blob([result], { type: "image/png" });
+					setFilesS((prev) => {
+						return [...prev, { file: result }];
+					});
+				} else {
+					setloadImg(false);
+				}
+			});
+			setloadImg(true);
+		}
+	}, []);
+  useEffect(() => {
+		if (addPackAgeInitalValue?.premium?.packageImage?.length !== 0) {
+			addPackAgeInitalValue?.premium?.packageImage?.map(async (e) => {
+				let signedURL = await Storage.get(e);
+				let url = signedURL;
+				const data = await fetch(url);
+				if (data.ok) {
+					const result = await data.blob();
+					//   var blob = new Blob([result], { type: "image/png" });
+					setFilesP((prev) => {
+						return [...prev, { file: result }];
+					});
+				} else {
+					setloadImg(false);
+				}
+			});
+			setloadImg(true);
+		}
+	}, []);
+  let onSubmit = async (values, actions) => {
+    try {
+      await debounce(2000);
+
+          let allPackageImage = [];
+          if (iseEDit) {
+            let i=0
+            await files.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImage.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          values.packageImage = [...allPackageImage];
+        let details =storage.vendorDetails
+        let balance =storage.balance
+        let prevPackage= storage.vendor?.packages
+        let profile =storage?.profilePicture ||""
+        let newData =JSON.stringify(values)
+        
+        prevPackage[index]= newData
+        let data ={id:attributes.sub,packages:prevPackage}
+        const updatedVendorDetails = await API.graphql({
+          query: serviceAPI,
+          variables: { input: data  },
+        });
+        dispatch({
+          type: "UPDATE_SUCCESS",
+          payload: {
+              vendorDetails: details,
+              vendor: updatedVendorDetails.data[vData],
+              balance: balance,
+              data:"Found",
+              profilePicture:profile
+            
+          },
+        })
+  
+        setFiles([]);
+        setFileError(false);
+        actions.resetForm();
+        toast.success(`Package updated successfully`);
+        setEditIsOpen(false)
+      }else{
+        if (addPackAgeInitalValue.packageImage.length > 0) {
+          values.packageImage = [...addPackAgeInitalValue.packageImage];
+        } else {
+          let allPackageImage = [];
+          let allPackageImageB = [];
+          let allPackageImageS = [];
+          let allPackageImageP = [];
+          if (files) {
+            let i=0
+            await files.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImage.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          }
+          if (filesB) {
+            let i=0
+            await filesB.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/Basic/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImageB.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          }
+          if (filesS) {
+            let i=0
+            await filesS.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/Standard/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImageS.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          }
+          if (filesP) {
+            let i=0
+            await filesP.map(async (e) => {
+              const fileName = `PackageImages/${attributes.sub}/Premium/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
+              allPackageImageP.push(fileName);
+          await Storage.put(
+                fileName,
+                e.file
+              )
+              
+            });
+          }
+          values.packageImage = [...allPackageImage];
+          values.standard.packageImage = [...allPackageImageS];
+          values.basic.packageImage = [...allPackageImageB];
+          values.premium.packageImage = [...allPackageImageP];
+        }
+        let details =storage.vendorDetails
+        let balance =storage.balance
+        let prevPackage= storage.vendor?.packages
+        let profile =storage?.profilePicture ||""
+        let newData =JSON.stringify(values)
+        let finalData = null
+        // work here ==============================
+        if(prevPackage === null){
+          finalData =[newData]
+        }if(prevPackage !== null){
+          finalData =[...prevPackage,newData]
+        }
+        // work here ==============================
+        values.id = uuid()
+        
+ 
+        let data ={id:attributes.sub,packages:finalData}
+        const updatedVendorDetails = await API.graphql({
+          query: serviceAPI,
+          variables: { input: data  },
+        });
+        dispatch({
+          type: "UPDATE_SUCCESS",
+          payload: {
+              vendorDetails: details,
+              vendor: updatedVendorDetails.data[vData],
+              balance: balance,
+              data:"Found",
+              profilePicture:profile
+            
+          },
+        })
+  
+        setFiles([]);
+        setFileError(false);
+        actions.resetForm();
+        toast.success(`Package created successfully`);
+        router.push("/dashboard/my-package")
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  let handleClick = (formikValues) => {
+    !Object.values(formikValues).every((o) => o === null) && setFileError(true);
+  };
+  return (
+    <>
+      <div className="color3 font-14 sm:font-16 flex justify-end">
+        <Link href="/documentation">
+          <a className="btn-hover">
+            <span className="flex gap-1 items-center">
+              <span>Documentation</span>
+              <span>
+                <LinkIconPink />
+              </span>
+            </span>
+          </a>
+        </Link>
+      </div>
+      <Formik
+        initialValues={addPackAgeInitalValue}
+        validationSchema={schema(serviceCheck)}
+        validateOnBlur={true}
+        onSubmit={onSubmit}
+      >
+        {(props) => (
+          <Form>
+            <div className="md:flex md:flex-row-reverse  ">
+
+            <div className="md:w-[45%] mx-auto">
+
+              <DropZone
+              label="Please Upload Gift Images"
+              files={filesP}
+              setFiles={setFilesP}
+              fileError={fileError}
+              showImage={false}
+              fileLimit={5}
+              minFileLimit={3}
+              dropZoneHeight="h-[280px]"
+              dropZoneImgWidth="w-[20px] sm:w-[35px]"
+              dropZoneMidText="font-14 md:font-18 mt-[5px]"
+              dropZoneEndText="font-12 sm:font-14 mt-[6px]"
+              />
+              </div>
+
+          <div className="md:w-[45%] mx-auto">
+
+            <PackageFrom
+              props={props}
+              files={files}
+              setFiles={setFiles}
+              filesB={filesB}
+              setFilesB={setFilesB}
+              filesP={filesP}
+              setFilesP={setFilesP}
+              filesS={filesS}
+              setFilesS={setFilesS}
+              fileError={fileError}
+              serviceCheck={serviceCheck}
+              addPackAgeInitalValue={addPackAgeInitalValue}
+              iseEDit={iseEDit}
+              />
+              </div>
+
+              </div>
+             <section className=" md:ml-3">
+             <div className="flex">
+             <div className=' '>
+                    <input className='mt-[15px]' onClick={()=>setIsSingle(!isSingle)} type="checkbox" name="First item" id="first-item-checkbox" />
+                    <label role={'button'} className='text-base font-normal ml-2' htmlFor="first-item-checkbox">Single</label>
+                    </div>
+             <div  className='ml-8'>
+                    <input className='mt-[15px]' onClick={()=>setIsMultiple(!isMultiple)} type="checkbox" name="First item" id="second-item-checkbox" />
+                    <label role={'button'} className='text-base font-normal ml-2' htmlFor="second-item-checkbox">Multiple</label>
+                    </div>
+             </div>
+
+             {(isSingle&&!isMultiple)&&
+             <div className="mt-8">
+              <h2 className="text-lg">Price</h2>
+              <div className="mt-2">
+              <input className="inpBorderColor w-full md:w-[47%] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]" type="text" placeholder="৳6000"/>
+              </div>
+              </div>
+              }
+              </section> 
+
+
+            <ButtonClick
+              type="submit"
+              width="null"
+              padding="px-6 sm:px-14"
+              handleClick={() => handleClick(props.values)}
+              css={`bgcolor2 text-white rounded-[8px] w-full ml-auto block mt-8 ${
+                props.isSubmitting && "opacity-75"
+              }`}
+              text={
+                props.isSubmitting ? (
+                  <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
+                ) : (
+                  "Publish"
+                )
+              }
+              disable={props.isSubmitting || (files.length > 0 ? "" : !props.dirty) }
+            />
+          </Form>
+        )}
+      </Formik>
+    </>
+  );
+};
+
+export default PhotographyMain;
