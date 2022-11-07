@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import Link from "next/link";
 import LinkIconPink from '../../../reUseComponents/icons/LinkIconPink'
 import initalValue from "../../../../utils/add-packages/initalValue";
-import { Formik, Form } from "formik";
+import { Formik, Form, FieldArray } from "formik";
 import toast from "react-hot-toast";
 import ButtonClick from "../../../reUseComponents/ButtonClick";
 import schema from "../../../../utils/add-packages/schema";
@@ -17,6 +17,8 @@ import { API } from "aws-amplify";
 import * as mutations from "../../../../src/graphql/mutations";
 import {useRouter} from 'next/router'
 import DropZone from "../../../reUseComponents/dropZone/DropZone";
+import Input from "../../../reUseComponents/Input";
+import InputError from "../../../reUseComponents/InputError";
 
 const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
   const router =useRouter()
@@ -38,10 +40,7 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
   const [isSingle,setIsSingle]=useState(false)
   const [isMultiple,setIsMultiple]=useState(false)
 
-  let a = {name:"Test"}
-  const inA = [a,a,a]
-  console.log(inA.map(b=>b));
-
+ 
 	async function check() {
 		if (serviceCheck === "photography") {
 			setserviceAPI(mutations.updatePhotography);
@@ -297,6 +296,20 @@ check()
   let handleClick = (formikValues) => {
     !Object.values(formikValues).every((o) => o === null) && setFileError(true);
   };
+
+  const handleSingle = ()=>{
+    setIsSingle(true)
+    setIsMultiple(false)
+  }
+  const handleMultiple = ()=>{
+    setIsMultiple(true)
+    setIsSingle(false)
+  }
+
+  const handleImage = (e)=>{
+    console.log(e.target.files[0])
+  }
+
   return (
     <>
       <div className="color3 font-14 sm:font-16 flex justify-end">
@@ -331,7 +344,7 @@ check()
               showImage={false}
               fileLimit={5}
               minFileLimit={3}
-              dropZoneHeight="h-[280px]"
+              dropZoneHeight="md:h-[280px] h-[170px]"
               dropZoneImgWidth="w-[20px] sm:w-[35px]"
               dropZoneMidText="font-14 md:font-18 mt-[5px]"
               dropZoneEndText="font-12 sm:font-14 mt-[6px]"
@@ -360,17 +373,17 @@ check()
               </div>
              <section className=" md:ml-3">
              <div className="flex">
-             <div className=' '>
-                    <input className='mt-[15px]' onClick={()=>setIsSingle(!isSingle)} type="checkbox" name="First item" id="first-item-checkbox" />
+             <div   className=' '>
+                    <input onClick={handleSingle} className='mt-[15px]' type="radio" name="First item" id="first-item-checkbox" />
                     <label role={'button'} className='text-base font-normal ml-2' htmlFor="first-item-checkbox">Single</label>
                     </div>
-             <div  className='ml-8'>
-                    <input className='mt-[15px]' onClick={()=>setIsMultiple(!isMultiple)} type="checkbox" name="First item" id="second-item-checkbox" />
+             <div   className='ml-8'>
+                    <input onClick={handleMultiple} className='mt-[15px]'  type="radio" name="First item" id="second-item-checkbox" />
                     <label role={'button'} className='text-base font-normal ml-2' htmlFor="second-item-checkbox">Multiple</label>
                     </div>
              </div>
 
-             {(isSingle&&!isMultiple)&&
+             {(isSingle )&&
              <div className="mt-8">
               <h2 className="text-lg">Price</h2>
               <div className="mt-2">
@@ -378,7 +391,67 @@ check()
               </div>
               </div>
               }
+
+              {(isMultiple )&& <div>
+                <div className="w-full  flex md:flex-row flex-col flex-wrap ">
+                <div className="mt-8 flex md:flex-row flex-col justify-between w-full md:w-[47%] mx-auto">
+              <div className="md:w-[75%] ">
+              <h2 className="font-16 sm:font-16 md:font-18">Item name 1</h2>
+              <div className="mt-2">
+              <input className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]" type="text" placeholder="৳6000"/>
+              </div>
+              </div>
+
+              <div  className="w-[15%] md:w-[10%] mr-4 mt-3 md:mt-0">
+              <h2 className="font-16 sm:font-16 md:font-18">Image</h2>
+              <div className="mt-2">
+              <input  onChange={handleImage} className="hidden" type="file" name="" id="image1" />
+              <label htmlFor="image1">
+                <div className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center"><h1 className="text-[#8C8C8C] text-3xl">+</h1></div>
+              </label>
+              </div>
+              </div>
+              </div>
+
+              {/* Second input */}
+                <div className="mt-8 flex md:flex-row flex-col justify-between w-full md:w-[47%] mx-auto">
+              <div className="md:w-[75%] ">
+              <h2 className="font-16 sm:font-16 md:font-18">Item name 1</h2>
+              <div className="mt-2">
+              <input className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]" type="text" placeholder="৳6000"/>
+              </div>
+              </div>
+
+              <div  className="w-[15%] md:w-[10%] mr-4 mt-3 md:mt-0">
+              <h2 className="font-16 sm:font-16 md:font-18">Image</h2>
+              <div className="mt-2">
+              <input className="hidden" type="file" name="" id="image1" />
+              <label htmlFor="image1">
+                <div className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center"><h1 className="text-[#8C8C8C] text-3xl">+</h1></div>
+              </label>
+              </div>
+              </div>
+              </div>
+              </div>
+
+              <div className="md:w-[45%] mt-8">
+              <h2 className="font-14 sm:font-16 md:font-18">Total Price</h2>
+              <div className="mt-2">
+              <input className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]" type="text" placeholder="৳6000"/>
+              </div>
+              </div>
+              </div>
+              }
               </section> 
+
+                {/* Testing */}
+
+              
+
+
+      
+                {/* Testing */}
+
 
 
             <ButtonClick
