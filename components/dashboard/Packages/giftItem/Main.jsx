@@ -39,6 +39,7 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
   
   const [isSingle,setIsSingle]=useState(false)
   const [isMultiple,setIsMultiple]=useState(false)
+  const [image,setImage]=useState(false)
 
  
 	async function check() {
@@ -306,11 +307,19 @@ check()
     setIsSingle(false)
   }
 
-  const handleImage = (e)=>{
-    console.log(e.target.files[0])
+  const [inputList,setInputList]=useState([{inputData:''}])
+  const addBtn =()=>{
+    setInputList([...inputList , {inputData:''}])         
+  }
+  const deleteBtn = (index)=>{
+    const list = [...inputList];
+    list.splice(index , 1)
+    setInputList(list)
   }
 
+
   return (
+   
     <>
       <div className="color3 font-14 sm:font-16 flex justify-end">
         <Link href="/documentation">
@@ -393,47 +402,55 @@ check()
               }
 
               {(isMultiple )&& <div>
-                <div className="w-full  flex md:flex-row flex-col flex-wrap ">
-                <div className="mt-8 flex md:flex-row flex-col justify-between w-full md:w-[47%] mx-auto">
+                <div className="w-full  grid grid-cols-12 ">
+             {inputList.map((singleInput,index)=>
+                <div key={index} className="mt-8 col-span-6 flex md:flex-row flex-col justify-between  ">
               <div className="md:w-[75%] ">
               <h2 className="font-16 sm:font-16 md:font-18">Item name 1</h2>
               <div className="mt-2">
-              <input className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]" type="text" placeholder="৳6000"/>
+              <input onChange={(e)=>console.log(e.target.value)} className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]" type="text" placeholder="৳6000"/>
               </div>
+              
+              {inputList.length - 1 === index && 
+              <div className="flex justify-between  mt-2">
+             <div>
+              {inputList.length < 5 &&
+                <button onClick={addBtn} className="" type="button">add more+</button>
+              }
+             </div>
+
+                { (inputList.length > 1 && inputList.length <= 5 )&& <button 
+                onClick={()=>deleteBtn(index)}
+                className="text-white bgcolor2" 
+                type="button">
+                Delete
+                </button>}
+
+              </div>
+              } 
+
               </div>
 
-              <div  className="w-[15%] md:w-[10%] mr-4 mt-3 md:mt-0">
+              <div  className={`${!image && 'mr-4'} mt-3 md:mt-0`}>
               <h2 className="font-16 sm:font-16 md:font-18">Image</h2>
-              <div className="mt-2">
-              <input  onChange={handleImage} className="hidden" type="file" name="" id="image1" />
+              <div className="mt-2 w-[15%] md:w-[10%]">
+              <input  onClick={()=>setImage(!image)} className="hidden" type="file" name="" id="image1" />
               <label htmlFor="image1">
-                <div className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center"><h1 className="text-[#8C8C8C] text-3xl">+</h1></div>
+                <div className={`${image && 'border-green-500 border-2'} ${!image &&'inpBorderColor inputdesign'}  w-full font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}><h1 className="text-[#8C8C8C] text-3xl ">{!image ? '+':'✔️'}</h1>
+                </div>
               </label>
               </div>
               </div>
               </div>
+             )}         
 
               {/* Second input */}
-                <div className="mt-8 flex md:flex-row flex-col justify-between w-full md:w-[47%] mx-auto">
-              <div className="md:w-[75%] ">
-              <h2 className="font-16 sm:font-16 md:font-18">Item name 1</h2>
-              <div className="mt-2">
-              <input className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]" type="text" placeholder="৳6000"/>
+                {/* <div className="mt-8 flex md:flex-row flex-col justify-between w-full md:w-[47%] mx-auto">
+                
+              </div> */}
+             
               </div>
-              </div>
-
-              <div  className="w-[15%] md:w-[10%] mr-4 mt-3 md:mt-0">
-              <h2 className="font-16 sm:font-16 md:font-18">Image</h2>
-              <div className="mt-2">
-              <input className="hidden" type="file" name="" id="image1" />
-              <label htmlFor="image1">
-                <div className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center"><h1 className="text-[#8C8C8C] text-3xl">+</h1></div>
-              </label>
-              </div>
-              </div>
-              </div>
-              </div>
-
+ 
               <div className="md:w-[45%] mt-8">
               <h2 className="font-14 sm:font-16 md:font-18">Total Price</h2>
               <div className="mt-2">
