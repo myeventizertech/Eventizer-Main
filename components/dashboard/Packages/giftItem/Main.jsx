@@ -362,21 +362,53 @@ check()
 
           <div className="md:w-[45%] mx-auto">
 
-            <PackageFrom
-              props={props}
-              files={files}
-              setFiles={setFiles}
-              filesB={filesB}
-              setFilesB={setFilesB}
-              filesP={filesP}
-              setFilesP={setFilesP}
-              filesS={filesS}
-              setFilesS={setFilesS}
-              fileError={fileError}
-              serviceCheck={serviceCheck}
-              addPackAgeInitalValue={addPackAgeInitalValue}
-              iseEDit={iseEDit}
-              />
+
+
+
+          <div className="flex-1">
+						<Input
+							label={
+								serviceCheck === services.giftItems
+									? "Item Name"
+									: "Package Name" && serviceCheck === services.brandPromoter
+									? "Promoter Name"
+									: "Package Name"
+							}
+							type="text"
+							name="packageName"
+							placeholder={"Enter Name"}
+							value={props.values.packageName}
+							handleChange={props.handleChange}
+							handleBlur={props.handleBlur}
+							error={
+								props.touched.packageName && props.errors.packageName
+									? props.errors.packageName
+									: ""
+							}
+						/>
+
+						<Input
+							istextArea={true}
+							textareaHeight={"6"}
+							label={
+								serviceCheck === services.giftItems
+									? "Item Details"
+									: "Package Details" && serviceCheck === services.brandPromoter
+									? "Promoter Experience"
+									: "Package Details"
+							}
+							name="packageDetails"
+							placeholder={"Enter Details"}
+							value={props.values.packageDetails}
+							handleChange={props.handleChange}
+							handleBlur={props.handleBlur}
+							error={
+								props.touched.packageDetails && props.errors.packageDetails
+									? props.errors.packageDetails
+									: ""
+							}
+						/>
+					</div>
               </div>
 
               </div>
@@ -421,7 +453,7 @@ check()
 
                 { (inputList.length > 1 && inputList.length <= 5 )&& <button 
                 onClick={()=>deleteBtn(index)}
-                className="text-white bgcolor2" 
+                className="text-white bgcolor2 text-sm px-1 rounded" 
                 type="button">
                 Delete
                 </button>}
@@ -431,24 +463,18 @@ check()
 
               </div>
 
-              <div  className={`${!image && 'mr-4'} mt-3 md:mt-0`}>
+              <div  className={` mt-3 md:mt-0`}>
               <h2 className="font-16 sm:font-16 md:font-18">Image</h2>
               <div className="mt-2 w-[15%] md:w-[10%]">
               <input  onClick={()=>setImage(!image)} className="hidden" type="file" name="" id="image1" />
               <label htmlFor="image1">
-                <div className={`${image && 'border-green-500 border-2'} ${!image &&'inpBorderColor inputdesign'}  w-full font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}><h1 className="text-[#8C8C8C] text-3xl ">{!image ? '+':'✔️'}</h1>
+                <div className={`${image && 'border-green-500 inputdesign border-2'} ${!image &&'inpBorderColor inputdesign'}  w-full font-14 sm:font-16 md:font-18 rounded-[8px] ${!image ? 'px-2': 'px-0'}  sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}><h1 className={`text-[#8C8C8C] text-3xl w-[40px]`}>{!image ? '+':'✔️'}</h1>
                 </div>
               </label>
               </div>
               </div>
               </div>
-             )}         
-
-              {/* Second input */}
-                {/* <div className="mt-8 flex md:flex-row flex-col justify-between w-full md:w-[47%] mx-auto">
-                
-              </div> */}
-             
+             )}                      
               </div>
  
               <div className="md:w-[45%] mt-8">
