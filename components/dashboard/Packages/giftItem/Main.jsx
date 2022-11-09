@@ -42,262 +42,6 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
   const [image,setImage]=useState(false)
 
  
-	async function check() {
-		if (serviceCheck === "photography") {
-			setserviceAPI(mutations.updatePhotography);
-			setvData("updatePhotography");
-		}
-		if (serviceCheck === "cinematography") {
-			setserviceAPI(mutations.updateCinematography);
-			setvData("updateCinematography");
-		}
-		if (serviceCheck === "dj-musician") {
-			setserviceAPI(mutations.updateDJMusician);
-			setvData("updateDJMusician");
-		}
-		if (serviceCheck === "mehedi-artist") {
-			setserviceAPI(mutations.updateMehediArtist);
-			setvData("updateMehediArtist");
-		}
-		if (serviceCheck === "makeup-artist") {
-			setserviceAPI(mutations.updateMakeupArtist);
-			setvData("updateMakeupArtist");
-		}
-	}
-  useEffect(() => {
-check()
-  }, [])
-  useEffect(() => {
-		if (addPackAgeInitalValue?.packageImage?.length !== 0) {
-			addPackAgeInitalValue?.packageImage?.map(async (e) => {
-				let signedURL = await Storage.get(e);
-				let url = signedURL;
-				const data = await fetch(url);
-				if (data.ok) {
-					const result = await data.blob();
-					//   var blob = new Blob([result], { type: "image/png" });
-					setFiles((prev) => {
-						return [...prev, { file: result }];
-					});
-				} else {
-					setloadImg(false);
-				}
-			});
-			setloadImg(true);
-		}
-	}, []);
-  useEffect(() => {
-		if (addPackAgeInitalValue?.basic?.packageImage?.length !== 0) {
-			addPackAgeInitalValue?.basic?.packageImage?.map(async (e) => {
-				let signedURL = await Storage.get(e);
-				let url = signedURL;
-				const data = await fetch(url);
-				if (data.ok) {
-					const result = await data.blob();
-					//   var blob = new Blob([result], { type: "image/png" });
-					setFilesB((prev) => {
-						return [...prev, { file: result }];
-					});
-				} else {
-					setloadImg(false);
-				}
-			});
-			setloadImg(true);
-		}
-	}, []);
-  useEffect(() => {
-		if (addPackAgeInitalValue?.standard?.packageImage?.length !== 0) {
-			addPackAgeInitalValue?.standard?.packageImage?.map(async (e) => {
-				let signedURL = await Storage.get(e);
-				let url = signedURL;
-				const data = await fetch(url);
-				if (data.ok) {
-					const result = await data.blob();
-					//   var blob = new Blob([result], { type: "image/png" });
-					setFilesS((prev) => {
-						return [...prev, { file: result }];
-					});
-				} else {
-					setloadImg(false);
-				}
-			});
-			setloadImg(true);
-		}
-	}, []);
-  useEffect(() => {
-		if (addPackAgeInitalValue?.premium?.packageImage?.length !== 0) {
-			addPackAgeInitalValue?.premium?.packageImage?.map(async (e) => {
-				let signedURL = await Storage.get(e);
-				let url = signedURL;
-				const data = await fetch(url);
-				if (data.ok) {
-					const result = await data.blob();
-					//   var blob = new Blob([result], { type: "image/png" });
-					setFilesP((prev) => {
-						return [...prev, { file: result }];
-					});
-				} else {
-					setloadImg(false);
-				}
-			});
-			setloadImg(true);
-		}
-	}, []);
-  let onSubmit = async (values, actions) => {
-    try {
-      await debounce(2000);
-
-          let allPackageImage = [];
-          if (iseEDit) {
-            let i=0
-            await files.map(async (e) => {
-              const fileName = `PackageImages/${attributes.sub}/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
-              allPackageImage.push(fileName);
-          await Storage.put(
-                fileName,
-                e.file
-              )
-              
-            });
-          values.packageImage = [...allPackageImage];
-        let details =storage.vendorDetails
-        let balance =storage.balance
-        let prevPackage= storage.vendor?.packages
-        let profile =storage?.profilePicture ||""
-        let newData =JSON.stringify(values)
-        
-        prevPackage[index]= newData
-        let data ={id:attributes.sub,packages:prevPackage}
-        const updatedVendorDetails = await API.graphql({
-          query: serviceAPI,
-          variables: { input: data  },
-        });
-        dispatch({
-          type: "UPDATE_SUCCESS",
-          payload: {
-              vendorDetails: details,
-              vendor: updatedVendorDetails.data[vData],
-              balance: balance,
-              data:"Found",
-              profilePicture:profile
-            
-          },
-        })
-  
-        setFiles([]);
-        setFileError(false);
-        actions.resetForm();
-        toast.success(`Package updated successfully`);
-        setEditIsOpen(false)
-      }else{
-        if (addPackAgeInitalValue.packageImage.length > 0) {
-          values.packageImage = [...addPackAgeInitalValue.packageImage];
-        } else {
-          let allPackageImage = [];
-          let allPackageImageB = [];
-          let allPackageImageS = [];
-          let allPackageImageP = [];
-          if (files) {
-            let i=0
-            await files.map(async (e) => {
-              const fileName = `PackageImages/${attributes.sub}/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
-              allPackageImage.push(fileName);
-          await Storage.put(
-                fileName,
-                e.file
-              )
-              
-            });
-          }
-          if (filesB) {
-            let i=0
-            await filesB.map(async (e) => {
-              const fileName = `PackageImages/${attributes.sub}/Basic/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
-              allPackageImageB.push(fileName);
-          await Storage.put(
-                fileName,
-                e.file
-              )
-              
-            });
-          }
-          if (filesS) {
-            let i=0
-            await filesS.map(async (e) => {
-              const fileName = `PackageImages/${attributes.sub}/Standard/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
-              allPackageImageS.push(fileName);
-          await Storage.put(
-                fileName,
-                e.file
-              )
-              
-            });
-          }
-          if (filesP) {
-            let i=0
-            await filesP.map(async (e) => {
-              const fileName = `PackageImages/${attributes.sub}/Premium/${values.packageName.replace(/ /g,"_")}${attributes.sub}${i++}.png`;
-              allPackageImageP.push(fileName);
-          await Storage.put(
-                fileName,
-                e.file
-              )
-              
-            });
-          }
-          values.packageImage = [...allPackageImage];
-          values.standard.packageImage = [...allPackageImageS];
-          values.basic.packageImage = [...allPackageImageB];
-          values.premium.packageImage = [...allPackageImageP];
-        }
-        let details =storage.vendorDetails
-        let balance =storage.balance
-        let prevPackage= storage.vendor?.packages
-        let profile =storage?.profilePicture ||""
-        let newData =JSON.stringify(values)
-        let finalData = null
-        // work here ==============================
-        if(prevPackage === null){
-          finalData =[newData]
-        }if(prevPackage !== null){
-          finalData =[...prevPackage,newData]
-        }
-        // work here ==============================
-        values.id = uuid()
-        
- 
-        let data ={id:attributes.sub,packages:finalData}
-        const updatedVendorDetails = await API.graphql({
-          query: serviceAPI,
-          variables: { input: data  },
-        });
-        dispatch({
-          type: "UPDATE_SUCCESS",
-          payload: {
-              vendorDetails: details,
-              vendor: updatedVendorDetails.data[vData],
-              balance: balance,
-              data:"Found",
-              profilePicture:profile
-            
-          },
-        })
-  
-        setFiles([]);
-        setFileError(false);
-        actions.resetForm();
-        toast.success(`Package created successfully`);
-        router.push("/dashboard/my-package")
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  let handleClick = (formikValues) => {
-    !Object.values(formikValues).every((o) => o === null) && setFileError(true);
-  };
-
   const handleSingle = ()=>{
     setIsSingle(true)
     setIsMultiple(false)
@@ -333,14 +77,9 @@ check()
           </a>
         </Link>
       </div>
-      <Formik
-        initialValues={addPackAgeInitalValue}
-        validationSchema={schema(serviceCheck)}
-        validateOnBlur={true}
-        onSubmit={onSubmit}
-      >
-        {(props) => (
-          <Form>
+      
+       
+          <form>
             <div className="md:flex md:flex-row-reverse  ">
 
             <div className="md:w-[45%] mx-auto">
@@ -362,52 +101,24 @@ check()
 
           <div className="md:w-[45%] mx-auto">
 
-
+           
+          
 
 
           <div className="flex-1">
-						<Input
-							label={
-								serviceCheck === services.giftItems
-									? "Item Name"
-									: "Package Name" && serviceCheck === services.brandPromoter
-									? "Promoter Name"
-									: "Package Name"
-							}
-							type="text"
-							name="packageName"
-							placeholder={"Enter Name"}
-							value={props.values.packageName}
-							handleChange={props.handleChange}
-							handleBlur={props.handleBlur}
-							error={
-								props.touched.packageName && props.errors.packageName
-									? props.errors.packageName
-									: ""
-							}
-						/>
+          <div className="mb-5">
+              <label className="inputLabel font-14 sm:font-16 md:font-18  text-[#f30303]">Package Name</label>
+              <input autoComplete="off" type="text" name="packageName" placeholder="Enter Name" className="w-full  border-[#f30303] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]"  />
+                {/* <p className="font-12 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] " >Required field</p> */}
+                </div> 
 
-						<Input
-							istextArea={true}
-							textareaHeight={"6"}
-							label={
-								serviceCheck === services.giftItems
-									? "Item Details"
-									: "Package Details" && serviceCheck === services.brandPromoter
-									? "Promoter Experience"
-									: "Package Details"
-							}
-							name="packageDetails"
-							placeholder={"Enter Details"}
-							value={props.values.packageDetails}
-							handleChange={props.handleChange}
-							handleBlur={props.handleBlur}
-							error={
-								props.touched.packageDetails && props.errors.packageDetails
-									? props.errors.packageDetails
-									: ""
-							}
-						/>
+
+                <div className="mb-5">
+                  <label className="inputLabel font-14 sm:font-16 md:font-18  text-[#f30303]">Package Details</label>
+                  <textarea rows="6" cols="50" name="packageDetails" placeholder="Enter Details" className="w-full  border-[#f30303] inputdesign  font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px]  h-[unset] py-2 max-h-[400px] resize-y  ">
+                  </textarea>
+                  {/* <p className="font-12 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Required field</p> */}
+                  </div>
 					</div>
               </div>
 
@@ -436,7 +147,7 @@ check()
               {(isMultiple )&& <div>
                 <div className="w-full  grid grid-cols-12 ">
              {inputList.map((singleInput,index)=>
-                <div key={index} className="mt-8 col-span-6 flex md:flex-row flex-col justify-between  ">
+                <div key={index} className="mt-8 col-span-12 md:col-span-6 flex md:flex-row flex-col justify-between  ">
               <div className="md:w-[75%] ">
               <h2 className="font-16 sm:font-16 md:font-18">Item name 1</h2>
               <div className="mt-2">
@@ -447,7 +158,7 @@ check()
               <div className="flex justify-between  mt-2">
              <div>
               {inputList.length < 5 &&
-                <button onClick={addBtn} className="" type="button">add more+</button>
+                <button onClick={addBtn} className="text-lg px-1 rounded-md text-white bgcolor2" type="button">Add Extra+</button>
               }
              </div>
 
@@ -463,12 +174,12 @@ check()
 
               </div>
 
-              <div  className={` mt-3 md:mt-0`}>
+              <div  className={` mt-3 md:mt-0 ${ !image && 'mr-6'}`}>
               <h2 className="font-16 sm:font-16 md:font-18">Image</h2>
               <div className="mt-2 w-[15%] md:w-[10%]">
               <input  onClick={()=>setImage(!image)} className="hidden" type="file" name="" id="image1" />
               <label htmlFor="image1">
-                <div className={`${image && 'border-green-500 inputdesign border-2'} ${!image &&'inpBorderColor inputdesign'}  w-full font-14 sm:font-16 md:font-18 rounded-[8px] ${!image ? 'px-2': 'px-0'}  sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}><h1 className={`text-[#8C8C8C] text-3xl w-[40px]`}>{!image ? '+':'✔️'}</h1>
+                <div className={`${image && 'border-green-500 inputdesign border-2'} ${!image &&'inpBorderColor inputdesign'}  w-full font-14 sm:font-16 md:font-18 rounded-[8px] ${!image ? 'px-2': 'px-0'}  sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}><h1 className={`text-[#8C8C8C] text-3xl `}>{!image ? '+':'✔️'}</h1>
                 </div>
               </label>
               </div>
@@ -485,38 +196,27 @@ check()
               </div>
               </div>
               }
-              </section> 
-
-                {/* Testing */}
-
-              
-
-
-      
-                {/* Testing */}
-
-
+              </section>             
 
             <ButtonClick
               type="submit"
               width="null"
               padding="px-6 sm:px-14"
-              handleClick={() => handleClick(props.values)}
-              css={`bgcolor2 text-white rounded-[8px] w-full ml-auto block mt-8 ${
-                props.isSubmitting && "opacity-75"
-              }`}
+              className="hover:opacity-[75%]"
+              handleClick={''}
+              css={`bgcolor2 text-white rounded-[8px] w-full ml-auto block mt-8 
+              `}
               text={
-                props.isSubmitting ? (
-                  <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
-                ) : (
-                  "Publish"
-                )
+               
+                  // <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
+                  'Publish'
+               
+                 
+                
               }
-              disable={props.isSubmitting || (files.length > 0 ? "" : !props.dirty) }
+             
             />
-          </Form>
-        )}
-      </Formik>
+          </form>      
     </>
   );
 };
