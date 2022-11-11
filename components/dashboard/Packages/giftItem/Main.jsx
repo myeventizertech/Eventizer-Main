@@ -20,7 +20,7 @@ import DropZone from "../../../reUseComponents/dropZone/DropZone";
 import Input from "../../../reUseComponents/Input";
 import InputError from "../../../reUseComponents/InputError";
 
-const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
+const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIsOpen }) => {
   const router =useRouter()
   const { verifyUser } = useUserOrVendor();
   let { attributes } = verifyUser?.isUser_vendorAttr || {};
@@ -30,7 +30,6 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
   const [files, setFiles] = useState([]);
   const [filesB, setFilesB] = useState([]);
   const [filesS, setFilesS] = useState([]);
-  const [filesP, setFilesP] = useState([]);
   const [fileError, setFileError] = useState(false);
   const storage = JSON.parse(localStorage.getItem("AmpUserInfo"));
 	let { dispatch } = useUserOrVendor();
@@ -39,9 +38,11 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
   
   const [isSingle,setIsSingle]=useState(false)
   const [isMultiple,setIsMultiple]=useState(false)
-  // const [image,setImage]=useState(false)
+  const [packageName,setPackageName]=useState('')
+  const [packageDetail,setPackageDetail]=useState('')
+  const [singleGiftPrice,setSingleGiftPrice]=useState('')
+  const [filesP, setFilesP] = useState([]);
 
- 
   const handleSingle = ()=>{
     setIsSingle(true)
     setIsMultiple(false)
@@ -53,7 +54,6 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
 
 
   const [inputList,setInputList]=useState([{inputData:'',inputImage:''}])
-  console.log(inputList);
   const addBtn =()=>{
     setInputList([...inputList , {inputData:'',inputImage:''}])
   }
@@ -71,21 +71,27 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
     }
 
     const handleImageChange = (e,index)=>{
-      console.log(index)      
       const file=(e.target.files[0]);
       const name=(e.target.name);
       const list = [...inputList];
       list[index][name]=file;
       setInputList(list)
-      // setImage(e.target.files[0])
     }
 
-
-    const ami = ''
-    // console.log(typeof(a));
-    if(ami===true){
-      console.log("false")
+    const giftData = {
+      packageName:packageName,
+      packageDetail:packageDetail,
+      dropZoneImage: filesP,
+      singleGiftPrice:singleGiftPrice,
+      inputList:inputList
     }
+   
+    const handleGiftData =(e)=>{
+      e.preventDefault()
+      console.log(giftData)
+
+    }
+
 
   return (
    
@@ -102,9 +108,8 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
           </a>
         </Link>
       </div>
-      
-       
-          <form>
+             
+          <form onSubmit={handleGiftData}>
             <div className="md:flex md:flex-row-reverse  ">
 
             <div className="md:w-[45%] mx-auto">
@@ -126,21 +131,18 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
 
           <div className="md:w-[45%] mx-auto">
 
-           
-          
-
-
           <div className="flex-1">
           <div className="mb-5">
               <label className="inputLabel font-14 sm:font-16 md:font-18  text-[#f30303]">Package Name</label>
-              <input autoComplete="off" type="text" name="packageName" placeholder="Enter Name" className="w-full  border-[#f30303] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]"  />
+              <input onChange={(e)=>setPackageName(e.target.value)} autoComplete="off" type="text" name="packageName" placeholder="Enter Name" className="w-full  border-[#f30303] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]"  />
                 {/* <p className="font-12 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] " >Required field</p> */}
                 </div> 
 
 
                 <div className="mb-5">
                   <label className="inputLabel font-14 sm:font-16 md:font-18  text-[#f30303]">Package Details</label>
-                  <textarea rows="6" cols="50" name="packageDetails" placeholder="Enter Details" className="w-full  border-[#f30303] inputdesign  font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px]  h-[unset] py-2 max-h-[400px] resize-y  ">
+                  <textarea onChange={(e)=>setPackageDetail(e.target.value)}
+                  autoComplete="off" rows="6" cols="50" name="packageDetails" placeholder="Enter Details" className="w-full  border-[#f30303] inputdesign  font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px]  h-[unset] py-2 max-h-[400px] resize-y  ">
                   </textarea>
                   {/* <p className="font-12 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Required field</p> */}
                   </div>
@@ -192,7 +194,9 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
              <div className="mt-8">
               <h2 className="text-lg">Price</h2>
               <div className="mt-2">
-              <input className="inpBorderColor w-full md:w-[47%] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]" type="text" placeholder="৳6000"/>
+              <input
+              autoComplete="Off"
+               onChange={(e)=>setSingleGiftPrice(e.target.value)} className="inpBorderColor w-full md:w-[47%] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]" type="text" placeholder="৳6000"/>
               </div>
               </div>
               }
@@ -207,6 +211,7 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
               <input 
               name="inputData"
               id="inputData"
+              autoComplete="off"
               value={singleInput.inputData}
               onChange={(e)=>handleInputData(e, index)}
                className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]"
@@ -262,7 +267,8 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
               }
               </section>             
 
-            <ButtonClick
+              <input role={'button'} type="submit" className="bgcolor2 text-white rounded-[8px] w-full ml-auto block mt-8 px-6 sm:px-14 hover:opacity-[75%] py-2 text-lg font-normal shadow-[0px_3.72px_33.49px_0px_rgba(239,13,94,0.3)]" value="Publish" />
+            {/* <ButtonClick
               type="submit"
               width="null"
               padding="px-6 sm:px-14"
@@ -274,15 +280,12 @@ const PhotographyMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,se
                
                   // <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
                   'Publish'
-               
-                 
-                
-              }
-             
-            />
+                                                
+              }             
+            /> */}
           </form>      
     </>
   );
 };
 
-export default PhotographyMain;
+export default GiftMain;
