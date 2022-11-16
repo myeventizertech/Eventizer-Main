@@ -1609,6 +1609,7 @@ export const onCreateGiftVendor = /* GraphQL */ `
           giftName
           giftDescription
           giftImage
+          category
           price
           multipleItem
           GiftVendorID
@@ -1669,6 +1670,7 @@ export const onUpdateGiftVendor = /* GraphQL */ `
           giftName
           giftDescription
           giftImage
+          category
           price
           multipleItem
           GiftVendorID
@@ -1729,6 +1731,7 @@ export const onDeleteGiftVendor = /* GraphQL */ `
           giftName
           giftDescription
           giftImage
+          category
           price
           multipleItem
           GiftVendorID
@@ -1751,6 +1754,7 @@ export const onCreateGift = /* GraphQL */ `
       giftName
       giftDescription
       giftImage
+      category
       price
       multipleItem
       GiftVendorID
@@ -1767,6 +1771,7 @@ export const onUpdateGift = /* GraphQL */ `
       giftName
       giftDescription
       giftImage
+      category
       price
       multipleItem
       GiftVendorID
@@ -1783,6 +1788,7 @@ export const onDeleteGift = /* GraphQL */ `
       giftName
       giftDescription
       giftImage
+      category
       price
       multipleItem
       GiftVendorID

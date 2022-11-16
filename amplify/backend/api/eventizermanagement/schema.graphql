@@ -376,8 +376,8 @@ type GiftVendor
 		]
 	) {
 	id: ID!
-	VendorName: String!
-	VendorDescription: String!
+	VendorName: String
+	VendorDescription: String
 	email: String!
 	phoneNumber: String!
 	uploadYourPhoto:String
@@ -404,6 +404,7 @@ type Gift
 	giftName: String!
 	giftDescription: String !
 	giftImage: [String]
+	category:[AWSJSON]
 	price: Int!
 	multipleItem: [AWSJSON]
 	GiftVendorID: ID! @index(name: "byGiftVendor")

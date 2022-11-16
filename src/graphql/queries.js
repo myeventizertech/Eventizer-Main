@@ -1015,6 +1015,7 @@ export const getGiftVendor = /* GraphQL */ `
           giftName
           giftDescription
           giftImage
+          category
           price
           multipleItem
           GiftVendorID
@@ -1067,6 +1068,7 @@ export const getGift = /* GraphQL */ `
       giftName
       giftDescription
       giftImage
+      category
       price
       multipleItem
       GiftVendorID
@@ -1088,6 +1090,7 @@ export const listGifts = /* GraphQL */ `
         giftName
         giftDescription
         giftImage
+        category
         price
         multipleItem
         GiftVendorID
