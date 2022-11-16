@@ -37,9 +37,7 @@ let commonSchema = (checkVendor, isOptinal) => {
     ...(conditionalRendar(
       checkVendor === services.photography ||
         checkVendor === services.cinematography ||
-        checkVendor === services.djMusician ||
-        checkVendor === services.mehediArtist ||
-        checkVendor === services.makeupArtist
+        checkVendor === services.djMusician 
     ) && {
       pricePerHour: isOptinal ? mustBeNumberOptinalSchema : mustBeNumberSchema,
       pricePerDay: mustBeNumberOptinalSchema,
@@ -58,9 +56,7 @@ let commonSchema = (checkVendor, isOptinal) => {
     ...(conditionalRendar(
       checkVendor === services.photography ||
         checkVendor === services.cinematography ||
-        checkVendor === services.djMusician ||
-        checkVendor === services.mehediArtist ||
-        checkVendor === services.makeupArtist
+        checkVendor === services.djMusician 
     ) && {
       minPerson: isOptinal ? mustBeNumberOptinalSchema : mustBeNumberSchema,
     }),

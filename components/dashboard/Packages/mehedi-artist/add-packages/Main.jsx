@@ -341,7 +341,7 @@ check()
                   "Publish"
                 )
               }
-              disable={props.isSubmitting || (files.length > 0 ? "" : !props.dirty) }
+              disable={props.isSubmitting}
             />
           </Form>
         )}
