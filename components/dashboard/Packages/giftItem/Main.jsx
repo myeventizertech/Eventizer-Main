@@ -38,44 +38,73 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
   
   const [isSingle,setIsSingle]=useState(false)
   const [isMultiple,setIsMultiple]=useState(false)
-  const [packageName,setPackageName]=useState('')
-  const [packageDetail,setPackageDetail]=useState('')
-  const [singleGiftPrice,setSingleGiftPrice]=useState('')
+  const [packageName,setPackageName]=useState(null)
+  const [packageDetail,setPackageDetail]=useState(null)
+  const [singleGiftPrice,setSingleGiftPrice]=useState(null)
   const [filesP, setFilesP] = useState([]);
+  const [totalPrice,setTotalPrice]= useState(null)
 
+  const [inputList,setInputList]=useState([{inputData:undefined,inputImage:undefined}])
   const handleSingle = ()=>{
     setIsSingle(true)
     setIsMultiple(false)
+    setSingleGiftPrice(null)
+    setInputList([{inputData:undefined,inputImage:undefined}]) 
+    setTotalPrice(totalPrice=null)    
   }
   const handleMultiple = ()=>{
     setIsMultiple(true)
     setIsSingle(false)
+    setSingleGiftPrice(singleGiftPrice=null)
   }
 
-
-  const [inputList,setInputList]=useState([{inputData:'',inputImage:''}])
   const addBtn =()=>{
-    setInputList([...inputList , {inputData:'',inputImage:''}])
+    setInputList([...inputList , {inputData:undefined,inputImage:undefined}])
   }
+
   const deleteBtn = (index)=>{
     const list = [...inputList];
     list.splice(index , 1)
     setInputList(list)
   }
 
-  const handleInputData = (e, index)=>{
+  const handlePackageName = (e)=>{
+    if(e.target.value !==null){
+      setPackageName(e.target.value)
+    }
+  }
+  const handlePackageDetail = (e)=>{
+    if(e.target.value !==null){
+      setPackageDetail(e.target.value)
+    }
+  }
+  const handleSingleGiftPrice = (e)=>{
+    if(e.target.value !==null){
+      setSingleGiftPrice(e.target.value)
+      console.log(e.target.value)
+    }
+  }
+
+  const handleInputData = (e, index)=>{   
       const {name,value} = e.target;
       const list = [...inputList];
       list[index][name]=value;
       setInputList(list)
     }
 
+    const [inputImageUndefined,setInputImageUndefined]=useState(false)
     const handleImageChange = (e,index)=>{
+        if(e){
+          setInputImageUndefined(false)
+        }
       const file=(e.target.files[0]);
       const name=(e.target.name);
       const list = [...inputList];
       list[index][name]=file;
       setInputList(list)
+    }
+    const handleTotalPrice = (e)=>{           
+        setTotalPrice(e.target.value)              
     }
 
     const giftData = {
@@ -83,13 +112,43 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
       packageDetail:packageDetail,
       dropZoneImage: filesP,
       singleGiftPrice:singleGiftPrice,
-      inputList:inputList
+      inputList:inputList,
+      totalPrice:totalPrice
     }
    
+    const [dropMessage,setdropMessage]=useState(false)
+
     const handleGiftData =(e)=>{
       e.preventDefault()
-      console.log(giftData)
-
+      if(filesP.length<=2){
+        setdropMessage(true)
+      }
+      inputList.map(ip=>{
+        if(ip.inputImage==undefined){
+          setInputImageUndefined(true)
+        }else{
+          setInputImageUndefined(false)
+        }
+      })
+      if(!packageName){
+        setPackageName(false)
+      }
+       if((!packageDetail )){
+        console.log('hello')
+        setPackageDetail(false)
+      }
+      if(!giftData.dropZoneImage){
+        setFilesP(false)
+      }
+       if(!giftData.singleGiftPrice){
+        setSingleGiftPrice(false)
+      }
+       if(!giftData.inputList){
+        setInputList(false)
+      }
+       if(!totalPrice){
+        setTotalPrice(false)
+      }
     }
 
 
@@ -127,24 +186,26 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
               dropZoneMidText="font-14 md:font-18 mt-[5px]"
               dropZoneEndText="font-12 sm:font-14 mt-[6px]"
               />
+              {(filesP.length<=2 ) && dropMessage && <p className="font-12 text-[#F30303] font-light mt-1 mb-[-4px] sm:mb[-8px] " >Please upload minimum 3 images</p>}
               </div>
 
           <div className="md:w-[45%] mx-auto">
 
           <div className="flex-1">
           <div className="mb-5">
-              <label className="inputLabel font-14 sm:font-16 md:font-18  text-[#f30303]">Package Name</label>
-              <input onChange={(e)=>setPackageName(e.target.value)} autoComplete="off" type="text" name="packageName" placeholder="Enter Name" className="w-full  border-[#f30303] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]"  />
-                {/* <p className="font-12 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] " >Required field</p> */}
+              <label className={`inputLabel font-14 sm:font-16 md:font-18 
+              ${(packageName===null)&& 'text-black'} ${!packageName &&'text-[#F30303]'}`}>Package Name</label>
+              <input onChange={(e)=>handlePackageName(e)} autoComplete="off" type="text" name="packageName" placeholder="Enter Name" className={`${(!packageName && packageName !== null) &&  'border-[#f30303]'} inpBorderColor w-full  inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]`}  />
+               {(!packageName && packageName !== null) && <p className="font-12 text-[#F30303] font-light mt-1 mb-[-4px] sm:mb[-8px] " >Required field</p>}
                 </div> 
 
 
                 <div className="mb-5">
-                  <label className="inputLabel font-14 sm:font-16 md:font-18  text-[#f30303]">Package Details</label>
-                  <textarea onChange={(e)=>setPackageDetail(e.target.value)}
-                  autoComplete="off" rows="6" cols="50" name="packageDetails" placeholder="Enter Details" className="w-full  border-[#f30303] inputdesign  font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px]  h-[unset] py-2 max-h-[400px] resize-y  ">
+                <label className={`inputLabel font-14 sm:font-16 md:font-18 ${(packageDetail===null)&& 'text-black'} ${!packageDetail &&'text-[#F30303]'}`}>Package Detail</label>
+                  <textarea onChange={(e)=>handlePackageDetail(e)}
+                  autoComplete="off" rows="6" cols="50" name="packageDetails" placeholder="Enter Details" className={`w-full ${(packageDetail===null)&& 'inpBorderColor'}  ${!packageDetail &&'border-[#F30303]'} inputdesign  font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px]  h-[unset] py-2 max-h-[400px] resize-y  `}>
                   </textarea>
-                  {/* <p className="font-12 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Required field</p> */}
+                  {(!packageDetail && packageDetail!==null) && <p className="font-12 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Required field</p>}
                   </div>
 					</div>
               </div>
@@ -153,9 +214,10 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
              <section className=" md:ml-3">
              <div className="flex">
 
+                    <div>
                     <label
 												role={"button"}
-												className="mt-[15px] label flex text-base font-normal "
+												className={`mt-[15px] label flex text-base font-normal `}
 												htmlFor="first-item-checkbox"
 											>
 												Single
@@ -168,9 +230,12 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
 													name="Single"													
 												/>
 												<span className="checkmark ml-[-8px]"></span>
+                        
 											</label>
+                    </div>
 
-                    <label
+                   <div>
+                   <label
 												role={"button"}
 												className="mt-[15px] ml-8 label flex text-base font-normal "
 												htmlFor="second-item-checkbox"
@@ -187,16 +252,18 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
 												/>
 												<span className="checkmark ml-[-8px]"></span>
 											</label>
+                   </div>
 
              </div>
 
              {(isSingle )&&
              <div className="mt-8">
-              <h2 className="text-lg">Price</h2>
+              <h2 className={`text-lg  ${(singleGiftPrice==null)&& 'text-black'} ${singleGiftPrice==false &&'text-[#F30303]'}`}>Price</h2>
               <div className="mt-2">
               <input
               autoComplete="Off"
-               onChange={(e)=>setSingleGiftPrice(e.target.value)} className="inpBorderColor w-full md:w-[47%] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]" type="text" placeholder="৳6000"/>
+               onChange={(e)=>handleSingleGiftPrice(e)} className={`${(singleGiftPrice==null)&& 'inpBorderColor'} ${singleGiftPrice==false &&'border-[#F30303]'}  w-full md:w-[47%] inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]`} type="text" placeholder="৳6000"/>
+               {(singleGiftPrice==false && singleGiftPrice!=null) && <p className="font-12 mt-1 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Required field</p>}
               </div>
               </div>
               }
@@ -206,16 +273,17 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
              {inputList.map((singleInput,index)=>
                 <div key={index} className="mt-8 col-span-12 md:col-span-6 flex md:flex-row flex-col justify-between  ">
               <div className="md:w-[75%] ">
-              <h2 className="font-16 sm:font-16 md:font-18">Item name {index+1}</h2>
+              <h2 className={`font-16 sm:font-16 md:font-18  ${ inputList[index].inputData==undefined &&'text-black'} ${ !inputList[index].inputData &&'text-[#F30303]'}`}>Item name {index+1}</h2>
               <div className="mt-2">
               <input 
               name="inputData"
               id="inputData"
               autoComplete="off"
-              value={singleInput.inputData}
               onChange={(e)=>handleInputData(e, index)}
-               className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]"
+               className={`${ inputList[index].inputData==undefined && 'inpBorderColor'} 
+               ${ !inputList[index].inputData &&'border-[#F30303]'} w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`}
               type="text" placeholder="৳6000"/>
+               {(!inputList[index].inputData && inputList[index].inputData!=undefined) && <p className="font-12 mt-1 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Required field</p>}
               </div>
               
               {inputList.length - 1 === index && 
@@ -238,8 +306,9 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
 
               </div>
 
-              <div  className={` mt-3 md:mt-0 ${(inputList[index].inputImage==='') && 'mr-6'}`}>
-              <h2 className="font-16 sm:font-16 md:font-18">Image</h2>
+              <div  className={` mt-3 md:mt-0 ${(inputList[index].inputImage==undefined) && 'mr-6'} ${(!inputList[index].inputImage) && 'mt-6'}`}>
+
+              <h2 className={`font-16 sm:font-16 md:font-18 ${ inputList[index].inputImage==undefined &&'text-black'} ${ !inputList[index].inputImage &&'text-[#F30303]'}`}>Image</h2>
               <div className="mt-2 w-[15%] md:w-[10%]">
               <input 
               onChange={(e)=>handleImageChange(e,index)} 
@@ -248,7 +317,7 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
               name="inputImage" 
               id={index} />                         
               <label role={'button'} htmlFor={index}>
-                <div className={`${(inputList[index].inputImage!=='') && 'border-green-500 inputdesign border-2'} ${(inputList[index].inputImage==='') &&'inpBorderColor inputdesign'}  w-full font-14 sm:font-16 md:font-18 rounded-[8px] ${(inputList[index].inputImage!=='') ? 'px-2': 'px-0'}  sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}><h1 className={`text-[#8C8C8C] text-3xl `}>{(inputList[index].inputImage==='') ? '+':'✔️'}</h1>
+                <div className={` ${(inputList[index].inputImage!=false) ? 'border-green-500 inputdesign border-2': 'border-red-500'} ${(inputList[index].inputImage==undefined) &&'inpBorderColor inputdesign'}  w-full font-14 sm:font-16 md:font-18 rounded-[8px] ${(inputList[index].inputImage!=undefined) ? 'px-2': 'px-0'}  sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}><h1 className={`text-[#8C8C8C] text-3xl `}>{(!inputList[index].inputImage) ? '+':'✔️'}</h1>
                 </div>
               </label>
               </div>
@@ -256,33 +325,23 @@ const GiftMain = ({ addPackAgeInitalValue = initalValue, iseEDit,index,setEditIs
               </div>
              )}                      
               </div>
+              {inputImageUndefined!==false && <p className="text-sm my-2 text-center text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Please upload item image</p>}
  
               <div className="md:w-[45%] mt-8">
-              <h2 className="font-14 sm:font-16 md:font-18">Total Price</h2>
+              <h2 className={`${(totalPrice==null)&& 'text-black'} ${totalPrice==false &&'text-[#F30303]'} font-14 sm:font-16 md:font-18`}>Total Price</h2>
               <div className="mt-2">
-              <input className="inpBorderColor w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]" type="text" placeholder="৳6000"/>
+              <input onChange={(e)=>handleTotalPrice(e)} className={`${(totalPrice==null)&& 'inpBorderColor'} ${!totalPrice && 'border-[#F30303]'} w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`} type="text" placeholder="৳6000"/>
               </div>
+              {(totalPrice==false && totalPrice!=null) && <p className="font-12 mt-1 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">Required field</p>}
               </div>
+              {}
               </div>
               }
               </section>             
 
-              <input role={'button'} type="submit" className="bgcolor2 text-white rounded-[8px] w-full ml-auto block mt-8 px-6 sm:px-14 hover:opacity-[75%] py-2 text-lg font-normal shadow-[0px_3.72px_33.49px_0px_rgba(239,13,94,0.3)]" value="Publish" />
-            {/* <ButtonClick
-              type="submit"
-              width="null"
-              padding="px-6 sm:px-14"
-              className="hover:opacity-[75%]"
-              handleClick={''}
-              css={`bgcolor2 text-white rounded-[8px] w-full ml-auto block mt-8 
-              `}
-              text={
-               
-                  // <Loader loaderWidht="w-[27px] h-[27px]" center={true} />
-                  'Publish'
-                                                
-              }             
-            /> */}
+            
+             <input  role={'button'} type="submit" className={` bgcolor2  hover:opacity-[75%] shadow-[0px_3.72px_33.49px_0px_rgba(239,13,94,0.3)]   text-white rounded-[8px] w-full ml-auto block mt-8 px-6 sm:px-14  py-2 text-lg font-normal `} value="Publish" />
+           
           </form>      
     </>
   );
