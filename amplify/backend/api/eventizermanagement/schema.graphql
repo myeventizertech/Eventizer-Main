@@ -17,6 +17,75 @@ type Coupon
 	userID: String
 	vendorID: String
 }
+type IhostManager
+	@model
+	@auth(
+		rules: [
+			{ allow: owner, operations: [read, create, update] }
+			{
+				allow: groups
+				groups: ["Admin","IhostManager"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	firstName: String!
+	lastName: String!
+	address: String
+	phoneNumber: AWSPhone
+	email: AWSEmail!
+	nidNumber: String
+	profilePicture: String
+	status: String!
+	IhostEvents: [IhostEvents] @hasMany(indexName: "byManager", fields: ["id"])
+}
+type IhostEvents
+	@model
+	@auth(
+		rules: [
+				{ allow: public, operations: [read,create] },
+			{ allow: owner, operations: [read, create, update, delete] }
+			{
+				allow: groups
+				groups: ["Admin", "IhostManager"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	eventName: String!
+	eventDescription: String!
+	eventPhoto: [String]
+	address: String
+	phoneNumber: AWSPhone
+	extra: [AWSJSON]
+	IhostManager: ID! @index(name: "byManager")
+	Ticket: [Ticket] @hasMany(indexName: "byTicket", fields: ["id"])
+}
+type Ticket
+	@model
+	@auth(
+		rules: [
+				{ allow: public, operations: [read,create] },
+			{ allow: owner, operations: [read, create, update] }
+			{
+				allow: groups
+				groups: ["Admin", "IhostManager"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	message: String
+	fullName: String
+	email:String
+	phoneNumber:String
+	profilePicture:String
+	extra: AWSJSON
+	status: String
+	IhostEvents: ID! @index(name: "byTicket")
+}
 type History
 	@model
 	@auth(
@@ -26,23 +95,23 @@ type History
 		]
 	) {
 	id: ID!
-	message:String
-	Employee:ID! @index(name: "byEmployee")
+	message: String
+	Employee: ID! @index(name: "byEmployee")
 }
 type Employee
 	@model
 	@auth(
 		rules: [
-			{ allow: owner, operations: [create, read,update,delete] }
+			{ allow: owner, operations: [create, read, update, delete] }
 			{ allow: groups, groups: ["Admin"], operations: [read] }
 		]
 	) {
 	id: ID!
-	name:String
+	name: String
 	designation: String
-	profilePicture:String
+	profilePicture: String
 	power: [String]
-	History:[History] @hasMany(indexName: "byEmployee", fields: ["id"])
+	History: [History] @hasMany(indexName: "byEmployee", fields: ["id"])
 }
 type Balance
 	@model
@@ -100,7 +169,7 @@ type Plan
 	@model
 	@auth(
 		rules: [
-			{ allow: owner, operations: [create,read] }
+			{ allow: owner, operations: [create, read] }
 			{
 				allow: groups
 				groups: ["Admin"]
@@ -111,16 +180,16 @@ type Plan
 	id: ID!
 	brief: [AWSJSON]
 	name: String
-	companyName:String
-	phoneNumber:String
-	email:String
-	eventTitle:String
-	eventLocation:String
-	eventDate:String
-	totalBudget:String
-	fileLink:String
+	companyName: String
+	phoneNumber: String
+	email: String
+	eventTitle: String
+	eventLocation: String
+	eventDate: String
+	totalBudget: String
+	fileLink: String
 	status: String!
-    description:String,
+	description: String
 	userID: ID! @index(name: "byUser")
 }
 
@@ -184,7 +253,7 @@ type Review
 	behaviour: Float!
 	average: Float!
 	userPicture: String
-	userName:String
+	userName: String
 	photographyID: ID @index(name: "byPhotography")
 	cinematographyID: ID @index(name: "byCinematography")
 	userID: ID! @index(name: "byUser")
@@ -196,6 +265,7 @@ type Review
 	mehediartistID: ID @index(name: "byMehediArtist")
 	makeupartistID: ID @index(name: "byMakeupArtist")
 	djmusicianID: ID @index(name: "byDJMusician")
+	giftVendor: ID @index(name: "byGiftVendor")
 }
 
 type Vendor
@@ -291,6 +361,53 @@ type Cinematography
 	eventsCompleted: Int
 }
 
+type GiftVendor
+	@model
+	@auth(
+		rules: [
+			{ allow: public, operations: [read] }
+			{ allow: owner, operations: [create, read, update] }
+			{ allow: private, operations: [read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	VendorName: String!
+	VendorDescription: String!
+	email: String!
+	phoneNumber: String!
+	uploadYourPhoto:String
+	eventsCompleted: Int
+	status: String!
+	Reviews: [Review] @hasMany(indexName: "byGiftVendor", fields: ["id"])
+	Gifts: [Gift] @hasMany(indexName: "byGiftVendor", fields: ["id"])
+}
+type Gift
+	@model
+	@auth(
+		rules: [
+			{ allow: public, operations: [read] }
+			{ allow: owner, operations: [create, read, update,delete] }
+			{ allow: private, operations: [read] }
+			{
+				allow: groups
+				groups: ["Admin"]
+				operations: [read, create, update, delete]
+			}
+		]
+	) {
+	id: ID!
+	giftName: String!
+	giftDescription: String !
+	giftImage: [String]
+	price: Int!
+	multipleItem: [AWSJSON]
+	GiftVendorID: ID! @index(name: "byGiftVendor")
+}
 type Photography
 	@model
 	@auth(

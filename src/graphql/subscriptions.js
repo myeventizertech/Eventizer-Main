@@ -46,6 +46,108 @@ export const onDeleteCoupon = /* GraphQL */ `
     }
   }
 `;
+export const onCreateIhostManager = /* GraphQL */ `
+  subscription OnCreateIhostManager($owner: String) {
+    onCreateIhostManager(owner: $owner) {
+      id
+      firstName
+      lastName
+      address
+      phoneNumber
+      email
+      nidNumber
+      profilePicture
+      status
+      IhostEvents {
+        items {
+          id
+          eventName
+          eventDescription
+          eventPhoto
+          address
+          phoneNumber
+          extra
+          IhostManager
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateIhostManager = /* GraphQL */ `
+  subscription OnUpdateIhostManager($owner: String) {
+    onUpdateIhostManager(owner: $owner) {
+      id
+      firstName
+      lastName
+      address
+      phoneNumber
+      email
+      nidNumber
+      profilePicture
+      status
+      IhostEvents {
+        items {
+          id
+          eventName
+          eventDescription
+          eventPhoto
+          address
+          phoneNumber
+          extra
+          IhostManager
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteIhostManager = /* GraphQL */ `
+  subscription OnDeleteIhostManager($owner: String) {
+    onDeleteIhostManager(owner: $owner) {
+      id
+      firstName
+      lastName
+      address
+      phoneNumber
+      email
+      nidNumber
+      profilePicture
+      status
+      IhostEvents {
+        items {
+          id
+          eventName
+          eventDescription
+          eventPhoto
+          address
+          phoneNumber
+          extra
+          IhostManager
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreateHistory = /* GraphQL */ `
   subscription OnCreateHistory {
     onCreateHistory {
@@ -837,6 +939,7 @@ export const onCreateUser = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -935,6 +1038,7 @@ export const onUpdateUser = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1033,12 +1137,169 @@ export const onDeleteUser = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateIhostEvents = /* GraphQL */ `
+  subscription OnCreateIhostEvents($owner: String) {
+    onCreateIhostEvents(owner: $owner) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          fullName
+          email
+          phoneNumber
+          profilePicture
+          extra
+          status
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateIhostEvents = /* GraphQL */ `
+  subscription OnUpdateIhostEvents($owner: String) {
+    onUpdateIhostEvents(owner: $owner) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          fullName
+          email
+          phoneNumber
+          profilePicture
+          extra
+          status
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteIhostEvents = /* GraphQL */ `
+  subscription OnDeleteIhostEvents($owner: String) {
+    onDeleteIhostEvents(owner: $owner) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          fullName
+          email
+          phoneNumber
+          profilePicture
+          extra
+          status
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateTicket = /* GraphQL */ `
+  subscription OnCreateTicket($owner: String) {
+    onCreateTicket(owner: $owner) {
+      id
+      message
+      fullName
+      email
+      phoneNumber
+      profilePicture
+      extra
+      status
+      IhostEvents
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateTicket = /* GraphQL */ `
+  subscription OnUpdateTicket($owner: String) {
+    onUpdateTicket(owner: $owner) {
+      id
+      message
+      fullName
+      email
+      phoneNumber
+      profilePicture
+      extra
+      status
+      IhostEvents
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteTicket = /* GraphQL */ `
+  subscription OnDeleteTicket($owner: String) {
+    onDeleteTicket(owner: $owner) {
+      id
+      message
+      fullName
+      email
+      phoneNumber
+      profilePicture
+      extra
+      status
+      IhostEvents
       createdAt
       updatedAt
       owner
@@ -1067,6 +1328,7 @@ export const onCreateReview = /* GraphQL */ `
       mehediartistID
       makeupartistID
       djmusicianID
+      giftVendor
       createdAt
       updatedAt
       owner
@@ -1095,6 +1357,7 @@ export const onUpdateReview = /* GraphQL */ `
       mehediartistID
       makeupartistID
       djmusicianID
+      giftVendor
       createdAt
       updatedAt
       owner
@@ -1123,6 +1386,7 @@ export const onDeleteReview = /* GraphQL */ `
       mehediartistID
       makeupartistID
       djmusicianID
+      giftVendor
       createdAt
       updatedAt
       owner
@@ -1169,6 +1433,7 @@ export const onCreateCinematography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1225,6 +1490,7 @@ export const onUpdateCinematography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1281,6 +1547,7 @@ export const onDeleteCinematography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1291,6 +1558,234 @@ export const onDeleteCinematography = /* GraphQL */ `
       packages
       status
       eventsCompleted
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateGiftVendor = /* GraphQL */ `
+  subscription OnCreateGiftVendor($owner: String) {
+    onCreateGiftVendor(owner: $owner) {
+      id
+      VendorName
+      VendorDescription
+      email
+      phoneNumber
+      uploadYourPhoto
+      eventsCompleted
+      status
+      Reviews {
+        items {
+          id
+          description
+          valueForMoney
+          service
+          behaviour
+          average
+          userPicture
+          userName
+          photographyID
+          cinematographyID
+          userID
+          rentalID
+          brandpromoterID
+          decorationID
+          printingpressID
+          giftitemsID
+          mehediartistID
+          makeupartistID
+          djmusicianID
+          giftVendor
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Gifts {
+        items {
+          id
+          giftName
+          giftDescription
+          giftImage
+          price
+          multipleItem
+          GiftVendorID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateGiftVendor = /* GraphQL */ `
+  subscription OnUpdateGiftVendor($owner: String) {
+    onUpdateGiftVendor(owner: $owner) {
+      id
+      VendorName
+      VendorDescription
+      email
+      phoneNumber
+      uploadYourPhoto
+      eventsCompleted
+      status
+      Reviews {
+        items {
+          id
+          description
+          valueForMoney
+          service
+          behaviour
+          average
+          userPicture
+          userName
+          photographyID
+          cinematographyID
+          userID
+          rentalID
+          brandpromoterID
+          decorationID
+          printingpressID
+          giftitemsID
+          mehediartistID
+          makeupartistID
+          djmusicianID
+          giftVendor
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Gifts {
+        items {
+          id
+          giftName
+          giftDescription
+          giftImage
+          price
+          multipleItem
+          GiftVendorID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteGiftVendor = /* GraphQL */ `
+  subscription OnDeleteGiftVendor($owner: String) {
+    onDeleteGiftVendor(owner: $owner) {
+      id
+      VendorName
+      VendorDescription
+      email
+      phoneNumber
+      uploadYourPhoto
+      eventsCompleted
+      status
+      Reviews {
+        items {
+          id
+          description
+          valueForMoney
+          service
+          behaviour
+          average
+          userPicture
+          userName
+          photographyID
+          cinematographyID
+          userID
+          rentalID
+          brandpromoterID
+          decorationID
+          printingpressID
+          giftitemsID
+          mehediartistID
+          makeupartistID
+          djmusicianID
+          giftVendor
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Gifts {
+        items {
+          id
+          giftName
+          giftDescription
+          giftImage
+          price
+          multipleItem
+          GiftVendorID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateGift = /* GraphQL */ `
+  subscription OnCreateGift($owner: String) {
+    onCreateGift(owner: $owner) {
+      id
+      giftName
+      giftDescription
+      giftImage
+      price
+      multipleItem
+      GiftVendorID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateGift = /* GraphQL */ `
+  subscription OnUpdateGift($owner: String) {
+    onUpdateGift(owner: $owner) {
+      id
+      giftName
+      giftDescription
+      giftImage
+      price
+      multipleItem
+      GiftVendorID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteGift = /* GraphQL */ `
+  subscription OnDeleteGift($owner: String) {
+    onDeleteGift(owner: $owner) {
+      id
+      giftName
+      giftDescription
+      giftImage
+      price
+      multipleItem
+      GiftVendorID
       createdAt
       updatedAt
       owner
@@ -1336,6 +1831,7 @@ export const onCreatePhotography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1392,6 +1888,7 @@ export const onUpdatePhotography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1448,6 +1945,7 @@ export const onDeletePhotography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1506,6 +2004,7 @@ export const onCreateDJMusician = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1562,6 +2061,7 @@ export const onUpdateDJMusician = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1618,6 +2118,7 @@ export const onDeleteDJMusician = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1673,6 +2174,7 @@ export const onCreateMakeupArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1728,6 +2230,7 @@ export const onUpdateMakeupArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1783,6 +2286,7 @@ export const onDeleteMakeupArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1838,6 +2342,7 @@ export const onCreateMehediArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1893,6 +2398,7 @@ export const onUpdateMehediArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1948,6 +2454,7 @@ export const onDeleteMehediArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner

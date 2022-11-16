@@ -23,7 +23,7 @@ const options = [
 	{ id: 2, value: "cinematography", label: "Cinematography" },
 	// { id: 3, value: "decoration", label: "Decoration" },
 	// { id: 4, value: "printing-press", label: "Printing & Press" },
-	// { id: 5, value: "gift-items", label: "Gift Items" },
+	{ id: 6, value: "gift-items", label: "Gift Items" },
 	{ id: 3, value: "dj-musician", label: "DJ/Musician" },
 	{ id: 4, value: "mehedi-artist", label: "Mehedi Artist" },
 	{ id: 5, value: "makeup-artist", label: "Makeup Artist" },
@@ -124,9 +124,14 @@ const RegForm = () => {
 			serviceAPI = mutations.createMehediArtist;
 			vData="createMehediArtist"
 		}
+	
 		if ((userData.service === "makeup-artist")) {
 			serviceAPI = mutations.createMakeupArtist;
 			vData="createMakeupArtist"
+		}
+		if ((userData.service === "gift-items")) {
+			serviceAPI = mutations.createGiftVendor;
+			vData="createGiftVendor"
 		}
 
 		event.preventDefault();

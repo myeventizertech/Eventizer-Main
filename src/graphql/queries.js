@@ -38,6 +38,68 @@ export const listCoupons = /* GraphQL */ `
     }
   }
 `;
+export const getIhostManager = /* GraphQL */ `
+  query GetIhostManager($id: ID!) {
+    getIhostManager(id: $id) {
+      id
+      firstName
+      lastName
+      address
+      phoneNumber
+      email
+      nidNumber
+      profilePicture
+      status
+      IhostEvents {
+        items {
+          id
+          eventName
+          eventDescription
+          eventPhoto
+          address
+          phoneNumber
+          extra
+          IhostManager
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listIhostManagers = /* GraphQL */ `
+  query ListIhostManagers(
+    $filter: ModelIhostManagerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listIhostManagers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        firstName
+        lastName
+        address
+        phoneNumber
+        email
+        nidNumber
+        profilePicture
+        status
+        IhostEvents {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getHistory = /* GraphQL */ `
   query GetHistory($id: ID!) {
     getHistory(id: $id) {
@@ -592,6 +654,7 @@ export const getUser = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -638,6 +701,110 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getIhostEvents = /* GraphQL */ `
+  query GetIhostEvents($id: ID!) {
+    getIhostEvents(id: $id) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          fullName
+          email
+          phoneNumber
+          profilePicture
+          extra
+          status
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listIhostEvents = /* GraphQL */ `
+  query ListIhostEvents(
+    $filter: ModelIhostEventsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listIhostEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        eventName
+        eventDescription
+        eventPhoto
+        address
+        phoneNumber
+        extra
+        IhostManager
+        Ticket {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getTicket = /* GraphQL */ `
+  query GetTicket($id: ID!) {
+    getTicket(id: $id) {
+      id
+      message
+      fullName
+      email
+      phoneNumber
+      profilePicture
+      extra
+      status
+      IhostEvents
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listTickets = /* GraphQL */ `
+  query ListTickets(
+    $filter: ModelTicketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTickets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        message
+        fullName
+        email
+        phoneNumber
+        profilePicture
+        extra
+        status
+        IhostEvents
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getReview = /* GraphQL */ `
   query GetReview($id: ID!) {
     getReview(id: $id) {
@@ -660,6 +827,7 @@ export const getReview = /* GraphQL */ `
       mehediartistID
       makeupartistID
       djmusicianID
+      giftVendor
       createdAt
       updatedAt
       owner
@@ -693,6 +861,7 @@ export const listReviews = /* GraphQL */ `
         mehediartistID
         makeupartistID
         djmusicianID
+        giftVendor
         createdAt
         updatedAt
         owner
@@ -741,6 +910,7 @@ export const getCinematography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -800,6 +970,135 @@ export const listCinematographies = /* GraphQL */ `
     }
   }
 `;
+export const getGiftVendor = /* GraphQL */ `
+  query GetGiftVendor($id: ID!) {
+    getGiftVendor(id: $id) {
+      id
+      VendorName
+      VendorDescription
+      email
+      phoneNumber
+      uploadYourPhoto
+      eventsCompleted
+      status
+      Reviews {
+        items {
+          id
+          description
+          valueForMoney
+          service
+          behaviour
+          average
+          userPicture
+          userName
+          photographyID
+          cinematographyID
+          userID
+          rentalID
+          brandpromoterID
+          decorationID
+          printingpressID
+          giftitemsID
+          mehediartistID
+          makeupartistID
+          djmusicianID
+          giftVendor
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Gifts {
+        items {
+          id
+          giftName
+          giftDescription
+          giftImage
+          price
+          multipleItem
+          GiftVendorID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listGiftVendors = /* GraphQL */ `
+  query ListGiftVendors(
+    $filter: ModelGiftVendorFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGiftVendors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        VendorName
+        VendorDescription
+        email
+        phoneNumber
+        uploadYourPhoto
+        eventsCompleted
+        status
+        Reviews {
+          nextToken
+        }
+        Gifts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getGift = /* GraphQL */ `
+  query GetGift($id: ID!) {
+    getGift(id: $id) {
+      id
+      giftName
+      giftDescription
+      giftImage
+      price
+      multipleItem
+      GiftVendorID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listGifts = /* GraphQL */ `
+  query ListGifts(
+    $filter: ModelGiftFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGifts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        giftName
+        giftDescription
+        giftImage
+        price
+        multipleItem
+        GiftVendorID
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getPhotography = /* GraphQL */ `
   query GetPhotography($id: ID!) {
     getPhotography(id: $id) {
@@ -839,6 +1138,7 @@ export const getPhotography = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -936,6 +1236,7 @@ export const getDJMusician = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1030,6 +1331,7 @@ export const getMakeupArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
@@ -1123,6 +1425,7 @@ export const getMehediArtist = /* GraphQL */ `
           mehediartistID
           makeupartistID
           djmusicianID
+          giftVendor
           createdAt
           updatedAt
           owner
