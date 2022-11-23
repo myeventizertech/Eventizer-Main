@@ -1,13 +1,23 @@
-import React from 'react';
-import GiftMyPackage from '../../components/dashboard/my-package/giftItem/GiftMyPackage';
-// import GiftMyPackage from '../../components/dashboard/my-package/giftItem/GiftMyPackage';
-
+import React from "react";
+import GiftMyPackage from "../../components/dashboard/my-package/giftItem/GiftMyPackage";
+import { vendorProtectRoute } from "../../utils/vendorProtectRoute";
+import Layout from "../../components/dashboard/Layout";
+import Head from "next/head";
 const giftItem = () => {
-    return (
-        <div>
-            <GiftMyPackage/>
-        </div>
-    );
+	return (
+		<>
+			<Head>
+				<title>Eventizer | My Package</title>
+			</Head>
+			<Layout>
+				<GiftMyPackage />
+			</Layout>
+		</>
+	);
 };
-
+export const getServerSideProps = vendorProtectRoute((context) => {
+	return {
+		props: {},
+	};
+});
 export default giftItem;

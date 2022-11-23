@@ -1017,6 +1017,9 @@ export const getGiftVendor = /* GraphQL */ `
           giftImage
           category
           price
+          customizedPrice
+          cPrice
+          type
           multipleItem
           GiftVendorID
           createdAt
@@ -1070,6 +1073,9 @@ export const getGift = /* GraphQL */ `
       giftImage
       category
       price
+      customizedPrice
+      cPrice
+      type
       multipleItem
       GiftVendorID
       createdAt
@@ -1092,6 +1098,9 @@ export const listGifts = /* GraphQL */ `
         giftImage
         category
         price
+        customizedPrice
+        cPrice
+        type
         multipleItem
         GiftVendorID
         createdAt

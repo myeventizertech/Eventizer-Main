@@ -18,6 +18,7 @@ const Layout = ({ children }) => {
       router.pathname !== "/dashboard/my-package" &&
       router.pathname !== "/dashboard/profile" &&
       router.pathname !== "/dashboard/my-plans" &&
+      router.pathname !== "/dashboard/giftItem" &&
       router.pathname !== "/dashboard/withdraw" 
 
     );

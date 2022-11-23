@@ -406,6 +406,9 @@ type Gift
 	giftImage: [String]
 	category:[AWSJSON]
 	price: Int!
+	customizedPrice:Int
+	cPrice: Boolean           #True/false if custom price is given or not
+	type:String               #  Single or Multiple
 	multipleItem: [AWSJSON]
 	GiftVendorID: ID! @index(name: "byGiftVendor")
 }
