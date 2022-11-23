@@ -51,10 +51,7 @@ const Main = ({service}) => {
                     <Link href='/gift'>
                       <a
                         className={`text-[#434343] font-14 font-normal hover:opacity-75 flex items-center gap-2 px-2 py-1 `
-                        // ${router.pathname == item.path &&
-                        // "bg-[#ef0d5e] bg-opacity-10 border-[#ef0d5e] border-b-2"
-                        
-                          // }
+                       
                     
                     }
                       >

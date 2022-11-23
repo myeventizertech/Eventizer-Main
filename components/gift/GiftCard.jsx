@@ -1,12 +1,10 @@
 import React from 'react';
-import ButtonClick from '../reUseComponents/ButtonClick';
-import p1 from '../../public/img/Rectangle 42.png'
 
 const GiftCard = ({data}) => {
     return (
-        <section className='rounded  bg-base-100 col-span-6 min-w-full   lg:min-w-full  md:col-span-6 mdx:col-span-4 shadow-md w-[100%] '>
+        <section className='rounded-lg max-w-[280px] bg-base-100 col-span-6 min-w-full   lg:min-w-full  md:col-span-6 mdx:col-span-4 shadow-md w-[100%] '>
             <div className=' w-[100%]'>
-            <img src={data.giftPhoto} alt="gift" />
+            <img className='rounded-tl-lg rounded-tr-lg min-h-[210px] max-h-[210px]' src={data.giftPhoto} alt="gift" />
 
              <div>
                                                                
