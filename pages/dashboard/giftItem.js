@@ -9,8 +9,8 @@ const giftItem = () => {
 			<Head>
 				<title>Eventizer | My Package</title>
 			</Head>
-			<Layout>
-				<GiftMyPackage />
+			<Layout >
+				<GiftMyPackage padding={'p-3'}/>
 			</Layout>
 		</>
 	);

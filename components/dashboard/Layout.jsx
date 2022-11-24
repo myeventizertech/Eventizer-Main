@@ -14,10 +14,12 @@ const LayoutSSRfalse = dynamic(() => import("./LayoutSSRfalse"), {
   ),
   ssr: false,
 });
-const Layout = ({ children }) => {
+const Layout = ({children }) => {
+ 
+  
   return (
     <>
-      <LayoutSSRfalse>{children}</LayoutSSRfalse>
+      <LayoutSSRfalse >{children}</LayoutSSRfalse>
     </>
   );
 };

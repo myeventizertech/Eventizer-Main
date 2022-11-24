@@ -12,6 +12,7 @@ import ButtonLinkOrClick from "../reUseComponents/ButtonLinkOrClick";
 import HamburgerDashboard from "../reUseComponents/icons/HamburgerDashboard";
 import Loader from "../reUseComponents/Loader";
 const LayoutSSRfalse = ({ children }) => {
+//  const padding = children console.log({padding:children.props})
   const { setAuthLoader, setVeifyUser, verifyUser, dispatch } =
     useUserOrVendor();
   const { isUser_vendor } = verifyUser;
@@ -200,7 +201,7 @@ const LayoutSSRfalse = ({ children }) => {
                 </>
               )}
 
-              <div className="p-9 lg:p-10">{children}</div>
+              <div className={`${children.props ? 'p-3':'p-9'}  lg:p-10`}>{children}</div>
             </>
           )}
         </div>

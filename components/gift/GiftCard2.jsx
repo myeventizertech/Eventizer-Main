@@ -1,15 +1,15 @@
 import React from 'react';
 
-const GiftCard = ({data}) => {
+const GiftCard2 = ({data}) => {
     return (
-        <section className='rounded-lg max-w-[280px] bg-base-100 col-span-6 min-w-full   lg:min-w-full  md:col-span-6 mdx:col-span-4 shadow-md w-[100%] '>
-            <div className=''>
-            <img className='rounded-tl-lg w-[100%] rounded-tr-lg h-[140px] md:min-h-[210px] md:max-h-[210px]' src={data.giftPhoto} alt="gift" />
+        <section className='rounded-lg max-w-[280px] bg-base-100 col-span-6 min-w-full   lg:min-w-full  md:col-span-6 mdx:col-span-3 shadow-md w-[100%] '>
+            <div className=' '>
+            <img className='w-[100%] rounded-tl-lg rounded-tr-lg min-h-[113px] md:min-h-[210px] max-h-[210px]' src={data.giftPhoto} alt="gift" />
 
              <div className='flex justify-end'>
                                                                
-            <div className="mt-[-17.5px] md:mt-[-32.5px] mr-4 absolute bg-slate-300 bg-opacity-10 rounded-[50%] w-[35px] md:w-[63px]    border border-gray-500">
-                <div className=" overflow-hidden relative rounded-full ">
+            <div className="mt-[-17.5px] mr-5 md:mt-[-32.5px] absolute ml-[95px] bg-slate-300 bg-opacity-10 rounded-[50%] w-[35px] md:w-[63px]    border border-gray-500">
+                <div className="overflow-hidden relative rounded-full ">
                   {  (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -32,13 +32,14 @@ const GiftCard = ({data}) => {
             <div>
                 <hr />
             </div>
-            <div className='flex justify-between mt-3 '>
-                <h3 className='text-sm text-[#EF0D5E] font-normal'>৳{data.price}</h3>
-              <button className='rounded text-white bg-[#EF0D5E] md:p-1 text-[8px] md:text-xs w-[45px] md:w-[82px] h-[15px] md:h-[28px] font-normal'>Buy Now</button>
+            <div className='flex justify-center gap-5 mt-3 '>
+            <button className='rounded text-white bg-[#ef0d33] md:p-1 text-[8px] md:text-xs w-[45px] md:w-[82px] h-[15px] md:h-[28px] font-normal hover:opacity-75'>Delete</button>
+            
+              <button className='rounded text-white bg-[#2ac9a1] md:p-1 text-[8px] md:text-xs w-[45px] md:w-[82px] h-[15px] md:h-[28px] font-normal hover:opacity-75'>Edit</button>
             </div>
             </div>
         </section>
     );
 };
 
-export default GiftCard;
+export default GiftCard2;

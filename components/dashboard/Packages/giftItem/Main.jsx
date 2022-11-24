@@ -22,26 +22,14 @@ import InputError from "../../../reUseComponents/InputError";
 import Tick from "../../../reUseComponents/icons/tick";
 import Plus from "../../../reUseComponents/icons/plus";
 
-const GiftMain = ({
-  addPackAgeInitalValue = initalValue,
-  iseEDit,
-  index,
-  setEditIsOpen,
-}) => {
+const GiftMain = () => {
   const router = useRouter();
   const { verifyUser } = useUserOrVendor();
   let { attributes } = verifyUser?.isUser_vendorAttr || {};
   let serviceCheck = attributes?.["custom:service"];
   const [serviceAPI, setserviceAPI] = useState(null);
-  const [vData, setvData] = useState(null);
-  const [files, setFiles] = useState([]);
-  const [filesB, setFilesB] = useState([]);
-  const [filesS, setFilesS] = useState([]);
   const [fileError, setFileError] = useState(false);
   const storage = JSON.parse(localStorage.getItem("AmpUserInfo"));
-  let { dispatch } = useUserOrVendor();
-  const [loadImg, setloadImg] = useState(false);
-  let prevPackage = storage.vendor?.packages;
 
   const [isSingle, setIsSingle] = useState(false);
   const [isMultiple, setIsMultiple] = useState(false);
@@ -49,22 +37,26 @@ const GiftMain = ({
   const [packageDetail, setPackageDetail] = useState(null);
   const [singleGiftPrice, setSingleGiftPrice] = useState(null);
   const [filesP, setFilesP] = useState([]);
+  // const [images,setImages]= useState([])
   const [totalPrice, setTotalPrice] = useState(null);
 
-  const [inputList, setInputList] = useState([
+  const [multipleItem, setMultipleItem] = useState([
     { inputData: undefined, inputPrice: undefined, inputImage: undefined },
   ]);
   const [customize, setCustomize] = useState(false);
-
+  
+  const [cPrice, setCPrice]=useState(false)
   const handleSingle = () => {
     setIsSingle(true);
     setIsMultiple(false);
     setSingleGiftPrice(null);
-    setInputList([
+    setMultipleItem([
       { inputData: undefined, inputPrice: undefined, inputImage: undefined },
     ]);
     setTotalPrice((totalPrice = null));
+    setCPrice(false)
   };
+
   const handleMultiple = () => {
     setIsMultiple(true);
     setIsSingle(false);
@@ -72,16 +64,16 @@ const GiftMain = ({
   };
 
   const addBtn = () => {
-    setInputList([
-      ...inputList,
+    setMultipleItem([
+      ...multipleItem,
       { inputData: undefined, inputPrice: undefined, inputImage: undefined },
     ]);
   };
 
   const deleteBtn = (index) => {
-    const list = [...inputList];
+    const list = [...multipleItem];
     list.splice(index, 1);
-    setInputList(list);
+    setMultipleItem(list);
   };
 
   const handlePackageName = (e) => {
@@ -103,28 +95,30 @@ const GiftMain = ({
 
   const handleInputData = (e, index) => {
     const { name, value } = e.target;
-    const list = [...inputList];
+    const list = [...multipleItem];
     list[index][name] = value;
-    setInputList(list);
+    setMultipleItem(list);
   };
 
   const [lastPrice, setLastPrice] = useState(0);
 
   const handleInputPrice = (e, index) => {
+    console.log(e.target.value)
     const { name, value } = e.target;
-    const list = [...inputList];
+    const list = [...multipleItem];
     list[index][name] = value;
-    setInputList(list);
+    setMultipleItem(list);
 
     let priceArray = [];
-    inputList.map((ip) => {
+    multipleItem.map((ip) => {
       priceArray.push(ip.inputPrice);
     });
     let price;
     let sumPrice = 0;
     for (price of priceArray) {
-      sumPrice = sumPrice + Number(price);
-      setLastPrice(sumPrice);
+      sumPrice = sumPrice + parseFloat(price);
+      // setLastPrice(sumPrice);
+      setCustomizedPrice(sumPrice)
     }
   };
 
@@ -135,34 +129,48 @@ const GiftMain = ({
     }
     const file = e.target.files[0];
     const name = e.target.name;
-    const list = [...inputList];
+    const list = [...multipleItem];
     list[index][name] = file;
-    setInputList(list);
+    setMultipleItem(list);
   };
   const [customizedPrice,setCustomizedPrice]=useState(null)
   const handleCustomizePrice = (e) => {
     setCustomizedPrice(e.target.value);
   };
 
-  let giftData={} ; 
- 	giftData = {
-	packageName: packageName,
-    packageDetail: packageDetail,
+  
+  useEffect(()=>{
+
+    if(customize){
+      setCPrice(true)
+    }else{
+      setCPrice(false)
+    }
+  
+  },[customize])
+    
+
+
+  let giftData={
+    giftName: packageName,
+    giftDescription : packageDetail,
     dropZoneImage: filesP,
     singleGiftPrice: singleGiftPrice,
-    inputList: inputList,
-    totalPackagePrice: lastPrice,
-	customizedPrice: customizedPrice
+    multipleItem: multipleItem,
+    // totalPackagePrice: lastPrice,
+	customizedPrice: customizedPrice,
+  cPrice:cPrice
 	}
 
   const [dropMessage, setdropMessage] = useState(false);
 
   const handleGiftData = (e) => {
     e.preventDefault();	
+    // console.log(images);
 	if (filesP.length <= 2) {
       setdropMessage(true);
     }
-    inputList.map((ip) => {
+    multipleItem.map((ip) => {
       if (ip.inputImage == undefined) {
         setInputImageUndefined(true);
       } else {
@@ -181,8 +189,8 @@ const GiftMain = ({
     if (!giftData.singleGiftPrice) {
       setSingleGiftPrice(false);
     }
-    if (!giftData.inputList) {
-      setInputList(false);
+    if (!giftData.multipleItem) {
+      setMultipleItem(false);
     }
     if (!totalPrice) {
       setTotalPrice(false);
@@ -207,7 +215,7 @@ const GiftMain = ({
 
       <form onSubmit={handleGiftData}>
         <div className="md:flex md:flex-row-reverse  ">
-          <div className="md:w-[45%] mx-auto">
+          <div className="md:w-[45%] ml-auto">
             <DropZone
               label="Please Upload Gift Images"
               files={filesP}
@@ -228,7 +236,7 @@ const GiftMain = ({
             )}
           </div>
 
-          <div className="md:w-[45%] mx-auto">
+          <div className="md:w-[45%] mr-auto">
             <div className="flex-1">
               <div className="mb-5">
                 <label
@@ -246,8 +254,8 @@ const GiftMain = ({
                   name="packageName"
                   placeholder="Enter Name"
                   className={`${
-                    !packageName && packageName !== null && "border-[#f30303]"
-                  } inpBorderColor w-full  inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]`}
+                    !packageName  && "border-[#f30303]"
+                  }  ${packageName === null && "inpBorderColor"}  w-full  inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] sm:h-[45px]`}
                 />
                 {!packageName && packageName !== null && (
                   <p className="font-12 text-[#F30303] font-light mt-1 mb-[-4px] sm:mb[-8px] ">
@@ -358,7 +366,7 @@ const GiftMain = ({
           {isMultiple && (
             <div>
               <div className="w-full  grid grid-cols-12 ">
-                {inputList.map((singleInput, index) => (
+                {multipleItem.map((singleInput, index) => (
                   <div
                     key={index}
                     className="mt-8 col-span-12 md:col-span-6 flex md:flex-row flex-col justify-between  "
@@ -366,9 +374,9 @@ const GiftMain = ({
                     <div className="md:w-[75%] ">
                       <h2
                         className={`font-16 sm:font-16 md:font-18  ${
-                          inputList[index].inputData == undefined &&
+                          multipleItem[index].inputData == undefined &&
                           "text-black"
-                        } ${!inputList[index].inputData && "text-[#F30303]"}`}
+                        } ${!multipleItem[index].inputData && "text-[#F30303]"}`}
                       >
                         Item name {index + 1}
                       </h2>
@@ -379,17 +387,17 @@ const GiftMain = ({
                           autoComplete="off"		
                           onChange={(e) => handleInputData(e, index)}
                           className={`${
-                            inputList[index].inputData == undefined &&
+                            multipleItem[index].inputData == undefined &&
                             "inpBorderColor"
                           }${
-                            !inputList[index].inputData && "border-[#F30303]"
+                            !multipleItem[index].inputData && "border-[#F30303]"
                           } w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`}
                           type="text"
                           placeholder="Name"
                         />
 
-                        {inputList[index].inputData == undefined &&
-                          inputList[index].inputData != null && (
+                        {multipleItem[index].inputData == undefined &&
+                          multipleItem[index].inputData != null && (
                             <p className="font-12 mt-1 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">
                               Required field
                             </p>
@@ -398,10 +406,10 @@ const GiftMain = ({
                         <div className="mt-2">
                           <h2
                             className={`font-16 sm:font-16 md:font-18  ${
-                              inputList[index].inputPrice == undefined &&
+                              multipleItem[index].inputPrice == undefined &&
                               "text-black"
                             } ${
-                              !inputList[index].inputPrice && "text-[#F30303]"
+                              !multipleItem[index].inputPrice && "text-[#F30303]"
                             }`}
                           >
                             Price
@@ -411,16 +419,16 @@ const GiftMain = ({
                             autoComplete="off"
                             onChange={(e) => handleInputPrice(e, index)}
                             className={`${
-                              inputList[index].inputData == undefined &&
+                              multipleItem[index].inputData == undefined &&
                               "inpBorderColor"
                             }${
-                              !inputList[index].inputData && "border-[#F30303]"
+                              !multipleItem[index].inputData && "border-[#F30303]"
                             } w-[50%] inputdesign  font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`}
-                            type="text"
+                            type="number"
                             placeholder="৳6000"
                           />
 
-                          {inputList[index].inputPrice == undefined && inputList[index].inputPrice != null && (
+                          {!multipleItem[index].inputPrice  && multipleItem[index].inputPrice != null && (
                             <p className="font-12 mt-1 text-[#F30303] font-light mb-[-4px] sm:mb[-8px] ">
                               Required field
                             </p>
@@ -428,10 +436,10 @@ const GiftMain = ({
                         </div>
                       </div>
 
-                      {inputList.length - 1 === index && (
+                      {multipleItem.length - 1 === index && (
                         <div className="flex justify-between  mt-2">
                           <div>
-                            {inputList.length < 5 && (
+                            {multipleItem.length < 10 && (
                               <button
                                 onClick={addBtn}
                                 className="text-base px-3 py-1 font-light rounded-md text-white bgcolor2"
@@ -442,7 +450,7 @@ const GiftMain = ({
                             )}
                           </div>
 
-                          {inputList.length > 1 && inputList.length <= 5 && (
+                          {multipleItem.length > 1 && multipleItem.length <= 10 && (
                             <button
                               onClick={() => deleteBtn(index)}
                               className="text-white bgcolor2 font-light text-sm px-1 rounded"
@@ -457,14 +465,14 @@ const GiftMain = ({
 
                     <div
                       className={` mt-3 md:mt-0 mr-3 ${
-                        inputList[index].inputImage == undefined && "mr-0"
-                      } ${!inputList[index].inputImage && "mt-6"}`}
+                        multipleItem[index].inputImage == undefined && "mr-0"
+                      } ${!multipleItem[index].inputImage && "mt-6"}`}
                     >
                       <h2
                         className={`font-16 sm:font-16 md:font-18 ${
-                          inputList[index].inputImage == undefined &&
+                          multipleItem[index].inputImage == undefined &&
                           "text-black"
-                        } ${!inputList[index].inputImage && "text-[#F30303]"}`}
+                        } ${!multipleItem[index].inputImage && "text-[#F30303]"}`}
                       >
                         Image
                       </h2>
@@ -479,20 +487,20 @@ const GiftMain = ({
                         <label role={"button"} htmlFor={index}>
                           <div
                             className={` ${
-                              inputList[index].inputImage != false
+                              multipleItem[index].inputImage != false
                                 ? "border-green-500 inputdesign border-2"
                                 : "border-red-500"
                             } ${
-                              inputList[index].inputImage == undefined &&
+                              multipleItem[index].inputImage == undefined &&
                               "inpBorderColor inputdesign"
                             }  w-full font-14 sm:font-16 md:font-18 rounded-[8px] ${
-                              inputList[index].inputImage != undefined
+                              multipleItem[index].inputImage != undefined
                                 ? "px-2"
                                 : "px-0"
                             }  sm:px-[20px] h-[38px] sm:h-[45px] flex justify-center items-center`}
                           >
                             <div>
-                              {!inputList[index].inputImage ? (
+                              {!multipleItem[index].inputImage ? (
                                 <Plus />
                               ) : (
                                 <Tick />
@@ -560,18 +568,15 @@ const GiftMain = ({
                 {customize ? (
                   <div className="mt-5">
                     <h2
-                      className={` text-black  font-14 sm:font-16 md:font-18`}
+                      className={`${customizedPrice == null && " text-black"}  font-14 sm:font-16 md:font-18`}
                     >
                       Customize Total Price
                     </h2>
-
                     <div className="mt-2">
                       <input
                         onChange={(e) => handleCustomizePrice(e)}
-                        className={`${totalPrice == null && "inpBorderColor"} ${
-                          !totalPrice && "border-[#F30303]"
-                        } w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`}
-                        type="text"
+                        className={`${customizedPrice == null && "inpBorderColor"} w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`}
+                        type="number"
                         placeholder="৳6000"
                         readOnly={false}
                       />
@@ -588,11 +593,9 @@ const GiftMain = ({
                     <div className="mt-2">
                       <input
                        
-                        className={`${totalPrice == null && "inpBorderColor"} ${
-                          !totalPrice && "border-[#F30303]"
-                        } w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`}
-                        type="text"
-						value={lastPrice}
+                        className={`${customizedPrice === null && "inpBorderColor"}  w-full inputdesign font-14 sm:font-16 md:font-18 rounded-[8px] px-2 sm:px-[20px] h-[38px] bg-auto sm:h-[45px]`}
+                        type="number"
+						value={customizedPrice}
                         placeholder="৳6000"
                         readOnly={true}
                       />
