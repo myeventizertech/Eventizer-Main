@@ -166,6 +166,40 @@ export const deleteIhostManager = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
+=======
+export const createIhostEvents = /* GraphQL */ `
+  mutation CreateIhostEvents(
+    $input: CreateIhostEventsInput!
+    $condition: ModelIhostEventsConditionInput
+  ) {
+    createIhostEvents(input: $input, condition: $condition) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+>>>>>>> 427ff33 (Test)
 export const updateIhostEvents = /* GraphQL */ `
   mutation UpdateIhostEvents(
     $input: UpdateIhostEventsInput!
@@ -184,12 +218,15 @@ export const updateIhostEvents = /* GraphQL */ `
         items {
           id
           message
+<<<<<<< HEAD
           fullName
           email
           phoneNumber
           profilePicture
           extra
           status
+=======
+>>>>>>> 427ff33 (Test)
           IhostEvents
           createdAt
           updatedAt
@@ -221,12 +258,15 @@ export const deleteIhostEvents = /* GraphQL */ `
         items {
           id
           message
+<<<<<<< HEAD
           fullName
           email
           phoneNumber
           profilePicture
           extra
           status
+=======
+>>>>>>> 427ff33 (Test)
           IhostEvents
           createdAt
           updatedAt
@@ -240,6 +280,24 @@ export const deleteIhostEvents = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
+=======
+export const createTicket = /* GraphQL */ `
+  mutation CreateTicket(
+    $input: CreateTicketInput!
+    $condition: ModelTicketConditionInput
+  ) {
+    createTicket(input: $input, condition: $condition) {
+      id
+      message
+      IhostEvents
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+>>>>>>> 427ff33 (Test)
 export const updateTicket = /* GraphQL */ `
   mutation UpdateTicket(
     $input: UpdateTicketInput!
@@ -248,12 +306,15 @@ export const updateTicket = /* GraphQL */ `
     updateTicket(input: $input, condition: $condition) {
       id
       message
+<<<<<<< HEAD
       fullName
       email
       phoneNumber
       profilePicture
       extra
       status
+=======
+>>>>>>> 427ff33 (Test)
       IhostEvents
       createdAt
       updatedAt
@@ -269,12 +330,15 @@ export const deleteTicket = /* GraphQL */ `
     deleteTicket(input: $input, condition: $condition) {
       id
       message
+<<<<<<< HEAD
       fullName
       email
       phoneNumber
       profilePicture
       extra
       status
+=======
+>>>>>>> 427ff33 (Test)
       IhostEvents
       createdAt
       updatedAt

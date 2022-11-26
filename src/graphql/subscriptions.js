@@ -148,6 +148,129 @@ export const onDeleteIhostManager = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
+=======
+export const onCreateIhostEvents = /* GraphQL */ `
+  subscription OnCreateIhostEvents($owner: String) {
+    onCreateIhostEvents(owner: $owner) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateIhostEvents = /* GraphQL */ `
+  subscription OnUpdateIhostEvents($owner: String) {
+    onUpdateIhostEvents(owner: $owner) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteIhostEvents = /* GraphQL */ `
+  subscription OnDeleteIhostEvents($owner: String) {
+    onDeleteIhostEvents(owner: $owner) {
+      id
+      eventName
+      eventDescription
+      eventPhoto
+      address
+      phoneNumber
+      extra
+      IhostManager
+      Ticket {
+        items {
+          id
+          message
+          IhostEvents
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateTicket = /* GraphQL */ `
+  subscription OnCreateTicket($owner: String) {
+    onCreateTicket(owner: $owner) {
+      id
+      message
+      IhostEvents
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateTicket = /* GraphQL */ `
+  subscription OnUpdateTicket($owner: String) {
+    onUpdateTicket(owner: $owner) {
+      id
+      message
+      IhostEvents
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteTicket = /* GraphQL */ `
+  subscription OnDeleteTicket($owner: String) {
+    onDeleteTicket(owner: $owner) {
+      id
+      message
+      IhostEvents
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+>>>>>>> 427ff33 (Test)
 export const onCreateHistory = /* GraphQL */ `
   subscription OnCreateHistory {
     onCreateHistory {
