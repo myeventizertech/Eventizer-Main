@@ -107,7 +107,13 @@ const MobileNav = ({
 
                 {isUser_vendor === "vendor" && isverified && (
                   <>
-                    {service !== "rental" && (
+                    {service === "gift-items"? (
+                      <ButtonLinkOrClick
+                        goto="/dashboard/add-packages"
+                        text="Add Gift"
+                      />
+                    ):
+                    (
                       <ButtonLinkOrClick
                         goto="/dashboard/add-packages"
                         text="Add package"

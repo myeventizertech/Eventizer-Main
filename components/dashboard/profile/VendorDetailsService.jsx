@@ -128,6 +128,7 @@ const VendorDetailsService = ({ fieldProps, serviceCheck, attributes }) => {
             {conditionalRendar(
               serviceCheck !== services.rental &&
                 serviceCheck !== services.mehediArtist &&
+                serviceCheck !== services.giftItems &&
                 serviceCheck !== services.makeupArtist
             ) && (
               <div>

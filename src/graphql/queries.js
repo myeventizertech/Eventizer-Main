@@ -981,6 +981,7 @@ export const getGiftVendor = /* GraphQL */ `
       uploadYourPhoto
       eventsCompleted
       status
+      address
       Reviews {
         items {
           id
@@ -1021,6 +1022,7 @@ export const getGiftVendor = /* GraphQL */ `
           cPrice
           type
           multipleItem
+          status
           GiftVendorID
           createdAt
           updatedAt
@@ -1050,6 +1052,7 @@ export const listGiftVendors = /* GraphQL */ `
         uploadYourPhoto
         eventsCompleted
         status
+        address
         Reviews {
           nextToken
         }
@@ -1077,6 +1080,7 @@ export const getGift = /* GraphQL */ `
       cPrice
       type
       multipleItem
+      status
       GiftVendorID
       createdAt
       updatedAt
@@ -1102,6 +1106,7 @@ export const listGifts = /* GraphQL */ `
         cPrice
         type
         multipleItem
+        status
         GiftVendorID
         createdAt
         updatedAt

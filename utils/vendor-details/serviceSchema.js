@@ -67,7 +67,12 @@ let ServiceSchema_Rental = {
   // licenseFrontSide: checkFile,
   // licenseBackSide: checkFile,
 };
+let ServiceSchema_GIft = {
+  title: comminvalidation1,
 
+  // licenseFrontSide: checkFile,
+  // licenseBackSide: checkFile,
+};
 export {
   ServiceSchema_Photograpy_cinematograpy,
   ServiceSchema_Decoration_printing_press_gift_items,
@@ -75,4 +80,5 @@ export {
   ServiceSchema_MakeUp_MehdiArtist,
   ServiceSchema_BrandPromote,
   ServiceSchema_Rental,
+  ServiceSchema_GIft
 };

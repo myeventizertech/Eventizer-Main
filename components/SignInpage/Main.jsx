@@ -79,6 +79,10 @@ const Main = () => {
 						serviceAPI = queries.getMakeupArtist;
 						vData = "getMakeupArtist"
 					}
+					if ((service === "gift-items")) {
+						serviceAPI = queries.getGiftVendor;
+						vData="getGiftVendor"
+					}
 					const vendor = await API.graphql({
 						query: queries.getVendor,
 						variables: { id: id }

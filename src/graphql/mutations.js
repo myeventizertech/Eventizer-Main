@@ -1655,6 +1655,7 @@ export const createGiftVendor = /* GraphQL */ `
       uploadYourPhoto
       eventsCompleted
       status
+      address
       Reviews {
         items {
           id
@@ -1695,6 +1696,7 @@ export const createGiftVendor = /* GraphQL */ `
           cPrice
           type
           multipleItem
+          status
           GiftVendorID
           createdAt
           updatedAt
@@ -1722,6 +1724,7 @@ export const updateGiftVendor = /* GraphQL */ `
       uploadYourPhoto
       eventsCompleted
       status
+      address
       Reviews {
         items {
           id
@@ -1762,6 +1765,7 @@ export const updateGiftVendor = /* GraphQL */ `
           cPrice
           type
           multipleItem
+          status
           GiftVendorID
           createdAt
           updatedAt
@@ -1789,6 +1793,7 @@ export const deleteGiftVendor = /* GraphQL */ `
       uploadYourPhoto
       eventsCompleted
       status
+      address
       Reviews {
         items {
           id
@@ -1829,6 +1834,7 @@ export const deleteGiftVendor = /* GraphQL */ `
           cPrice
           type
           multipleItem
+          status
           GiftVendorID
           createdAt
           updatedAt
@@ -1858,6 +1864,7 @@ export const createGift = /* GraphQL */ `
       cPrice
       type
       multipleItem
+      status
       GiftVendorID
       createdAt
       updatedAt
@@ -1881,6 +1888,7 @@ export const updateGift = /* GraphQL */ `
       cPrice
       type
       multipleItem
+      status
       GiftVendorID
       createdAt
       updatedAt
@@ -1904,6 +1912,7 @@ export const deleteGift = /* GraphQL */ `
       cPrice
       type
       multipleItem
+      status
       GiftVendorID
       createdAt
       updatedAt

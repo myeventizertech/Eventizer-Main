@@ -91,11 +91,18 @@ const DekstopNav = ({
                     alt="vendor"
                     isUser_vendor={isUser_vendor}
                   />
-                  {service !== "rental" && (
+                  {service === "gift-items"?(
+                    <div>
+                      <ButtonLinkOrClick goto="/dashboard/add-packages" text="Add Gift" />
+                    </div>
+                  ):
+                  (
                     <div>
                       <ButtonLinkOrClick goto="/dashboard/add-packages" text="Add package" />
                     </div>
-                  )}
+                  )
+           
+                  }
                 </>
               )}
             </>

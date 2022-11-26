@@ -46,12 +46,13 @@ const AddPackages = () => {
         <title>Eventizer | Add Packages</title>
       </Head>
       <Layout>
-      <GiftMain/>
-       {/* {serviceCheck === "photography" && <PhotographyMain/>}
+      
+      {serviceCheck === "gift-items" && <GiftMain/>}
+       {serviceCheck === "photography" && <PhotographyMain/>}
 					{serviceCheck === "cinematography" && <CinematographyMain />}
 					{serviceCheck === "dj-musician" && <DjMain />}
 					{serviceCheck === "mehedi-artist" && <MehediMain />}
-					{serviceCheck === "makeup-artist" && <MakeupMain />} */}
+					{serviceCheck === "makeup-artist" && <MakeupMain />}
       </Layout>
     </>
   );

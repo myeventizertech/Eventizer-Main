@@ -184,7 +184,18 @@ const LayoutSSRfalse = ({ children }) => {
                         </h1>
                       </div>
 
-                      {attributes?.["custom:service"] !== "rental" && (
+                      {(attributes?.["custom:service"] === "gift-items") ? (
+                        <div>
+                          <ButtonLinkOrClick
+                            text="Add Gift"
+                            font="font-14 font-light"
+                            goto="/dashboard/add-packages"
+                            radius="rounded-[5px]"
+                            py="py-[5px]"
+                            px="px-[15px]"
+                          />
+                        </div>
+                      ): (
                         <div>
                           <ButtonLinkOrClick
                             text="Add Package"
@@ -195,7 +206,9 @@ const LayoutSSRfalse = ({ children }) => {
                             px="px-[15px]"
                           />
                         </div>
-                      )}
+                      )
+                      
+                      }
                     </div>
                   </div>
                 </>

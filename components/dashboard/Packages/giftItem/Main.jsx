@@ -154,7 +154,7 @@ const GiftMain = () => {
   let giftData={
     giftName: packageName,
     giftDescription : packageDetail,
-    dropZoneImage: filesP,
+    giftImage: filesP,
     singleGiftPrice: singleGiftPrice,
     multipleItem: multipleItem,
     // totalPackagePrice: lastPrice,
@@ -164,7 +164,7 @@ const GiftMain = () => {
 
   const [dropMessage, setdropMessage] = useState(false);
 
-  const handleGiftData = (e) => {
+  const handleGiftData = async(e) => {
     e.preventDefault();	
     // console.log(images);
 	if (filesP.length <= 2) {
@@ -195,7 +195,19 @@ const GiftMain = () => {
     if (!totalPrice) {
       setTotalPrice(false);
     }	
-	console.log(giftData);
+    // if(giftData.singleGiftPrice !==null){
+    //   const multiple = await API.graphql({
+    //     query: mutations.createGift,
+    //     variables: { input: giftData  },
+    //   });
+    // }
+    // if(giftData.singleGiftPrice ===null){
+    //   const single = await API.graphql({
+    //     query: mutations.createGift,
+    //     variables: { input: giftData  },
+    //   });
+    // }
+
   };
 
   return (
@@ -223,15 +235,15 @@ const GiftMain = () => {
               fileError={fileError}
               showImage={false}
               fileLimit={5}
-              minFileLimit={3}
+              minFileLimit={2}
               dropZoneHeight="md:h-[280px] h-[170px]"
               dropZoneImgWidth="w-[20px] sm:w-[35px]"
               dropZoneMidText="font-14 md:font-18 mt-[5px]"
               dropZoneEndText="font-12 sm:font-14 mt-[6px]"
             />
-            {filesP.length <= 2 && dropMessage && (
+            {filesP.length <= 1 && dropMessage && (
               <p className="font-12 text-[#F30303] font-light mt-1 mb-[-4px] sm:mb[-8px] ">
-                Please upload minimum 3 images
+                Please upload minimum 2 images
               </p>
             )}
           </div>
@@ -617,6 +629,7 @@ const GiftMain = () => {
           type="submit"
           className={` bgcolor2  hover:opacity-[75%] shadow-[0px_3.72px_33.49px_0px_rgba(239,13,94,0.3)]   text-white rounded-[8px] w-full ml-auto block mt-8 px-6 sm:px-14  py-2 text-lg font-normal `}
           value="Publish"
+
         />
       </form>
     </>

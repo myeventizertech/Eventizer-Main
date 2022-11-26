@@ -383,6 +383,7 @@ type GiftVendor
 	uploadYourPhoto:String
 	eventsCompleted: Int
 	status: String!
+	address:String
 	Reviews: [Review] @hasMany(indexName: "byGiftVendor", fields: ["id"])
 	Gifts: [Gift] @hasMany(indexName: "byGiftVendor", fields: ["id"])
 }
@@ -410,6 +411,7 @@ type Gift
 	cPrice: Boolean           #True/false if custom price is given or not
 	type:String               #  Single or Multiple
 	multipleItem: [AWSJSON]
+	status:String
 	GiftVendorID: ID! @index(name: "byGiftVendor")
 }
 type Photography

@@ -1,8 +1,9 @@
 import * as yup from "yup";
 import URLREGEX from "../Url_Regex";
 const BDNUM = /^01[23456789][0-9]{8}\b/g;
-
-let commonFieldSchema = (check) => {
+import conditionalRendar from "../conditionalRendar";
+import services from "../services";
+let commonFieldSchema = (check,checkVendor) => {
   let res = {
     firstName: yup
       .string()
@@ -30,31 +31,38 @@ let commonFieldSchema = (check) => {
       )
      
       .required("Required field"),
-    yearsOfExp: yup.mixed().nullable().required("Required field"),
-    presentLocation: yup.mixed().nullable().required("Required field"),
-    serviceLocation: yup
-      .array()
-      .min(1, "Pick at least 1 tags")
-      .of(
-        yup.object().shape({
-          id: yup.number().required(),
-          label: yup.string().required(),
-          value: yup.string().required(),
-        })
-      ),
-    portfolioLink: yup.array().of(
+      ...(conditionalRendar(
+        !checkVendor === services.giftItems
+      ) && (
+{
+  yearsOfExp: yup.mixed().nullable().required("Required field"),
+  presentLocation: yup.mixed().nullable().required("Required field"),
+  serviceLocation: yup
+    .array()
+    .min(1, "Pick at least 1 tags")
+    .of(
       yup.object().shape({
-        url: check
-          ? yup
-              .string()
-              .matches(URLREGEX, "URL is not valid")
-              .required("Required")
-          : yup
-              .string()
-              .matches(URLREGEX, "URL is not valid")
-              .notRequired("Not required"),
+        id: yup.number().required(),
+        label: yup.string().required(),
+        value: yup.string().required(),
       })
     ),
+  portfolioLink: yup.array().of(
+    yup.object().shape({
+      url: check
+        ? yup
+            .string()
+            .matches(URLREGEX, "URL is not valid")
+            .required("Required")
+        : yup
+            .string()
+            .matches(URLREGEX, "URL is not valid")
+            .notRequired("Not required"),
+    })
+  )
+}
+      ))
+,
   };
   return res;
 };

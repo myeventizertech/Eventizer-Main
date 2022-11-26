@@ -58,6 +58,10 @@ const VendorProfile = ({ attributes, service }) => {
       setserviceAPI(mutations.updateMakeupArtist);
       setvData("updateMakeupArtist");
     }
+    if (service === "gift-items") {
+      setserviceAPI(mutations.updateGiftVendor);
+      setvData("updateGiftVendor");
+    }
   }
 
   useEffect(() => {
@@ -106,18 +110,18 @@ const VendorProfile = ({ attributes, service }) => {
     getImages();
     getImagesf();
     getImagesb();
-    if (storage.vendor?.specializedIn?.length != 0 || null) {
-      storage.vendor?.specializedIn?.map((e) => {
+    if (storage?.vendor?.specializedIn?.length != 0 || null) {
+      storage?.vendor?.specializedIn?.map((e) => {
         specialized.push(JSON.parse(e));
       });
     }
-    if (storage.vendor?.serviceLocation?.length != 0 || null) {
-      storage.vendor?.serviceLocation?.map((e) => {
+    if (storage?.vendor?.serviceLocation?.length != 0 || null) {
+      storage?.vendor?.serviceLocation?.map((e) => {
         sLocation.push(JSON.parse(e));
       });
     }
-    if (storage.vendor?.portfolioLink?.length != 0 || null) {
-      storage.vendor?.portfolioLink?.map((e) => {
+    if (storage?.vendor?.portfolioLink?.length != 0 || null) {
+      storage?.vendor?.portfolioLink?.map((e) => {
         pLink.push(JSON.parse(e));
       });
     }
@@ -173,7 +177,7 @@ const VendorProfile = ({ attributes, service }) => {
   }, []);
   useEffect(() => {
     if (files.length === 0) {
-      storage.vendor?.portfolioImage?.map(async (e) => {
+      storage?.vendor?.portfolioImage?.map(async (e) => {
         let signedURL = await Storage.get(e);
         let url = signedURL;
         const data = await fetch(url);

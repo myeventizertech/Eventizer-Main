@@ -89,6 +89,18 @@ let finaSubmitToBackEnd = async (
 		...(service === services.brandPromoter && Service_BrandPromote),
 		...(service === services.rental && Service_Rental),
 	};
+	if(service===services.giftItems){
+		vendorDetails ={
+			VendorName: values.title,
+			VendorDescription: values.detailsAboutYou,
+			email: attributes.email,
+			phoneNumber: "+88"+values.phone,
+			uploadYourPhoto: "ProfilePicture/Vendor" + attributes.sub + ".png",
+			eventsCompleted: 0,
+			status: "Pending",
+			address:values.yourAddress
+		}
+	}
 	let vendor = {
 		id: attributes.sub,
 		firstName: values.firstName,

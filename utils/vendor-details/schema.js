@@ -7,6 +7,7 @@ import {
   ServiceSchema_Dj_musian,
   ServiceSchema_MakeUp_MehdiArtist,
   ServiceSchema_BrandPromote,
+  ServiceSchema_GIft,
   ServiceSchema_Rental,
 } from "./serviceSchema";
 import personalInfoSchema from "./personanInfoSchema";
@@ -21,8 +22,8 @@ let schema = (checkVendor) => {
 
     ...(conditionalRendar(
       checkVendor === services.decoration ||
-        checkVendor === services.printingPress ||
-        checkVendor === services.giftItems
+        checkVendor === services.printingPress
+        // checkVendor === services.giftItems
     ) && ServiceSchema_Decoration_printing_press_gift_items),
 
     ...(conditionalRendar(
@@ -33,8 +34,10 @@ let schema = (checkVendor) => {
     ...(checkVendor === services.djMusician && ServiceSchema_Dj_musian),
     ...(checkVendor === services.brandPromoter && ServiceSchema_BrandPromote),
     ...(checkVendor === services.rental && ServiceSchema_Rental),
+    ...(checkVendor === services.giftItems &&   ServiceSchema_GIft),
+  
 
-    ...commonFieldSchema(checkVendor === services.cinematography),
+    ...commonFieldSchema(checkVendor === services.cinematography,checkVendor),
     ...personalInfoSchema,
   });
 
