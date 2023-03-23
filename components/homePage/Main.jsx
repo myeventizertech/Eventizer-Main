@@ -40,9 +40,9 @@ const Main = () => {
         <section>
           <SectionColabWithUs />
         </section>
-        <section>
+        {/* <section>
           <SectionReadarticles />
-        </section>
+        </section> */}
         <section>
           <SectionSubscribe />
         </section>

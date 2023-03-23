@@ -30,7 +30,7 @@ const SectionReadarticles = () => {
             />
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-10 sm:mt-0">
-              {data?.slice(0, 3).map((item, i) => {
+              {data && data?.slice(0, 3)?.map((item, i) => {
                 return (
                   <div className="flex " key={i}>
                     <div className="bg-white flex flex-col overflow-hidden rounded-[4px] shadow-[0px_0px_10px_0px_#90909040] w-full">
