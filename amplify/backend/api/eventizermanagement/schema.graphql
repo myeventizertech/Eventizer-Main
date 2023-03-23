@@ -24,7 +24,11 @@ type IhostManager
 			{ allow: owner, operations: [read, create, update] }
 			{
 				allow: groups
+<<<<<<< HEAD
 				groups: ["Admin","IhostManager"]
+=======
+				groups: ["Admin"]
+>>>>>>> 427ff33 (Test)
 				operations: [read, create, update, delete]
 			}
 		]
@@ -44,7 +48,10 @@ type IhostEvents
 	@model
 	@auth(
 		rules: [
+<<<<<<< HEAD
 				{ allow: public, operations: [read,create] },
+=======
+>>>>>>> 427ff33 (Test)
 			{ allow: owner, operations: [read, create, update, delete] }
 			{
 				allow: groups
@@ -67,7 +74,10 @@ type Ticket
 	@model
 	@auth(
 		rules: [
+<<<<<<< HEAD
 				{ allow: public, operations: [read,create] },
+=======
+>>>>>>> 427ff33 (Test)
 			{ allow: owner, operations: [read, create, update] }
 			{
 				allow: groups
@@ -78,12 +88,15 @@ type Ticket
 	) {
 	id: ID!
 	message: String
+<<<<<<< HEAD
 	fullName: String
 	email:String
 	phoneNumber:String
 	profilePicture:String
 	extra: AWSJSON
 	status: String
+=======
+>>>>>>> 427ff33 (Test)
 	IhostEvents: ID! @index(name: "byTicket")
 }
 type History

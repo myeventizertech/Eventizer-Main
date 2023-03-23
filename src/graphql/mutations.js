@@ -269,12 +269,15 @@ export const deleteTicket = /* GraphQL */ `
     deleteTicket(input: $input, condition: $condition) {
       id
       message
+<<<<<<< HEAD
       fullName
       email
       phoneNumber
       profilePicture
       extra
       status
+=======
+>>>>>>> 427ff33 (Test)
       IhostEvents
       createdAt
       updatedAt
